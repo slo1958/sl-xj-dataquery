@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopWindow Window1
+Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
@@ -24,90 +24,6 @@ Begin DesktopWindow Window1
    Type            =   0
    Visible         =   True
    Width           =   934
-   Begin DesktopCanvas Canvas1
-      AllowAutoDeactivate=   True
-      AllowFocus      =   False
-      AllowFocusRing  =   True
-      AllowTabs       =   False
-      Backdrop        =   0
-      Enabled         =   True
-      Height          =   306
-      Index           =   -2147483648
-      Left            =   315
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   True
-      LockTop         =   True
-      Scope           =   0
-      TabIndex        =   0
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   37
-      Transparent     =   True
-      Visible         =   True
-      Width           =   567
-   End
-   Begin DesktopScrollbar Scrollbar1
-      AllowAutoDeactivate=   True
-      AllowFocus      =   True
-      AllowLiveScrolling=   True
-      Enabled         =   True
-      Height          =   306
-      Index           =   -2147483648
-      Left            =   895
-      LineStep        =   1
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   True
-      LockTop         =   True
-      MaximumValue    =   100
-      MinimumValue    =   0
-      PageStep        =   20
-      Scope           =   0
-      TabIndex        =   1
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   37
-      Transparent     =   False
-      Value           =   0
-      Visible         =   True
-      Width           =   19
-   End
-   Begin DesktopButton Button1
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Button"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   637
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   2
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   351
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
    Begin DesktopListBox ListBox3
       AllowAutoDeactivate=   True
       AllowAutoHideScrollbars=   True
@@ -165,6 +81,7 @@ Begin DesktopWindow Window1
       Height          =   32
       HelpTag         =   ""
       Index           =   -2147483648
+      InitialParent   =   ""
       Italic          =   False
       Left            =   20
       LockBottom      =   False
@@ -190,9 +107,10 @@ Begin DesktopWindow Window1
       Visible         =   True
       Width           =   274
    End
-   Begin TextField EditField1
+   Begin TextField tf_GroupTtitle
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   True
@@ -203,6 +121,7 @@ Begin DesktopWindow Window1
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -210,17 +129,13 @@ Begin DesktopWindow Window1
       LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       Mask            =   ""
-      Multiline       =   False
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
       TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
@@ -245,6 +160,7 @@ Begin DesktopWindow Window1
       Height          =   32
       HelpTag         =   ""
       Index           =   -2147483648
+      InitialParent   =   ""
       Italic          =   False
       Left            =   20
       LockBottom      =   False
@@ -270,6 +186,66 @@ Begin DesktopWindow Window1
       Visible         =   True
       Width           =   294
    End
+   Begin ccAutomatorFlow ccAutomatorFlow1
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   False
+      AllowTabs       =   True
+      Backdrop        =   0
+      BackgroundColor =   &cFFFFFF
+      Composited      =   False
+      Enabled         =   True
+      HasBackgroundColor=   False
+      Height          =   310
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   315
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   33
+      Transparent     =   True
+      Visible         =   True
+      Width           =   600
+   End
+   Begin DesktopButton Button1
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Button"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   834
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   8
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   355
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
 End
 #tag EndDesktopWindow
 
@@ -279,16 +255,15 @@ End
 		  
 		  BuildListOfAnalysis
 		  
-		  items=new clOneRanking
+		  self.AutomatorFlow =new clDataQueryFlow
+		  self.ccAutomatorFlow1.SetFlow self.AutomatorFlow
 		  
 		  var  d as new date
-		  call items.doAdd (400)
 		  
-		  EditField1.text="Analysis "+d.ShortDate
+		  tf_GroupTtitle.Text =  "Analysis "+d.ShortDate
 		  tmpCurrentFile=""
-		  //pbsave.enabled=false
 		  
-		  //end if
+		  UpdateUI
 		  
 		  dirtyFlag=false
 		  sttLocalFilename.caption=tmpCurrentFile
@@ -298,23 +273,11 @@ End
 
 
 	#tag Method, Flags = &h0
-		Sub AddStepAfter(StepTechnicalID as integer, SelectedStepType as string)
+		Sub AddStepAfter(Identifier as integer, NewStepType as string)
+		  // Part of the AutomatorVisualInterface interface.
 		  
-		  var c as new ccAutomatorStep
 		  
-		  c.EmbedWithin(Canvas1, 0, 0, canvas1.Width, c.Height)
-		  
-		  if ccList.Count = 0 then c.RemoveButton(false)
-		  
-		  c.Collapse
-		  
-		  c.SetID( str(ccList.Count + 1), ccList.Count + 1)
-		  
-		  c.SetTitle(SelectedStepType)
-		  
-		  // c.Label1.text = "#" + str(ccList.Count+1)
-		  
-		  ccList.AddAt(StepTechnicalID +1,c )
+		  var s as  clAutomatorItem = AutomatorFlow.doInsertAfter(NewStepType, Identifier)
 		  
 		  RefreshStepIDs
 		  
@@ -326,7 +289,7 @@ End
 	#tag Method, Flags = &h0
 		Sub BuildListOfAnalysis()
 		  dim fld as FolderItem
-		  dim i as integer
+		  var i  as integer
 		  dim s as string
 		  dim s2 as string
 		  dim s3 as string
@@ -347,7 +310,7 @@ End
 		        txt=GetFolderItem(s).OpenAsTextFile
 		        s2=txt.readline
 		        
-		        if s2=clAutomatorGroup.cSignature  then
+		        if s2=clAutomatorFlow.cSignature  then
 		          s3=""
 		          while not txt.eof and s3=""
 		            s3=trim(txt.readline)
@@ -363,7 +326,7 @@ End
 		        end if
 		        
 		        txt.close
-		        if s2=clAutomatorGroup.cSignature then
+		        if s2=clAutomatorFlow.cSignature then
 		          ListBox3.addrow  s
 		          r=ListBox3.LastRowIndex
 		          ListBox3.CellTextAt(r,1)=s3
@@ -380,8 +343,16 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub EditStepWithID(StepTechnicalID as integer)
-		  MessageBox("Edit " + str(StepTechnicalID))
+		Sub EditStepWithID(Identifier as integer)
+		  // Part of the AutomatorVisualInterface interface.
+		  
+		  
+		  var s as clAutomatorItem = self.AutomatorFlow.FindItemWithId(Identifier)
+		  
+		  if s = nil then return 
+		  //
+		  s.Open
+		  
 		End Sub
 	#tag EndMethod
 
@@ -389,8 +360,8 @@ End
 		Sub RefreshStepIDs()
 		  var i as integer
 		  
-		  for each c as ccAutomatorStep in ccList
-		    c.SetID(str(i+1), i)
+		  for each c as clAutomatorItem in self.AutomatorFlow.Items
+		    c.SetID(i)
 		    
 		    i = i + 1
 		    
@@ -400,27 +371,44 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SelectAndAddStepAfter(StepTechnicalID as integer)
+		Sub RenameStep(Identifier as integer, NewName as string)
+		  // Part of the AutomatorVisualInterface interface.
 		  
-		  var c as new ccAutomatorStep
 		  
-		  c.EmbedWithin(Canvas1, 0, 0, canvas1.Width, c.Height)
+		  var s as clAutomatorItem = self.AutomatorFlow.FindItemWithId(Identifier)
 		  
-		  if ccList.Count = 0 then c.RemoveButton(false)
+		  if s = nil then return 
 		  
-		  c.Collapse
-		  
-		  c.SetID( str(ccList.Count + 1), ccList.Count + 1)
-		  
-		  c.SetTitle("Title of step " + str(ccList.Count + 1))
-		  
-		  // c.Label1.text = "#" + str(ccList.Count+1)
-		  
-		  ccList.AddAt(StepTechnicalID +1,c )
-		  
-		  RefreshStepIDs
+		  if s.ID = Identifier then s.SetTitle(newName)
 		  
 		  UpdateUI
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SelectAndAddStepAfter(Identifier as integer)
+		  // Part of the AutomatorVisualInterface interface.
+		  
+		  // 
+		  // var c as new ccAutomatorStep
+		  // 
+		  // c.EmbedWithin(Canvas1, 0, 0, canvas1.Width, c.Height)
+		  // 
+		  // if ccList.Count = 0 then c.RemoveButton(false)
+		  // 
+		  // c.Collapse
+		  // 
+		  // c.SetID( str(ccList.Count + 1), ccList.Count + 1)
+		  // 
+		  // c.SetTitle("Title of step " + str(ccList.Count + 1))
+		  // 
+		  // // c.Label1.text = "#" + str(ccList.Count+1)
+		  // 
+		  // ccList.AddAt(StepTechnicalID +1,c )
+		  // 
+		  // RefreshStepIDs
+		  // 
+		  // UpdateUI
 		  
 		End Sub
 	#tag EndMethod
@@ -428,47 +416,18 @@ End
 	#tag Method, Flags = &h0
 		Sub UpdateUI()
 		  
-		  var verticalOffset as integer = Scrollbar1.Value
-		  
-		  var y as integer =  - verticalOffset + canvas1.top + 10
-		  
-		  for each c as ccAutomatorStep in ccList
-		    c.Top = y
-		    c.Visible = True
-		    y = y + c.Height + 20
-		    
-		  next
-		  
-		  for each c as ccAutomatorStep in ccList
-		    c.Refresh( true)
-		    
-		  next
-		  
-		  
-		  if ScrollBar1.Value > y then
-		    
-		    ScrollBar1.MaximumValue = y
-		    Scrollbar1.value = y
-		    
-		  else
-		    
-		    ScrollBar1.MaximumValue = y
-		  end if
+		  ccAutomatorFlow1.UpdateUI
 		  
 		End Sub
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h0
-		ccList() As ccAutomatorStep
+	#tag Property, Flags = &h1
+		Protected AutomatorFlow As clAutomatorFlow
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
 		Protected dirtyFlag As boolean
-	#tag EndProperty
-
-	#tag Property, Flags = &h1
-		Protected Items As clOneRanking
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -478,63 +437,23 @@ End
 
 #tag EndWindowCode
 
-#tag Events Canvas1
-	#tag Event
-		Function MouseWheel(x As Integer, y As Integer, deltaX As Integer, deltaY As Integer) As Boolean
-		  
-		  ScrollBar1.Value = ScrollBar1.Value + deltay
-		  
-		End Function
-	#tag EndEvent
-#tag EndEvents
-#tag Events Scrollbar1
-	#tag Event
-		Sub ValueChanged()
-		  UpdateUI
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Button1
-	#tag Event
-		Sub Pressed()
-		  
-		  
-		  var c as new ccAutomatorStep
-		  
-		  c.EmbedWithin(Canvas1, 0, 0, canvas1.Width, c.Height)
-		  
-		  if ccList.Count = 0 then c.RemoveButton(false)
-		  
-		  c.Collapse
-		  
-		  c.SetID( str(ccList.Count + 1), ccList.Count)
-		  
-		  c.SetTitle("Title of step " + str(ccList.Count + 1))
-		  
-		  // c.Label1.text = "#" + str(ccList.Count+1)
-		  
-		  ccList.Add(c)
-		  
-		  UpdateUI
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events ListBox3
 	#tag Event
 		Sub DoublePressed()
 		  dim sFileToOpen as string
-		  dim i as integer
+		  var i  as integer
 		  
 		  i = Listbox3.SelectedRowIndex
 		  
 		  if i>=0 Then
 		    sFileToOpen=ListBox3.CellTextAt(i,0)
 		    
-		    items.LoadFromTextFile sFileToOpen
+		    self.AutomatorFlow.LoadFromTextFile(sFileToOpen)
+		    
 		    tmpCurrentFile=sFileToOpen
-		    EditField1.text=Items.GroupName
-		    // pbsave.enabled=true
+		    
+		    tf_GroupTtitle.Text = self.AutomatorFlow.GroupName
+		    
 		    Refresh
 		    
 		  end if
@@ -542,11 +461,23 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events EditField1
+#tag Events tf_GroupTtitle
 	#tag Event
 		Sub TextChange()
-		  title=EditField1.text
-		  Items.GroupName=EditField1.text
+		  title=tf_GroupTtitle.text
+		  self.AutomatorFlow.GroupName = tf_GroupTtitle.text
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button1
+	#tag Event
+		Sub Pressed()
+		  var tmp as string
+		  
+		  
+		  tmp = clDataQueryFlow(self.AutomatorFlow).getSqlStatement
+		  
+		  MessageBox(tmp)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

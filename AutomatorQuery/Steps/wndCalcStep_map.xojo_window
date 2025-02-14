@@ -46,7 +46,7 @@ Begin DesktopWindow wndCalcStep_map
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      TabStop         =   "True"
+      TabStop         =   True
       Text            =   "Label:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -62,6 +62,7 @@ Begin DesktopWindow wndCalcStep_map
    Begin TextField efName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -73,6 +74,7 @@ Begin DesktopWindow wndCalcStep_map
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -84,12 +86,12 @@ Begin DesktopWindow wndCalcStep_map
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
+      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
+      ScrollbarHorizontal=   "False"
+      ScrollbarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
@@ -266,7 +268,7 @@ Begin DesktopWindow wndCalcStep_map
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
-      TabStop         =   "True"
+      TabStop         =   True
       Text            =   "To hide a field, leave the New Name empty"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -365,7 +367,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  dim i as integer
+		  var i  as integer
 		  
 		  
 		  curStep.name=efName.text
@@ -384,9 +386,9 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowMe(theStep as clCalcStep_map)
-		  dim i as integer
-		  dim j as integer
+		Sub ShowMe(theStep as clDataQueryItem_map)
+		  var i  as integer
+		  var j  as integer
 		  
 		  curStep=theStep
 		  
@@ -401,7 +403,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub updateList()
-		  dim i as integer
+		  var i  as integer
 		  dim r as integer
 		  
 		  ListBox1.RemoveAllRows
@@ -426,7 +428,7 @@ End
 		  dim sa,sb  as string
 		  dim bAnyDefined as boolean
 		  
-		  dim i as integer
+		  var i  as integer
 		  dim bErr as boolean
 		  
 		  bErr=false
@@ -467,7 +469,7 @@ End
 
 
 	#tag Property, Flags = &h0
-		curStep As clCalcStep_map
+		curStep As clDataQueryItem_map
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -493,7 +495,7 @@ End
 #tag Events pb_None
 	#tag Event
 		Sub Pressed()
-		  dim i as integer
+		  var i  as integer
 		  
 		  for i=0 to ListBox1.RowCount-1
 		    listbox1.CellTextAt(i,1)=""
@@ -505,7 +507,7 @@ End
 #tag Events PushButton1
 	#tag Event
 		Sub Pressed()
-		  dim i as integer
+		  var i  as integer
 		  
 		  for i=0 to ListBox1.RowCount-1
 		    listbox1.CellTextAt(i,1)=listbox1.CellTextAt(i,0)

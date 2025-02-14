@@ -1,13 +1,18 @@
 #tag Class
-Protected Class clCalcStep_Generic
+Protected Class clDataQueryItem_Generic
 Inherits clAutomatorItem
 	#tag Method, Flags = &h0
-		Function anyInChain(theExpectedType as integer) As boolean
+		Function anyInChain(theExpectedType as StepTypes) As boolean
+		  //
+		  // Check the chain contains one step of the given type
+		  //
 		  
 		  if prevCalcStep=nil then
-		    return (ItemType=theExpectedType)
+		    return (ItemEnumType=theExpectedType)
+		    
 		  else
-		    return (ItemType=theExpectedType) or prevCalcStep.anyInChain(theExpectedType)
+		    return (ItemEnumType=theExpectedType) or prevCalcStep.anyInChain(theExpectedType)
+		    
 		  end if
 		  
 		End Function
@@ -15,6 +20,10 @@ Inherits clAutomatorItem
 
 	#tag Method, Flags = &h0
 		Sub Constructor()
+		  
+		  super.Constructor(clDataQueryFlow.StepTypeToLabel(StepTypes.Generic))
+		  
+		  self.ItemEnumType = StepTypes.Generic
 		  
 		  prevCalcStep=nil
 		  
@@ -24,12 +33,36 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getFieldType(theField as string) As integer
-		  dim k as integer
+		Sub Constructor(st as StepTypes)
 		  
-		  k=getKeyType(theField)
+		  super.Constructor(clDataQueryFlow.StepTypeToLabel(st))
 		  
-		  if k<0 then k=getValueType(theField)
+		  self.ItemEnumType = st
+		  
+		  prevCalcStep=nil
+		  
+		  numSeq=-1
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetConfigJSON() As JSONItem
+		  
+		  var j1 as new JSONItem
+		   
+		  return j1
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getFieldType(theField as string) As InternalFieldTypes
+		  dim k as InternalFieldTypes
+		  
+		  k = getKeyType(theField)
+		  
+		  if k = InternalFieldTypes.Undefined then k = getValueType(theField)
 		  
 		  return k
 		  
@@ -38,19 +71,20 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getKeyType(theKey as string) As integer
-		  dim i as integer
-		  dim j as integer
+		Function getKeyType(theKey as string) As InternalFieldTypes
+		  var i  as integer
+		  var j  as InternalFieldTypes = InternalFieldTypes.Undefined
 		  
 		  i=1 
-		  j=-1
-		  while (i<=ubound(keyFields)) and (j<0)
+		  j= InternalFieldTypes.Undefined
+		  while (i<=keyFields.LastIndex) and (j = InternalFieldTypes.Undefined)
 		    if uppercase(keyFields(i))=uppercase(thekey) then j=keyFieldType(i)
 		    
 		    i=i+1
 		  wend
 		  
 		  return j
+		  
 		End Function
 	#tag EndMethod
 
@@ -69,54 +103,57 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetType() As string
-		  dim s as string
+		Function GetTypeAsString() As string
 		  
-		  select case ItemType
-		    
-		  case 100
-		    s="Generic"
-		    
-		  case 200
-		    s="Filter"
-		    
-		  case 300
-		    s="Group/Split"
-		    
-		  case 400
-		    s="Start"
-		    
-		  case 500
-		    s="Sort"
-		    
-		  case 600
-		    s="Calc"
-		    
-		  case 700
-		    s="Pivot"
-		    
-		  case 800
-		    s="Map"
-		  case else
-		    s="?"
-		  end Select
+		  return self.ItemType
 		  
-		  return s
-		  
+		  // dim s as string
+		  // 
+		  // select case ItemType
+		  // 
+		  // case 100
+		  // s="Generic"
+		  // 
+		  // case 200
+		  // s="Filter"
+		  // 
+		  // case 300
+		  // s="Group/Split"
+		  // 
+		  // case 400
+		  // s="Start"
+		  // 
+		  // case 500
+		  // s="Sort"
+		  // 
+		  // case 600
+		  // s="Calc"
+		  // 
+		  // case 700
+		  // s="Pivot"
+		  // 
+		  // case 800
+		  // s="Map"
+		  // case else
+		  // s="?"
+		  // end Select
+		  // 
+		  // return s
+		  // 
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getValueType(theField as string) As integer
+		Function getValueType(theField as string) As InternalFieldTypes
 		  
-		  dim i as integer
-		  dim j as integer
+		  var i  as integer
+		  var j  as InternalFieldTypes = InternalFieldTypes.Undefined
 		  
 		  i=1 
-		  j=-1
-		  while (i<=ubound(valueFields)) and (j<0)
-		    if uppercase(valueFields(i))=uppercase(theField) then j=30
+		  j = InternalFieldTypes.Undefined
+		  while (i<=ubound(valueFields)) and (j =  InternalFieldTypes.Undefined)
+		    if uppercase(valueFields(i))=uppercase(theField) then j = InternalFieldTypes.Double
 		    i=i+1
 		  wend
 		  
@@ -133,12 +170,6 @@ Inherits clAutomatorItem
 		  p.Graphics.DrawRect 0,0,37,37
 		  return p
 		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function myType() As integer
-		  return 100
 		End Function
 	#tag EndMethod
 
@@ -165,20 +196,22 @@ Inherits clAutomatorItem
 	#tag Method, Flags = &h0
 		Sub numSeq(assigns n as integer)
 		  intNumSeq=n
-		  fieldPostFix=chr(asc("A")-1+n)
+		  
+		  fieldPostFix = str(n)
+		  
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Open()
-		  MessageBox( "Open operation not allowed on generic object")
+		  ShowConfigDialog
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processLoad(theLine as string)
+		Sub processLoadedJSON(theLine as string)
 		  
 		End Sub
 	#tag EndMethod
@@ -202,10 +235,10 @@ Inherits clAutomatorItem
 
 	#tag Method, Flags = &h0
 		Sub saveToTextFile(theTextFile as textoutputStream)
-		  dim i as integer
+		  var i  as integer
 		  
-		  theTextFile.writeline "4;"+str(ubound(keyFields))
-		  for i=1 to ubound(keyFields)
+		  theTextFile.writeline "4;"+str(keyFields.LastIndex)
+		  for i=1 to keyFields.LastIndex
 		    theTextFile.writeline "5;"+keyFields(i)
 		  next
 		  
@@ -222,6 +255,23 @@ Inherits clAutomatorItem
 		  'theTextFile.writeline "11;"+str(ypos)
 		  
 		  saveMyData theTextFile
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ShowConfigDialog()
+		  MessageBox( "Open operation not allowed on generic object")
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub UpdatedFromConfigDialog()
+		  
+		  if self.VisualSupport = nil then Return
+		  
+		  self.VisualSupport.SetTitle(self.Name)
 		  
 		End Sub
 	#tag EndMethod
@@ -256,16 +306,20 @@ Inherits clAutomatorItem
 		Protected intNumSeq As integer
 	#tag EndProperty
 
+	#tag Property, Flags = &h1
+		Protected ItemEnumType As StepTypes
+	#tag EndProperty
+
 	#tag Property, Flags = &h0
 		keyFields(0) As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
-		Protected keyFieldType(0) As integer
+		Protected keyFieldType(0) As InternalFieldTypes
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		prevCalcStep As clCalcStep_generic
+		prevCalcStep As clDataQueryItem_generic
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -319,30 +373,6 @@ Inherits clAutomatorItem
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="yBase"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="yEnd"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Title"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="selected"
 			Visible=false
 			Group="Behavior"
@@ -352,14 +382,6 @@ Inherits clAutomatorItem
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="workarea"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ItemType"
 			Visible=false
 			Group="Behavior"
 			InitialValue="0"

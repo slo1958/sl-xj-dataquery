@@ -48,7 +48,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      TabStop         =   "True"
+      TabStop         =   True
       Text            =   "Label:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -64,6 +64,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
    Begin TextField efName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       BalloonHelp     =   ""
@@ -77,6 +78,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -88,13 +90,13 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      MultiLine       =   False
+      MultiLine       =   "False"
       Password        =   False
       ReadOnly        =   False
       ScrollBar       =   "True"
-      ScrollBarHorizontal=   False
-      ScrollBarVertical=   True
-      Styled          =   False
+      ScrollBarHorizontal=   "False"
+      ScrollBarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
@@ -134,7 +136,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       Selectable      =   False
       TabIndex        =   2
       TabPanelIndex   =   0
-      TabStop         =   "True"
+      TabStop         =   True
       Text            =   "Split by"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -164,7 +166,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       HelpTag         =   ""
       Index           =   0
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
       ListIndex       =   "0"
@@ -280,7 +282,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       HelpTag         =   ""
       Index           =   1
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
       ListIndex       =   "0"
@@ -357,7 +359,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       HelpTag         =   ""
       Index           =   2
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
       ListIndex       =   "0"
@@ -434,7 +436,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       HelpTag         =   ""
       Index           =   3
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
       ListIndex       =   "0"
@@ -511,7 +513,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       HelpTag         =   ""
       Index           =   4
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
       ListIndex       =   "0"
@@ -588,7 +590,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       HelpTag         =   ""
       Index           =   5
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
       ListIndex       =   "0"
@@ -665,7 +667,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       HelpTag         =   ""
       Index           =   6
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
       ListIndex       =   "0"
@@ -843,7 +845,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  dim i as integer
+		  var i  as integer
 		  
 		  lastItem=0
 		  for i=1 to 6
@@ -892,7 +894,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  dim i as integer
+		  var i  as integer
 		  
 		  
 		  curStep.name=efName.text
@@ -915,7 +917,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub prepLine(theLine as integer)
-		  dim i as integer
+		  var i  as integer
 		  if curStep.prevCalcStep<>nil then
 		    ppFieldA(theLine).RemoveAllRows
 		    
@@ -936,9 +938,9 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowMe(theStep as clCalcStep_GroupSplit)
-		  dim i as integer
-		  dim j as integer
+		Sub ShowMe(theStep as clDataQueryItem_GroupSplit)
+		  var i  as integer
+		  var j  as integer
 		  
 		  curStep=theStep
 		  
@@ -966,7 +968,7 @@ End
 
 
 	#tag Property, Flags = &h0
-		curStep As clCalcStep_GroupSplit
+		curStep As clDataQueryItem_GroupSplit
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -979,7 +981,7 @@ End
 #tag Events pb_Remove
 	#tag Event
 		Sub Pressed(index as Integer)
-		  dim i as integer
+		  var i  as integer
 		  dim y as integer
 		  dim last as integer
 		  
@@ -1019,7 +1021,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  dim i as integer
+		  var i  as integer
 		  i=addOne
 		  
 		  

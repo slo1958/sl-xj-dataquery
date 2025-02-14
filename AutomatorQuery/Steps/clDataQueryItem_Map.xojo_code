@@ -1,10 +1,12 @@
 #tag Class
-Protected Class clCalcStep_Map
-Inherits clCalcStep_Generic
+Protected Class clDataQueryItem_Map
+Inherits clDataQueryItem_Generic
 	#tag Method, Flags = &h0
 		Sub Constructor()
-		  clCalcStep_Generic.Constructor
-		  redim InputList(0)
+		  
+		  Super.constructor(StepTypes.Map)
+		  
+		  redim inputList(0)
 		  redim Outputlist(0)
 		  
 		  nextItem=0
@@ -16,7 +18,7 @@ Inherits clCalcStep_Generic
 		Function getSql() As string
 		  dim sSource as string
 		  dim sPostFix as string
-		  dim i as integer
+		  var i  as integer
 		  dim ssep as string
 		  
 		  dim s as string
@@ -32,7 +34,7 @@ Inherits clCalcStep_Generic
 		  s="select  "
 		  ssep=""
 		  
-		  for i=1 to ubound(keyFields)
+		  for i=1 to keyFields.LastIndex
 		    s=s+ssep+keyFields(i)+"_"+sPostFix+" as "+keyFields(i)+"_" + fieldPostFix
 		    ssep=","
 		  next
@@ -55,7 +57,7 @@ Inherits clCalcStep_Generic
 
 	#tag Method, Flags = &h0
 		Function getTextItem(theItem as integer) As string
-		  dim i as integer
+		  var i  as integer
 		  dim n as integer
 		  dim s as string
 		  
@@ -84,25 +86,10 @@ Inherits clCalcStep_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function myType() As integer
-		  return 800
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Open()
-		  
-		  wndCalcStep_map.ShowMe me 
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoad(theLine as string)
+		Sub processLoadedJSON(theLine as string)
 		  dim m as integer
 		  dim s as string
-		  dim i as integer
+		  var i  as integer
 		  
 		  m=val(NthField(theline,";",1))
 		  i=instr(theLine,";")
@@ -111,7 +98,7 @@ Inherits clCalcStep_Generic
 		  select case m
 		  case 10
 		    nextItem=nextItem+1
-		    redim InputList(nextItem)
+		    redim inputList(nextItem)
 		    redim OutputList(nextItem)
 		    
 		  case 11
@@ -129,7 +116,7 @@ Inherits clCalcStep_Generic
 
 	#tag Method, Flags = &h0
 		Sub saveMyData(theOutput as textoutputStream)
-		  dim i as integer
+		  var i  as integer
 		  
 		  for i=1 to ubound(InputList)
 		    theOutput.writeline "50;10;xx"
@@ -141,8 +128,16 @@ Inherits clCalcStep_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub ShowConfigDialog()
+		   
+		  wndCalcStep_map.ShowMe me 
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
-		  dim i,j as integer
+		  var i ,j as integer
 		  dim n as integer
 		  dim m as integer
 		  dim b as boolean
@@ -178,7 +173,7 @@ Inherits clCalcStep_Generic
 		      
 		      if not b then
 		        m=m+1
-		        redim InputList(m)
+		        redim inputList(m)
 		        InputList(m)=prevCalcStep.valueFields(i)
 		        redim OutputList(m)
 		        OutputList(m)=prevCalcStep.valueFields(i)

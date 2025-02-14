@@ -1,14 +1,14 @@
 #tag Class
-Protected Class clCalcStep_pivot
-Inherits clCalcStep_Generic
+Protected Class clDataQueryItem_pivot
+Inherits clDataQueryItem_Generic
 	#tag Method, Flags = &h21
 		Private Sub Build_Remaining_KeyFields()
 		  
 		  dim sField_Remaining(0) as string
-		  dim sField_R_Type(0) as integer
+		  dim sField_R_Type(0) as InternalFieldTypes
 		  
-		  dim i as integer
-		  dim jField as integer
+		  var i  as integer
+		  var jField  as integer
 		  
 		  '
 		  ' identify key fields used to build blocks and remaining key fields
@@ -45,7 +45,7 @@ Inherits clCalcStep_Generic
 		  
 		  for i=1 to ubound(sField_Remaining)
 		    if sField_Remaining(i)<>"$$$$" then
-		      jField=ubound(keyFields)+1
+		      jField=keyFields.LastIndex+1
 		      redim keyFields(jField)
 		      redim keyFieldType(jField)
 		      
@@ -61,7 +61,11 @@ Inherits clCalcStep_Generic
 
 	#tag Method, Flags = &h0
 		Sub Constructor()
-		  dim i as integer
+		  
+		  
+		  super.Constructor(StepTypes.Pivot)
+		  
+		  var i  as integer
 		  
 		  for i=0 to maxItems
 		    binuse(i)=false
@@ -79,7 +83,7 @@ Inherits clCalcStep_Generic
 	#tag Method, Flags = &h1
 		Protected Function getOneItem(theItem as integer) As string
 		  dim s as string
-		  dim i as integer
+		  var i  as integer
 		  if bInUse(theItem) then
 		    s=sBlockName(theItem)
 		    s=s+" for "
@@ -102,9 +106,9 @@ Inherits clCalcStep_Generic
 		  dim sSource as string
 		  dim sPostFix as string
 		  dim blockSql(maxItems) as string
-		  dim i as integer
-		  dim jBlock as integer
-		  dim jField as integer
+		  var i  as integer
+		  var jBlock as integer
+		  var jField as integer
 		  dim sWhere as string
 		  dim sSep as string
 		  dim sOutput as string
@@ -177,7 +181,7 @@ Inherits clCalcStep_Generic
 		    ' extract non-involved key fields
 		    '
 		    ssep=""
-		    for i=1 to ubound(keyFields)
+		    for i=1 to keyFields.LastIndex
 		      sOutput=sOutput+ssep+"BLK_"+sBlockName(0)+"."+keyFields(i)+"_"+sPostFix+" as "+keyFields(i)+"_"+fieldPostFix
 		      ssep=","
 		    next
@@ -204,7 +208,7 @@ Inherits clCalcStep_Generic
 		    
 		    for jBlock=1 to maxitems 'not started from block 0 since block 0 is the "master" block
 		      
-		      if ubound(keyFields)=0 then
+		      if keyFields.LastIndex=0 then
 		        
 		        if blockSql(jBlock)<>"" then
 		          s=s+","+blockSql(jBlock)
@@ -216,7 +220,7 @@ Inherits clCalcStep_Generic
 		          s=s+sJoinType(iJoinType) +"  "+blockSql(jBlock)' +"  on  "
 		          ssep=" on "
 		          
-		          for i=1 to ubound(keyFields)
+		          for i=1 to keyFields.LastIndex
 		            s=s+ssep+" (BLK_"+sBlockName(0)+"."+keyFields(i)+"_"+sPostFix+"= BLK_"+sBlockName(jBlock)+"."+keyFields(i)+"_"+sPostFix+")"
 		            ssep=" and "
 		          next
@@ -243,7 +247,7 @@ Inherits clCalcStep_Generic
 		Function GetSql_InnerJoin() As string
 		  dim sSource as string
 		  dim sPostFix as string
-		  dim i,jBlock,jField as integer
+		  var i ,jBlock,jField as integer
 		  dim n as integer
 		  dim s as string
 		  dim sSep as string
@@ -258,7 +262,7 @@ Inherits clCalcStep_Generic
 		  
 		  dim blockSql(maxItems) as string
 		  
-		  MessageBox( "ubound keyfields (INNER) : " + str(ubound(keyFields)))
+		  MessageBox( "ubound keyfields (INNER) : " + str(keyFields.LastIndex))
 		  
 		  
 		  if prevCalcStep<>nil then 
@@ -292,7 +296,7 @@ Inherits clCalcStep_Generic
 		    ' build list of 'final' output field
 		    '
 		    sosep=""
-		    for i=1 to ubound(keyFields)
+		    for i=1 to keyFields.LastIndex
 		      sOutputFields=sOutputFields+soSep +sPrFx+keyFields(i)+"_"+fieldPostFix
 		      soSep=","
 		    next
@@ -307,7 +311,7 @@ Inherits clCalcStep_Generic
 		        sSep=""
 		        sGroup=""
 		        
-		        for i=1 to ubound(keyFields)
+		        for i=1 to keyFields.LastIndex
 		          s=s+sSep + keyFields(i)+"_"+sPostFix +"  as "+keyFields(i)+"_"+fieldPostFix
 		          sGroup=sgroup+sSep + keyFields(i)+"_"+sPostFix
 		          sSep=","
@@ -362,7 +366,7 @@ Inherits clCalcStep_Generic
 		    for jblock=1 to maxitems
 		      if sBlockName(jblock)<>"" then
 		        
-		        for i=1 to ubound(keyFields)
+		        for i=1 to keyFields.LastIndex
 		          sWhere2=sWhere2+ssep+ " ("
 		          ssep=" and "
 		          
@@ -421,8 +425,8 @@ Inherits clCalcStep_Generic
 
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		  dim i as integer
-		  dim j as integer
+		  var i  as integer
+		  var j  as integer
 		  
 		  j=0
 		  
@@ -443,24 +447,10 @@ Inherits clCalcStep_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function myType() As integer
-		  return 700
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Open()
-		  
-		  wndCalcStep_pivot.showme me
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoad(theLine as string)
+		Sub processLoadedJSON(theLine as string)
 		  dim m as integer
 		  dim s as string
-		  dim i as integer
+		  var i  as integer
 		  
 		  m=val(NthField(theline,";",1))
 		  i=instr(theLine,";")
@@ -499,7 +489,7 @@ Inherits clCalcStep_Generic
 
 	#tag Method, Flags = &h0
 		Sub saveMyData(theOutput as textoutputStream)
-		  dim i as integer
+		  var i  as integer
 		  
 		  for i=0 to maxItems
 		    if bInUse(i) then
@@ -520,11 +510,19 @@ Inherits clCalcStep_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub ShowConfigDialog()
+		   
+		  wndCalcStep_pivot.showme me
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
 		  '
 		  ' a pivot removes some records, but passes all fields
 		  '
-		  dim i ,jBlock as integer
+		  var i  ,jBlock as integer
 		  dim n as integer
 		  dim s as string
 		  
@@ -557,7 +555,7 @@ Inherits clCalcStep_Generic
 		Function validateChain() As string
 		  dim sa as string
 		  dim k as integer
-		  dim jBlock as integer
+		  var jBlock as integer
 		  
 		  sa="OK"
 		  if prevCalcStep<>nil then sa=prevCalcStep.validateChain
@@ -576,7 +574,7 @@ Inherits clCalcStep_Generic
 		  end if
 		  
 		  if sa="OK" then
-		    if not anyInChain(300) then sa="Missing Group/Split step before pivot step"
+		    if not anyInChain(StepTypes.GroupSplit) then sa="Missing Group/Split step before pivot step"
 		  end if
 		  
 		  return sa
@@ -610,7 +608,7 @@ Inherits clCalcStep_Generic
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		sFieldType(maxItems) As integer
+		sFieldType(maxItems) As InternalFieldTypes
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

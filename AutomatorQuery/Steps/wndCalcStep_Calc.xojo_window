@@ -62,6 +62,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextField efName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -72,6 +73,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -83,13 +85,13 @@ Begin DesktopWindow wndCalcStep_Calc
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
+      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
+      ScrollbarHorizontal=   "False"
+      ScrollbarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
@@ -318,6 +320,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextField efFieldName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -328,6 +331,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
@@ -339,13 +343,13 @@ Begin DesktopWindow wndCalcStep_Calc
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
+      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
+      ScrollbarHorizontal=   "False"
+      ScrollbarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
@@ -364,6 +368,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextArea efFieldA
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   True
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -374,11 +379,14 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      HideSelection   =   True
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
       Left            =   203
       LimitText       =   0
+      LineHeight      =   0.0
+      LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -386,7 +394,7 @@ Begin DesktopWindow wndCalcStep_Calc
       LockTop         =   False
       Mask            =   ""
       Multiline       =   True
-      Password        =   False
+      Password        =   "False"
       ReadOnly        =   False
       Scope           =   0
       ScrollbarHorizontal=   False
@@ -403,6 +411,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Top             =   70
       Transparent     =   False
       Underline       =   False
+      UnicodeMode     =   0
       UseFocusRing    =   True
       Visible         =   True
       Width           =   434
@@ -446,6 +455,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextField efFieldName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -456,6 +466,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
@@ -467,13 +478,13 @@ Begin DesktopWindow wndCalcStep_Calc
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
+      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
+      ScrollbarHorizontal=   "False"
+      ScrollbarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
@@ -492,6 +503,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextArea efFieldA
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   True
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -502,11 +514,14 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      HideSelection   =   True
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
       Left            =   203
       LimitText       =   0
+      LineHeight      =   0.0
+      LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -514,7 +529,7 @@ Begin DesktopWindow wndCalcStep_Calc
       LockTop         =   False
       Mask            =   ""
       Multiline       =   True
-      Password        =   False
+      Password        =   "False"
       ReadOnly        =   False
       Scope           =   0
       ScrollbarHorizontal=   False
@@ -531,6 +546,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Top             =   94
       Transparent     =   False
       Underline       =   False
+      UnicodeMode     =   0
       UseFocusRing    =   True
       Visible         =   True
       Width           =   434
@@ -574,6 +590,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextField efFieldName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -584,6 +601,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
@@ -595,13 +613,13 @@ Begin DesktopWindow wndCalcStep_Calc
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
+      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
+      ScrollbarHorizontal=   "False"
+      ScrollbarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   14
       TabPanelIndex   =   0
       TabStop         =   True
@@ -656,6 +674,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextArea efFieldA
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   True
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -666,11 +685,14 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      HideSelection   =   True
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
       Left            =   203
       LimitText       =   0
+      LineHeight      =   0.0
+      LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -678,7 +700,7 @@ Begin DesktopWindow wndCalcStep_Calc
       LockTop         =   False
       Mask            =   ""
       Multiline       =   True
-      Password        =   False
+      Password        =   "False"
       ReadOnly        =   False
       Scope           =   0
       ScrollbarHorizontal=   False
@@ -695,6 +717,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Top             =   118
       Transparent     =   False
       Underline       =   False
+      UnicodeMode     =   0
       UseFocusRing    =   True
       Visible         =   True
       Width           =   434
@@ -702,6 +725,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextField efFieldName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -712,6 +736,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
@@ -723,13 +748,13 @@ Begin DesktopWindow wndCalcStep_Calc
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
+      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
+      ScrollbarHorizontal=   "False"
+      ScrollbarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   17
       TabPanelIndex   =   0
       TabStop         =   True
@@ -748,6 +773,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextArea efFieldA
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   True
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -758,11 +784,14 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      HideSelection   =   True
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
       Left            =   203
       LimitText       =   0
+      LineHeight      =   0.0
+      LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -770,7 +799,7 @@ Begin DesktopWindow wndCalcStep_Calc
       LockTop         =   False
       Mask            =   ""
       Multiline       =   True
-      Password        =   False
+      Password        =   "False"
       ReadOnly        =   False
       Scope           =   0
       ScrollbarHorizontal=   False
@@ -787,6 +816,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Top             =   143
       Transparent     =   False
       Underline       =   False
+      UnicodeMode     =   0
       UseFocusRing    =   True
       Visible         =   True
       Width           =   434
@@ -830,6 +860,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextField efFieldName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -840,6 +871,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
@@ -851,13 +883,13 @@ Begin DesktopWindow wndCalcStep_Calc
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
+      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
+      ScrollbarHorizontal=   "False"
+      ScrollbarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   20
       TabPanelIndex   =   0
       TabStop         =   True
@@ -876,6 +908,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextArea efFieldA
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   True
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -886,11 +919,14 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      HideSelection   =   True
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
       Left            =   203
       LimitText       =   0
+      LineHeight      =   0.0
+      LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -898,7 +934,7 @@ Begin DesktopWindow wndCalcStep_Calc
       LockTop         =   False
       Mask            =   ""
       Multiline       =   True
-      Password        =   False
+      Password        =   "False"
       ReadOnly        =   False
       Scope           =   0
       ScrollbarHorizontal=   False
@@ -915,6 +951,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Top             =   168
       Transparent     =   False
       Underline       =   False
+      UnicodeMode     =   0
       UseFocusRing    =   True
       Visible         =   True
       Width           =   434
@@ -958,6 +995,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextField efFieldName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -968,6 +1006,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
@@ -979,13 +1018,13 @@ Begin DesktopWindow wndCalcStep_Calc
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
+      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
+      ScrollbarHorizontal=   "False"
+      ScrollbarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   23
       TabPanelIndex   =   0
       TabStop         =   True
@@ -1004,6 +1043,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextArea efFieldA
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   True
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -1014,11 +1054,14 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      HideSelection   =   True
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
       Left            =   203
       LimitText       =   0
+      LineHeight      =   0.0
+      LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1026,7 +1069,7 @@ Begin DesktopWindow wndCalcStep_Calc
       LockTop         =   False
       Mask            =   ""
       Multiline       =   True
-      Password        =   False
+      Password        =   "False"
       ReadOnly        =   False
       Scope           =   0
       ScrollbarHorizontal=   False
@@ -1043,6 +1086,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Top             =   193
       Transparent     =   False
       Underline       =   False
+      UnicodeMode     =   0
       UseFocusRing    =   True
       Visible         =   True
       Width           =   434
@@ -1086,6 +1130,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextField efFieldName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -1096,6 +1141,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
@@ -1107,13 +1153,13 @@ Begin DesktopWindow wndCalcStep_Calc
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
+      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
+      ScrollbarHorizontal=   "False"
+      ScrollbarVertical=   "True"
+      Styled          =   "False"
       TabIndex        =   26
       TabPanelIndex   =   0
       TabStop         =   True
@@ -1132,6 +1178,7 @@ Begin DesktopWindow wndCalcStep_Calc
    Begin TextArea efFieldA
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   True
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -1142,11 +1189,14 @@ Begin DesktopWindow wndCalcStep_Calc
       Format          =   ""
       Height          =   20
       HelpTag         =   ""
+      HideSelection   =   True
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
       Left            =   203
       LimitText       =   0
+      LineHeight      =   0.0
+      LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1154,7 +1204,7 @@ Begin DesktopWindow wndCalcStep_Calc
       LockTop         =   False
       Mask            =   ""
       Multiline       =   True
-      Password        =   False
+      Password        =   "False"
       ReadOnly        =   False
       Scope           =   0
       ScrollbarHorizontal=   False
@@ -1171,6 +1221,7 @@ Begin DesktopWindow wndCalcStep_Calc
       Top             =   219
       Transparent     =   False
       Underline       =   False
+      UnicodeMode     =   0
       UseFocusRing    =   True
       Visible         =   True
       Width           =   434
@@ -1351,7 +1402,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  dim i as integer
+		  var i  as integer
 		  
 		  lastItem=-1
 		  lastText=-1
@@ -1404,7 +1455,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  dim i as integer
+		  var i  as integer
 		  dim n as integer
 		  
 		  n=0
@@ -1432,15 +1483,15 @@ End
 
 	#tag Method, Flags = &h0
 		Sub prepLine(theLine as integer)
-		  dim i as integer
+		  var i  as integer
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowMe(theStep as clCalcStep_Calc)
-		  dim i as integer
-		  dim j as integer
+		Sub ShowMe(theStep as clDataQueryItem_Calc)
+		  var i  as integer
+		  var j  as integer
 		  
 		  curStep=theStep
 		  
@@ -1473,7 +1524,7 @@ End
 
 
 	#tag Property, Flags = &h0
-		curStep As clCalcStep_Calc
+		curStep As clDataQueryItem_Calc
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -1514,7 +1565,7 @@ End
 #tag Events pb_Remove
 	#tag Event
 		Sub Pressed(index as Integer)
-		  dim i as integer
+		  var i  as integer
 		  dim y as integer
 		  dim last as integer
 		  
@@ -1547,7 +1598,7 @@ End
 #tag Events ListBox1
 	#tag Event
 		Sub DoublePressed()
-		  dim i as integer
+		  var i  as integer
 		  
 		  i=ListBox1.SelectedRowIndex
 		  if (i>=0) and (lastText>=0) then
@@ -1571,7 +1622,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  dim i as integer
+		  var i  as integer
 		  i=addOne
 		  
 		  

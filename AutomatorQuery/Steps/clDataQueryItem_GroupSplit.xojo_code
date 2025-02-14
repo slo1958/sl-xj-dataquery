@@ -1,18 +1,18 @@
 #tag Class
-Protected Class clCalcStep_Sort
-Inherits clCalcStep_Generic
+Protected Class clDataQueryItem_GroupSplit
+Inherits clDataQueryItem_Generic
 	#tag Method, Flags = &h0
 		Sub Constructor()
-		  dim i as integer
 		  
-		  clCalcStep_generic.constructor
+		  super.Constructor(StepTypes.GroupSplit)
+		  
+		  var i  as integer
 		  
 		  for i=0 to maxItems
 		    binuse(i)=false
 		  next
 		  
 		  nextItem=-1
-		  recLimit=0
 		  
 		End Sub
 	#tag EndMethod
@@ -32,60 +32,65 @@ Inherits clCalcStep_Generic
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Function getSql() As string
-		  dim s as string
+	#tag Method, Flags = &h0
+		Function getSql() As String
 		  dim sSource as string
 		  dim sPostFix as string
-		  dim i as integer
-		  dim ssep as string
+		  var i  as integer
+		  dim n as integer
+		  dim s as string
+		  dim sSep as string
+		  dim sGroupBy as string
 		  
-		  if prevCalcStep<>nil then
-		    
+		  if prevCalcStep<>nil then 
 		    sSource=prevCalcStep.getSql
 		    sPostFix=prevCalcStep.fieldPostFix
-		    
+		  else
+		    ssource=""
+		    sPostFix=""
 		  end if
 		  
-		  if ssource<>"" then
-		    s="select "
+		  s=""
+		  
+		  if sPostFix<>"" then
 		    
-		    if recLimit>0 then
-		      s=s+" top "+str(reclimit)+"    "
-		    end if
+		    s="select  "   
+		    sSep=""
 		    
-		    ssep=""
-		    
-		    for i=1 to ubound(prevCalcStep.keyFields)
-		      s=s+ssep
-		      s=s+prevCalcStep.keyFields(i)+"_"+sPostFix+" as "+prevCalcStep.keyFields(i)+"_"+fieldPostFix
-		      ssep=","
-		    next
-		    
-		    for i=1 to ubound(prevCalcStep.valueFields)
-		      s=s+ssep
-		      s=s+prevCalcStep.valueFields(i)+"_"+sPostFix+" as "+prevCalcStep.valueFields(i)+"_"+fieldPostFix
-		      ssep=","
-		    next
-		    
-		    
-		    s=s+" from ("+ssource+")"
-		    
-		    ssep=" order by "
-		    
-		    for i=0 to maxitems
-		      if sfield1(i)<>"" then
-		        s=s+ssep+sfield1(i)+"_"+sPostFix+"  "+sfields(i)
-		        ssep=","
+		    for i=0 to ubound(sField1)
+		      if bInUse(i) then
+		        s=s+sSep + sField1(i)+"_"+sPostFix +"  as "+sField1(i)+"_"+fieldPostFix
+		        sSep=","
 		      end if
 		    next
 		    
-		  else
-		    s=""
+		    for i=1 to ubound(valueFields)
+		      s=s+ssep+"sum(" + valueFields(i)+"_"+sPostFix +") as "+valueFields(i)+"_"+fieldPostFix
+		      sSep=","
+		    next
+		    
+		    s=s+"  from ("+sSource+")"
+		    
+		    sGroupBy=" group by "
+		    ssep=""
+		    
+		    for i=0 to ubound(sField1)
+		      if bInUse(i) then
+		        s=s+sGroupBy
+		        sGroupBy=""
+		        s=s+ssep
+		        ssep=" , "
+		        
+		        s=s+sfield1(i)+"_"+sPostFix
+		        
+		      end if
+		      
+		    next
+		    
+		    
 		  end if
 		  
 		  return s
-		  
 		  
 		End Function
 	#tag EndMethod
@@ -114,8 +119,8 @@ Inherits clCalcStep_Generic
 
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		  dim i as integer
-		  dim j as integer
+		  var i  as integer
+		  var j  as integer
 		  
 		  j=0
 		  
@@ -130,31 +135,16 @@ Inherits clCalcStep_Generic
 
 	#tag Method, Flags = &h0
 		Function myImage() As picture
-		  return sort_38_38
+		  return GrouSplit_38_38
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function myType() As integer
-		  return 500
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Open()
-		  
-		  wndCalcStep_sort.showme me
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoad(theLine as string)
+		Sub processLoadedJSON(theLine as string)
 		  dim m as integer
 		  dim s as string
-		  dim i as integer
+		  var i  as integer
 		  
 		  m=val(NthField(theline,";",1))
 		  i=instr(theLine,";")
@@ -169,13 +159,6 @@ Inherits clCalcStep_Generic
 		    sfield1(nextItem)=s
 		    binuse(nextitem)=true
 		    
-		  case 14
-		    sfieldS(nextItem)=s
-		    binuse(nextitem)=true
-		    
-		  case 16
-		    recLimit=val(s)
-		    
 		  case else
 		  end select
 		End Sub
@@ -183,14 +166,12 @@ Inherits clCalcStep_Generic
 
 	#tag Method, Flags = &h0
 		Sub saveMyData(theOutput as textoutputStream)
-		  dim i as integer
+		  var i  as integer
 		  
 		  for i=0 to maxItems
 		    if bInUse(i) then
 		      theOutput.writeline "50;10;xx"
 		      theOutput.writeline "50;12;"+sfield1(i)
-		      theOutput.writeline "50;14;"+sfieldS(i)
-		      theOutput.writeline "50;16;"+str(reclimit)
 		    end if
 		  next
 		  
@@ -199,12 +180,20 @@ Inherits clCalcStep_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub ShowConfigDialog()
+		  
+		  wndCalcStep_GroupSplit.showme me
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
 		  '
-		  ' passes all fields (key, values)
+		  ' a group/split   but passes all value fields and only selected key fields
 		  '
-		  dim i as integer
-		  dim j as integer
+		  var i  as integer
+		  var j  as integer
 		  dim n as integer
 		  dim s as string
 		  
@@ -223,9 +212,11 @@ Inherits clCalcStep_Generic
 		      next
 		    next
 		    
+		    
 		    n=itemInUse
 		    redim keyFields(n)
 		    redim keyFieldType(n)
+		    
 		    j=0
 		    for i=0 to ubound(sfield1)
 		      if binuse(i) then  
@@ -257,19 +248,11 @@ Inherits clCalcStep_Generic
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		recLimit As integer
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		sField1(maxItems) As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		sField1Type(maxItems) As integer
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		sFieldS(maxItems) As string
+		sField1Type(maxItems) As InternalFieldTypes
 	#tag EndProperty
 
 
@@ -388,14 +371,6 @@ Inherits clCalcStep_Generic
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="recLimit"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty

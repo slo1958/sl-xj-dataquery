@@ -419,7 +419,7 @@ Begin DesktopWindow wnd_rank_help
          TabIndex        =   5
          TabPanelIndex   =   3
          TabStop         =   True
-         Text            =   "By default, the program groups all data together  at the end of the chain and calculates the grand total of all number fields (like turnover, quantity, ...).\r\n\r\nYou can use this type of step to split the grand total according to the value of one or more other key fields (posting year, product code, ...)\r\n\r\nFor instance, if the database contains the total sales for the last three years, you can use the 'group/split' step to get the total per year for all available years.\r\n\r\nIf you want to restrict the totals to year 2004, see the 'filter' step."
+         Text            =   "By default, the program groups all data together  at the end of the chain and calculates the grand total of all number fields (like turnover, quantity, ...).\r\n\r\nYou can use this type of step to split the grand total according to the value of one or more other key fields (posting dummyfield4, product code, ...)\r\n\r\nFor instance, if the database contains the total sales for the last three years, you can use the 'group/split' step to get the total per year for all available years.\r\n\r\nIf you want to restrict the totals to year 2004, see the 'filter' step."
          TextAlignment   =   0
          TextColor       =   &c00000000
          Tooltip         =   ""
@@ -454,7 +454,7 @@ Begin DesktopWindow wnd_rank_help
          TabIndex        =   6
          TabPanelIndex   =   4
          TabStop         =   True
-         Text            =   "By default, the program includes all records in the calculation.\r\n\r\nYou can use this type of step to select the records you want to inlcude.\r\n\r\nFor instance, if the database contains the total sales for the last three years, you can use the 'filter' step to restrict the totals to year 2004.\r\n\r\nIf you want the total per year for all available year, see the 'group/split' step.\r\n"
+         Text            =   "By default, the program includes all records in the calculation.\r\n\r\nYou can use this type of step to select the records you want to inlcude.\r\n\r\nFor instance, if the database contains the total sales for the last three dummyfield4s, you can use the 'filter' step to restrict the totals to year 2004.\r\n\r\nIf you want the total per year for all available year, see the 'group/split' step.\r\n"
          TextAlignment   =   0
          TextColor       =   &c00000000
          Tooltip         =   ""
@@ -489,7 +489,7 @@ Begin DesktopWindow wnd_rank_help
          TabIndex        =   7
          TabPanelIndex   =   7
          TabStop         =   True
-         Text            =   "The database stores the data in rows. For instance, sales for year 2004 are stored in one record, sales for year 2005 are stored in another record, ...There are a lot of good reasons to do that this way, but it prevents you from comparing Sales 2004 to Sales 2005.\r\n\r\nYou can use this type of step to split the contents of one column, for instance the total sales, in different output columns according to the value stored in another column (field), for instance the year. \r\n\r\nYou can define a 'block name', which will be used to generate the name of the output fields.\r\n\r\nFor instance, if you want to split total_sales per year, you create a first criteria where year=2004, and give 'Y2004' as block name; you create a second criteria where year=2005, and give 'Y2005' as block name.\r\n\r\nThe input field total_sales will be split into the output fields total_sales_Y2004 and total_sales_Y2005.\r\n\r\n"
+         Text            =   "The database stores the data in rows. For instance, sales for dummyfield4 2004 are stored in one record, sales for year 2005 are stored in another record, ...There are a lot of good reasons to do that this way, but it prevents you from comparing Sales 2004 to Sales 2005.\r\n\r\nYou can use this type of step to split the contents of one column, for instance the total sales, in different output columns according to the value stored in another column (field), for instance the year. \r\n\r\nYou can define a 'block name', which will be used to generate the name of the output fields.\r\n\r\nFor instance, if you want to split total_sales per year, you create a first criteria where year=2004, and give 'Y2004' as block name; you create a second criteria where year=2005, and give 'Y2005' as block name.\r\n\r\nThe input field total_sales will be split into the output fields total_sales_Y2004 and total_sales_Y2005.\r\n\r\n"
          TextAlignment   =   0
          TextColor       =   &c00000000
          Tooltip         =   ""
@@ -524,7 +524,7 @@ Begin DesktopWindow wnd_rank_help
          TabIndex        =   8
          TabPanelIndex   =   5
          TabStop         =   True
-         Text            =   "You can use this type of step to create a new field from the results of a formula applied to other fields of the SAME record.\r\n\r\nFor instance, if the database contains the price of items in one field and the cost of items in another field, you can calculate the new field margin as price - cost for (for each records).\r\n\r\nIf this step come after a pivot step that is used to split total_sales per year, creating the new fields total_sales_Y2004 and total_sales_Y2005 (see Pivot step), you can use a calculation step to compute the percentage of growth as\r\n\r\ngrowth = (total_sales_Y2005 - total_sales_Y2004) / total_sales_Y2004\r\n\r\n"
+         Text            =   "You can use this type of step to create a new field from the results of a formula applied to other fields of the SAME record.\r\n\r\nFor instance, if the database contains the price of items in one field and the cost of items in another field, you can calculate the new field margin as price - cost for (for each records).\r\n\r\nIf this step come after a pivot step that is used to split total_sales per dummyfield4, creating the new fields total_sales_Y2004 and total_sales_Y2005 (see Pivot step), you can use a calculation step to compute the percentage of growth as\r\n\r\ngrowth = (total_sales_Y2005 - total_sales_Y2004) / total_sales_Y2004\r\n\r\n"
          TextAlignment   =   0
          TextColor       =   &c00000000
          Tooltip         =   ""
@@ -804,7 +804,7 @@ Begin DesktopWindow wnd_rank_help
          TabIndex        =   16
          TabPanelIndex   =   1
          TabStop         =   True
-         Text            =   "Extracting data for reporting, or other purposes is done using a chain of steps. Each step will execute a single operation on the data (filtering, grouping, ...)\r\n\r\nThe program knows two types of fields: key fields (like product code, customer name, ...) and value fields (like quantity, total sales, ...).\r\n\r\nThe minimum process contains the (mandatory) step 'Start'. It will calculate the grand total of all value fields (sales, volume, ...)  accross the whole database.\r\n\r\nThe process is represented graphically as a list of steps.\r\n\r\nTo add a step to the process, click on the '+' button and select the type of step you want to add. It is automatically added at the end of the list.\r\n\r\nBy clicking on the edit ('...') button, you can define the name of the step, its parameters, ...\r\n\r\nTo remove a step, click on the '-' button. You cannot delete the first step.\r\n\r\nTo change the position of a step in the list, click on the step name to select and it and drag the step to a new location.\r\n\r\nThe function of each type of step is described in the next pages.\r\n"
+         Text            =   "Extracting data for reporting, or other purposes is done using a chain of steps. Each step will execute a single operation on the data (filtering, grouping, ...)\r\n\r\nThe program knows two types of fields: key fields (like product code, dummyfield1 name, ...) and value fields (like quantity, total sales, ...).\r\n\r\nThe minimum process contains the (mandatory) step 'Start'. It will calculate the grand total of all value fields (sales, volume, ...)  accross the whole database.\r\n\r\nThe process is represented graphically as a list of steps.\r\n\r\nTo add a step to the process, click on the '+' button and select the type of step you want to add. It is automatically added at the end of the list.\r\n\r\nBy clicking on the edit ('...') button, you can define the name of the step, its parameters, ...\r\n\r\nTo remove a step, click on the '-' button. You cannot delete the first step.\r\n\r\nTo change the position of a step in the list, click on the step name to select and it and drag the step to a new location.\r\n\r\nThe function of each type of step is described in the next pages.\r\n"
          TextAlignment   =   0
          TextColor       =   &c00000000
          Tooltip         =   ""

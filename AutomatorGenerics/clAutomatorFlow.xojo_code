@@ -1,48 +1,52 @@
 #tag Class
-Protected Class clAutomatorGroup
+Protected Class clAutomatorFlow
 	#tag Method, Flags = &h0
 		Sub Constructor()
 		  
 		  doClear
-		  lastStepId=0
-		  
+		   
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Function CreateVisualSupport() As DesktopContainer
+		  var cc as new ccAutomatorStep
+		  
+		  return cc
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
-		Function doAdd(itemType as integer) As integer
-		  dim p as clAutomatorItem
-		  dim n as integer
+		Function doAdd(itemType as String) As clAutomatorItem
+		  
+		  var p as clAutomatorItem
+		  
 		  
 		  p=ObjectFactory(itemType)
 		  
 		  if p<>nil  then
-		    lastStepId=lastStepId+1
-		    n=1+ubound(items)
-		    redim items(n)
+		    items.Add(p)
+		    p.SetTitle("Step"+Format(lastStepId,"000000"))
 		    
-		    items(n)=p
-		    items(n).Title="Step"+Format(lastStepId,"000000")
-		    items(n).ItemType=itemType
-		    items(n).workarea=1
+		    self.doSelect(items.LastIndex)
 		    
-		    doSelect n
 		  end if
 		  
-		  return  n
+		  return p 
+		  
+		  
+		  
+		  
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub doClear()
-		  redim Items(0)
-		  items(0)=nil
 		  
-		  ' 
-		  ' should add a start item here
-		  '
-		  
+		  items.RemoveAll
+		   
 		End Sub
 	#tag EndMethod
 
@@ -55,9 +59,31 @@ Protected Class clAutomatorGroup
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function doInsertAfter(itemType as String, InsertAfterSteIp as integer) As clAutomatorItem
+		  
+		  var p as clAutomatorItem = ObjectFactory(itemType)
+		  
+		  if p = nil then return nil
+		  
+		  items.AddAt(InsertAfterSteIp + 1, p)
+		   
+		  p.SetTitle("Step"+Format(lastStepId,"000000"))
+		  
+		  self.doSelect(InsertAfterSteIp+1)
+		  
+		  return p 
+		  
+		  
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub doMoveBeforeItem(moveItem as integer, moveBeforeItem as integer)
-		  dim i as integer
-		  dim j as integer
+		  var i  as integer
+		  var j  as integer
 		  dim tmp as clAutomatorItem
 		  
 		  'ItemStatus.Insert moveBeforeItem
@@ -92,12 +118,24 @@ Protected Class clAutomatorGroup
 
 	#tag Method, Flags = &h0
 		Sub doSelect(theItem as integer)
-		  dim i as integer
+		  var i  as integer
 		  for i=1 to ubound(items)
 		    items(i).selected=(i=theItem)
 		  next
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function FindItemWithId(Identifier as integer) As clAutomatorItem
+		  
+		  for each s as clAutomatorItem in self.Items
+		    if s.ID = Identifier then return s
+		    
+		  next
+		  
+		  return nil
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -108,7 +146,7 @@ Protected Class clAutomatorGroup
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getType(theItem as integer) As string
+		Function GetType(theItem as integer) As string
 		  return items(theItem).getType
 		  
 		End Function
@@ -122,93 +160,36 @@ Protected Class clAutomatorGroup
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function LastStepId() As integer
+		  
+		  return items.LastIndex
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub LoadFromTextFile(theTextFilename as string)
-		  dim txtin as TextInputStream
 		  
-		  dim n as integer
-		  dim m as integer
-		  dim mTyp as integer
 		  
-		  dim i as integer
-		  dim j as integer
-		  
-		  dim s as string
-		  dim clc as clAutomatorItem
-		  
-		  dim kk as integer
-		  dim kv as integer
-		  dim kz as integer
-		  
-		  dim mxk as integer
-		  dim mxv as integer
+		  var txtin as TextInputStream
 		  
 		  txtin=GetFolderItem(theTextFileName).OpenAsTextFile
 		  
-		  s=txtin.ReadLine 'read signature
+		  var MainJSON as new JSONItem(txtin.ReadAll)
+		  txtin.Close
 		  
-		  if s=clAutomatorGroup.cSignature then
-		    
-		    doClear
-		    
-		    while not txtin.eof
-		      s=txtin.Readline
-		      
-		      s=trim(s)
-		      n=val(NthField(s,";",1))
-		      i=InStr(s,";")
-		      s=mid(s,i+1,9999)
-		      
-		      select case n
-		        
-		      case 1 ' mark the start of a new object
-		        
-		      case 2 ' obtain object type from param
-		        mTyp=val(s)
-		        kk=0
-		        kv=0
-		        
-		        kz=doAdd(mTyp)
-		        clc=items(kz)
-		        
-		      case 3 ' name
-		        
-		        if clc<>nil then clc.Title=s
-		        
-		      case 50 ' object personal data
-		        if clc<>nil then clc.processLoad s
-		        
-		        
-		      case 60 'query name
-		        GroupName=s
-		        
-		      case 70 'lastIdStep
-		        lastStepId=val(s)
-		        
-		        
-		        
-		      case else
-		        ProcessLoadLine  clc,n,s
-		      end select
-		    wend
-		  else
-		    '
-		    ' here if invalid signature
-		    '
-		    MessageBox( "Invalid file signature")
-		    
-		  end if
-		  txtin.close
+		  MessageBox( "Invalid file signature")
 		  
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function ObjectFactory(ObjectType as integer) As clAutomatorItem
-		  dim p as clAutomatorItem
-		  p=new clAutomatorItem
+		Function ObjectFactory(ObjectType as String) As clAutomatorItem
+		  //
+		  // Allocate an automator item
+		  // 
+		  return new clAutomatorItem("invalid")
 		  
-		  return p
 		  
 		  
 		End Function
@@ -221,30 +202,34 @@ Protected Class clAutomatorGroup
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SaveToTextFile(theTextFilename as string)
-		  dim txtout as TextOutputStream
+		Sub SaveToFile(theTextFilename as string)
+		  var txtout as TextOutputStream
 		  
-		  dim n as integer
-		  dim i as integer
+		  var MainJSON as new JSONItem
+		   
+		  MainJSON.Value("signature") = clAutomatorFlow.cSignature
+		  MainJSON.Value("groupname") = GroupName
+		  MainJSON.Value("count") = items.Count
 		  
-		  txtout=GetFolderItem(theTextFileName).CreateTextFile
-		  txtout.writeline  clAutomatorGroup.cSignature
-		  n=Itemcount
-		  
-		  for i=1 to n
-		    txtout.writeline "1;0"
+		  for each item as clAutomatorItem in self.items
 		    
-		    if Items(i)<>nil then 
-		      txtout.writeline "2;"+str(items(i).ItemType)
-		      txtout.writeline "3;"+items(i).getTitle
-		      Items(i).saveToTextFile txtout
+		    if item <> nil then
+		      var itemTitle as string = item.getTitle
+		      var itemType as string = item.GetType
+		      var itemConfig as JSONItem = item.GetConfigJSON
+		      
+		      var ChildJSON as JSONItem
+		      ChildJSON.value("type") = itemType
+		      ChildJSON.value("title") = itemTitle
+		      ChildJSON.value("configuration") = itemConfig
+		      
 		    end if
 		    
 		  next
 		  
-		  txtout.writeline "60;"+groupname
+		  txtout=GetFolderItem(theTextFileName).CreateTextFile
 		  
-		  txtout.writeline "70;"+str(lastStepId)
+		  txtout.Write(MainJSON.ToString) 
 		  
 		  txtout.close
 		  
@@ -277,10 +262,6 @@ Protected Class clAutomatorGroup
 
 	#tag Property, Flags = &h0
 		Items(0) As clAutomatorItem
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		lastStepId As integer
 	#tag EndProperty
 
 
@@ -336,14 +317,6 @@ Protected Class clAutomatorGroup
 			InitialValue=""
 			Type="string"
 			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="lastStepId"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

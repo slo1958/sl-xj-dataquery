@@ -26,20 +26,17 @@ Begin DesktopWindow wndCalcStep_Filter
    Width           =   772
    Begin DesktopPopupMenu PopupMenu1
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
       Italic          =   False
       Left            =   -465
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -50,8 +47,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   6
       Transparent     =   False
@@ -97,6 +92,7 @@ Begin DesktopWindow wndCalcStep_Filter
    Begin TextField efName
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -107,6 +103,7 @@ Begin DesktopWindow wndCalcStep_Filter
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -118,13 +115,9 @@ Begin DesktopWindow wndCalcStep_Filter
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
       TabIndex        =   2
       TabPanelIndex   =   0
       TabStop         =   True
@@ -177,20 +170,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   0
       InitialParent   =   ""
-      InitialValue    =   ""
+      InitialValue    =   "dummyfield1"
       Italic          =   False
       Left            =   110
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -201,8 +191,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   4
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   51
       Transparent     =   False
@@ -212,20 +200,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppOp
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   0
       InitialParent   =   ""
       InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
       Italic          =   False
       Left            =   285
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -236,8 +221,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   51
       Transparent     =   False
@@ -247,20 +230,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   0
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n(constant)\r\n(empty)"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n(constant)\r\n(empty)"
       Italic          =   False
       Left            =   354
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -271,8 +251,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   6
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   51
       Transparent     =   False
@@ -283,6 +261,7 @@ Begin DesktopWindow wndCalcStep_Filter
    Begin TextField efConstant
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -293,6 +272,7 @@ Begin DesktopWindow wndCalcStep_Filter
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
@@ -304,13 +284,9 @@ Begin DesktopWindow wndCalcStep_Filter
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
       TabIndex        =   7
       TabPanelIndex   =   0
       TabStop         =   True
@@ -328,7 +304,6 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   True
       Cancel          =   False
       Caption         =   "-"
@@ -338,7 +313,6 @@ Begin DesktopWindow wndCalcStep_Filter
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
@@ -353,8 +327,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
       Top             =   50
       Transparent     =   False
@@ -364,20 +336,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   1
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\ndummyfield2\ndummyfield3\ndummyfield4\n"
       Italic          =   False
       Left            =   110
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -388,8 +357,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   75
       Transparent     =   False
@@ -399,20 +366,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppOp
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   1
       InitialParent   =   ""
       InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
       Italic          =   False
       Left            =   285
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -423,8 +387,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   75
       Transparent     =   False
@@ -434,20 +396,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   1
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n(constant)\r\n(empty)"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n(constant)\r\n(empty)"
       Italic          =   False
       Left            =   354
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -458,8 +417,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   75
       Transparent     =   False
@@ -470,6 +427,7 @@ Begin DesktopWindow wndCalcStep_Filter
    Begin TextField efConstant
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -480,6 +438,7 @@ Begin DesktopWindow wndCalcStep_Filter
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
@@ -491,13 +450,9 @@ Begin DesktopWindow wndCalcStep_Filter
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
       TabIndex        =   12
       TabPanelIndex   =   0
       TabStop         =   True
@@ -515,7 +470,6 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   True
       Cancel          =   False
       Caption         =   "-"
@@ -525,7 +479,6 @@ Begin DesktopWindow wndCalcStep_Filter
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
@@ -540,8 +493,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   13
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
       Top             =   74
       Transparent     =   False
@@ -551,20 +502,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   2
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -575,8 +523,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   14
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   99
       Transparent     =   False
@@ -586,20 +532,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppOp
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   2
       InitialParent   =   ""
       InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
       Italic          =   False
       Left            =   285
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -610,8 +553,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   15
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   99
       Transparent     =   False
@@ -621,20 +562,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   2
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n(constant)\r\n(empty)"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n(constant)\r\n(empty)"
       Italic          =   False
       Left            =   354
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -645,8 +583,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   16
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   99
       Transparent     =   False
@@ -657,6 +593,7 @@ Begin DesktopWindow wndCalcStep_Filter
    Begin TextField efConstant
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -667,6 +604,7 @@ Begin DesktopWindow wndCalcStep_Filter
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
@@ -678,13 +616,9 @@ Begin DesktopWindow wndCalcStep_Filter
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
       TabIndex        =   17
       TabPanelIndex   =   0
       TabStop         =   True
@@ -702,7 +636,6 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   True
       Cancel          =   False
       Caption         =   "-"
@@ -712,7 +645,6 @@ Begin DesktopWindow wndCalcStep_Filter
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
@@ -727,8 +659,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   18
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
       Top             =   98
       Transparent     =   False
@@ -738,20 +668,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   3
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -762,8 +689,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   19
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   124
       Transparent     =   False
@@ -773,20 +698,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppOp
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   3
       InitialParent   =   ""
       InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
       Italic          =   False
       Left            =   285
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -797,8 +719,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   20
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   124
       Transparent     =   False
@@ -808,20 +728,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   3
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n(constant)\r\n(empty)"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n(constant)\r\n(empty)"
       Italic          =   False
       Left            =   354
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -832,8 +749,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   21
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   124
       Transparent     =   False
@@ -844,6 +759,7 @@ Begin DesktopWindow wndCalcStep_Filter
    Begin TextField efConstant
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -854,6 +770,7 @@ Begin DesktopWindow wndCalcStep_Filter
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
@@ -865,13 +782,9 @@ Begin DesktopWindow wndCalcStep_Filter
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
       TabIndex        =   22
       TabPanelIndex   =   0
       TabStop         =   True
@@ -889,7 +802,6 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   True
       Cancel          =   False
       Caption         =   "-"
@@ -899,7 +811,6 @@ Begin DesktopWindow wndCalcStep_Filter
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
@@ -914,8 +825,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   23
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
       Top             =   123
       Transparent     =   False
@@ -925,20 +834,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   4
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -949,8 +855,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   24
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   149
       Transparent     =   False
@@ -960,20 +864,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppOp
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   4
       InitialParent   =   ""
       InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
       Italic          =   False
       Left            =   285
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -984,8 +885,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   25
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   149
       Transparent     =   False
@@ -995,20 +894,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   4
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n(constant)\r\n(empty)"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n(constant)\r\n(empty)"
       Italic          =   False
       Left            =   354
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1019,8 +915,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   26
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   149
       Transparent     =   False
@@ -1031,6 +925,7 @@ Begin DesktopWindow wndCalcStep_Filter
    Begin TextField efConstant
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -1041,6 +936,7 @@ Begin DesktopWindow wndCalcStep_Filter
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
@@ -1052,13 +948,9 @@ Begin DesktopWindow wndCalcStep_Filter
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
       TabIndex        =   27
       TabPanelIndex   =   0
       TabStop         =   True
@@ -1076,7 +968,6 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   True
       Cancel          =   False
       Caption         =   "-"
@@ -1086,7 +977,6 @@ Begin DesktopWindow wndCalcStep_Filter
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
@@ -1101,8 +991,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   28
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
       Top             =   148
       Transparent     =   False
@@ -1112,20 +1000,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   5
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1136,8 +1021,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   29
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   174
       Transparent     =   False
@@ -1147,20 +1030,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppOp
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   5
       InitialParent   =   ""
       InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
       Italic          =   False
       Left            =   285
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1171,8 +1051,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   30
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   174
       Transparent     =   False
@@ -1182,20 +1060,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   5
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n(constant)\r\n(empty)"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n(constant)\r\n(empty)"
       Italic          =   False
       Left            =   354
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1206,8 +1081,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   31
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   174
       Transparent     =   False
@@ -1218,6 +1091,7 @@ Begin DesktopWindow wndCalcStep_Filter
    Begin TextField efConstant
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -1228,6 +1102,7 @@ Begin DesktopWindow wndCalcStep_Filter
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
@@ -1239,13 +1114,9 @@ Begin DesktopWindow wndCalcStep_Filter
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
       TabIndex        =   32
       TabPanelIndex   =   0
       TabStop         =   True
@@ -1263,7 +1134,6 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   True
       Cancel          =   False
       Caption         =   "-"
@@ -1273,7 +1143,6 @@ Begin DesktopWindow wndCalcStep_Filter
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
@@ -1288,8 +1157,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   33
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
       Top             =   173
       Transparent     =   False
@@ -1299,20 +1166,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   6
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\ndummyfield2\ndummyfield3\ndummyfield4\n"
       Italic          =   False
       Left            =   110
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1323,8 +1187,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   34
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   200
       Transparent     =   False
@@ -1334,20 +1196,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppOp
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   6
       InitialParent   =   ""
       InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
       Italic          =   False
       Left            =   285
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1358,8 +1217,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   35
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   200
       Transparent     =   False
@@ -1369,20 +1226,17 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   6
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n(constant)\r\n(empty)"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n(constant)\r\n(empty)"
       Italic          =   False
       Left            =   354
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1393,8 +1247,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   36
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   200
       Transparent     =   False
@@ -1405,6 +1257,7 @@ Begin DesktopWindow wndCalcStep_Filter
    Begin TextField efConstant
       AcceptTabs      =   False
       Alignment       =   0
+      AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
       Bold            =   False
@@ -1415,6 +1268,7 @@ Begin DesktopWindow wndCalcStep_Filter
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
+      Hint            =   ""
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
@@ -1426,13 +1280,9 @@ Begin DesktopWindow wndCalcStep_Filter
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   False
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollbarVertical=   True
-      Styled          =   False
       TabIndex        =   37
       TabPanelIndex   =   0
       TabStop         =   True
@@ -1450,7 +1300,6 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   True
       Cancel          =   False
       Caption         =   "-"
@@ -1460,7 +1309,6 @@ Begin DesktopWindow wndCalcStep_Filter
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
@@ -1475,8 +1323,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   38
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
       Top             =   199
       Transparent     =   False
@@ -1486,7 +1332,6 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopButton pb_Add
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   True
       Cancel          =   False
       Caption         =   "+"
@@ -1496,7 +1341,6 @@ Begin DesktopWindow wndCalcStep_Filter
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   22
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -1511,8 +1355,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   39
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
       Top             =   173
       Transparent     =   False
@@ -1522,7 +1364,6 @@ Begin DesktopWindow wndCalcStep_Filter
    End
    Begin DesktopButton pb_close
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Cancel          =   False
       Caption         =   "Close"
@@ -1532,7 +1373,6 @@ Begin DesktopWindow wndCalcStep_Filter
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   22
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -1547,8 +1387,6 @@ Begin DesktopWindow wndCalcStep_Filter
       TabIndex        =   40
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   173
       Transparent     =   False
@@ -1597,7 +1435,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  dim i as integer
+		  var i  as integer
 		  
 		  lastItem=0
 		  for i=1 to 6
@@ -1606,6 +1444,7 @@ End
 		    ppop(i).Visible=false
 		    efConstant(i).Visible=false
 		    pb_Remove(i).Visible=false
+		    
 		  next
 		  
 		  pb_add.top=pb_remove(0).top
@@ -1647,7 +1486,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  dim i as integer
+		  var i  as integer
 		  
 		  
 		  curStep.name=efName.text
@@ -1660,8 +1499,10 @@ End
 		      curStep.sOper(i)=ppOp(i).SelectedRowText
 		      curStep.sConst(i)=efConstant(i).Text
 		      curStep.bInUse(i)=true
+		      
 		    else
 		      curStep.bInUse(i)=false
+		      
 		    end if
 		    
 		  next
@@ -1673,7 +1514,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub prepLine(theLine as integer)
-		  dim i as integer
+		  var i  as integer
 		  if curStep.prevCalcStep<>nil then
 		    ppFieldA(theLine).RemoveAllRows
 		    ppFieldB(theLine).RemoveAllRows
@@ -1698,9 +1539,9 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowMe(theStep as clCalcStep_filter)
-		  dim i as integer
-		  dim j as integer
+		Sub ShowMe(theStep as clDataQueryItem_filter)
+		  var i  as integer
+		  var j  as integer
 		  
 		  curStep=theStep
 		  
@@ -1732,10 +1573,11 @@ End
 
 	#tag Method, Flags = &h0
 		Function validInput() As boolean
-		  dim i as integer
+		  var i  as integer
 		  dim k as integer
 		  dim bErr as boolean
-		  dim kt as integer
+		  
+		  dim kt as InternalFieldTypes
 		  
 		  bErr=false
 		  for i=0 to 6
@@ -1743,9 +1585,11 @@ End
 		    
 		    if ppFieldA(i).Visible then
 		      if curStep.prevCalcStep=nil then
-		        kt=-1
+		        kt = InternalFieldTypes.Undefined
+		        
 		      else
 		        kt=curStep.prevCalcStep.getFieldType(ppFieldA(i).SelectedRowText)
+		        
 		      end if
 		      
 		      if ppfieldB(i).SelectedRowText=cUseConstant then 
@@ -1773,7 +1617,7 @@ End
 
 
 	#tag Property, Flags = &h0
-		curStep As clCalcStep_filter
+		curStep As clDataQueryItem_filter
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -1816,25 +1660,27 @@ End
 #tag Events efConstant
 	#tag Event
 		Sub MouseEnter(index as Integer)
-		  dim kt as integer
+		  dim kt as InternalFieldTypes
+		  
 		  dim sb as string
 		  dim sc as string
+		  
 		  if me.BackColor=rgb(255,0,0) then
 		    sb=ppFieldA(index).SelectedRowText
-		    kt=curStep.prevCalcStep.getFieldType(sb)
+		    kt = curStep.prevCalcStep.getFieldType(sb)
 		    
 		    
-		    if kt=10 then
+		    if kt = InternalFieldTypes.String then
 		      sc="This is a text key. Its value must be surrounded with ' (single quote). "
 		      sc=sc+"It may not contain single or double quote."
 		      
 		    end if
 		    
-		    if kt=20 then
+		    if kt = InternalFieldTypes.Integer then
 		      sc="This is a number key.  Its value must be a valid number."
 		    end if
 		    
-		    if kt=30 then
+		    if kt = InternalFieldTypes.Double then
 		      sc="This is a number value.  Its value must be a valid number (use the dot for fractionnal numbers)"
 		    end if
 		    
@@ -1850,7 +1696,7 @@ End
 #tag Events pb_Remove
 	#tag Event
 		Sub Pressed(index as Integer)
-		  dim i as integer
+		  var i  as integer
 		  dim y as integer
 		  dim last as integer
 		  
@@ -1886,7 +1732,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  dim i as integer
+		  var i  as integer
 		  i=addOne
 		  
 		  

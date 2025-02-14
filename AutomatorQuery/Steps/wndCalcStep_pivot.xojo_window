@@ -318,7 +318,7 @@ Begin DesktopWindow wndCalcStep_pivot
       Height          =   20
       Index           =   -2147483648
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   132
       LockBottom      =   False
@@ -348,7 +348,7 @@ Begin DesktopWindow wndCalcStep_pivot
       Height          =   20
       Index           =   -2147483648
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   284
       LockBottom      =   False
@@ -378,7 +378,7 @@ Begin DesktopWindow wndCalcStep_pivot
       Height          =   20
       Index           =   -2147483648
       InitialParent   =   ""
-      InitialValue    =   "customer\r\nprod_fam_2\r\npgvss\r\nyear\r\n"
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   436
       LockBottom      =   False
@@ -1989,7 +1989,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  dim i as integer
+		  var i  as integer
 		  st_help.Caption=""
 		  
 		  lastItem=0
@@ -2036,7 +2036,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub checkUsage()
-		  dim i as integer
+		  var i  as integer
 		  dim bAnyUsed as boolean
 		  
 		  
@@ -2085,7 +2085,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  dim i as integer
+		  var i  as integer
 		  
 		  
 		  curStep.name=efName.text
@@ -2128,9 +2128,9 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowMe(theStep as clCalcStep_pivot)
-		  dim i as integer
-		  dim j as integer
+		Sub ShowMe(theStep as clDataQueryItem_pivot)
+		  var i  as integer
+		  var j  as integer
 		  
 		  curStep=theStep
 		  
@@ -2185,7 +2185,7 @@ End
 	#tag Method, Flags = &h0
 		Function validBlockName() As boolean
 		  dim bErr as Boolean
-		  dim i as integer
+		  var i  as integer
 		  dim sb as string
 		  
 		  berr=false
@@ -2219,9 +2219,9 @@ End
 	#tag Method, Flags = &h0
 		Function validKeyValue() As boolean
 		  dim bErr as Boolean
-		  dim i as integer
+		  var i  as integer
 		  dim sa as string
-		  dim kt as integer
+		  var kt as InternalFieldTypes
 		  dim eff as TextField
 		  
 		  berr=false
@@ -2269,7 +2269,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function ValidOneValue(byref theEditField as TextField, theType as integer) As boolean
+		Function ValidOneValue(byref theEditField as TextField, theType as InternalFieldTypes) As boolean
 		  
 		  dim sb as string
 		  dim bErr as boolean
@@ -2295,7 +2295,7 @@ End
 
 
 	#tag Property, Flags = &h0
-		curStep As clCalcStep_pivot
+		curStep As clDataQueryItem_pivot
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -2308,7 +2308,7 @@ End
 #tag Events ppField2
 	#tag Event
 		Sub SelectionChanged(item As DesktopMenuItem)
-		  dim i as integer
+		  var i  as integer
 		  
 		  for i=0 to 6
 		    efConstant2(i).Enabled=ppField2.SelectedRowText<>cNotUsed
@@ -2320,7 +2320,7 @@ End
 #tag Events ppField3
 	#tag Event
 		Sub SelectionChanged(item As DesktopMenuItem)
-		  dim i as integer
+		  var i  as integer
 		  
 		  for i=0 to 6
 		    efConstant3(i).Enabled=ppField3.SelectedRowText<>cNotUsed
@@ -2332,22 +2332,24 @@ End
 #tag Events efConstant1
 	#tag Event
 		Sub MouseEnter(index as Integer)
-		  dim kt as integer
+		  dim kt as InternalFieldTypes
+		  
 		  dim sb as string
 		  dim sc as string
+		  
 		  if me.BackColor=rgb(255,0,0) then
 		    sb=ppField1.SelectedRowText
 		    kt=curStep.prevCalcStep.getKeyType(sb)
 		    
 		    
-		    if kt=10 then
+		    if kt=InternalFieldTypes.String then
 		      sc="This is a text key. Its value must be surrounded with ' (single quote)."
 		      sc=sc+" "
 		      sc=sc+"It may not contain single or double quote."
 		      
 		    end if
 		    
-		    if kt=20 then
+		    if kt=InternalFieldTypes.Double or kt=InternalFieldTypes.Integer then
 		      sc="This is a number key.  Its value must be a valid number."
 		    end if
 		    
@@ -2362,22 +2364,24 @@ End
 #tag Events efConstant2
 	#tag Event
 		Sub MouseEnter(index as Integer)
-		  dim kt as integer
+		  dim kt as InternalFieldTypes
+		  
 		  dim sb as string
 		  dim sc as string
+		  
 		  if me.BackColor=rgb(255,0,0) then
 		    sb=ppField2.SelectedRowText
 		    kt=curStep.prevCalcStep.getKeyType(sb)
 		    
 		    
-		    if kt=10 then
+		    if kt=InternalFieldTypes.string then
 		      sc="This is a text key. Its value must be surrounded with ' (single quote)."
 		      sc=sc+" "
 		      sc=sc+"It may not contain single or double quote."
 		      
 		    end if
 		    
-		    if kt=20 then
+		    if kt = InternalFieldTypes.Double or kt = InternalFieldTypes.Integer then
 		      sc="This is a number key.  Its value must be a valid number."
 		    end if
 		    
@@ -2391,22 +2395,24 @@ End
 #tag Events efConstant3
 	#tag Event
 		Sub MouseEnter(index as Integer)
-		  dim kt as integer
+		  dim kt as InternalFieldTypes
+		  
 		  dim sb as string
 		  dim sc as string
+		  
 		  if me.BackColor=rgb(255,0,0) then
 		    sb=ppField3.SelectedRowText
 		    kt=curStep.prevCalcStep.getKeyType(sb)
 		    
 		    
-		    if kt=10 then
+		    if kt = InternalFieldTypes.string then
 		      sc="This is a text key. Its value must be surrounded with ' (single quote)."
 		      sc=sc+" "
 		      sc=sc+"It may not contain single or double quote."
 		      
 		    end if
 		    
-		    if kt=20 then
+		    if kt = InternalFieldTypes.Double or kt = InternalFieldTypes.Integer then
 		      sc="This is a number key.  Its value must be a valid number."
 		    end if
 		    
@@ -2420,7 +2426,7 @@ End
 #tag Events pb_Remove
 	#tag Event
 		Sub Pressed(index as Integer)
-		  dim i as integer
+		  var i  as integer
 		  dim y as integer
 		  dim last as integer
 		  
@@ -2456,7 +2462,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  dim i as integer
+		  var i  as integer
 		  i=addOne
 		  
 		  

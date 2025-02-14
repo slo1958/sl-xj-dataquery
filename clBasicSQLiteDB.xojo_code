@@ -43,6 +43,19 @@ Protected Class clBasicSQLiteDB
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function Name() As string
+		  if fld = nil then 
+		    return "Not connected"
+		    
+		  else
+		    return fld.Name
+		    
+		  end if
+		  
+		End Function
+	#tag EndMethod
+
 
 	#tag Note, Name = DataType
 		
@@ -54,7 +67,7 @@ Protected Class clBasicSQLiteDB
 		5 (Text or VarChar) Stores alphabetic data, in which the number of characters vary from record to record, but you don't want to pad the unused characters with blanks. For example, VARCHAR (20) specifies a VARCHAR field with a maximum length of 20 characters.
 		6 (Float) Stores floating-point numeric values with a precision that you specify, i.e., FLOAT (5).
 		7 (Double) Stores double-precision floating-point numbers.
-		8 (Date) Stores year, month, and day values of a date in the format YYYY-MM-DD. The year value is four digits; the month and day values are two digits.
+		8 (Date) Stores dummyfield4, month, and day values of a date in the format YYYY-MM-DD. The dummyfield4 value is four digits; the month and day values are two digits.
 		9 (Time) Stores hour, minute, and second values of a time in the format HH:MM:SS. The hours and minutes are two digits. The seconds values is also two digits, may include a optional fractional part, e.g., 09:55:25.248. The default length of the fractional part is zero.
 		10 (TimeStamp) Stores both date and time information in the format YYYY-MM-DD HH:MM:SS. The lengths of the components of a TimeStamp are the same as for Time and Date, except that the default length of the fractional part of the time component is six digits rather than zero. If a TimeStamp values has no fractional component, then its length is 19 digits If it has a fractional component, its length is 20 digits, plus the length of the fractional component.
 		11 (Currency) This is a 64-bit fixed-point number format that holds 15 digits to the left of the decimal point and 4 digits to the right.

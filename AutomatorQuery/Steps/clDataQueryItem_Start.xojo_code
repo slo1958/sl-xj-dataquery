@@ -1,6 +1,6 @@
 #tag Class
-Protected Class clCalcStep_Start
-Inherits clCalcStep_Generic
+Protected Class clDataQueryItem_Start
+Inherits clDataQueryItem_Generic
 	#tag Method, Flags = &h0
 		Function canDelete() As boolean
 		  return false
@@ -10,11 +10,11 @@ Inherits clCalcStep_Generic
 	#tag Method, Flags = &h0
 		Sub Constructor()
 		  // Calling the overridden superclass constructor.
-		  Super.Constructor
+		  Super.Constructor(StepTypes.Start)
 		  
 		  
 		  dim ssql as string
-		  dim i as integer
+		  var i  as integer
 		  dim n as integer
 		  
 		  dataSource = "CurrentSales" // getASourceName(ViewName_Queries,"data")
@@ -29,6 +29,8 @@ Inherits clCalcStep_Generic
 		  
 		  var temp as new clBasicSQLiteQuery(app.DBConnection, dataSource)
 		  
+		  self.dbname = app.DBConnection.Name
+		  
 		  var dct as Dictionary = temp.GetColumnTypes
 		  
 		  writelog "Found "+str(dct.Count)+" fields."
@@ -36,25 +38,26 @@ Inherits clCalcStep_Generic
 		  for each FieldName as string in dct.keys
 		    var ct as integer = dct.value(FieldName)
 		    
+		    writelog ("found field "+ FieldName +" fieldtype "+str(ct))
+		    
 		    select case ct
-		    case 5
-		      n=ubound(valueFields)+1
-		      redim valueFields(n)
-		      valueFields(n)= FieldName
+		    case 7 // Double
+		      valueFields.Add(FieldName)
 		      
 		    case 3
-		      n=ubound(keyFields)+1
-		      redim keyFields(n)
-		      redim keyFieldType(n)
-		      keyfields(n)=FieldName
-		      keyFieldType(n)=20
+		      keyFields.add(FieldName)
+		      keyFieldType.add(InternalFieldTypes.Undefined)
 		      
-		    case 202
-		      n=ubound(keyFields)+1
-		      redim keyFields(n)
-		      redim keyFieldType(n)
-		      keyfields(n)=FieldName
-		      keyFieldType(n)=10
+		    case 5
+		      keyFields.add(FieldName)
+		      keyFieldType.add(InternalFieldTypes.String)
+		      
+		    case 19
+		      keyFields.add(FieldName)
+		      keyFieldType.add(InternalFieldTypes.Integer)
+		      
+		    case 8 // Date
+		      writelog ("Rejected field "+ FieldName +" fieldtype "+str(ct))
 		      
 		    case else
 		      writelog ("Rejected field "+ FieldName +" fieldtype "+str(ct))
@@ -64,20 +67,20 @@ Inherits clCalcStep_Generic
 		  next
 		  
 		  
-		  writelog str(ubound(keyFields))+" key fields / "+ str(ubound(valueFields))+" value fields"
+		  writelog str(keyFields.LastIndex)+" key fields / "+ str(ubound(valueFields))+" value fields"
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getSql() As string
-		  dim i as integer
+		  var i  as integer
 		  dim n as integer
 		  dim s as string
 		  
 		  s="select inputrow"   
 		  
-		  for i=1 to ubound(keyFields)
+		  for i=1 to keyFields.LastIndex
 		    s=s+"," + keyFields(i)+" as "+keyFields(i)+"_"+fieldPostFix
 		  next
 		  
@@ -94,7 +97,18 @@ Inherits clCalcStep_Generic
 
 	#tag Method, Flags = &h0
 		Function getTextItem(theItem as integer) As string
-		  return ""
+		  select case theitem
+		    
+		  case 1
+		    return "Table: " + datasource
+		    
+		  case 2
+		    return "Database: " + dbname
+		    
+		  case else
+		    return ""
+		    
+		  end select
 		  
 		End Function
 	#tag EndMethod
@@ -107,13 +121,8 @@ Inherits clCalcStep_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function myType() As integer
-		  return 400
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Open()
+		Sub ShowConfigDialog()
+		   
 		  MessageBox( "Open operation not allowed on Start object")
 		  
 		End Sub
@@ -122,6 +131,10 @@ Inherits clCalcStep_Generic
 
 	#tag Property, Flags = &h0
 		dataSource As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		dbname As String
 	#tag EndProperty
 
 

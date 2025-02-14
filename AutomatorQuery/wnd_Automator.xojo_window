@@ -542,34 +542,34 @@ End
 
 	#tag Event
 		Sub Opening()
-		  dim k as integer
-		  dim d as date
-		  
-		  BuildList_Analysis
-		  
-		  items=new clOneRanking
-		  
-		  recalcLayout
-		  
-		  // fileToOpen<>"" then 
-		  
-		  'items.LoadFromTextFile fileToOpen
-		  'tmpCurrentFile=fileToOpen
-		  'EditField1.text=Items.GroupName
-		  'pbsave.enabled=true
-		  
-		  //else
-		  
-		  d=new date
-		  k=items.doAdd (400)
-		  EditField1.text="Analysis "+d.ShortDate
-		  tmpCurrentFile=""
-		  pbsave.enabled=false
-		  
-		  //end if
-		  
-		  dirtyFlag=false
-		  sttLocalFilename.caption=tmpCurrentFile
+		  // dim k as integer
+		  // dim d as date
+		  // 
+		  // BuildList_Analysis
+		  // 
+		  // items=new clDataQueryFlow
+		  // 
+		  // recalcLayout
+		  // 
+		  // // fileToOpen<>"" then 
+		  // 
+		  // 'items.LoadFromTextFile fileToOpen
+		  // 'tmpCurrentFile=fileToOpen
+		  // 'EditField1.text=Items.GroupName
+		  // 'pbsave.enabled=true
+		  // 
+		  // //else
+		  // 
+		  // d=new date
+		  // k=items.doAdd (400)
+		  // EditField1.text="Analysis "+d.ShortDate
+		  // tmpCurrentFile=""
+		  // pbsave.enabled=false
+		  // 
+		  // //end if
+		  // 
+		  // dirtyFlag=false
+		  // sttLocalFilename.caption=tmpCurrentFile
 		  
 		End Sub
 	#tag EndEvent
@@ -594,7 +594,7 @@ End
 	#tag Method, Flags = &h0
 		Sub BuildList_Analysis()
 		  dim fld as FolderItem
-		  dim i as integer
+		  var i  as integer
 		  dim s as string
 		  dim s2 as string
 		  dim s3 as string
@@ -615,7 +615,7 @@ End
 		        txt=GetFolderItem(s).OpenAsTextFile
 		        s2=txt.readline
 		        
-		        if s2=clAutomatorGroup.cSignature  then
+		        if s2=clAutomatorFlow.cSignature  then
 		          s3=""
 		          while not txt.eof and s3=""
 		            s3=trim(txt.readline)
@@ -631,7 +631,7 @@ End
 		        end if
 		        
 		        txt.close
-		        if s2=clAutomatorGroup.cSignature then
+		        if s2=clAutomatorFlow.cSignature then
 		          ListBox3.addrow  s
 		          r=ListBox3.LastRowIndex
 		          ListBox3.CellTextAt(r,1)=s3
@@ -659,24 +659,24 @@ End
 
 	#tag Method, Flags = &h1
 		Protected Sub doClear()
-		  dim k as integer
-		  dim d as date
-		  
-		  items=new clOneRanking
-		  
-		  recalcLayout
-		  
-		  d=new date
-		  k=items.doAdd (400)
-		  EditField1.text="Analysis "+d.ShortDate
-		  tmpCurrentFile=""
-		  pbsave.enabled=false
-		  
-		  dirtyFlag=false
-		  sttLocalFilename.caption=""
-		  
-		  items.UpdateDataFlow
-		  Refresh
+		  // dim k as integer
+		  // dim d as date
+		  // 
+		  // items=new clDataQueryFlow
+		  // 
+		  // recalcLayout
+		  // 
+		  // d=new date
+		  // k=items.doAdd (StepTypes.Start)
+		  // EditField1.text="Analysis "+d.ShortDate
+		  // tmpCurrentFile=""
+		  // pbsave.enabled=false
+		  // 
+		  // dirtyFlag=false
+		  // sttLocalFilename.caption=""
+		  // 
+		  // items.UpdateDataFlow
+		  // Refresh
 		  
 		End Sub
 	#tag EndMethod
@@ -767,7 +767,7 @@ End
 		    end if
 		    
 		    if bgo then
-		      items=new clOneRanking
+		      items=new clDataQueryFlow
 		      
 		      recalcLayout
 		      
@@ -786,57 +786,57 @@ End
 
 	#tag Method, Flags = &h1
 		Protected Sub doPrint()
-		  
-		  Dim g as Graphics
-		  Dim p as PrinterSetup
-		  dim y as integer
-		  dim dy as integer
-		  dim i as integer
-		  
-		  p=New PrinterSetup
-		  If p.PageSetupDialog then
-		    g=OpenPrinterDialog(p)
-		    If g<> Nil then
-		      
-		      y=15
-		      
-		      g.Bold=true
-		      g.DrawString items.GroupName,10,y
-		      
-		      y=y+12
-		      
-		      for i=1 to Items.Itemcount
-		        
-		        if Items.VisibleStatus(i)>0 then
-		          dy=intdrawStep(g,i,y,2)
-		          items.items(i).yBase=y
-		          if i<Items.Itemcount then
-		            
-		            if Items.visibleStatus(i+1)<>0 then
-		              
-		            end if
-		          end if
-		          items.items(i).yend=y+dy
-		          y=y+dy+cInterstep
-		        end if
-		        
-		      next
-		      
-		      
-		      
-		      
-		      
-		      
-		      '
-		      '
-		      '
-		      
-		      
-		      
-		      
-		      
-		    end if
-		  end if
+		  // 
+		  // Dim g as Graphics
+		  // Dim p as PrinterSetup
+		  // dim y as integer
+		  // dim dy as integer
+		  // var i  as integer
+		  // 
+		  // p=New PrinterSetup
+		  // If p.PageSetupDialog then
+		  // g=OpenPrinterDialog(p)
+		  // If g<> Nil then
+		  // 
+		  // y=15
+		  // 
+		  // g.Bold=true
+		  // g.DrawString items.GroupName,10,y
+		  // 
+		  // y=y+12
+		  // 
+		  // for i=1 to Items.Itemcount
+		  // 
+		  // if Items.VisibleStatus(i)>0 then
+		  // dy=intdrawStep(g,i,y,2)
+		  // items.items(i).yBase=y
+		  // if i<Items.Itemcount then
+		  // 
+		  // if Items.visibleStatus(i+1)<>0 then
+		  // 
+		  // end if
+		  // end if
+		  // items.items(i).yend=y+dy
+		  // y=y+dy+cInterstep
+		  // end if
+		  // 
+		  // next
+		  // 
+		  // 
+		  // 
+		  // 
+		  // 
+		  // 
+		  // '
+		  // '
+		  // '
+		  // 
+		  // 
+		  // 
+		  // 
+		  // 
+		  // end if
+		  // end if
 		End Sub
 	#tag EndMethod
 
@@ -1018,7 +1018,7 @@ End
 
 	#tag Method, Flags = &h1
 		Protected Function drawStep(g as graphics, stepNo as integer,ybase as integer) As integer
-		  dim j as integer
+		  var j  as integer
 		  
 		  j= Items.VisibleStatus(stepno) 
 		  
@@ -1041,7 +1041,7 @@ End
 		  dim sTit as string
 		  dim sTyp as string
 		  
-		  dim i as integer
+		  var i  as integer
 		  dim s as string
 		  
 		  g.Bold=false
@@ -1144,10 +1144,11 @@ End
 		Protected Sub intSave(theFilename as string)
 		  
 		  if items<>nil then
-		    items.SaveToTextFile tmpCurrentFile
+		    items.SaveToFile tmpCurrentFile
 		    sttLocalFilename.caption=tmpCurrentFile
 		    pbSave.Enabled=true
 		    dirtyFlag=false
+		    
 		  end if
 		  
 		End Sub
@@ -1170,69 +1171,12 @@ End
 	#tag EndMethod
 
 
-	#tag Note, Name = InsObjType
-		== Action
-		
-		
-		dim j as integer
-		dim k as integer
-		
-		select case item
-		  
-		case "Group/Split"
-		  j=300
-		  
-		case "Filter"
-		  j=200
-		  
-		case "Sort"
-		  j=500
-		  
-		case "Calc"
-		  j=600
-		  
-		case "Map"
-		   j=800
-		  
-		case "Pivot"
-		  j=700
-		  
-		case else
-		  
-		  j=-1
-		  
-		end Select
-		
-		k=items.doAdd(j)
-		doSelect k
-		
-		items.UpdateDataFlow
-		dirtyFlag=true
-		
-		
-		
-		
-		
-		========= Open
-		InsObjType.RemoveAllRows
-		
-		InsObjType.addrow "Group/Split"
-		InsObjType.addrow "Filter"
-		InsObjType.addrow "Sort"
-		InsObjType.addrow "Calc"
-		InsObjType.addrow "Map"
-		InsObjType.addrow "Pivot"
-		
-		
-	#tag EndNote
-
-
 	#tag Property, Flags = &h1
 		Protected dirtyFlag As boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
-		Protected Items As clOneRanking
+		Protected Items As clDataQueryFlow
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -1288,158 +1232,158 @@ End
 #tag Events Canvas1
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
-		  dim i as integer
-		  dim j as integer
-		  
-		  
-		  
-		  if plusX0<=x and x<=plusx1 and plusy0<=y and y <=plusy1 then
-		    doAdd
-		  else
-		    j=-1
-		    i=1
-		    while (i<=Items.Itemcount) and (j<0)
-		      if (Items.items(i).yBase<=y) and (y<=Items.items(i).yBase+xButtonWidth) then j=i 'stepYEnd(i) then j=i
-		      i=i+1
-		    wend 
-		    
-		    if j>0 then
-		      if (xButtonBase<=x) and (x<=xButtonBase+xButtonWidth) then  doToggle j
-		      if (xActionButtonBase<=x) and (x<=xActionButtonBase+xButtonWidth) then doRemove j
-		      if (xstepBase<=x) and (x<=xStepBase+xStepWidth) then doSelect j
-		      if (xEditButtonBase<=x) and (x<=xEditButtonBase+xButtonWidth) then doEdit j
-		      
-		    end if
-		    
-		  end if
+		  // var i  as integer
+		  // var j  as integer
+		  // 
+		  // 
+		  // 
+		  // if plusX0<=x and x<=plusx1 and plusy0<=y and y <=plusy1 then
+		  // doAdd
+		  // else
+		  // j=-1
+		  // i=1
+		  // while (i<=Items.Itemcount) and (j<0)
+		  // if (Items.items(i).yBase<=y) and (y<=Items.items(i).yBase+xButtonWidth) then j=i 'stepYEnd(i) then j=i
+		  // i=i+1
+		  // wend 
+		  // 
+		  // if j>0 then
+		  // if (xButtonBase<=x) and (x<=xButtonBase+xButtonWidth) then  doToggle j
+		  // if (xActionButtonBase<=x) and (x<=xActionButtonBase+xButtonWidth) then doRemove j
+		  // if (xstepBase<=x) and (x<=xStepBase+xStepWidth) then doSelect j
+		  // if (xEditButtonBase<=x) and (x<=xEditButtonBase+xButtonWidth) then doEdit j
+		  // 
+		  // end if
+		  // 
+		  // end if
 		  
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Function MouseDown(x As Integer, y As Integer) As Boolean
-		  dim i as integer
-		  dim j as integer
-		  dim k as integer
-		  dim ka as integer
-		  dim xx as integer
-		  dim yy as integer
-		  dim bStartDraw as Boolean
-		  
-		  if (x<=xButtonBase+xButtonWidth) or (x>=xActionButtonBase) then
-		    return true ' mouse up will handle the event
-		    
-		    
-		  else
-		    j=-1
-		    i=1
-		    while (i<=Items.Itemcount) and (j<0)
-		      if items.items(i).yBase<=y and y<=items.items(i).yEnd then j=i
-		      i=i+1
-		    wend
-		    
-		    
-		    if j>0 then
-		      bStartDraw=false
-		      ka=0
-		      k=-1
-		      while System.MouseDown
-		        xx=mousex-canvas1.left
-		        yy=mousey-canvas1.top
-		        
-		        k=-1
-		        i=1
-		        while (i<=Items.Itemcount) and (k<0)
-		          if items.items(i).yBase<=yy and yy<=items.items(i).yEnd then k=i
-		          i=i+1
-		        wend
-		        
-		        
-		        if not bStartDraw and ((j<>k) and (k>-1)) then
-		          doSelect j
-		          refresh
-		          bStartDraw=true
-		        end if
-		        
-		        if (k>0) and bStartDraw then
-		          // if (k<>ka)  then
-		          // if (ka>0) then
-		          // me.Graphics.ForeColor=rgb(255,255,255)
-		          // me.Graphics.PenWidth=2
-		          // me.Graphics.PenHeight=2
-		          // me.Graphics.drawline 5,items.items(ka).yBase-3,400,items.items(ka).yBase-3
-		          // end if
-		          // ka=k
-		          // me.Graphics.ForeColor=rgb(0,0,0)
-		          // me.Graphics.PenWidth=2
-		          // me.Graphics.PenHeight=2
-		          // 
-		          // me.Graphics.drawline 5,items.items(k).yBase-3,400,items.items(k).yBase-3
-		          // end if
-		        end if
-		        
-		      wend
-		      
-		      
-		    end if
-		    
-		    if (j>0) and (k>0) and (j<>k) then
-		      doMoveBeforeItem j,k 
-		      refresh
-		      return false
-		    else
-		      return true
-		    end if
-		    
-		  end if
+		  // var i  as integer
+		  // var j  as integer
+		  // dim k as integer
+		  // dim ka as integer
+		  // dim xx as integer
+		  // dim yy as integer
+		  // dim bStartDraw as Boolean
+		  // 
+		  // if (x<=xButtonBase+xButtonWidth) or (x>=xActionButtonBase) then
+		  // return true ' mouse up will handle the event
+		  // 
+		  // 
+		  // else
+		  // j=-1
+		  // i=1
+		  // while (i<=Items.Itemcount) and (j<0)
+		  // if items.items(i).yBase<=y and y<=items.items(i).yEnd then j=i
+		  // i=i+1
+		  // wend
+		  // 
+		  // 
+		  // if j>0 then
+		  // bStartDraw=false
+		  // ka=0
+		  // k=-1
+		  // while System.MouseDown
+		  // xx=mousex-canvas1.left
+		  // yy=mousey-canvas1.top
+		  // 
+		  // k=-1
+		  // i=1
+		  // while (i<=Items.Itemcount) and (k<0)
+		  // if items.items(i).yBase<=yy and yy<=items.items(i).yEnd then k=i
+		  // i=i+1
+		  // wend
+		  // 
+		  // 
+		  // if not bStartDraw and ((j<>k) and (k>-1)) then
+		  // doSelect j
+		  // refresh
+		  // bStartDraw=true
+		  // end if
+		  // 
+		  // if (k>0) and bStartDraw then
+		  // // if (k<>ka)  then
+		  // // if (ka>0) then
+		  // // me.Graphics.ForeColor=rgb(255,255,255)
+		  // // me.Graphics.PenWidth=2
+		  // // me.Graphics.PenHeight=2
+		  // // me.Graphics.drawline 5,items.items(ka).yBase-3,400,items.items(ka).yBase-3
+		  // // end if
+		  // // ka=k
+		  // // me.Graphics.ForeColor=rgb(0,0,0)
+		  // // me.Graphics.PenWidth=2
+		  // // me.Graphics.PenHeight=2
+		  // // 
+		  // // me.Graphics.drawline 5,items.items(k).yBase-3,400,items.items(k).yBase-3
+		  // // end if
+		  // end if
+		  // 
+		  // wend
+		  // 
+		  // 
+		  // end if
+		  // 
+		  // if (j>0) and (k>0) and (j<>k) then
+		  // doMoveBeforeItem j,k 
+		  // refresh
+		  // return false
+		  // else
+		  // return true
+		  // end if
+		  // 
+		  // end if
 		  
 		End Function
 	#tag EndEvent
 	#tag Event
 		Sub Paint(g As Graphics, areas() As Rect)
-		  dim y as integer
-		  dim dy as integer
-		  dim i as integer
-		  dim np(0) as integer
-		  
-		  g.ForeColor=rgb(255,255,255)
-		  g.FillRect 0,0,g.Width,g.Height
-		  
-		  y=5
-		  drawAdd g,y
-		  
-		  y=30
-		  
-		  for i=1 to Items.Itemcount
-		    
-		    if Items.VisibleStatus(i)>0 then
-		      dy=drawStep(g,i,y)
-		      items.items(i).yBase=y
-		      if i<Items.Itemcount then
-		        
-		        if Items.visibleStatus(i+1)<>0 then
-		          
-		          'redim np(6)
-		          'np(1)=xStepBase+xStepWidth-70
-		          'np(2)=y+dy-1
-		          '
-		          'np(3)=xStepBase+xStepWidth-45
-		          'np(4)=y+dy+cInterstep
-		          '
-		          'np(5)=xStepBase+xStepWidth-20
-		          'np(6)=y+dy-1
-		          '
-		          'g.ForeColor=rgb(220,220,220)
-		          'g.FillPolygon np
-		          
-		        end if
-		      end if
-		      items.items(i).yend=y+dy
-		      y=y+dy+cInterstep
-		    end if
-		    
-		  next
-		  
-		  
+		  // dim y as integer
+		  // dim dy as integer
+		  // var i  as integer
+		  // dim np(0) as integer
+		  // 
+		  // g.ForeColor=rgb(255,255,255)
+		  // g.FillRect 0,0,g.Width,g.Height
+		  // 
+		  // y=5
+		  // drawAdd g,y
+		  // 
+		  // y=30
+		  // 
+		  // for i=1 to Items.Itemcount
+		  // 
+		  // if Items.VisibleStatus(i)>0 then
+		  // dy=drawStep(g,i,y)
+		  // items.items(i).yBase=y
+		  // if i<Items.Itemcount then
+		  // 
+		  // if Items.visibleStatus(i+1)<>0 then
+		  // 
+		  // 'redim np(6)
+		  // 'np(1)=xStepBase+xStepWidth-70
+		  // 'np(2)=y+dy-1
+		  // '
+		  // 'np(3)=xStepBase+xStepWidth-45
+		  // 'np(4)=y+dy+cInterstep
+		  // '
+		  // 'np(5)=xStepBase+xStepWidth-20
+		  // 'np(6)=y+dy-1
+		  // '
+		  // 'g.ForeColor=rgb(220,220,220)
+		  // 'g.FillPolygon np
+		  // 
+		  // end if
+		  // end if
+		  // items.items(i).yend=y+dy
+		  // y=y+dy+cInterstep
+		  // end if
+		  // 
+		  // next
+		  // 
+		  // 
 		  
 		End Sub
 	#tag EndEvent
@@ -1519,7 +1463,7 @@ End
 	#tag Event
 		Sub DoublePressed()
 		  dim sFileToOpen as string
-		  dim i as integer
+		  var i  as integer
 		  
 		  i = Listbox3.SelectedRowIndex
 		  

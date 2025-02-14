@@ -7,7 +7,24 @@ Protected Class clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor(NewItemType as string)
+		  
+		  self.ItemType = NewItemType
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetConfigJSON() As JSONItem
+		  
+		  return new JSONItem
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getTextItem(theItem as integer) As string
+		  
 		  return ""
 		  
 		End Function
@@ -20,8 +37,8 @@ Protected Class clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getType() As string
-		  return "none"
+		Function GetType() As string
+		  return ItemType
 		End Function
 	#tag EndMethod
 
@@ -43,29 +60,45 @@ Protected Class clAutomatorItem
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub SetID(NewId as integer)
+		  
+		  self.ID = NewId
+		  if self.VisualSupport <> nil then self.VisualSupport.SetID(Newid)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetTitle(NewTitle as string)
+		  self.Title = NewTitle
+		  
+		End Sub
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h0
-		ItemType As integer
+		ID As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h1
+		Protected ItemType As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		selected As boolean
 	#tag EndProperty
 
+	#tag Property, Flags = &h1
+		Protected Title As string
+	#tag EndProperty
+
 	#tag Property, Flags = &h0
-		Title As string
+		VisualSupport As ccAutomatorStep
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		workarea As integer
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		yBase As integer
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		yEnd As integer
 	#tag EndProperty
 
 
@@ -111,30 +144,6 @@ Protected Class clAutomatorItem
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="yBase"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="yEnd"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Title"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="selected"
 			Visible=false
 			Group="Behavior"
@@ -144,14 +153,6 @@ Protected Class clAutomatorItem
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="workarea"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ItemType"
 			Visible=false
 			Group="Behavior"
 			InitialValue="0"

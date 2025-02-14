@@ -72,6 +72,39 @@ Begin DesktopContainer ccAutomatorStep
          Transparent     =   False
          Visible         =   True
          Width           =   546
+         Begin DesktopLabel lbl_desc
+            AllowAutoDeactivate=   True
+            Bold            =   False
+            Enabled         =   True
+            FontName        =   "System"
+            FontSize        =   0.0
+            FontUnit        =   0
+            Height          =   118
+            Index           =   -2147483648
+            InitialParent   =   "Rectangle2"
+            Italic          =   False
+            Left            =   29
+            LockBottom      =   True
+            LockedInPosition=   False
+            LockLeft        =   True
+            LockRight       =   True
+            LockTop         =   False
+            Multiline       =   True
+            Scope           =   0
+            Selectable      =   False
+            TabIndex        =   0
+            TabPanelIndex   =   0
+            TabStop         =   True
+            Text            =   "Untitled"
+            TextAlignment   =   0
+            TextColor       =   &c28282800
+            Tooltip         =   ""
+            Top             =   60
+            Transparent     =   False
+            Underline       =   False
+            Visible         =   True
+            Width           =   513
+         End
       End
       Begin DesktopLabel lbl_title
          AllowAutoDeactivate=   True
@@ -84,7 +117,7 @@ Begin DesktopContainer ccAutomatorStep
          Index           =   -2147483648
          InitialParent   =   "Rectangle1"
          Italic          =   False
-         Left            =   30
+         Left            =   82
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
@@ -100,7 +133,7 @@ Begin DesktopContainer ccAutomatorStep
          TextAlignment   =   0
          TextColor       =   &c000000
          Tooltip         =   ""
-         Top             =   22
+         Top             =   23
          Transparent     =   False
          Underline       =   False
          Visible         =   True
@@ -117,7 +150,7 @@ Begin DesktopContainer ccAutomatorStep
          Index           =   -2147483648
          InitialParent   =   "Rectangle1"
          Italic          =   False
-         Left            =   448
+         Left            =   493
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   False
@@ -137,7 +170,40 @@ Begin DesktopContainer ccAutomatorStep
          Transparent     =   False
          Underline       =   False
          Visible         =   True
-         Width           =   100
+         Width           =   55
+      End
+      Begin DesktopLabel lbl_type
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "Rectangle1"
+         Italic          =   False
+         Left            =   20
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   3
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Text            =   "Untitled"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   23
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   50
       End
    End
    Begin DesktopButton btn_Add
@@ -233,39 +299,6 @@ Begin DesktopContainer ccAutomatorStep
       Visible         =   True
       Width           =   34
    End
-   Begin DesktopLabel lbl_desc
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   118
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   29
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   True
-      LockTop         =   True
-      Multiline       =   True
-      Scope           =   0
-      Selectable      =   False
-      TabIndex        =   5
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Text            =   "Untitled"
-      TextAlignment   =   0
-      TextColor       =   &c000000
-      Tooltip         =   ""
-      Top             =   76
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   513
-   End
 End
 #tag EndDesktopWindow
 
@@ -301,6 +334,7 @@ End
 	#tag Method, Flags = &h0
 		Sub Collapse()
 		  self.Height = cCollapsedHeigth
+		  self.StateCollapsed = True
 		  UpdateUI
 		End Sub
 	#tag EndMethod
@@ -309,8 +343,16 @@ End
 		Sub Expand()
 		  
 		  self.Height = cExpandedHeigth
+		  self.StateCollapsed = False
+		  
 		  UpdateUI
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function IsCollapsed() As Boolean
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -322,10 +364,19 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetID(VisibleID as string, TechnicalD as integer)
+		Sub SetID(NewID as integer)
 		  
-		  lbl_id.Text = VisibleID
-		  InternalID = TechnicalD
+		  lbl_id.Text =str(NewID)
+		  
+		  self.InternalID = NewID
+		   
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetText(s() as string)
+		  
+		  self.lbl_desc.Text = string.FromArray(s, chr(13))
 		  
 		End Sub
 	#tag EndMethod
@@ -335,6 +386,14 @@ End
 		  
 		  lbl_title.Text = TitleText
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetType(TypeLabel as string)
+		  
+		  lbl_type.Text = TypeLabel
+		   
 		End Sub
 	#tag EndMethod
 
@@ -359,14 +418,20 @@ End
 		  
 		  if self.Window =nil then return 
 		  
-		  window1(self.Window).UpdateUI
-		  
+		  if self.Window isa AutomatorVisualInterface then
+		    AutomatorVisualInterface(self.Window).UpdateUI
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 
 
 	#tag Property, Flags = &h0
 		InternalID As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		StateCollapsed As Boolean
 	#tag EndProperty
 
 
@@ -379,14 +444,36 @@ End
 
 #tag EndWindowCode
 
+#tag Events lbl_title
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  var s as string = wnd_rename.ShowDialog(lbl_title.text)
+		  
+		  if s.Length > 0 then lbl_title.Text = s
+		  
+		  if self.Window =nil then return false
+		  
+		  if  self.Window isa AutomatorVisualInterface then
+		    AutomatorVisualInterface(self.Window).RenameStep(InternalID, s)
+		    
+		  end if
+		  
+		  return true
+		  
+		End Function
+	#tag EndEvent
+#tag EndEvents
 #tag Events btn_Add
 	#tag Event
 		Sub Pressed()
 		  
 		  if self.Window =nil then return 
 		  
-		  window1(self.Window).SelectAndAddStepAfter(InternalID)
-		  
+		  if self.Window isa AutomatorVisualInterface then
+		    
+		    AutomatorVisualInterface(self.Window).SelectAndAddStepAfter(InternalID)
+		    
+		  end if
 		  
 		  
 		End Sub
@@ -409,7 +496,10 @@ End
 		  
 		  if self.Window =nil then return false
 		  
-		  window1(self.Window).AddStepAfter(InternalID, selectedItem.Text)
+		  if self.Window isa AutomatorVisualInterface then
+		    AutomatorVisualInterface(self.Window).AddStepAfter(InternalID, selectedItem.Text)
+		    
+		  end if
 		  
 		  return True
 		  
@@ -423,7 +513,10 @@ End
 		  
 		  if self.Window =nil then return 
 		  
-		  window1(self.Window).EditStepWithID(InternalID)
+		  if  self.Window isa AutomatorVisualInterface then
+		    AutomatorVisualInterface(self.Window).EditStepWithID(InternalID)
+		    
+		  end if
 		  
 		  
 		  
@@ -653,6 +746,14 @@ End
 		Group="Behavior"
 		InitialValue=""
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="StateCollapsed"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

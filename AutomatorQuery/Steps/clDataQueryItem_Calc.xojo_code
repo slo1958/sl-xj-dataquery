@@ -1,10 +1,11 @@
 #tag Class
-Protected Class clCalcStep_Calc
-Inherits clCalcStep_Generic
+Protected Class clDataQueryItem_Calc
+Inherits clDataQueryItem_Generic
 	#tag Method, Flags = &h0
 		Sub Constructor()
 		  
-		  clCalcStep_Generic.Constructor
+		  Super.constructor(StepTypes.Calculate)
+		  
 		  
 		  Nextitem=0
 		  
@@ -12,8 +13,32 @@ Inherits clCalcStep_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetConfigJSON() As JSONItem
+		  
+		  
+		  var j1 as new JSONItem
+		  
+		  var jFormula as new JSONItem
+		  var jOutput as new JSONItem
+		  
+		  
+		  for i as integer = 1 to ubound(formula)
+		    jFormula.Add(formula(i))
+		    jOutput.Add(OutputFields(i))
+		    
+		  next
+		  
+		  j1.Value("formula") = jFormula
+		  j1.Value("output") = jOutput
+		  
+		  return j1
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getSql() As string
-		  dim i as integer
+		  var i  as integer
 		  dim n as integer
 		  dim s as string
 		  
@@ -90,24 +115,10 @@ Inherits clCalcStep_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function myType() As integer
-		  return 600
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Open()
-		  
-		  wndCalcStep_Calc.showme me
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoad(theLine as string)
+		Sub processLoadedJSON(theLine as string)
 		  dim m as integer
 		  dim s as string
-		  dim i as integer
+		  var i  as integer
 		  
 		  m=val(NthField(theline,";",1))
 		  i=instr(theLine,";")
@@ -133,22 +144,16 @@ Inherits clCalcStep_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub saveMyData(theOutput as textoutputStream)
-		  dim i as integer
+		Sub ShowConfigDialog()
 		  
-		  for i=1 to ubound(formula)
-		    theOutput.writeline "50;11;xx"
-		    theOutput.writeline "50;21;"+formula(i)
-		    theOutput.Writeline "50;25;"+OutputFields(i)
-		  next
-		  
+		  wndCalcStep_Calc.showme me
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
-		  dim i as integer
+		  var i  as integer
 		  dim n as integer
 		  dim m as integer
 		  
