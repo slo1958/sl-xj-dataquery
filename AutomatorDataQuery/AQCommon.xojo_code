@@ -19,6 +19,23 @@ Protected Module AQCommon
 	#tag Method, Flags = &h0
 		Function ValidFieldName(FieldNameToCheck as string) As Boolean
 		  
+		  var ValidChars as string
+		  
+		  ValidChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjiklmnopqrstuvwxyz"
+		  
+		  for i as integer = 0 to FieldNameToCheck.Length
+		    var char as string = FieldNameToCheck.Middle(i,1)
+		    
+		    if ValidChars.IndexOf(char) < 0 then Return false
+		    
+		    if i = 0 then
+		      ValidChars = ValidChars + "_0123456789"
+		      
+		    end if
+		    
+		  next
+		  
+		  return true
 		End Function
 	#tag EndMethod
 

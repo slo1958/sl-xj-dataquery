@@ -1,6 +1,6 @@
 #tag Class
 Protected Class clDataQueryItem_Start
-Inherits clDataQueryItem_Generic
+Inherits clDataQueryItem
 	#tag Method, Flags = &h0
 		Function canDelete() As boolean
 		  return false
@@ -8,7 +8,7 @@ Inherits clDataQueryItem_Generic
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor()
+		Sub Constructor(FlowDataSource as String)
 		  // Calling the overridden superclass constructor.
 		  Super.Constructor(StepTypes.Start)
 		  
@@ -17,17 +17,15 @@ Inherits clDataQueryItem_Generic
 		  var i  as integer
 		  dim n as integer
 		  
-		  dataSource = "CurrentSales" // getASourceName(ViewName_Queries,"data")
+		  self.dataSource = FlowDataSource
 		  
-		  'ssql="select top 1 * from "+cDetailTable
-		  ssql="select top 1 * from "+dataSource
+		  ssql="select * from "+ self.dataSource + " limit 1"
 		  
 		  redim KeyFields(0)
 		  redim valueFields(0)
 		  
-		  writelog "Scanning "+ssql
 		  
-		  var temp as new clBasicSQLiteQuery(app.DBConnection, dataSource)
+		  var temp as new clBasicSQLiteQuery(app.DBConnection, ssql)
 		  
 		  self.dbname = app.DBConnection.Name
 		  
@@ -78,17 +76,20 @@ Inherits clDataQueryItem_Generic
 		  dim n as integer
 		  dim s as string
 		  
-		  s="select inputrow"   
+		  
+		  var tempFields() as string
 		  
 		  for i=1 to keyFields.LastIndex
-		    s=s+"," + keyFields(i)+" as "+keyFields(i)+"_"+fieldPostFix
+		    tempFields.Add( keyFields(i)+" as "+keyFields(i)+"_"+fieldPostFix)
+		    
 		  next
 		  
 		  for i=1 to ubound(valueFields)
-		    s=s+"," + valueFields(i)+" as "+valueFields(i)+"_"+fieldPostFix
+		    tempFields.Add( valueFields(i)+" as "+valueFields(i)+"_"+fieldPostFix)
+		    
 		  next
 		  
-		  s=s+" from "+dataSource
+		  s = "Select " + string.FromArray(tempFields, ",") + " from " + dataSource
 		  
 		  return s
 		  
@@ -122,7 +123,7 @@ Inherits clDataQueryItem_Generic
 
 	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
-		   
+		  
 		  MessageBox( "Open operation not allowed on Start object")
 		  
 		End Sub
@@ -139,6 +140,14 @@ Inherits clDataQueryItem_Generic
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="ID"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
@@ -180,30 +189,6 @@ Inherits clDataQueryItem_Generic
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="yBase"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="yEnd"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Title"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="selected"
 			Visible=false
 			Group="Behavior"
@@ -213,14 +198,6 @@ Inherits clDataQueryItem_Generic
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="workarea"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ItemType"
 			Visible=false
 			Group="Behavior"
 			InitialValue="0"
@@ -258,6 +235,14 @@ Inherits clDataQueryItem_Generic
 			InitialValue=""
 			Type="string"
 			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="dbname"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

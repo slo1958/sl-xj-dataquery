@@ -2,19 +2,16 @@
 Protected Class clDataQueryFlow
 Inherits clAutomatorFlow
 	#tag Method, Flags = &h0
-		Function calcStep(theItem as integer) As clDataQueryItem_Generic
-		  
-		  return clDataQueryItem_Generic(items(theItem))
-		   
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Constructor()
+		Sub Constructor(DataSource as string)
 		  // Calling the overridden superclass constructor.
-		  Super.Constructor
+		  
+		  self.FlowDataSource = DataSource
 		  
 		  if StepTypeLabels = nil then CreateStepTypeLabels
+		  
+		  Super.Constructor
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -24,37 +21,44 @@ Inherits clAutomatorFlow
 		  
 		  StepTypeLabels = new Dictionary
 		  
-		  StepTypeLabels.value(StepTypes.Generic) ="Generic"
+		  StepTypeLabels.value(StepTypes.Generic) = cStepGeneric
 		  
+		  StepTypeLabels.value(StepTypes.Calculate) = cStepCalc
 		  
-		  StepTypeLabels.value(StepTypes.Calculate) ="Calc"
+		  StepTypeLabels.value(StepTypes.Filter) = cStepFilter
 		  
-		  StepTypeLabels.value(StepTypes.Filter) = "Filter"
+		  StepTypeLabels.value(StepTypes.GroupSplit) = cStepGroupSplit
 		  
-		  StepTypeLabels.value(StepTypes.GroupSplit) ="Group/Split"
+		  StepTypeLabels.value(StepTypes.Map) = cStepMap
 		  
-		  StepTypeLabels.value(StepTypes.Map) = "Map"
+		  StepTypeLabels.value(StepTypes.Pivot) = cStepPivot
 		  
-		  StepTypeLabels.value(StepTypes.Pivot) = "Pivot"
+		  StepTypeLabels.value(StepTypes.Start) = cStepStart
+		  StepTypeLabels.value(StepTypes.Sort) = cStepSort
 		  
-		  StepTypeLabels.value(StepTypes.Start) = "Start"
-		  StepTypeLabels.value(StepTypes.Sort) = "Sort"
-		   
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function DataQueryItem(theItem as integer) As clDataQueryItem
+		  
+		  return clDataQueryItem(items(theItem))
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function doAdd(itemType as String) As clAutomatorItem
 		  // Calling the overridden superclass method.
 		  
-		  var lastItem as clDataQueryItem_Generic  = nil
+		  var lastItem as clDataQueryItem  = nil
 		  
-		  if self.Items.Count > 0 then lastItem = clDataQueryItem_Generic(self.Items(self.items.LastIndex))
+		  if self.Items.Count > 0 then lastItem = clDataQueryItem(self.Items(self.items.LastIndex))
 		  
-		  Var returnValue as clDataQueryItem_Generic = clDataQueryItem_Generic(Super.doAdd(itemType))
+		  Var returnValue as clDataQueryItem = clDataQueryItem(Super.doAdd(itemType))
 		  
-		  returnValue.prevCalcStep = lastItem
+		  returnValue.prevDataQueryItem = lastItem
 		  
 		  Return returnValue
 		  
@@ -80,22 +84,46 @@ Inherits clAutomatorFlow
 		Function doInsertAfter(itemType as String, InsertAfterSteIp as integer) As clAutomatorItem
 		  // Calling the overridden superclass method.
 		  
-		  var BeforeItem as clDataQueryItem_Generic
-		  var AfterItem as clDataQueryItem_Generic
+		  var BeforeItem as clDataQueryItem
+		  var AfterItem as clDataQueryItem
 		  
-		  BeforeItem = clDataQueryItem_Generic(FindItemWithId(InsertAfterSteIp))
+		  BeforeItem = clDataQueryItem(FindItemWithId(InsertAfterSteIp))
 		  
-		  AfterItem = clDataQueryItem_Generic(FindItemWithId(InsertAfterSteIp+1))
+		  AfterItem = clDataQueryItem(FindItemWithId(InsertAfterSteIp+1))
 		  
-		  Var returnValue as clDataQueryItem_Generic = clDataQueryItem_Generic(Super.doInsertAfter(itemType, InsertAfterSteIp))
+		  Var returnValue as clDataQueryItem = clDataQueryItem(Super.doInsertAfter(itemType, InsertAfterSteIp))
 		  
-		  returnValue.prevCalcStep = BeforeItem
+		  returnValue.prevDataQueryItem = BeforeItem
 		  
-		  if AfterItem <> nil then AfterItem.prevCalcStep = returnValue
+		  if AfterItem <> nil then AfterItem.prevDataQueryItem = returnValue
 		  
 		  
 		  
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub doRemove(theItem as integer)
+		  // Calling the overridden superclass method.
+		  
+		  Super.doRemove(theItem)
+		  
+		  // Refresh links
+		  
+		  var previous as clDataQueryItem  = nil
+		  
+		  for each item as clAutomatorItem in self.items
+		    
+		    var dqItem as clDataQueryItem = clDataQueryItem(item)
+		    
+		    dqItem.prevDataQueryItem = previous
+		    
+		    previous = dqItem
+		    
+		  next
+		  
+		  
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -105,24 +133,47 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Shared Function GetListOfSteps() As string()
+		  if StepTypeLabels = nil then CreateStepTypeLabels
+		  
+		  var list() as string
+		  for each k as StepTypes in StepTypeLabels.keys
+		    
+		    if k = StepTypes.Generic then 
+		      
+		    elseif k = StepTypes.Start then
+		      
+		    else
+		      list.Add(StepTypeLabels.Value(k) )
+		      
+		    end if
+		    
+		  next
+		  
+		  return list
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getSqlStatement() As string
 		  var s as string
 		  
 		  
 		  var AddDummyGroupby as Boolean
-		   
+		  
 		  AddDummyGroupby = True
+		  
 		  
 		  for each gitem as clAutomatorItem in self.Items
 		    if gitem isa clDataQueryItem_GroupSplit then AddDummyGroupby = false
 		    
 		  next
 		  
-		  if AddDummyGroupby then call doAdd("Group/Split")
+		  if AddDummyGroupby then call doAdd(cStepGroupSplit)
 		  
 		  UpdateDataFlow
 		  
-		  s=calcStep(items.LastIndex).getSql
+		  s=DataQueryItem(items.LastIndex).getSql
 		  
 		  if AddDummyGroupby then 
 		    doRemove items.LastIndex
@@ -160,12 +211,12 @@ Inherits clAutomatorFlow
 
 	#tag Method, Flags = &h0
 		Function ObjectFactory(StepLabel as String) As clautomatorItem
-		  dim clc as clDataQueryItem_Generic
+		  dim clc as clDataQueryItem
 		  
 		  select case LabelToStepType(StepLabel)
 		    
 		  case StepTypes.Generic
-		    clc=new clDataQueryItem_Generic
+		    clc=new clDataQueryItem
 		    
 		  case StepTypes.Filter
 		    clc=new clDataQueryItem_Filter
@@ -174,7 +225,9 @@ Inherits clAutomatorFlow
 		    clc=new clDataQueryItem_GroupSplit
 		    
 		  case StepTypes.Start
-		    clc= new clDataQueryItem_Start
+		    var cls as new clDataQueryItem_Start(FlowDataSource)
+		    clc = cls
+		    // clc= new clDataQueryItem_Start
 		    
 		  case StepTypes.Sort
 		    clc=new clDataQueryItem_Sort
@@ -192,7 +245,7 @@ Inherits clAutomatorFlow
 		    clc=nil
 		    
 		  end select
-		   
+		  
 		  
 		  return clc
 		  
@@ -204,7 +257,7 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processLoadLine(clc as clDataQueryItem_Generic, theOpcode as integer, theParam as string)
+		Sub processLoadLine(clc as clDataQueryItem, theOpcode as integer, theParam as string)
 		  dim m as integer
 		  dim s as string
 		  
@@ -261,7 +314,7 @@ Inherits clAutomatorFlow
 		Shared Function RequiredStepTypes() As String()
 		  var ret() as string
 		  
-		  ret.Add("Start")
+		  ret.Add(cStepStart)
 		  
 		  return ret
 		  
@@ -280,10 +333,10 @@ Inherits clAutomatorFlow
 		Sub UpdateDataFlow()
 		  var i  as integer
 		  
-		  var prevItem as clDataQueryItem_Generic
+		  var prevItem as clDataQueryItem
 		  
 		  for each gItem as clAutomatorItem in  Items
-		    var item as clDataQueryItem_Generic = clDataQueryItem_Generic(gItem)
+		    var item as clDataQueryItem = clDataQueryItem(gItem)
 		    
 		    i = i + 1
 		    if item isa clDataQueryItem_Start then
@@ -298,7 +351,7 @@ Inherits clAutomatorFlow
 		    prevItem = item
 		    
 		  next
-		   
+		  
 		End Sub
 	#tag EndMethod
 
@@ -310,7 +363,7 @@ Inherits clAutomatorFlow
 		  
 		  UpdateDataFlow
 		  
-		  return calcStep(n).validateChain
+		  return DataQueryItem(n).validateChain
 		  
 		  
 		  Exception err as RuntimeException
@@ -325,7 +378,7 @@ Inherits clAutomatorFlow
 		
 		select case ObjectType 
 		  case 100
-		    clc=new clDataQueryItem_Generic
+		    clc=new clDataQueryItem
 		    
 		  case 200
 		    clc=new clDataQueryItem_Filter
@@ -352,8 +405,37 @@ Inherits clAutomatorFlow
 
 
 	#tag Property, Flags = &h0
+		FlowDataSource As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Shared StepTypeLabels As Dictionary
 	#tag EndProperty
+
+
+	#tag Constant, Name = cStepCalc, Type = String, Dynamic = False, Default = \"Calc", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cStepFilter, Type = String, Dynamic = False, Default = \"Filter", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cStepGeneric, Type = String, Dynamic = False, Default = \"Generic", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cStepGroupSplit, Type = String, Dynamic = False, Default = \"Group/Split", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cStepMap, Type = String, Dynamic = False, Default = \"Map measures", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cStepPivot, Type = String, Dynamic = False, Default = \"Pivot", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cStepSort, Type = String, Dynamic = False, Default = \"Sort", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cStepStart, Type = String, Dynamic = False, Default = \"Start", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior
@@ -364,14 +446,6 @@ Inherits clAutomatorFlow
 			InitialValue=""
 			Type="string"
 			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="lastStepId"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"

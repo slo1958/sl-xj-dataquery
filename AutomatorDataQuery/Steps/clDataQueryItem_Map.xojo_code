@@ -1,6 +1,6 @@
 #tag Class
 Protected Class clDataQueryItem_Map
-Inherits clDataQueryItem_Generic
+Inherits clDataQueryItem
 	#tag Method, Flags = &h0
 		Sub Constructor()
 		  
@@ -23,12 +23,12 @@ Inherits clDataQueryItem_Generic
 		  
 		  dim s as string
 		  
-		  if prevCalcStep=nil then
+		  if prevDataQueryItem=nil then
 		    sSource=""
 		    sPostFix=""
 		  else
-		    sSource=prevCalcStep.getSql
-		    sPostFix=prevCalcStep.fieldPostFix
+		    sSource=prevDataQueryItem.getSql
+		    sPostFix=prevDataQueryItem.fieldPostFix
 		  end if
 		  
 		  s="select  "
@@ -129,8 +129,8 @@ Inherits clDataQueryItem_Generic
 
 	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
-		   
-		  wndCalcStep_map.ShowMe me 
+		  
+		  wndDataQueryItem_map.ShowMe me 
 		  
 		End Sub
 	#tag EndMethod
@@ -144,39 +144,37 @@ Inherits clDataQueryItem_Generic
 		  
 		  dim looplimit as integer
 		  
-		  if prevCalcStep=nil then
+		  if prevDataQueryItem=nil then
 		    
 		  else
 		    '
 		    ' key fields are moved 'as is'
 		    '
-		    n=ubound(prevCalcStep.keyFields)
+		    n=ubound(prevDataQueryItem.keyFields)
 		    redim keyFields(n)
 		    redim keyFieldType(n)
 		    
 		    for i=1 to n
-		      keyfields(i)=prevCalcStep.keyFields(i)
-		      keyFieldType(i)=prevCalcStep.keyFieldType(i)
+		      keyfields(i)=prevDataQueryItem.keyFields(i)
+		      keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
 		    next
 		    
 		    '
 		    '  add new data fields
 		    '
-		    n=UBound(prevCalcStep.valueFields)
+		    n=UBound(prevDataQueryItem.valueFields)
 		    for i=1 to n
 		      m=ubound(InputList)
 		      b=false
 		      for j=1 to m
-		        if prevCalcStep.valueFields(i)=inputList(j) then b=true
+		        if prevDataQueryItem.valueFields(i)=inputList(j) then b=true
 		        
 		      next
 		      
 		      if not b then
-		        m=m+1
-		        redim inputList(m)
-		        InputList(m)=prevCalcStep.valueFields(i)
-		        redim OutputList(m)
-		        OutputList(m)=prevCalcStep.valueFields(i)
+		        InputList.add(prevDataQueryItem.valueFields(i))
+		        OutputList.Add(prevDataQueryItem.valueFields(i))
+		        
 		      end if
 		      
 		    next
@@ -191,9 +189,9 @@ Inherits clDataQueryItem_Generic
 		    while i<=ubound(inputlist) and looplimit>0
 		      b=false 
 		      
-		      for j=1 to ubound(prevCalcStep.valueFields)
+		      for j=1 to ubound(prevDataQueryItem.valueFields)
 		        
-		        if prevCalcStep.valueFields(j)=InputList(i) then b=true
+		        if prevDataQueryItem.valueFields(j)=InputList(i) then b=true
 		        
 		      next
 		      
@@ -241,6 +239,14 @@ Inherits clDataQueryItem_Generic
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="ID"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
@@ -281,30 +287,6 @@ Inherits clDataQueryItem_Generic
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="yBase"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="yEnd"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Title"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="selected"
 			Visible=false
 			Group="Behavior"
@@ -314,14 +296,6 @@ Inherits clDataQueryItem_Generic
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="workarea"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ItemType"
 			Visible=false
 			Group="Behavior"
 			InitialValue="0"

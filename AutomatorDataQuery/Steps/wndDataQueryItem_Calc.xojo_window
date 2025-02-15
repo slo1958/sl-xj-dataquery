@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopWindow wndCalcStep_Calc
+Begin DesktopWindow wndDataQueryItem_Calc
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF00
    Composite       =   False
@@ -1419,7 +1419,7 @@ End
 		  
 		  pb_close.top=pb_add.top+25
 		  
-		  wndCalcStep_Calc.Height=pb_close.top+25
+		  wndDataQueryItem_Calc.Height=pb_close.top+25
 		  
 		End Sub
 	#tag EndEvent
@@ -1441,7 +1441,7 @@ End
 		  
 		  pb_close.top=pb_add.top+25
 		  
-		  wndCalcStep_Calc.Height=efFieldA(0).top+25*(lastItem+1+1)
+		  wndDataQueryItem_Calc.Height=efFieldA(0).top+25*(lastItem+1+1)
 		  
 		  return lastItem
 		  
@@ -1511,9 +1511,9 @@ End
 		  
 		  
 		  ListBox1.RemoveAllRows
-		  if curStep.prevCalcStep<>nil then
-		    for i=1 to ubound(curStep.prevCalcStep.valueFields)
-		      ListBox1.addrow curStep.prevCalcStep.valueFields(i)+"$"
+		  if curStep.prevDataQueryItem<>nil then
+		    for i=1 to ubound(curStep.prevDataQueryItem.valueFields)
+		      ListBox1.addrow curStep.prevDataQueryItem.valueFields(i)+"$"
 		    next
 		  end if
 		  
@@ -1589,7 +1589,7 @@ End
 		  
 		  pb_close.top=pb_add.top+25
 		  
-		  wndCalcStep_Calc.Height=efFieldA(0).top+25*(lastItem+1+1)
+		  wndDataQueryItem_Calc.Height=efFieldA(0).top+25*(lastItem+1+1)
 		  
 		  
 		End Sub

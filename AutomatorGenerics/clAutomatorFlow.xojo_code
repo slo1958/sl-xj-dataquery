@@ -4,13 +4,13 @@ Protected Class clAutomatorFlow
 		Sub Constructor()
 		  
 		  doClear
-		   
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
 		Protected Function CreateVisualSupport() As DesktopContainer
-		  var cc as new ccAutomatorStep
+		  var cc as new ccAutomatorItem
 		  
 		  return cc
 		  
@@ -46,7 +46,7 @@ Protected Class clAutomatorFlow
 		Sub doClear()
 		  
 		  items.RemoveAll
-		   
+		  
 		End Sub
 	#tag EndMethod
 
@@ -66,7 +66,7 @@ Protected Class clAutomatorFlow
 		  if p = nil then return nil
 		  
 		  items.AddAt(InsertAfterSteIp + 1, p)
-		   
+		  
 		  p.SetTitle("Step"+Format(lastStepId,"000000"))
 		  
 		  self.doSelect(InsertAfterSteIp+1)
@@ -206,7 +206,7 @@ Protected Class clAutomatorFlow
 		  var txtout as TextOutputStream
 		  
 		  var MainJSON as new JSONItem
-		   
+		  
 		  MainJSON.Value("signature") = clAutomatorFlow.cSignature
 		  MainJSON.Value("groupname") = GroupName
 		  MainJSON.Value("count") = items.Count

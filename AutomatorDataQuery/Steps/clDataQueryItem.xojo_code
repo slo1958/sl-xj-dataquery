@@ -1,5 +1,5 @@
 #tag Class
-Protected Class clDataQueryItem_Generic
+Protected Class clDataQueryItem
 Inherits clAutomatorItem
 	#tag Method, Flags = &h0
 		Function anyInChain(theExpectedType as StepTypes) As boolean
@@ -7,11 +7,11 @@ Inherits clAutomatorItem
 		  // Check the chain contains one step of the given type
 		  //
 		  
-		  if prevCalcStep=nil then
+		  if prevDataQueryItem=nil then
 		    return (ItemEnumType=theExpectedType)
 		    
 		  else
-		    return (ItemEnumType=theExpectedType) or prevCalcStep.anyInChain(theExpectedType)
+		    return (ItemEnumType=theExpectedType) or prevDataQueryItem.anyInChain(theExpectedType)
 		    
 		  end if
 		  
@@ -25,7 +25,7 @@ Inherits clAutomatorItem
 		  
 		  self.ItemEnumType = StepTypes.Generic
 		  
-		  prevCalcStep=nil
+		  prevDataQueryItem=nil
 		  
 		  numSeq=-1
 		  
@@ -39,7 +39,7 @@ Inherits clAutomatorItem
 		  
 		  self.ItemEnumType = st
 		  
-		  prevCalcStep=nil
+		  prevDataQueryItem=nil
 		  
 		  numSeq=-1
 		  
@@ -50,7 +50,7 @@ Inherits clAutomatorItem
 		Function GetConfigJSON() As JSONItem
 		  
 		  var j1 as new JSONItem
-		   
+		  
 		  return j1
 		  
 		End Function
@@ -247,8 +247,8 @@ Inherits clAutomatorItem
 		    theTextFile.writeline "7;"+valueFields(i)
 		  next
 		  
-		  'if nextCalcStep<>nil then
-		  'theTextFile.writeline "9;"+nextCalcStep.name
+		  'if nextDataQueryItem<>nil then
+		  'theTextFile.writeline "9;"+nextDataQueryItem.name
 		  'end if
 		  
 		  'theTextFile.writeline "10;"+str(IntxCenter)
@@ -284,10 +284,10 @@ Inherits clAutomatorItem
 
 	#tag Method, Flags = &h0
 		Function validateChain() As string
-		  if prevCalcStep=nil then
+		  if prevDataQueryItem=nil then
 		    return "OK"
 		  else
-		    return prevCalcStep.validateChain
+		    return prevDataQueryItem.validateChain
 		  end if
 		  
 		End Function
@@ -319,7 +319,7 @@ Inherits clAutomatorItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		prevCalcStep As clDataQueryItem_generic
+		prevDataQueryItem As clDataQueryItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -332,6 +332,14 @@ Inherits clAutomatorItem
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="ID"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true

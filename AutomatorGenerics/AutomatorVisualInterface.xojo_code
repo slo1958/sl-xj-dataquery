@@ -7,19 +7,37 @@ Protected Interface AutomatorVisualInterface
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub EditStepWithID(Identifier as integer)
+		Sub ExecuteAction(Identifier as integer, ActionCode as string)
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ExecuteRemove(Identifier as integer, ActionCode as string)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetListOfOptionsForActions(CurrentStepType as string) As string()
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetListOfOptionsForAdd(CurrentStepType as string) As string()
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetListOfOptionsForRemove(CurrentStepType as string) As string()
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub RenameStep(Identifier as integer, NewName as string)
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub SelectAndAddStepAfter(Identifier as integer)
 		  
 		End Sub
 	#tag EndMethod

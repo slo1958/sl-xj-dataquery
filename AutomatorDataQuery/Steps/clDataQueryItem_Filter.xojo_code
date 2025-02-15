@@ -1,6 +1,6 @@
 #tag Class
 Protected Class clDataQueryItem_Filter
-Inherits clDataQueryItem_Generic
+Inherits clDataQueryItem
 	#tag Method, Flags = &h0
 		Sub Constructor()
 		  
@@ -52,9 +52,9 @@ Inherits clDataQueryItem_Generic
 		  dim sSep as string
 		  dim Swhere as string
 		  
-		  if prevCalcStep<>nil then 
-		    sSource=prevCalcStep.getSql
-		    sPostFix=prevCalcStep.fieldPostFix
+		  if prevDataQueryItem<>nil then 
+		    sSource=prevDataQueryItem.getSql
+		    sPostFix=prevDataQueryItem.fieldPostFix
 		  else
 		    ssource=""
 		    sPostFix=""
@@ -208,7 +208,7 @@ Inherits clDataQueryItem_Generic
 	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
 		  
-		  wndCalcStep_Filter.showme me
+		  wndDataQueryItem_Filter.showme me
 		  
 		End Sub
 	#tag EndMethod
@@ -231,7 +231,7 @@ Inherits clDataQueryItem_Generic
 		  var i ,j as integer
 		  dim n as integer
 		  dim s as string
-		  if prevCalcStep<>nil then
+		  if prevDataQueryItem<>nil then
 		    
 		    
 		    '
@@ -240,9 +240,9 @@ Inherits clDataQueryItem_Generic
 		    for i=0 to ubound(sField1)
 		      s=sField1(i)
 		      
-		      for j=1 to ubound(prevCalcStep.keyFields)
-		        if prevCalcStep.keyFields(j)=s then
-		          sField1Type(i)=prevCalcStep.keyFieldType(j)
+		      for j=1 to ubound(prevDataQueryItem.keyFields)
+		        if prevDataQueryItem.keyFields(j)=s then
+		          sField1Type(i)=prevDataQueryItem.keyFieldType(j)
 		        end if
 		      next
 		    next
@@ -255,27 +255,27 @@ Inherits clDataQueryItem_Generic
 		    for i=0 to ubound(sField2)
 		      s=sField2(i)
 		      
-		      for j=1 to ubound(prevCalcStep.keyFields)
-		        if prevCalcStep.keyFields(j)=s then
-		          sField2Type(i)=prevCalcStep.keyFieldType(j)
+		      for j=1 to ubound(prevDataQueryItem.keyFields)
+		        if prevDataQueryItem.keyFields(j)=s then
+		          sField2Type(i)=prevDataQueryItem.keyFieldType(j)
 		        end if
 		      next
 		    next
 		    
-		    n=ubound(prevCalcStep.keyFields)
+		    n=ubound(prevDataQueryItem.keyFields)
 		    redim keyFields(n)
 		    redim keyFieldType(n)
 		    for i=1 to n
-		      keyFields(i)=prevCalcStep.keyFields(i)
-		      keyFieldType(i)=prevCalcStep.keyFieldType(i)
+		      keyFields(i)=prevDataQueryItem.keyFields(i)
+		      keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
 		    next
 		    
 		    
-		    n=ubound(prevCalcStep.valueFields)
+		    n=ubound(prevDataQueryItem.valueFields)
 		    redim valueFields(n)
 		    
 		    for i=1 to n
-		      valueFields(i)=prevCalcStep.valueFields(i)
+		      valueFields(i)=prevDataQueryItem.valueFields(i)
 		    next
 		    
 		  end if
@@ -324,28 +324,12 @@ Inherits clDataQueryItem_Generic
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="yBase"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="yEnd"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Title"
+			Name="ID"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
+			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="selected"
@@ -357,14 +341,6 @@ Inherits clDataQueryItem_Generic
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="workarea"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ItemType"
 			Visible=false
 			Group="Behavior"
 			InitialValue="0"

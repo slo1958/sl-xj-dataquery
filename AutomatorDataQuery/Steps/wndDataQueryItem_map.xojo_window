@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopWindow wndCalcStep_map
+Begin DesktopWindow wndDataQueryItem_map
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF00
    Composite       =   False
@@ -27,7 +27,6 @@ Begin DesktopWindow wndCalcStep_map
    Begin Label st_Name
       AutoDeactivate  =   True
       Bold            =   False
-      ControlOrder    =   "0"
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -43,6 +42,7 @@ Begin DesktopWindow wndCalcStep_map
       LockRight       =   False
       LockTop         =   False
       Multiline       =   False
+      Scope           =   0
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
@@ -67,7 +67,6 @@ Begin DesktopWindow wndCalcStep_map
       BackColor       =   &cFFFFFF00
       Bold            =   False
       Border          =   True
-      ControlOrder    =   "1"
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -86,12 +85,9 @@ Begin DesktopWindow wndCalcStep_map
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      Multiline       =   "False"
       Password        =   False
       ReadOnly        =   False
-      ScrollbarHorizontal=   "False"
-      ScrollbarVertical=   "True"
-      Styled          =   "False"
+      Scope           =   0
       TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
@@ -109,34 +105,27 @@ Begin DesktopWindow wndCalcStep_map
    End
    Begin DesktopPopupMenu PopupMenu1
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
-      ControlOrder    =   "2"
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
       Italic          =   False
       Left            =   -465
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
+      Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   2
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   6
       Transparent     =   False
@@ -146,18 +135,15 @@ Begin DesktopWindow wndCalcStep_map
    End
    Begin DesktopButton pb_close
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Cancel          =   False
       Caption         =   "Close"
-      ControlOrder    =   "3"
       Default         =   True
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   22
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -168,11 +154,10 @@ Begin DesktopWindow wndCalcStep_map
       LockRight       =   False
       LockTop         =   False
       MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   3
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   256
       Transparent     =   False
@@ -188,34 +173,22 @@ Begin DesktopWindow wndCalcStep_map
       AllowResizableColumns=   False
       AllowRowDragging=   False
       AllowRowReordering=   False
-      AutoDeactivate  =   "True"
       Bold            =   False
       ColumnCount     =   2
-      ColumnsResizable=   "False"
       ColumnWidths    =   ""
-      ControlOrder    =   "4"
-      DataField       =   ""
-      DataSource      =   ""
       DefaultRowHeight=   -1
       DropIndicatorVisible=   False
       Enabled         =   True
-      EnableDrag      =   "False"
-      EnableDragReorder=   "False"
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
-      GridLinesHorizontal=   "0"
       GridLineStyle   =   0
-      GridLinesVertical=   "0"
       HasBorder       =   True
       HasHeader       =   True
-      HasHeading      =   "True"
       HasHorizontalScrollbar=   False
       HasVerticalScrollbar=   True
       HeadingIndex    =   -1
       Height          =   220
-      HelpTag         =   ""
-      Hierarchical    =   "False"
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   "Current Name	New Name"
@@ -228,19 +201,14 @@ Begin DesktopWindow wndCalcStep_map
       LockTop         =   False
       RequiresSelection=   False
       RowSelectionType=   0
-      ScrollbarHorizontal=   "False"
-      ScrollBarVertical=   "True"
-      SelectionType   =   "0"
+      Scope           =   0
       TabIndex        =   4
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   33
       Transparent     =   False
       Underline       =   False
-      UseFocusRing    =   "True"
       Visible         =   True
       Width           =   488
       _ScrollOffset   =   0
@@ -249,7 +217,6 @@ Begin DesktopWindow wndCalcStep_map
    Begin Label StaticText1
       AutoDeactivate  =   True
       Bold            =   False
-      ControlOrder    =   "5"
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -265,6 +232,7 @@ Begin DesktopWindow wndCalcStep_map
       LockRight       =   False
       LockTop         =   False
       Multiline       =   False
+      Scope           =   0
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
@@ -283,18 +251,15 @@ Begin DesktopWindow wndCalcStep_map
    End
    Begin DesktopButton pb_None
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Cancel          =   False
       Caption         =   "None"
-      ControlOrder    =   "6"
       Default         =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   22
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -305,11 +270,10 @@ Begin DesktopWindow wndCalcStep_map
       LockRight       =   False
       LockTop         =   False
       MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   6
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "0.0"
       Tooltip         =   ""
       Top             =   256
       Transparent     =   False
@@ -319,18 +283,15 @@ Begin DesktopWindow wndCalcStep_map
    End
    Begin DesktopButton PushButton1
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Cancel          =   False
       Caption         =   "All"
-      ControlOrder    =   "7"
       Default         =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   22
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -341,11 +302,10 @@ Begin DesktopWindow wndCalcStep_map
       LockRight       =   False
       LockTop         =   False
       MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   7
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "0.0"
       Tooltip         =   ""
       Top             =   256
       Transparent     =   False
@@ -417,6 +377,7 @@ End
 		    
 		    // ListBox1.CellTypeAt(r,0)=1
 		    ListBox1.CellTypeAt(r,1) = DesktopListBox.CellTypes.TextField
+		    
 		    
 		  next
 		  

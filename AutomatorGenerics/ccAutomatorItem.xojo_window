@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopContainer ccAutomatorStep
+Begin DesktopContainer ccAutomatorItem
    AllowAutoDeactivate=   True
    AllowFocus      =   False
    AllowFocusRing  =   False
@@ -369,7 +369,7 @@ End
 		  lbl_id.Text =str(NewID)
 		  
 		  self.InternalID = NewID
-		   
+		  
 		End Sub
 	#tag EndMethod
 
@@ -391,9 +391,9 @@ End
 
 	#tag Method, Flags = &h0
 		Sub SetType(TypeLabel as string)
-		  
+		  CurrentType = TypeLabel
 		  lbl_type.Text = TypeLabel
-		   
+		  
 		End Sub
 	#tag EndMethod
 
@@ -426,12 +426,16 @@ End
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h0
-		InternalID As Integer
+	#tag Property, Flags = &h21
+		Private CurrentType As string
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		StateCollapsed As Boolean
+	#tag Property, Flags = &h21
+		Private InternalID As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private StateCollapsed As Boolean
 	#tag EndProperty
 
 
@@ -469,55 +473,108 @@ End
 		  
 		  if self.Window =nil then return 
 		  
+		  
+		  var temp() as string 
+		  var mainMenu as new DesktopMenuItem
+		  
+		  
 		  if self.Window isa AutomatorVisualInterface then
+		    temp = AutomatorVisualInterface(self.Window).GetListOfOptionsForAdd(CurrentType)
 		    
-		    AutomatorVisualInterface(self.Window).SelectAndAddStepAfter(InternalID)
+		    if temp = nil or temp.Count = 0 then
+		      AutomatorVisualInterface(self.Window).AddStepAfter(InternalID, "")
+		      return
+		      
+		    end if
+		    
+		    for each entry as string in temp
+		      mainMenu.AddMenu( New DesktopMenuItem(entry))
+		      
+		    next
+		    
+		    var selectedItem as DesktopMenuItem = mainMenu.PopUp
+		    
+		    if selectedItem = nil then return 
+		    
+		    AutomatorVisualInterface(self.Window).AddStepAfter(InternalID, selectedItem.Text)
 		    
 		  end if
 		  
 		  
 		End Sub
 	#tag EndEvent
+#tag EndEvents
+#tag Events btn_remove
 	#tag Event
-		Function ConstructContextualMenu(base As DesktopMenuItem, x As Integer, y As Integer) As Boolean
+		Sub Pressed()
 		  
-		  base.AddMenu(New DesktopMenuItem("Group/Split"))
 		  
-		  base.AddMenu(New DesktopMenuItem("Filter"))
-		  base.AddMenu(New DesktopMenuItem("Sort"))
-		  base.AddMenu(New DesktopMenuItem( "Calc"))
-		  base.AddMenu(New DesktopMenuItem("Map"))
-		  base.AddMenu(New DesktopMenuItem( "Pivot"))
+		  if self.Window =nil then return 
 		  
-		End Function
-	#tag EndEvent
-	#tag Event
-		Function ContextualMenuItemSelected(selectedItem As DesktopMenuItem) As Boolean
 		  
-		  if self.Window =nil then return false
+		  var temp() as string 
+		  var mainMenu as new DesktopMenuItem
+		  
 		  
 		  if self.Window isa AutomatorVisualInterface then
-		    AutomatorVisualInterface(self.Window).AddStepAfter(InternalID, selectedItem.Text)
+		    temp = AutomatorVisualInterface(self.Window).GetListOfOptionsForRemove(CurrentType)
+		    
+		    if  temp = nil or temp.Count = 0 then
+		      AutomatorVisualInterface(self.Window).ExecuteRemove(InternalID, "")
+		      return
+		      
+		    end if
+		    
+		    for each entry as string in temp
+		      mainMenu.AddMenu( New DesktopMenuItem(entry))
+		      
+		    next
+		    
+		    var selectedItem as DesktopMenuItem = mainMenu.PopUp
+		    
+		    if selectedItem = nil then return 
+		    
+		    AutomatorVisualInterface(self.Window).ExecuteRemove(InternalID, selectedItem.Text)
 		    
 		  end if
 		  
-		  return True
 		  
-		  
-		End Function
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btn_mode
 	#tag Event
 		Sub Pressed()
 		  
+		  
 		  if self.Window =nil then return 
 		  
-		  if  self.Window isa AutomatorVisualInterface then
-		    AutomatorVisualInterface(self.Window).EditStepWithID(InternalID)
+		  
+		  var temp() as string 
+		  var mainMenu as new DesktopMenuItem
+		  
+		  
+		  if self.Window isa AutomatorVisualInterface then
+		    temp = AutomatorVisualInterface(self.Window).GetListOfOptionsForActions(CurrentType)
+		    
+		    if  temp = nil or temp.Count = 0 then
+		      AutomatorVisualInterface(self.Window).ExecuteAction(InternalID, "")
+		      return
+		      
+		    end if
+		    
+		    for each entry as string in temp
+		      mainMenu.AddMenu( New DesktopMenuItem(entry))
+		      
+		    next
+		    
+		    var selectedItem as DesktopMenuItem = mainMenu.PopUp
+		    
+		    if selectedItem = nil then return 
+		    
+		    AutomatorVisualInterface(self.Window).ExecuteAction(InternalID, selectedItem.Text)
 		    
 		  end if
-		  
 		  
 		  
 		End Sub
@@ -737,22 +794,6 @@ End
 		Visible=true
 		Group="Window Behavior"
 		InitialValue="False"
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="InternalID"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="StateCollapsed"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty

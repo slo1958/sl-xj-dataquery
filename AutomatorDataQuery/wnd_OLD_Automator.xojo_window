@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopWindow wnd_Automator
+Begin DesktopWindow wnd_OLD_Automator
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF00
    Composite       =   False

@@ -1,6 +1,6 @@
 #tag Class
 Protected Class clDataQueryItem_pivot
-Inherits clDataQueryItem_Generic
+Inherits clDataQueryItem
 	#tag Method, Flags = &h21
 		Private Sub Build_Remaining_KeyFields()
 		  
@@ -13,16 +13,16 @@ Inherits clDataQueryItem_Generic
 		  '
 		  ' identify key fields used to build blocks and remaining key fields
 		  ' 
-		  if prevCalcStep=nil then
+		  if prevDataQueryItem=nil then
 		    
 		  else
 		    
-		    redim sField_Remaining(ubound(prevCalcStep.keyFields))
-		    redim sField_R_Type(ubound(prevCalcStep.keyFields))
+		    redim sField_Remaining(ubound(prevDataQueryItem.keyFields))
+		    redim sField_R_Type(ubound(prevDataQueryItem.keyFields))
 		    
-		    for i=1 to ubound(prevCalcStep.keyFields)
-		      sField_Remaining(i)=prevCalcStep.keyFields(i)
-		      sField_R_Type(i)=prevCalcStep.keyFieldType(i)
+		    for i=1 to ubound(prevDataQueryItem.keyFields)
+		      sField_Remaining(i)=prevDataQueryItem.keyFields(i)
+		      sField_R_Type(i)=prevDataQueryItem.keyFieldType(i)
 		    next
 		    
 		    for jField=1 to 3
@@ -115,9 +115,9 @@ Inherits clDataQueryItem_Generic
 		  
 		  dim s as string
 		  
-		  if prevCalcStep<>nil then 
-		    sSource=prevCalcStep.getSql
-		    sPostFix=prevCalcStep.fieldPostFix
+		  if prevDataQueryItem<>nil then 
+		    sSource=prevDataQueryItem.getSql
+		    sPostFix=prevDataQueryItem.fieldPostFix
 		  else
 		    ssource=""
 		    sPostFix=""
@@ -192,9 +192,9 @@ Inherits clDataQueryItem_Generic
 		    
 		    for jBlock=0 to maxItems
 		      if sBlockName(jBlock)<>"" then
-		        for i=1 to ubound(prevCalcStep.valueFields)
-		          soutput=soutput+ssep+"BLK_"+sBlockName(jblock)+"."+prevCalcStep.valueFields(i)+"_"+sPostFix+" as " +_
-		          prevCalcStep.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
+		        for i=1 to ubound(prevDataQueryItem.valueFields)
+		          soutput=soutput+ssep+"BLK_"+sBlockName(jblock)+"."+prevDataQueryItem.valueFields(i)+"_"+sPostFix+" as " +_
+		          prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
 		          ssep=","
 		        next
 		      end if
@@ -265,9 +265,9 @@ Inherits clDataQueryItem_Generic
 		  MessageBox( "ubound keyfields (INNER) : " + str(keyFields.LastIndex))
 		  
 		  
-		  if prevCalcStep<>nil then 
-		    sSource=prevCalcStep.getSql
-		    sPostFix=prevCalcStep.fieldPostFix
+		  if prevDataQueryItem<>nil then 
+		    sSource=prevDataQueryItem.getSql
+		    sPostFix=prevDataQueryItem.fieldPostFix
 		  else
 		    ssource=""
 		    sPostFix=""
@@ -317,10 +317,10 @@ Inherits clDataQueryItem_Generic
 		          sSep=","
 		        next
 		        
-		        for i=1 to ubound(prevCalcStep.valueFields)
-		          s=s+sSep+ prevCalcStep.valueFields(i)+"_"+sPostFix +" as "+prevCalcStep.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
+		        for i=1 to ubound(prevDataQueryItem.valueFields)
+		          s=s+sSep+ prevDataQueryItem.valueFields(i)+"_"+sPostFix +" as "+prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
 		          ssep=","
-		          sOutputFields=sOutputFields+sosep+prevCalcStep.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
+		          sOutputFields=sOutputFields+sosep+prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
 		          sosep=","
 		        next
 		        
@@ -511,8 +511,8 @@ Inherits clDataQueryItem_Generic
 
 	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
-		   
-		  wndCalcStep_pivot.showme me
+		  
+		  wndDataQueryItem_pivot.showme me
 		  
 		End Sub
 	#tag EndMethod
@@ -526,7 +526,7 @@ Inherits clDataQueryItem_Generic
 		  dim n as integer
 		  dim s as string
 		  
-		  if prevCalcStep<>nil then
+		  if prevDataQueryItem<>nil then
 		    
 		    Build_Remaining_KeyFields
 		    
@@ -534,10 +534,10 @@ Inherits clDataQueryItem_Generic
 		    
 		    for jBlock=0 to maxItems
 		      if sBlockName(jblock)<>"" then
-		        for i=1 to ubound(prevCalcStep.valueFields)
+		        for i=1 to ubound(prevDataQueryItem.valueFields)
 		          n=ubound(valueFields)+1
 		          redim valueFields(n)
-		          valueFields(n)=prevCalcStep.valueFields(i)+"_"+sBlockName(jblock)
+		          valueFields(n)=prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)
 		        next
 		      end if
 		    next
@@ -558,7 +558,7 @@ Inherits clDataQueryItem_Generic
 		  var jBlock as integer
 		  
 		  sa="OK"
-		  if prevCalcStep<>nil then sa=prevCalcStep.validateChain
+		  if prevDataQueryItem<>nil then sa=prevDataQueryItem.validateChain
 		  
 		  if sa="OK" then
 		    k=0
@@ -625,6 +625,14 @@ Inherits clDataQueryItem_Generic
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="ID"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
@@ -665,30 +673,6 @@ Inherits clDataQueryItem_Generic
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="yBase"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="yEnd"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Title"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="selected"
 			Visible=false
 			Group="Behavior"
@@ -698,14 +682,6 @@ Inherits clDataQueryItem_Generic
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="workarea"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ItemType"
 			Visible=false
 			Group="Behavior"
 			InitialValue="0"

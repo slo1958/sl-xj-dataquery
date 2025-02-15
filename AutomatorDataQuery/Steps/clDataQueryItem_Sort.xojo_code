@@ -1,6 +1,6 @@
 #tag Class
 Protected Class clDataQueryItem_Sort
-Inherits clDataQueryItem_Generic
+Inherits clDataQueryItem
 	#tag Method, Flags = &h0
 		Sub Constructor()
 		  var i  as integer
@@ -40,31 +40,27 @@ Inherits clDataQueryItem_Generic
 		  var i  as integer
 		  dim ssep as string
 		  
-		  if prevCalcStep<>nil then
+		  if prevDataQueryItem<>nil then
 		    
-		    sSource=prevCalcStep.getSql
-		    sPostFix=prevCalcStep.fieldPostFix
+		    sSource=prevDataQueryItem.getSql
+		    sPostFix=prevDataQueryItem.fieldPostFix
 		    
 		  end if
 		  
 		  if ssource<>"" then
 		    s="select "
 		    
-		    if recLimit>0 then
-		      s=s+" top "+str(reclimit)+"    "
-		    end if
-		    
 		    ssep=""
 		    
-		    for i=1 to ubound(prevCalcStep.keyFields)
+		    for i=1 to ubound(prevDataQueryItem.keyFields)
 		      s=s+ssep
-		      s=s+prevCalcStep.keyFields(i)+"_"+sPostFix+" as "+prevCalcStep.keyFields(i)+"_"+fieldPostFix
+		      s=s+prevDataQueryItem.keyFields(i)+"_"+sPostFix+" as "+prevDataQueryItem.keyFields(i)+"_"+fieldPostFix
 		      ssep=","
 		    next
 		    
-		    for i=1 to ubound(prevCalcStep.valueFields)
+		    for i=1 to ubound(prevDataQueryItem.valueFields)
 		      s=s+ssep
-		      s=s+prevCalcStep.valueFields(i)+"_"+sPostFix+" as "+prevCalcStep.valueFields(i)+"_"+fieldPostFix
+		      s=s+prevDataQueryItem.valueFields(i)+"_"+sPostFix+" as "+prevDataQueryItem.valueFields(i)+"_"+fieldPostFix
 		      ssep=","
 		    next
 		    
@@ -80,8 +76,15 @@ Inherits clDataQueryItem_Generic
 		      end if
 		    next
 		    
+		    
+		    if recLimit>0 then
+		      s=s+" limit  "+str(reclimit)+"    "
+		    end if
+		    
+		    
 		  else
 		    s=""
+		    
 		  end if
 		  
 		  return s
@@ -185,8 +188,8 @@ Inherits clDataQueryItem_Generic
 
 	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
-		   
-		  wndCalcStep_sort.showme me
+		  
+		  wndDataQueryItem_sort.showme me
 		  
 		  
 		End Sub
@@ -202,7 +205,7 @@ Inherits clDataQueryItem_Generic
 		  dim n as integer
 		  dim s as string
 		  
-		  if prevCalcStep<>nil then
+		  if prevDataQueryItem<>nil then
 		    
 		    '
 		    ' obtain field type of selected fields
@@ -210,9 +213,9 @@ Inherits clDataQueryItem_Generic
 		    for i=0 to ubound(sField1)
 		      s=sField1(i)
 		      
-		      for j=1 to ubound(prevCalcStep.keyFields)
-		        if prevCalcStep.keyFields(j)=s then
-		          sField1Type(i)=prevCalcStep.keyFieldType(j)
+		      for j=1 to ubound(prevDataQueryItem.keyFields)
+		        if prevDataQueryItem.keyFields(j)=s then
+		          sField1Type(i)=prevDataQueryItem.keyFieldType(j)
 		        end if
 		      next
 		    next
@@ -229,11 +232,11 @@ Inherits clDataQueryItem_Generic
 		      end if
 		    next
 		    
-		    n=ubound(prevCalcStep.valueFields)
+		    n=ubound(prevDataQueryItem.valueFields)
 		    redim valueFields(n)
 		    
 		    for i=1 to n
-		      valueFields(i)=prevCalcStep.valueFields(i)
+		      valueFields(i)=prevDataQueryItem.valueFields(i)
 		    next
 		    
 		  end if
@@ -272,6 +275,14 @@ Inherits clDataQueryItem_Generic
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="ID"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
@@ -313,30 +324,6 @@ Inherits clDataQueryItem_Generic
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="yBase"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="yEnd"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Title"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="selected"
 			Visible=false
 			Group="Behavior"
@@ -346,14 +333,6 @@ Inherits clDataQueryItem_Generic
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="workarea"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ItemType"
 			Visible=false
 			Group="Behavior"
 			InitialValue="0"

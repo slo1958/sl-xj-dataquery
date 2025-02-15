@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopWindow wndCalcStep_GroupSplit
+Begin DesktopWindow wndDataQueryItem_Sort
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF00
    Composite       =   False
@@ -10,7 +10,7 @@ Begin DesktopWindow wndCalcStep_GroupSplit
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   219
+   Height          =   267
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -20,18 +20,180 @@ Begin DesktopWindow wndCalcStep_GroupSplit
    MinimumHeight   =   64
    MinimumWidth    =   64
    Resizeable      =   True
-   Title           =   "Definition of a GroupSplit"
+   Title           =   "Definition of a Sort"
    Type            =   0
    Visible         =   True
-   Width           =   447
+   Width           =   476
+   Begin DesktopCanvas Canvas1
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   True
+      AllowTabs       =   False
+      Backdrop        =   0
+      Enabled         =   True
+      Height          =   22
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   110
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   0
+      TabIndex        =   0
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   31
+      Transparent     =   True
+      Visible         =   True
+      Width           =   322
+      Begin TextField efLimit
+         AcceptTabs      =   False
+         Alignment       =   0
+         AllowSpellChecking=   False
+         AutoDeactivate  =   True
+         BackColor       =   &cFFFFFF00
+         Bold            =   False
+         Border          =   True
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Format          =   ""
+         Height          =   20
+         HelpTag         =   ""
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "Canvas1"
+         Italic          =   False
+         Left            =   311
+         LimitText       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Mask            =   ""
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   0
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Text            =   ""
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   12.0
+         TextUnit        =   0
+         Top             =   32
+         Transparent     =   False
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   57
+      End
+      Begin Label StaticText3
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "Canvas1"
+         Italic          =   False
+         Left            =   371
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   1
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Text            =   "records"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   12.0
+         TextUnit        =   0
+         Top             =   32
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   50
+      End
+      Begin DesktopRadioButton rb_Limit
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "All records"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   0
+         InitialParent   =   "Canvas1"
+         Italic          =   False
+         Left            =   116
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         TabIndex        =   2
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   32
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   79
+      End
+      Begin DesktopRadioButton rb_limit
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Keep top"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   1
+         InitialParent   =   "Canvas1"
+         Italic          =   False
+         Left            =   209
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         TabIndex        =   3
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   32
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   87
+      End
+   End
    Begin Label st_Name
       AutoDeactivate  =   True
-      BalloonHelp     =   ""
       Bold            =   False
-      ControlOrder    =   "0"
       DataField       =   ""
       DataSource      =   ""
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       Height          =   20
       HelpTag         =   ""
@@ -44,9 +206,10 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      MultiLine       =   False
+      Multiline       =   False
+      Scope           =   0
       Selectable      =   False
-      TabIndex        =   0
+      TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Label:"
@@ -67,13 +230,10 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       AllowSpellChecking=   False
       AutoDeactivate  =   True
       BackColor       =   &cFFFFFF00
-      BalloonHelp     =   ""
       Bold            =   False
       Border          =   True
-      ControlOrder    =   "1"
       DataField       =   ""
       DataSource      =   ""
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       Format          =   ""
       Height          =   22
@@ -90,14 +250,10 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       LockRight       =   False
       LockTop         =   False
       Mask            =   ""
-      MultiLine       =   "False"
       Password        =   False
       ReadOnly        =   False
-      ScrollBar       =   "True"
-      ScrollBarHorizontal=   "False"
-      ScrollBarVertical=   "True"
-      Styled          =   "False"
-      TabIndex        =   1
+      Scope           =   0
+      TabIndex        =   2
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
@@ -114,12 +270,9 @@ Begin DesktopWindow wndCalcStep_GroupSplit
    End
    Begin Label StaticText1
       AutoDeactivate  =   True
-      BalloonHelp     =   ""
       Bold            =   False
-      ControlOrder    =   "2"
       DataField       =   ""
       DataSource      =   ""
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       Height          =   20
       HelpTag         =   ""
@@ -132,18 +285,19 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      MultiLine       =   False
+      Multiline       =   False
+      Scope           =   0
       Selectable      =   False
-      TabIndex        =   2
+      TabIndex        =   3
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "Split by"
+      Text            =   "Sort by"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   40
+      Top             =   62
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -151,113 +305,57 @@ Begin DesktopWindow wndCalcStep_GroupSplit
    End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
       Bold            =   False
-      ControlOrder    =   "3"
-      DataField       =   ""
-      DataSource      =   ""
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   0
       InitialParent   =   ""
       InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
+      Scope           =   0
       SelectedRowIndex=   0
-      TabIndex        =   3
+      TabIndex        =   4
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
-      Top             =   40
+      Top             =   62
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
-      AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      ControlOrder    =   "4"
-      Default         =   False
-      DisabledBalloonHelp=   ""
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      HelpTag         =   ""
-      Index           =   0
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   257
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      TabIndex        =   4
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
-      Tooltip         =   ""
-      Top             =   39
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   20
-   End
    Begin DesktopPopupMenu PopupMenu1
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
       Bold            =   False
-      ControlOrder    =   "5"
-      DataField       =   ""
-      DataSource      =   ""
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
       Italic          =   False
       Left            =   -465
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
+      Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
       Top             =   6
       Transparent     =   False
@@ -265,386 +363,281 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopPopupMenu ppFieldA
+   Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   False
-      ControlOrder    =   "6"
-      DataField       =   ""
-      DataSource      =   ""
-      DisabledBalloonHelp=   ""
+      Bold            =   True
+      Cancel          =   False
+      Caption         =   "-"
+      Default         =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
-      Index           =   1
+      Index           =   0
       InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   110
-      ListIndex       =   "0"
+      Left            =   311
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      SelectedRowIndex=   0
+      MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   6
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
-      Top             =   64
+      Top             =   62
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   20
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      ControlOrder    =   "7"
-      Default         =   False
-      DisabledBalloonHelp=   ""
+      Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   1
       InitialParent   =   ""
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   257
+      Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      MacButtonStyle  =   0
+      Scope           =   0
+      SelectedRowIndex=   0
       TabIndex        =   7
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
-      Top             =   63
+      Top             =   86
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   20
+      Width           =   140
    End
-   Begin DesktopPopupMenu ppFieldA
+   Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   False
-      ControlOrder    =   "8"
-      DataField       =   ""
-      DataSource      =   ""
-      DisabledBalloonHelp=   ""
+      Bold            =   True
+      Cancel          =   False
+      Caption         =   "-"
+      Default         =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
-      Index           =   2
+      Index           =   1
       InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   110
-      ListIndex       =   "0"
+      Left            =   311
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      SelectedRowIndex=   0
+      MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
-      Top             =   88
+      Top             =   86
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   20
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      ControlOrder    =   "9"
-      Default         =   False
-      DisabledBalloonHelp=   ""
+      Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   2
       InitialParent   =   ""
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   257
+      Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      MacButtonStyle  =   0
+      Scope           =   0
+      SelectedRowIndex=   0
       TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
-      Top             =   87
+      Top             =   110
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   20
+      Width           =   140
    End
-   Begin DesktopPopupMenu ppFieldA
+   Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   False
-      ControlOrder    =   "10"
-      DataField       =   ""
-      DataSource      =   ""
-      DisabledBalloonHelp=   ""
+      Bold            =   True
+      Cancel          =   False
+      Caption         =   "-"
+      Default         =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
-      Index           =   3
+      Index           =   2
       InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   110
-      ListIndex       =   "0"
+      Left            =   311
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      SelectedRowIndex=   0
+      MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
-      Top             =   113
+      Top             =   110
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   20
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      ControlOrder    =   "11"
-      Default         =   False
-      DisabledBalloonHelp=   ""
+      Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   3
       InitialParent   =   ""
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   257
+      Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      MacButtonStyle  =   0
+      Scope           =   0
+      SelectedRowIndex=   0
       TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
-      Top             =   112
+      Top             =   135
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   20
+      Width           =   140
    End
-   Begin DesktopPopupMenu ppFieldA
+   Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   False
-      ControlOrder    =   "12"
-      DataField       =   ""
-      DataSource      =   ""
-      DisabledBalloonHelp=   ""
+      Bold            =   True
+      Cancel          =   False
+      Caption         =   "-"
+      Default         =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
-      Index           =   4
+      Index           =   3
       InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   110
-      ListIndex       =   "0"
+      Left            =   311
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      SelectedRowIndex=   0
+      MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   12
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
-      Top             =   138
+      Top             =   135
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   20
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      ControlOrder    =   "13"
-      Default         =   False
-      DisabledBalloonHelp=   ""
+      Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   4
       InitialParent   =   ""
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   257
+      Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      MacButtonStyle  =   0
+      Scope           =   0
+      SelectedRowIndex=   0
       TabIndex        =   13
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
-      Top             =   137
+      Top             =   160
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   20
+      Width           =   140
    End
-   Begin DesktopPopupMenu ppFieldA
+   Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   False
-      ControlOrder    =   "14"
-      DataField       =   ""
-      DataSource      =   ""
-      DisabledBalloonHelp=   ""
+      Bold            =   True
+      Cancel          =   False
+      Caption         =   "-"
+      Default         =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
-      Index           =   5
+      Index           =   4
       InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   110
-      ListIndex       =   "0"
+      Left            =   311
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      SelectedRowIndex=   0
+      MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   14
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
-      Top             =   163
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-   End
-   Begin DesktopButton pb_Remove
-      AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      ControlOrder    =   "15"
-      Default         =   False
-      DisabledBalloonHelp=   ""
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      HelpTag         =   ""
-      Index           =   5
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   257
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      TabIndex        =   15
-      TabPanelIndex   =   0
-      TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
-      Tooltip         =   ""
-      Top             =   162
+      Top             =   160
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -652,38 +645,29 @@ Begin DesktopWindow wndCalcStep_GroupSplit
    End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
       Bold            =   False
-      ControlOrder    =   "16"
-      DataField       =   ""
-      DataSource      =   ""
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
-      Index           =   6
+      Index           =   5
       InitialParent   =   ""
       InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
       Left            =   110
-      ListIndex       =   "0"
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
+      Scope           =   0
       SelectedRowIndex=   0
-      TabIndex        =   16
+      TabIndex        =   15
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
-      Top             =   189
+      Top             =   185
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -691,94 +675,109 @@ Begin DesktopWindow wndCalcStep_GroupSplit
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
       Bold            =   True
       Cancel          =   False
       Caption         =   "-"
-      ControlOrder    =   "17"
       Default         =   False
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
-      Index           =   6
+      Index           =   5
       InitialParent   =   ""
       Italic          =   False
-      Left            =   257
+      Left            =   311
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
       MacButtonStyle  =   0
-      TabIndex        =   17
+      Scope           =   0
+      TabIndex        =   16
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
-      Top             =   188
+      Top             =   185
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   20
    End
-   Begin DesktopRadioButton rb_sumNumber
+   Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
       Bold            =   False
-      Caption         =   "Sum value fields"
-      ControlOrder    =   "18"
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
-      Height          =   19
-      HelpTag         =   ""
-      Index           =   -2147483648
+      Height          =   20
+      Index           =   6
       InitialParent   =   ""
+      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
       Italic          =   False
-      Left            =   8
+      Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   17
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   211
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   140
+   End
+   Begin DesktopButton pb_Remove
+      AllowAutoDeactivate=   True
+      Bold            =   True
+      Cancel          =   False
+      Caption         =   "-"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   6
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   311
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   18
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
-      Top             =   189
+      Top             =   211
       Transparent     =   False
       Underline       =   False
-      Value           =   True
       Visible         =   True
-      Width           =   94
+      Width           =   20
    End
    Begin DesktopButton pb_Add
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
       Bold            =   True
       Cancel          =   False
       Caption         =   "+"
-      ControlOrder    =   "19"
       Default         =   False
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   22
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -789,13 +788,12 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       LockRight       =   False
       LockTop         =   False
       MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   19
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "14.0"
       Tooltip         =   ""
-      Top             =   162
+      Top             =   184
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -803,20 +801,15 @@ Begin DesktopWindow wndCalcStep_GroupSplit
    End
    Begin DesktopButton pb_close
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
-      BalloonHelp     =   ""
       Bold            =   False
       Cancel          =   False
       Caption         =   "Close"
-      ControlOrder    =   "20"
       Default         =   True
-      DisabledBalloonHelp=   ""
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   22
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -827,17 +820,226 @@ Begin DesktopWindow wndCalcStep_GroupSplit
       LockRight       =   False
       LockTop         =   False
       MacButtonStyle  =   0
+      Scope           =   0
       TabIndex        =   20
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "12.0"
       Tooltip         =   ""
-      Top             =   162
+      Top             =   184
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   69
+   End
+   Begin DesktopPopupMenu ppFieldB
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   0
+      InitialParent   =   ""
+      InitialValue    =   "Asc\r\nDesc\r\n"
+      Italic          =   False
+      Left            =   255
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   21
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   62
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   52
+   End
+   Begin DesktopPopupMenu ppFieldB
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   1
+      InitialParent   =   ""
+      InitialValue    =   "Asc\r\nDesc\r\n"
+      Italic          =   False
+      Left            =   255
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   22
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   86
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   52
+   End
+   Begin DesktopPopupMenu ppFieldB
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   2
+      InitialParent   =   ""
+      InitialValue    =   "Asc\r\nDesc\r\n"
+      Italic          =   False
+      Left            =   255
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   23
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   110
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   52
+   End
+   Begin DesktopPopupMenu ppFieldB
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   3
+      InitialParent   =   ""
+      InitialValue    =   "Asc\r\nDesc\r\n"
+      Italic          =   False
+      Left            =   255
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   24
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   135
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   52
+   End
+   Begin DesktopPopupMenu ppFieldB
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   4
+      InitialParent   =   ""
+      InitialValue    =   "Asc\r\nDesc\r\n"
+      Italic          =   False
+      Left            =   255
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   25
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   160
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   52
+   End
+   Begin DesktopPopupMenu ppFieldB
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   5
+      InitialParent   =   ""
+      InitialValue    =   "Asc\r\nDesc\r\n"
+      Italic          =   False
+      Left            =   255
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   26
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   185
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   52
+   End
+   Begin DesktopPopupMenu ppFieldB
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   6
+      InitialParent   =   ""
+      InitialValue    =   "Asc\r\nDesc\r\n"
+      Italic          =   False
+      Left            =   255
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   27
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   211
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   52
    End
 End
 #tag EndDesktopWindow
@@ -850,6 +1052,7 @@ End
 		  lastItem=0
 		  for i=1 to 6
 		    ppFieldA(i).visible=false
+		    ppFieldB(i).visible=false
 		    pb_Remove(i).Visible=false
 		  next
 		  
@@ -857,10 +1060,9 @@ End
 		  
 		  pb_Remove(0).Enabled=false
 		  
-		  rb_sumNumber.top=pb_add.top+25
 		  pb_close.top=pb_add.top+25
 		  
-		  wndCalcStep_GroupSplit.Height=pb_close.top+25
+		  wndDataQueryItem_Sort.Height=pb_close.top+25
 		  
 		End Sub
 	#tag EndEvent
@@ -871,16 +1073,18 @@ End
 		  if lastItem<curStep.maxItems  then lastItem=lastItem+1
 		  
 		  ppFielda(lastItem).Visible=true
+		  ppFieldb(lastitem).Visible=true
+		  
 		  pb_remove(lastItem).visible=true 
 		  
 		  prepLine lastItem
 		  
 		  pb_add.top=pb_remove(lastItem).top
 		  
-		  rb_sumNumber.top=pb_add.top+25
+		  
 		  pb_close.top=pb_add.top+25
 		  
-		  wndCalcStep_GroupSplit.Height=ppFieldA(0).top+25*(lastItem+1+1)
+		  wndDataQueryItem_Sort.Height=ppFieldA(0).top+25*(lastItem+1+1)
 		  
 		  return lastItem
 		  
@@ -903,14 +1107,24 @@ End
 		  for i=0 to  curStep.maxItems
 		    if ppFieldA(i).Visible then
 		      curStep.sField1(i)=ppFieldA(i).SelectedRowText
+		      curStep.sFields(i)=ppfieldB(i).SelectedRowText
 		      curStep.bInUse(i)=true
 		    else
 		      curStep.bInUse(i)=false
+		      curStep.sField1(i)=""
+		      curStep.sFields(i)=""
 		    end if
 		    
 		  next
 		  
 		  
+		  if rb_Limit(0).value then
+		    curStep.recLimit=0
+		  elseif rb_limit(1).value then
+		    curStep.recLimit=val(efLimit.text)
+		  end if
+		  
+		  curStep.UpdatedFromConfigDialog
 		  
 		End Sub
 	#tag EndMethod
@@ -918,19 +1132,18 @@ End
 	#tag Method, Flags = &h0
 		Sub prepLine(theLine as integer)
 		  var i  as integer
-		  if curStep.prevCalcStep<>nil then
+		  if curStep.prevDataQueryItem<>nil then
 		    ppFieldA(theLine).RemoveAllRows
 		    
 		    
-		    for i=1 to ubound(curStep.prevCalcStep.keyFields)
-		      ppFielda(theLine).AddRow curStep.prevCalcStep.keyFields(i)
+		    for i=1 to ubound(curStep.prevDataQueryItem.keyFields)
+		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.keyFields(i)
 		    next
 		    
-		    'for i=1 to ubound(curStep.prevCalcStep.valueFields)
-		    'ppFielda(theLine).AddRow curStep.prevCalcStep.valueFields(i)
-		    'ppFieldb(theLine).AddRow curStep.prevCalcStep.valueFields(i)
-		    'next
-		    '
+		    for i=1 to ubound(curStep.prevDataQueryItem.valueFields)
+		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.valueFields(i)
+		    next
+		    
 		    
 		    'ppFieldb(theLine).AddRow cUseConstant
 		  end if
@@ -938,7 +1151,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowMe(theStep as clDataQueryItem_GroupSplit)
+		Sub ShowMe(theStep as clDataQueryItem_Sort)
 		  var i  as integer
 		  var j  as integer
 		  
@@ -946,19 +1159,26 @@ End
 		  
 		  prepLine 0
 		  
-		  efName.text=curStep.getTitle
+		  efName.text=curStep.name
 		  
 		  ppFieldA(0).findItem(curStep.sField1(0))
-		  
+		  ppFieldB(0).findItem(curStep.sFieldS(0))
 		  
 		  for i=1 to curStep.maxItems
 		    if curStep.bInUse(i) then
 		      j=addone
 		      ppFieldA(j).findItem(curStep.sField1(i))
+		      ppFieldB(j).findItem(curStep.sFieldS(i))
 		    end if
 		    
 		  next
 		  
+		  if curStep.recLimit=0 then 
+		    rb_Limit(0).value=true
+		  else
+		    rb_limit(1).value=true
+		    efLimit.text=str(curStep.recLimit)
+		  end if
 		  
 		  
 		  showmodal
@@ -968,7 +1188,7 @@ End
 
 
 	#tag Property, Flags = &h0
-		curStep As clDataQueryItem_GroupSplit
+		curStep As clDataQueryItem_Sort
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -978,6 +1198,30 @@ End
 
 #tag EndWindowCode
 
+#tag Events efLimit
+	#tag Event
+		Sub TextChange()
+		  
+		  if len(efLimit.text)>0 then
+		    rb_Limit(1).value=true
+		  end if
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events rb_Limit
+	#tag Event
+		Sub ValueChanged(index as Integer)
+		  
+		  if index=0 then
+		    if rb_limit(index).value then
+		      efLimit.text=""
+		    end if
+		  end if
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events pb_Remove
 	#tag Event
 		Sub Pressed(index as Integer)
@@ -989,31 +1233,24 @@ End
 		  for i=index+1 to lastItem
 		    y=ppFieldA(i).top-25
 		    ppFieldA(i-1).SelectedRowIndex=ppFieldA(i).SelectedRowIndex
+		    ppFieldB(i-1).SelectedRowIndex=ppfieldB(i).SelectedRowIndex
 		  next
 		  
 		  i=lastItem
 		  
 		  ppFieldA(i).visible=false
-		  
+		  ppFieldB(i).visible=false
 		  pb_Remove(i).Visible=false
 		  
 		  lastItem=lastItem-1
 		  
 		  pb_add.top=pb_remove(lastItem).top
 		  
-		  rb_sumNumber.top=pb_add.top+25
 		  pb_close.top=pb_add.top+25
 		  
-		  wndCalcStep_GroupSplit.Height=ppFieldA(0).top+25*(lastItem+1+1)
+		  wndDataQueryItem_Sort.Height=ppFieldA(0).top+25*(lastItem+1+1)
 		  
 		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events rb_sumNumber
-	#tag Event
-		Sub ValueChanged()
-		  rb_sumNumber.value=true
 		End Sub
 	#tag EndEvent
 #tag EndEvents

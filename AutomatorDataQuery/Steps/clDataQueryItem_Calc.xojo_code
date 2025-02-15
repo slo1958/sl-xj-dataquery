@@ -1,6 +1,6 @@
 #tag Class
 Protected Class clDataQueryItem_Calc
-Inherits clDataQueryItem_Generic
+Inherits clDataQueryItem
 	#tag Method, Flags = &h0
 		Sub Constructor()
 		  
@@ -49,24 +49,24 @@ Inherits clDataQueryItem_Generic
 		  
 		  dim sdel as string
 		  
-		  if prevCalcStep=nil then
+		  if prevDataQueryItem=nil then
 		    s=""
 		    
 		  else
 		    
-		    ssource=prevCalcStep.getSql
-		    sPostfix=prevCalcStep.fieldPostFix
+		    ssource=prevDataQueryItem.getSql
+		    sPostfix=prevDataQueryItem.fieldPostFix
 		    
 		    
 		    s="select "
 		    sdel=""
-		    for i=1 to ubound(prevCalcStep.keyFields)
-		      s=s+sdel+ prevCalcStep.keyFields(i)+"_"+spostfix+" as "+prevCalcStep.keyFields(i)+"_"+fieldPostFix
+		    for i=1 to ubound(prevDataQueryItem.keyFields)
+		      s=s+sdel+ prevDataQueryItem.keyFields(i)+"_"+spostfix+" as "+prevDataQueryItem.keyFields(i)+"_"+fieldPostFix
 		      sdel=","
 		    next
 		    
-		    for i=1 to ubound(prevCalcStep.valueFields)
-		      s=s+sdel + prevCalcStep.valueFields(i)+"_"+spostfix+" as "+prevCalcStep.valueFields(i)+"_"+fieldPostFix
+		    for i=1 to ubound(prevDataQueryItem.valueFields)
+		      s=s+sdel + prevDataQueryItem.valueFields(i)+"_"+spostfix+" as "+prevDataQueryItem.valueFields(i)+"_"+fieldPostFix
 		      sdel=","
 		    next
 		    
@@ -146,7 +146,7 @@ Inherits clDataQueryItem_Generic
 	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
 		  
-		  wndCalcStep_Calc.showme me
+		  wndDataQueryItem_Calc.showme me
 		  
 		End Sub
 	#tag EndMethod
@@ -157,31 +157,31 @@ Inherits clDataQueryItem_Generic
 		  dim n as integer
 		  dim m as integer
 		  
-		  if prevCalcStep=nil then
+		  if prevDataQueryItem=nil then
 		    
 		  else
 		    '
 		    ' move all key fields
 		    '
-		    n=ubound(prevCalcStep.keyFields)
+		    n=ubound(prevDataQueryItem.keyFields)
 		    
 		    redim keyFields(n)
 		    redim keyFieldType(n)
 		    
 		    for i=1 to n
-		      keyFields(i)=prevCalcStep.keyFields(i)
-		      keyFieldType(i)=prevCalcStep.keyFieldType(i)
+		      keyFields(i)=prevDataQueryItem.keyFields(i)
+		      keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
 		    next
 		    '
 		    ' move all value fields
 		    '
-		    n=ubound(prevCalcStep.valueFields)
+		    n=ubound(prevDataQueryItem.valueFields)
 		    m=ubound(OutputFields)
 		    
 		    redim valueFields(n+m)
 		    
 		    for i=1 to n
-		      valueFields(i)=prevCalcStep.valueFields(i)
+		      valueFields(i)=prevDataQueryItem.valueFields(i)
 		    next
 		    
 		    for i=1 to m
@@ -209,28 +209,12 @@ Inherits clDataQueryItem_Generic
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="yBase"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="yEnd"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Title"
+			Name="ID"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
+			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="selected"
@@ -242,14 +226,6 @@ Inherits clDataQueryItem_Generic
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="workarea"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ItemType"
 			Visible=false
 			Group="Behavior"
 			InitialValue="0"

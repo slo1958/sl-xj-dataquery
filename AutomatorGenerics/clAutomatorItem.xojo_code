@@ -94,7 +94,7 @@ Protected Class clAutomatorItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		VisualSupport As ccAutomatorStep
+		VisualSupport As ccAutomatorItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -157,6 +157,14 @@ Protected Class clAutomatorItem
 			Group="Behavior"
 			InitialValue="0"
 			Type="integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ID"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

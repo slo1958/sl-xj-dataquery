@@ -398,7 +398,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Integer"
+		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

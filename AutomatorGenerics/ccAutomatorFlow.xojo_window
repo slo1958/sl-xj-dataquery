@@ -83,9 +83,9 @@ End
 
 #tag WindowCode
 	#tag Method, Flags = &h0
-		Function CreateCC(isExpanded as Boolean, item as clAutomatorItem) As ccAutomatorStep
+		Function CreateCC(isExpanded as Boolean, item as clAutomatorItem) As ccAutomatorItem
 		  
-		  var c as new ccAutomatorStep
+		  var c as new ccAutomatorItem
 		  
 		  c.EmbedWithin(Canvas1, 0, 0, canvas1.Width, c.Height)
 		  
@@ -116,10 +116,10 @@ End
 		  
 		  var y as integer =  - verticalOffset + canvas1.top + 10
 		  
-		  var ccList() as ccAutomatorStep
+		  var ccList() as ccAutomatorItem
 		  
 		  for each item as clAutomatorItem in self.AutomatorFlow.Items
-		    var c as ccAutomatorStep = item.VisualSupport
+		    var c as ccAutomatorItem = item.VisualSupport
 		    
 		    if c = nil then
 		      c = CreateCC(True, item)
@@ -151,7 +151,7 @@ End
 		    
 		  next
 		  
-		  for each c as ccAutomatorStep in ccList
+		  for each c as ccAutomatorItem in ccList
 		    c.Refresh( true)
 		    
 		  next

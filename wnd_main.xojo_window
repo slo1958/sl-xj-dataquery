@@ -215,11 +215,11 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Visible         =   True
       Width           =   600
    End
-   Begin DesktopButton Button1
+   Begin DesktopButton pb_run
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
-      Caption         =   "Button"
+      Caption         =   "Run"
       Default         =   False
       Enabled         =   True
       FontName        =   "System"
@@ -228,12 +228,12 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   834
-      LockBottom      =   True
+      Left            =   855
+      LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   True
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   8
@@ -244,7 +244,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   80
+      Width           =   59
    End
 End
 #tag EndDesktopWindow
@@ -255,7 +255,8 @@ End
 		  
 		  BuildListOfAnalysis
 		  
-		  self.AutomatorFlow =new clDataQueryFlow
+		  self.AutomatorFlow =new clDataQueryFlow("CurrentSales")
+		  
 		  self.ccAutomatorFlow1.SetFlow self.AutomatorFlow
 		  
 		  var  d as new date
@@ -280,6 +281,8 @@ End
 		  var s as  clAutomatorItem = AutomatorFlow.doInsertAfter(NewStepType, Identifier)
 		  
 		  RefreshStepIDs
+		  
+		  clDataQueryFlow(self.AutomatorFlow).UpdateDataFlow
 		  
 		  UpdateUI
 		  
@@ -343,17 +346,94 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub EditStepWithID(Identifier as integer)
+		Sub ExecuteAction(Identifier as integer, ActionCode as string)
 		  // Part of the AutomatorVisualInterface interface.
 		  
+		  clDataQueryFlow(self.AutomatorFlow).UpdateDataFlow
 		  
 		  var s as clAutomatorItem = self.AutomatorFlow.FindItemWithId(Identifier)
 		  
+		   
 		  if s = nil then return 
-		  //
-		  s.Open
+		  
+		  select case ActionCode 
+		  case ""
+		    s.Open
+		    
+		  case cEdit
+		    s.Open
+		    
+		  case cRunTillHere
+		    var tmpSql as string
+		    var tmpSource as string
+		    
+		    tmpSql = clDataQueryFlow(self.AutomatorFlow).getSqlStatement
+		    tmpSource = clDataQueryFlow(self.AutomatorFlow).FlowDataSource
+		    
+		    wnd_queryViewer.ShowResults(app.DBConnection, tmpSql, tmpSource)
+		    
+		    
+		  case else
+		    
+		  end select
+		  
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ExecuteRemove(Identifier as integer, ActionCode as string)
+		  var ItemToRemove as integer = Identifier
+		  
+		  var s as clAutomatorItem = self.AutomatorFlow.FindItemWithId(Identifier)
+		  
+		  if s.VisualSupport <> nil then
+		    s.VisualSupport.Close
+		    s.VisualSupport = nil
+		    
+		  end if
+		  
+		  self.AutomatorFlow.doRemove(ItemToRemove)
+		  
+		  clDataQueryFlow(self.AutomatorFlow).UpdateDataFlow
+		  
+		  UpdateUI
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetListOfOptionsForActions(CurrentStepType as string) As string()
+		  var temp() as string
+		   
+		  
+		  if CurrentStepType <> "Start" then Temp.Add(cEdit)
+		  Temp.Add(cRunTillHere)
+		  
+		  return temp
+		  
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetListOfOptionsForAdd(CurrentStepType as string) As string()
+		  
+		  return clDataQueryFlow.GetListOfSteps
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetListOfOptionsForRemove(CurrentStepType as string) As string()
+		  
+		  return nil
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -386,34 +466,6 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SelectAndAddStepAfter(Identifier as integer)
-		  // Part of the AutomatorVisualInterface interface.
-		  
-		  // 
-		  // var c as new ccAutomatorStep
-		  // 
-		  // c.EmbedWithin(Canvas1, 0, 0, canvas1.Width, c.Height)
-		  // 
-		  // if ccList.Count = 0 then c.RemoveButton(false)
-		  // 
-		  // c.Collapse
-		  // 
-		  // c.SetID( str(ccList.Count + 1), ccList.Count + 1)
-		  // 
-		  // c.SetTitle("Title of step " + str(ccList.Count + 1))
-		  // 
-		  // // c.Label1.text = "#" + str(ccList.Count+1)
-		  // 
-		  // ccList.AddAt(StepTechnicalID +1,c )
-		  // 
-		  // RefreshStepIDs
-		  // 
-		  // UpdateUI
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub UpdateUI()
 		  
 		  ccAutomatorFlow1.UpdateUI
@@ -433,6 +485,13 @@ End
 	#tag Property, Flags = &h1
 		Protected tmpCurrentFile As string
 	#tag EndProperty
+
+
+	#tag Constant, Name = cEdit, Type = String, Dynamic = False, Default = \"Edit", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cRunTillHere, Type = String, Dynamic = False, Default = \"Run all", Scope = Public
+	#tag EndConstant
 
 
 #tag EndWindowCode
@@ -469,15 +528,17 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button1
+#tag Events pb_run
 	#tag Event
 		Sub Pressed()
-		  var tmp as string
 		  
+		  var tmpSql as string
+		  var tmpSource as string
 		  
-		  tmp = clDataQueryFlow(self.AutomatorFlow).getSqlStatement
+		  tmpSql = clDataQueryFlow(self.AutomatorFlow).getSqlStatement
+		  tmpSource = clDataQueryFlow(self.AutomatorFlow).FlowDataSource
 		  
-		  MessageBox(tmp)
+		  wnd_queryViewer.ShowResults(app.DBConnection, tmpSql, tmpSource)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
