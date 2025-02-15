@@ -207,6 +207,14 @@ Implements TableRowReaderInterface
 			Group="Behavior"
 			InitialValue=""
 			Type="string"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IndexRow"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

@@ -25,13 +25,15 @@ Begin DesktopWindow wndDataQueryItem_map
    Visible         =   True
    Width           =   636
    Begin Label st_Name
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   12.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -48,11 +50,9 @@ Begin DesktopWindow wndDataQueryItem_map
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Label:"
-      TextAlign       =   0
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   12.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   6
       Transparent     =   False
       Underline       =   False
@@ -60,31 +60,32 @@ Begin DesktopWindow wndDataQueryItem_map
       Width           =   100
    End
    Begin TextField efName
-      AcceptTabs      =   False
-      Alignment       =   0
+      AllowAutoDeactivate=   True
+      AllowFocusRing  =   True
       AllowSpellChecking=   False
-      AutoDeactivate  =   True
-      BackColor       =   &cFFFFFF00
+      AllowTabs       =   False
+      BackgroundColor =   &cFFFFFF00
       Bold            =   False
-      Border          =   True
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   12.0
+      FontUnit        =   0
       Format          =   ""
+      HasBorder       =   True
       Height          =   22
-      HelpTag         =   ""
       Hint            =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
       Left            =   110
-      LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   False
       LockTop         =   False
-      Mask            =   ""
+      MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
@@ -92,14 +93,13 @@ Begin DesktopWindow wndDataQueryItem_map
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   12.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   6
       Transparent     =   False
       Underline       =   False
-      UseFocusRing    =   True
+      ValidationMask  =   ""
       Visible         =   True
       Width           =   329
    End
@@ -215,13 +215,15 @@ Begin DesktopWindow wndDataQueryItem_map
       _ScrollWidth    =   -1
    End
    Begin Label StaticText1
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   12.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -238,11 +240,9 @@ Begin DesktopWindow wndDataQueryItem_map
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "To hide a field, leave the New Name empty"
-      TextAlign       =   0
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   12.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   257
       Transparent     =   False
       Underline       =   False

@@ -462,7 +462,15 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Integer"
-		EditorType=""
+		Type="string"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LastValue"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="string"
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 #tag EndViewBehavior

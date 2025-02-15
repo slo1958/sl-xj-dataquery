@@ -51,7 +51,7 @@ Begin DesktopWindow wnd_queryViewer
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      Value           =   1
+      Value           =   0
       Visible         =   True
       Width           =   560
       Begin DesktopListBox lb_Data
@@ -150,7 +150,7 @@ Begin DesktopWindow wnd_queryViewer
          LockBottom      =   True
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   False
          Multiline       =   False
          Scope           =   0
@@ -166,7 +166,7 @@ Begin DesktopWindow wnd_queryViewer
          Transparent     =   False
          Underline       =   False
          Visible         =   True
-         Width           =   437
+         Width           =   336
       End
       Begin DesktopLabel lbl_sql
          AllowAutoDeactivate=   True
@@ -200,6 +200,38 @@ Begin DesktopWindow wnd_queryViewer
          Underline       =   False
          Visible         =   True
          Width           =   507
+      End
+      Begin DesktopButton btn_export
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Save"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   388
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   3
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   462
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   80
       End
    End
 End
@@ -272,20 +304,40 @@ End
 		  var rs as RowSet
 		  var rCount as integer
 		  
-		  rs = self.DBConnection.db.SelectSQL("Select count(*) cnt from (" + self.SqlCode+")")
+		  try
+		    
+		    rs = self.DBConnection.db.SelectSQL("Select count(*) cnt from (" + self.SqlCode+")")
+		    
+		  catch err As DatabaseException
+		    rs = nil
+		    lbl_message.text = "SQL Error " + err.Message
+		    
+		    
+		  Catch
+		    
+		  end try
 		  
-		  for each row as DatabaseRow in rs
-		    rCount = row.Column("cnt").IntegerValue
-		  next
-		  
-		  lbl_message.text = " Query returned " + str(rCount) + " rows."
-		  
-		  Results = self.DBConnection.db.SelectSQL(self.SqlCode)
-		  
-		  lb_Data.RemoveAllRows
-		  RowCounter = 0
-		  
-		  AddNextRows()
+		  if rs = nil then
+		    btn_export.Enabled = False
+		    btn_moreRows.Enabled = False
+		    
+		  else
+		    
+		    for each row as DatabaseRow in rs
+		      rCount = row.Column("cnt").IntegerValue
+		      
+		    next
+		    
+		    lbl_message.text = " Query returned " + str(rCount) + " rows."
+		    
+		    Results = self.DBConnection.db.SelectSQL(self.SqlCode)
+		    
+		    lb_Data.RemoveAllRows
+		    RowCounter = 0
+		    
+		    AddNextRows()
+		    
+		  end if
 		  
 		  me.ShowModal
 		  
@@ -318,6 +370,53 @@ End
 	#tag Event
 		Sub Pressed()
 		  AddNextRows
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_export
+	#tag Event
+		Sub Pressed()
+		  var res as RowSet= self.DBConnection.db.SelectSQL(self.SqlCode)
+		  
+		  var fd as FolderItem = SpecialFolder.Desktop.child("Export.csv")
+		  var tt as TextOutputStream = TextOutputStream.Create(fd)
+		  
+		  var fields() as string
+		  
+		  
+		  for i as integer = 0 to res.ColumnCount - 1
+		    fields.add( res.ColumnAt(i).Name)
+		    
+		  next
+		  
+		  tt.WriteLine(string.FromArray(fields, ","))
+		  
+		  while not res.AfterLastRow
+		    fields.RemoveAll
+		    
+		    for i as integer = 0 to res.ColumnCount -1
+		      var col as DatabaseColumn = res.ColumnAt(i)
+		      
+		      if col.Type = 6 or col.Type = 7 then
+		        fields.add( format(col.DoubleValue, "-######0.00#####"))
+		        
+		      else
+		        fields.add(  col.StringValue)
+		        
+		      end if
+		      
+		    next
+		    
+		    tt.WriteLine(string.FromArray(fields, ","))
+		    
+		    res.MoveToNextRow
+		    
+		  wend
+		  
+		  
+		  tt.Close
+		  
 		  
 		End Sub
 	#tag EndEvent
