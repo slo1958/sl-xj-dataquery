@@ -353,7 +353,7 @@ End
 		  
 		  var s as clAutomatorItem = self.AutomatorFlow.FindItemWithId(Identifier)
 		  
-		   
+		  
 		  if s = nil then return 
 		  
 		  select case ActionCode 
@@ -405,7 +405,7 @@ End
 	#tag Method, Flags = &h0
 		Function GetListOfOptionsForActions(CurrentStepType as string) As string()
 		  var temp() as string
-		   
+		  
 		  
 		  if CurrentStepType <> "Start" then Temp.Add(cEdit)
 		  Temp.Add(cRunTillHere)

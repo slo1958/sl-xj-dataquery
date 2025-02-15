@@ -64,7 +64,15 @@ Protected Class clDataQueryFieldInfo
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
-			Type="Integer"
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Type"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="InternalFieldTypes"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
