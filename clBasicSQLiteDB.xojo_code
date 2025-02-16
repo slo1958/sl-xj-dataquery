@@ -5,6 +5,8 @@ Protected Class clBasicSQLiteDB
 		  
 		  self.fld = PathToDatabase
 		  
+		  if not PathToDatabase.Exists then return
+		  
 		  self.mdb = new SQLiteDatabase(PathToDatabase)
 		  
 		  var rt as RowSet = self.mdb.Tables

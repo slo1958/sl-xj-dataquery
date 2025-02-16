@@ -8,26 +8,23 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(FlowDataSource as String)
+		Sub Constructor(project as clDataQueryProject)
 		  // Calling the overridden superclass constructor.
+		  
 		  Super.Constructor(StepTypes.Start)
 		  
-		  
 		  dim ssql as string
-		  var i  as integer
-		  dim n as integer
 		  
-		  self.dataSource = FlowDataSource
+		  
+		  self.dataSource = project.GetDataSourceName
+		  self.dbname = project.DatabaseName
 		  
 		  ssql="select * from "+ self.dataSource + " limit 1"
 		  
+		  var temp as new clBasicSQLiteQuery(project.Connection, ssql)
+		  
 		  redim KeyFields(0)
 		  redim valueFields(0)
-		  
-		  
-		  var temp as new clBasicSQLiteQuery(app.DBConnection, ssql)
-		  
-		  self.dbname = app.DBConnection.Name
 		  
 		  var dct as Dictionary = temp.GetColumnTypes
 		  

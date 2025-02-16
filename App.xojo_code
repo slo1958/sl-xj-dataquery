@@ -4,54 +4,45 @@ Inherits DesktopApplication
 	#tag Event
 		Sub Opening()
 		  
-		  FindTestDataFolder
-		  
-		  self.DBConnection =  new clBasicSQLiteDB(testdatafolder.child("DummySalesData.db"))
-		  
-		  Return
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
-		Sub FindTestDataFolder()
+		Function GetAppDataFolder() As FolderItem
 		  
-		  //
-		  // move up until we find the folder of the current project
-		  //
-		  app.TestDataFolder = nil
+		  var f as FolderItem = SpecialFolder.ApplicationData
 		  
-		  var limit as integer = 20
-		  var fld as FolderItem = ExecutableFile.Parent
+		  f = f.Child(cAppDataFolder)
 		  
-		  while limit > 0
-		    if fld = nil then return
+		  if f.Exists then
 		    
-		    if fld.Child("TestData").Exists then 
-		      app.TestDataFolder = fld.Child("TestData")
-		      Return
+		    if not f.IsFolder then
+		      f.Remove
 		      
 		    end if
 		    
-		    fld = fld.Parent
+		    f.CreateFolder
 		    
-		    limit = limit -1
+		  else
 		    
-		  wend
+		    f.CreateFolder
+		    
+		  end if
 		  
-		  return
-		End Sub
+		  return f
+		  
+		End Function
 	#tag EndMethod
 
-
-	#tag Property, Flags = &h0
-		DBConnection As clBasicSQLiteDB
-	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		TestDataFolder As FolderItem
 	#tag EndProperty
 
+
+	#tag Constant, Name = cAppDataFolder, Type = String, Dynamic = False, Default = \"kverzu_dataquery", Scope = Public
+	#tag EndConstant
 
 	#tag Constant, Name = kEditClear, Type = String, Dynamic = False, Default = \"&Delete", Scope = Public
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"&Delete"

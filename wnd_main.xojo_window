@@ -11,7 +11,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
    HasMaximizeButton=   True
    HasMinimizeButton=   True
    Height          =   400
-   ImplicitInstance=   True
+   ImplicitInstance=   False
    MacProcID       =   0
    MaximumHeight   =   32000
    MaximumWidth    =   32000
@@ -22,7 +22,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
    Resizeable      =   True
    Title           =   "Untitled"
    Type            =   0
-   Visible         =   True
+   Visible         =   False
    Width           =   934
    Begin DesktopListBox ListBox3
       AllowAutoDeactivate=   True
@@ -253,22 +253,6 @@ End
 	#tag Event
 		Sub Opening()
 		  
-		  BuildListOfAnalysis
-		  
-		  self.AutomatorFlow =new clDataQueryFlow("CurrentSales")
-		  
-		  self.ccAutomatorFlow1.SetFlow self.AutomatorFlow
-		  
-		  var  d as new date
-		  
-		  tf_GroupTtitle.Text =  "Analysis "+d.ShortDate
-		  tmpCurrentFile=""
-		  
-		  UpdateUI
-		  
-		  dirtyFlag=false
-		  sttLocalFilename.caption=tmpCurrentFile
-		  
 		End Sub
 	#tag EndEvent
 
@@ -370,7 +354,7 @@ End
 		    tmpSql = clDataQueryFlow(self.AutomatorFlow).getSqlStatement
 		    tmpSource = clDataQueryFlow(self.AutomatorFlow).FlowDataSource
 		    
-		    wnd_queryViewer.ShowResults(app.DBConnection, tmpSql, tmpSource)
+		    wnd_queryViewer.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
 		    
 		    
 		  case else
@@ -437,6 +421,28 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Initialize()
+		  
+		  BuildListOfAnalysis
+		  
+		  self.AutomatorFlow =new clDataQueryFlow(self.CurrentProject)
+		  
+		  self.ccAutomatorFlow1.SetFlow self.AutomatorFlow
+		  
+		  var  d as new date
+		  
+		  tf_GroupTtitle.Text =  "Analysis "+d.ShortDate
+		  tmpCurrentFile=""
+		  
+		  UpdateUI
+		  
+		  dirtyFlag=false
+		  sttLocalFilename.caption=tmpCurrentFile
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub RefreshStepIDs()
 		  var i as integer
 		  
@@ -466,6 +472,13 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetProject(p as clDataQueryProject)
+		  self.CurrentProject = p
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub UpdateUI()
 		  
 		  ccAutomatorFlow1.UpdateUI
@@ -476,6 +489,10 @@ End
 
 	#tag Property, Flags = &h1
 		Protected AutomatorFlow As clAutomatorFlow
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		CurrentProject As clDataQueryProject
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -538,7 +555,7 @@ End
 		  tmpSql = clDataQueryFlow(self.AutomatorFlow).getSqlStatement
 		  tmpSource = clDataQueryFlow(self.AutomatorFlow).FlowDataSource
 		  
-		  wnd_queryViewer.ShowResults(app.DBConnection, tmpSql, tmpSource)
+		  wnd_queryViewer.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

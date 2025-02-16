@@ -2,10 +2,10 @@
 Protected Class clDataQueryFlow
 Inherits clAutomatorFlow
 	#tag Method, Flags = &h0
-		Sub Constructor(DataSource as string)
+		Sub Constructor(Project as clDataQueryProject)
 		  // Calling the overridden superclass constructor.
 		  
-		  self.FlowDataSource = DataSource
+		  self.SourceProject = Project
 		  
 		  if StepTypeLabels = nil then CreateStepTypeLabels
 		  
@@ -133,6 +133,14 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function FlowDataSource() As String
+		  
+		  
+		  return self.SourceProject.GetDataSourceName
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Shared Function GetListOfSteps() As string()
 		  if StepTypeLabels = nil then CreateStepTypeLabels
 		  
@@ -225,9 +233,8 @@ Inherits clAutomatorFlow
 		    clc=new clDataQueryItem_GroupSplit
 		    
 		  case StepTypes.Start
-		    var cls as new clDataQueryItem_Start(FlowDataSource)
+		    var cls as new clDataQueryItem_Start(SourceProject)
 		    clc = cls
-		    // clc= new clDataQueryItem_Start
 		    
 		  case StepTypes.Sort
 		    clc=new clDataQueryItem_Sort
@@ -246,13 +253,10 @@ Inherits clAutomatorFlow
 		    
 		  end select
 		  
-		  
 		  return clc
 		  
-		  Exception err as RuntimeException
-		    // // err.cascade "clDataQueryFlow.ObjectFactory with "+str(ObjectType)
-		    
-		    
+		  
+		  
 		End Function
 	#tag EndMethod
 
@@ -405,7 +409,7 @@ Inherits clAutomatorFlow
 
 
 	#tag Property, Flags = &h0
-		FlowDataSource As string
+		SourceProject As clDataQueryProject
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -488,7 +492,7 @@ Inherits clAutomatorFlow
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="FlowDataSource"
+			Name="SourceProject"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
