@@ -26,12 +26,15 @@ Inherits clDataQueryItem
 		    s=s+" "+ sOper(theItem)
 		    s=s+" "
 		    
-		    if sField2(theItem) ="(constant)" Then
+		    if sField2(theItem) =  cUseConstant Then
 		      s=s+sConst(theitem)
-		    elseif sField2(theItem)="(empty)" then
+		      
+		    elseif sField2(theItem) = cIsEmpty then
 		      s=s+"  empty"
+		      
 		    else
 		      s=s+" "+sfield2(theItem)
+		      
 		    end if
 		    return s
 		    
@@ -50,7 +53,7 @@ Inherits clDataQueryItem
 		  dim n as integer
 		  dim s as string
 		  dim sSep as string
-		  dim Swhere as string
+		   
 		  
 		  if prevDataQueryItem<>nil then 
 		    sSource=prevDataQueryItem.getSql
@@ -76,31 +79,41 @@ Inherits clDataQueryItem
 		      s=s+"," + valueFields(i)+"_"+sPostFix +" as "+valueFields(i)+"_"+fieldPostFix
 		    next
 		    
-		    s=s+"  from ("+sSource+")"
+		    s = s +"  FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
+		     
+		     
 		    
-		    swhere=" where "
-		    ssep=""
+		    var tempWheres() as string
 		    
 		    for i=0 to ubound(sConst)
+		      var tempWhere as string
+		      
 		      if bInUse(i) then
-		        s=s+swhere
-		        swhere=""
-		        s=s+ssep
-		        ssep=" and "
-		        
-		        s=s+sfield1(i)+"_"+sPostFix
-		        s=s+TradOp(soper(i))
+		        tempWhere = sfield1(i)+"_"+sPostFix
 		        
 		        if sField2(i)=cUseConstant then
-		          s=s+sConst(i)
+		          tempWhere = tempWhere + TradOp(soper(i))
+		          tempWhere = tempWhere + sConst(i)
+		          
+		        elseif sField2(i) = cIsEmpty then
+		          tempWhere = tempWhere +  " is null "
 		        else
-		          s=s+sField2(i)+"_"+sPostFix
+		          tempWhere = tempWhere + TradOp(soper(i))
+		          tempWhere = tempWhere + sField2(i)+"_"+sPostFix
+		          
 		        end if
 		        
 		      end if
 		      
+		      if tempWhere.Length  >0 then  tempWheres.Add(tempWhere)
+		      
 		    next
 		    
+		    
+		    if tempWheres.count > 0 then
+		      s = s + " WHERE " + string.FromArray(tempWheres," and ")
+		      
+		    end if
 		    
 		  end if
 		  

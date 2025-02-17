@@ -56,6 +56,9 @@ Protected Module ADQCommon
 	#tag EndMethod
 
 
+	#tag Constant, Name = cIsEmpty, Type = String, Dynamic = False, Default = \"Is Empty", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = cNotUsed, Type = String, Dynamic = False, Default = \"Not used", Scope = Public
 	#tag EndConstant
 

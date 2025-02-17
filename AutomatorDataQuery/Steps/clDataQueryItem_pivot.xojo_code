@@ -143,7 +143,7 @@ Inherits clDataQueryItem
 		    '
 		    for jBlock =0 to maxitems  
 		      if sBlockName(jBlock)<>"" then
-		        s="(select * from ("+ssource+")"
+		        s="(select * FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
 		        
 		        
 		        swhere=" where "
@@ -324,7 +324,7 @@ Inherits clDataQueryItem
 		          sosep=","
 		        next
 		        
-		        s=s+"  from ("+sSource+")"
+		        s=s+"  FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
 		        
 		        swhere=" where "
 		        ssep=""

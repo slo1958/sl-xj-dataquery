@@ -200,36 +200,6 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       Visible         =   True
       Width           =   20
    End
-   Begin DesktopPopupMenu PopupMenu1
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      InitialParent   =   ""
-      InitialValue    =   ""
-      Italic          =   False
-      Left            =   -465
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      SelectedRowIndex=   0
-      TabIndex        =   5
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   6
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
    Begin DesktopPopupMenu ppFieldA
       AllowAutoDeactivate=   True
       Bold            =   False
@@ -758,7 +728,7 @@ End
 		  
 		  
 		  for i=0 to  curStep.maxItems
-		    if ppFieldA(i).Visible then
+		    if ppFieldA(i).Visible and ppFieldA(i).SelectedRowText.Length > 0 then
 		      curStep.sField1(i)=ppFieldA(i).SelectedRowText
 		      curStep.bInUse(i)=true
 		    else

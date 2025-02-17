@@ -79,7 +79,7 @@ Inherits clDataQueryItem
 		      end if
 		    next
 		    
-		    s=s+"  from ("+ssource+")"
+		    s=s+"  FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
 		    
 		    return s
 		  end if

@@ -65,7 +65,7 @@ Inherits clDataQueryItem
 		    next
 		    
 		    
-		    s=s+" from ("+ssource+")"
+		    s=s+" FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
 		    
 		    ssep=" order by "
 		    

@@ -1493,7 +1493,7 @@ End
 		  
 		  
 		  for i=0 to  curStep.maxItems
-		    if ppFieldA(i).Visible then
+		    if ppFieldA(i).Visible and ppFieldA(i).SelectedRowText.Length > 0 then
 		      curStep.sField1(i)=ppFieldA(i).SelectedRowText
 		      curStep.sField2(i)=ppFieldB(i).SelectedRowText
 		      curStep.sOper(i)=ppOp(i).SelectedRowText
@@ -1520,6 +1520,7 @@ End
 		    ppFieldB(theLine).RemoveAllRows
 		    
 		    ppFieldb(theLine).AddRow cUseConstant
+		    ppFieldb(theLine).AddRow cIsEmpty
 		    
 		    for i=1 to ubound(curStep.prevDataQueryItem.keyFields)
 		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.keyFields(i)

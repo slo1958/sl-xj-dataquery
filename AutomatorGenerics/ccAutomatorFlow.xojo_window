@@ -87,7 +87,7 @@ End
 		  
 		  var c as new ccAutomatorItem
 		  
-		  c.EmbedWithin(Canvas1, 0, 0, canvas1.Width, c.Height)
+		  c.EmbedWithin(Canvas1, 0, 0, canvas1.Width, c.cCollapsedHeigth)
 		  
 		  // c.Collapse
 		  c.SetID(item.ID)

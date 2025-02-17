@@ -58,7 +58,7 @@ Inherits clDataQueryItem
 		    sSep=""
 		    
 		    for i=0 to ubound(sField1)
-		      if bInUse(i) then
+		      if bInUse(i) and sField1(i).trim.Length > 0 then
 		        s=s+sSep + sField1(i)+"_"+sPostFix +"  as "+sField1(i)+"_"+fieldPostFix
 		        sSep=","
 		      end if
@@ -69,13 +69,13 @@ Inherits clDataQueryItem
 		      sSep=","
 		    next
 		    
-		    s=s+"  from ("+sSource+")"
+		    s=s+"  FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
 		    
-		    sGroupBy=" group by "
+		    sGroupBy=" GROUP BY "
 		    ssep=""
 		    
 		    for i=0 to ubound(sField1)
-		      if bInUse(i) then
+		      if bInUse(i) and sField1(i).trim.Length > 0 then
 		        s=s+sGroupBy
 		        sGroupBy=""
 		        s=s+ssep
