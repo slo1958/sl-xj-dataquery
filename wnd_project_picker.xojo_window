@@ -10,7 +10,7 @@ Begin DesktopWindow wnd_project_picker
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   400
+   Height          =   300
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -24,7 +24,7 @@ Begin DesktopWindow wnd_project_picker
    Type            =   0
    Visible         =   True
    Width           =   600
-   Begin DesktopListBox ListBox1
+   Begin DesktopListBox lb_AvailableProjects
       AllowAutoDeactivate=   True
       AllowAutoHideScrollbars=   True
       AllowExpandableRows=   False
@@ -51,11 +51,11 @@ Begin DesktopWindow wnd_project_picker
       Index           =   -2147483648
       InitialValue    =   ""
       Italic          =   False
-      Left            =   45
-      LockBottom      =   False
+      Left            =   20
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       RequiresSelection=   False
       RowSelectionType=   0
@@ -68,7 +68,7 @@ Begin DesktopWindow wnd_project_picker
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   535
+      Width           =   560
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
@@ -82,7 +82,7 @@ Begin DesktopWindow wnd_project_picker
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   45
+      Left            =   28
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -114,12 +114,12 @@ Begin DesktopWindow wnd_project_picker
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   57
-      LockBottom      =   False
+      Left            =   20
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
@@ -149,12 +149,12 @@ Begin DesktopWindow wnd_project_picker
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   225
-      LockBottom      =   False
+      Left            =   296
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   3
@@ -181,11 +181,11 @@ Begin DesktopWindow wnd_project_picker
       Index           =   -2147483648
       Italic          =   False
       Left            =   500
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   4
@@ -211,12 +211,12 @@ Begin DesktopWindow wnd_project_picker
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   357
-      LockBottom      =   False
+      Left            =   397
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   5
@@ -278,7 +278,7 @@ End
 		Sub Pressed()
 		  
 		  wnd_new_project.Show
-		  me.Close
+		  self.Close
 		  
 		End Sub
 	#tag EndEvent

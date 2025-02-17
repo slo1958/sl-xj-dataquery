@@ -36,11 +36,6 @@ Inherits DesktopApplication
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h0
-		TestDataFolder As FolderItem
-	#tag EndProperty
-
-
 	#tag Constant, Name = cAppDataFolder, Type = String, Dynamic = False, Default = \"kverzu_dataquery", Scope = Public
 	#tag EndConstant
 

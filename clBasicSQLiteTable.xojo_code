@@ -28,9 +28,8 @@ Implements TableRowReaderInterface
 		    
 		    fieldTypes.Value(fieldname) = fieldType
 		    
-		    // System.DebugLog(fieldname+ " " + str(fieldType))
-		    
 		    rf.MoveToNextRow
+		    
 		  Wend
 		  
 		  rf.Close

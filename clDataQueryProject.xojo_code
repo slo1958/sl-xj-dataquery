@@ -8,6 +8,35 @@ Protected Class clDataQueryProject
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor(SourceJSON as JSONItem)
+		  
+		  if SourceJSON = nil then Return
+		  
+		  self.ProjectName = SourceJSON.value(cProjectName)
+		  
+		  var f as FolderItem 
+		  
+		  f = new FolderItem(SourceJSON.value(cDatabasePath).StringValue)
+		  
+		  if f = nil then
+		    
+		  elseif not f.Exists then
+		    
+		  else
+		    Self.PathToDatabase = f
+		    
+		    self.DBConnection = new clBasicSQLiteDB(f)
+		    
+		  end if
+		  
+		  Self.DataSourceName = SourceJSON.Value(cDataSource) 
+		  
+		  Return
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Constructor(NewProjectName as string)
 		  self.ProjectName = NewProjectName
 		  
@@ -26,9 +55,29 @@ Protected Class clDataQueryProject
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Destructor()
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetDataSourceName() As string
 		  
 		  return self.DataSourceName 
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetJSON() As JSONItem
+		  
+		  var jMaster as new JSONItem
+		  
+		  jMaster.value(cProjectName) = self.ProjectName
+		  jMaster.value(cDatabasePath) = Self.PathToDatabase.NativePath
+		  jMaster.Value(cDataSource) = Self.DataSourceName
+		  
+		  return jMaster
 		  
 		End Function
 	#tag EndMethod
@@ -38,6 +87,7 @@ Protected Class clDataQueryProject
 		  
 		  self.PathToDatabase = f
 		  self.DBConnection = new clBasicSQLiteDB(f)
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -49,11 +99,16 @@ Protected Class clDataQueryProject
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Shared Sub Untitled()
+		  
+		End Sub
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h21
 		#tag Note
 			Table name or view name
-			
 		#tag EndNote
 		Private DataSourceName As String
 	#tag EndProperty
@@ -69,6 +124,16 @@ Protected Class clDataQueryProject
 	#tag Property, Flags = &h21
 		Private ProjectName As string
 	#tag EndProperty
+
+
+	#tag Constant, Name = cDatabasePath, Type = String, Dynamic = False, Default = \"databasepath", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cDataSource, Type = String, Dynamic = False, Default = \"datasource", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cProjectName, Type = String, Dynamic = False, Default = \"projectname", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior
@@ -111,22 +176,6 @@ Protected Class clDataQueryProject
 			InitialValue="0"
 			Type="Integer"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ProjectName"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DataSourceName"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="String"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

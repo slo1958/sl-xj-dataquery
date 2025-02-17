@@ -56,7 +56,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   150
    End
-   Begin DesktopLabel Label2
+   Begin DesktopLabel lbl_dbname
       AllowAutoDeactivate=   True
       Bold            =   False
       Enabled         =   True
@@ -70,7 +70,7 @@ Begin DesktopWindow wnd_new_project
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       Multiline       =   False
       Scope           =   0
@@ -88,7 +88,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   300
    End
-   Begin DesktopLabel Label3
+   Begin DesktopLabel lbl_fullpath
       AllowAutoDeactivate=   True
       Bold            =   False
       Enabled         =   True
@@ -102,7 +102,7 @@ Begin DesktopWindow wnd_new_project
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       Multiline       =   False
       Scope           =   0
@@ -120,7 +120,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   300
    End
-   Begin DesktopListBox ListBox1
+   Begin DesktopListBox lb_datasource
       AllowAutoDeactivate=   True
       AllowAutoHideScrollbars=   True
       AllowExpandableRows=   False
@@ -148,10 +148,10 @@ Begin DesktopWindow wnd_new_project
       InitialValue    =   ""
       Italic          =   False
       Left            =   191
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       RequiresSelection=   False
       RowSelectionType=   0
@@ -164,7 +164,8 @@ Begin DesktopWindow wnd_new_project
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   300
+      Width           =   389
+      _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
    Begin DesktopLabel Label4
@@ -231,7 +232,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   150
    End
-   Begin DesktopTextField TextField1
+   Begin DesktopTextField tf_projectname
       AllowAutoDeactivate=   True
       AllowFocusRing  =   True
       AllowSpellChecking=   False
@@ -272,7 +273,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   300
    End
-   Begin DesktopButton Button1
+   Begin DesktopButton pb_ok
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -286,11 +287,11 @@ Begin DesktopWindow wnd_new_project
       Index           =   -2147483648
       Italic          =   False
       Left            =   379
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   7
@@ -303,7 +304,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton Button2
+   Begin DesktopButton pb_cancel
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   True
@@ -317,11 +318,11 @@ Begin DesktopWindow wnd_new_project
       Index           =   -2147483648
       Italic          =   False
       Left            =   503
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   8
@@ -334,7 +335,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton Button3
+   Begin DesktopButton pb_select
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   True
@@ -350,8 +351,8 @@ Begin DesktopWindow wnd_new_project
       Left            =   503
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
+      LockLeft        =   False
+      LockRight       =   True
       LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
@@ -365,12 +366,265 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   80
    End
+   Begin DesktopLabel lbl_status
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Data source"
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   360
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   347
+   End
 End
 #tag EndDesktopWindow
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  
+		  lb_datasource.HeaderAt(0)="Available tables"
+		  
+		  CheckStatus
+		End Sub
+	#tag EndEvent
+
+
+	#tag Method, Flags = &h0
+		Sub CheckDatabase()
+		  
+		  if self.selectedFile = nil then 
+		    self.dbConnection = nil
+		    return
+		    
+		  end if
+		  
+		  
+		  if self.selectedFile.IsFolder then
+		    self.dbConnection = nil
+		    return
+		    
+		  end if
+		  
+		  self.dbConnection = new clBasicSQLiteDB(self.selectedFile)
+		  
+		  if self.dbConnection.Connected then
+		    var tmp() as string = self.dbConnection.GetListOfTables
+		    
+		    tmp.sort()
+		    
+		    lb_datasource.RemoveAllRows
+		    
+		    lb_datasource.AddRow(tmp)
+		    
+		    lb_datasource.SelectedRowIndex = 0
+		    
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub CheckStatus()
+		  
+		  // Check the project has a name
+		  
+		  const cEverythingOk = 1
+		  const cMissingName = 2
+		  const cMissingDatabase = 3
+		  const cWrongDatabase = 4
+		  const cNotADatabase = 5
+		  
+		  var tmp_Status as integer = cEverythingOk
+		  var tmp_name as string = tf_projectname.Text.Trim
+		  
+		  
+		  if tmp_name.Length = 0 then
+		    tmp_Status = cMissingName
+		    
+		  end if
+		  
+		  
+		  if tmp_Status = cEverythingOk then
+		    if selectedFile = nil then
+		      tmp_Status = cMissingDatabase
+		      
+		    elseif not selectedFile.Exists then
+		      tmp_Status = cMissingDatabase
+		      
+		    elseif selectedFile.IsFolder then
+		      tmp_Status = cWrongDatabase
+		      
+		    else
+		      
+		    end if
+		    
+		  end if
+		  
+		  if tmp_Status = cEverythingOk then
+		    if dbConnection = nil then
+		      
+		    elseif not self.dbConnection.Connected then
+		      tmp_Status = cNotADatabase
+		      
+		    end if
+		    
+		  end if
+		  
+		  select case tmp_Status
+		    
+		  case cEverythingOk
+		    lbl_status.Text = ""
+		    
+		  case cMissingName
+		    lbl_status.Text = "Please enter a name for your new project"
+		    
+		  case cMissingDatabase
+		    lbl_status.Text = "Please select a sqlite datebase"
+		    
+		  case cWrongDatabase
+		    lbl_status.Text = "Reference is not a file"
+		    
+		  case cNotADatabase
+		    lbl_status.Text = "File is a not a SQLite database"
+		    
+		  case else
+		    lbl_status.Text = "Unknown status"
+		    
+		  end select
+		  
+		  pb_ok.Enabled = tmp_Status = cEverythingOk
+		  
+		  return
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ShowMe() As clBasicSQLiteDB
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub UpdateUI()
+		  if self.selectedFile = nil then
+		    lbl_dbname.Text = ""
+		    lbl_fullpath.Text = ""
+		    
+		  elseif self.selectedFile.IsFolder then
+		    lbl_dbname.Text = ""
+		    lbl_fullpath.Text = self.selectedFile.NativePath
+		    
+		  else
+		    lbl_dbname.Text = self.selectedFile.Name
+		    lbl_fullpath.Text = self.selectedFile.NativePath
+		    
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		dbConnection As clBasicSQLiteDB
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		selectedFile As FolderItem
+	#tag EndProperty
+
+
 #tag EndWindowCode
 
+#tag Events lb_datasource
+	#tag Event
+		Sub SelectionChanged()
+		  
+		  if dbConnection = nil then Return
+		  
+		  var temp as string
+		  
+		  temp = lb_datasource.SelectedRowText
+		  
+		  var tmp as TableRowReaderInterface = dbConnection.GetTable(temp)
+		  
+		  return
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events tf_projectname
+	#tag Event
+		Sub TextChanged()
+		  
+		  CheckStatus
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events pb_cancel
+	#tag Event
+		Sub Pressed()
+		  
+		  self.dbConnection = nil
+		  Self.selectedFile = nil
+		  
+		  self.close
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events pb_select
+	#tag Event
+		Sub Pressed()
+		  
+		  
+		  Var f As FolderItem
+		  Var dbType As New FileType
+		  
+		  dbType.Name = "sqlitedb"
+		  dbType.Extensions = "db;sqlite;sqlite3"
+		  
+		  
+		  f = FolderItem.ShowOpenFileDialog(dbType)
+		  
+		  self.selectedFile = f
+		  self.dbConnection = nil
+		  
+		  CheckDatabase
+		  
+		  UpdateUI
+		  
+		  CheckStatus
+		  
+		  return
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="Name"

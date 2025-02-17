@@ -1,23 +1,43 @@
 #tag Class
 Protected Class clBasicSQLiteDB
 	#tag Method, Flags = &h0
+		Function Connected() As Boolean
+		  
+		  return self.mdb <> nil
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Constructor(PathToDatabase as FolderItem)
 		  
 		  self.fld = PathToDatabase
 		  
 		  if not PathToDatabase.Exists then return
 		  
-		  self.mdb = new SQLiteDatabase(PathToDatabase)
-		  
-		  var rt as RowSet = self.mdb.Tables
-		  
-		  While Not rt.AfterLastRow
-		    DiscoveredTables.Add(rt.Column("TableName").StringValue)
-		    rt.MoveToNextRow
+		  try
+		    self.mdb = new SQLiteDatabase(PathToDatabase)
+		    self.mdb.Connect
 		    
-		  Wend
+		  catch
+		    self.mdb = nil
+		    
+		  end try
 		  
-		  rt.close
+		  if self.mdb <> nil then
+		    var rt as RowSet = self.mdb.Tables
+		    
+		    While Not rt.AfterLastRow
+		      DiscoveredTables.Add(rt.Column("TableName").StringValue)
+		      rt.MoveToNextRow
+		      
+		    Wend
+		    
+		    rt.close
+		    
+		  end if
+		  
 		  
 		  return
 		  
@@ -27,7 +47,29 @@ Protected Class clBasicSQLiteDB
 
 	#tag Method, Flags = &h0
 		Function db() As SQLiteDatabase
+		  
 		  return self.mdb
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Destructor()
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetListOfTables() As string()
+		  var temp() as string
+		  
+		  for each name as string in self.DiscoveredTables
+		    temp.add(name)
+		    
+		  next
+		  
+		  return temp
+		  
+		  
 		End Function
 	#tag EndMethod
 
@@ -35,9 +77,11 @@ Protected Class clBasicSQLiteDB
 		Function GetTable(NameOfTable as string) As TableRowReaderInterface
 		  
 		  if self.DiscoveredTables.IndexOf(NameOfTable) >-1 then
+		    self.CurrentTable = NameOfTable
 		    return new clBasicSQLiteTable(self, NameOfTable)
 		    
 		  else
+		    self.CurrentTable = ""
 		    return nil
 		    
 		  end if
@@ -48,7 +92,7 @@ Protected Class clBasicSQLiteDB
 	#tag Method, Flags = &h0
 		Function Name() As string
 		  if fld = nil then 
-		    return "Not connected"
+		    return ""
 		    
 		  else
 		    return fld.Name
@@ -87,6 +131,10 @@ Protected Class clBasicSQLiteDB
 		
 	#tag EndNote
 
+
+	#tag Property, Flags = &h0
+		CurrentTable As string
+	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private DiscoveredTables() As String
