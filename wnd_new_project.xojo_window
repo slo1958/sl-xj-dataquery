@@ -22,7 +22,7 @@ Begin DesktopWindow wnd_new_project
    Resizeable      =   True
    Title           =   "New project"
    Type            =   0
-   Visible         =   True
+   Visible         =   False
    Width           =   600
    Begin DesktopLabel Label1
       AllowAutoDeactivate=   True
@@ -523,7 +523,13 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function ShowMe() As clBasicSQLiteDB
+		Function ShowMe() As clDataQueryProject
+		  
+		  
+		  self.ShowModal
+		  
+		  return self.Project
+		  
 		  
 		End Function
 	#tag EndMethod
@@ -550,7 +556,15 @@ End
 
 
 	#tag Property, Flags = &h0
+		DataSourceName As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		dbConnection As clBasicSQLiteDB
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Project As clDataQueryProject
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -565,12 +579,11 @@ End
 		Sub SelectionChanged()
 		  
 		  if dbConnection = nil then Return
+		   
+		  self.DataSourceName = lb_datasource.SelectedRowText
 		  
-		  var temp as string
-		  
-		  temp = lb_datasource.SelectedRowText
-		  
-		  var tmp as TableRowReaderInterface = dbConnection.GetTable(temp)
+		  // Attempt to connect
+		  var tmp as TableRowReaderInterface = dbConnection.GetTable(self.DataSourceName)
 		  
 		  return
 		  
@@ -582,6 +595,24 @@ End
 		Sub TextChanged()
 		  
 		  CheckStatus
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events pb_ok
+	#tag Event
+		Sub Pressed()
+		  
+		  
+		  var p as new clDataQueryProject(tf_projectname.Text)
+		  
+		  p.OpenDatabase(selectedFile)
+		  p.SetDataSourceName(self.DataSourceName)
+		  
+		  self.Project = p
+		  
+		  self.close
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

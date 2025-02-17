@@ -149,7 +149,7 @@ Begin DesktopWindow wnd_project_picker
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   296
+      Left            =   195
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
@@ -211,7 +211,7 @@ Begin DesktopWindow wnd_project_picker
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   397
+      Left            =   297
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
@@ -229,12 +229,49 @@ Begin DesktopWindow wnd_project_picker
       Visible         =   True
       Width           =   80
    End
+   Begin DesktopButton pb_manage
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Manage"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   399
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   6
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   260
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
 End
 #tag EndDesktopWindow
 
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  
+		  pb_demo.Visible = DebugBuild
+		  
+		  lb_AvailableProjects.HeaderAt(0) =  "Available projects:"
+		  
+		  UpdateListOfProjects()
 		  
 		End Sub
 	#tag EndEvent
@@ -270,16 +307,41 @@ End
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub LaunchTool(project as clDataQueryProject)
+		  
+		  self.close
+		  
+		  var wnd as new wnd_main
+		  wnd.SetProject(project)
+		  wnd.Initialize
+		  wnd.Show
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub UpdateListOfProjects()
+		  
+		  
+		  pb_select.Enabled = lb_AvailableProjects.RowCount > 0
+		  pb_manage.Enabled = lb_AvailableProjects.RowCount > 0
+		  
+		End Sub
+	#tag EndMethod
+
 
 #tag EndWindowCode
 
 #tag Events pb_new
 	#tag Event
 		Sub Pressed()
+		  var p as clDataQueryProject = wnd_new_project.ShowMe
 		  
-		  wnd_new_project.Show
-		  self.Close
-		  
+		  if p <> nil then 
+		    LaunchTool(p)
+		    
+		  end if
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -308,12 +370,16 @@ End
 		  p.OpenDatabase(f)
 		  p.SetDataSourceName("CurrentSales")
 		  
-		  var wnd as new wnd_main
-		  wnd.SetProject(p)
-		  wnd.Initialize
-		  wnd.Show
+		  LaunchTool(p)
 		  
 		  Return
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events pb_manage
+	#tag Event
+		Sub Pressed()
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
