@@ -83,6 +83,54 @@ Protected Class clDataQueryProject
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Shared Function GetListOfProjects() As Dictionary
+		  
+		  var d as new Dictionary
+		  
+		  var dest as FolderItem = app.GetAppDataFolder()
+		  
+		  for each file as FolderItem in dest.Children
+		    if file.Name.right(cFileExtension.Length) = cFileExtension then
+		      
+		      var jFile as TextInputStream
+		      
+		      try
+		        jFIle = TextInputStream.Open(file)
+		        
+		      catch
+		        
+		      end try
+		      
+		      if jFile <> nil then
+		        
+		        try
+		          var jTxt as string = jfile.ReadAll
+		          var jMain as JSONItem = new JSONItem(jTxt)
+		          
+		          var jName as string = jMain.Value(cProjectName).StringValue
+		          
+		          d.value(file.name) = jName
+		          
+		        catch
+		          
+		        end try
+		        
+		        jfile.Close
+		      end if
+		      
+		      
+		      
+		    end if
+		    
+		    
+		  next
+		  
+		  return d
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub OpenDatabase(f as FolderItem)
 		  
 		  self.PathToDatabase = f
@@ -93,14 +141,30 @@ Protected Class clDataQueryProject
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetDataSourceName(Name as string)
-		  self.DataSourceName = name
+		Sub Save()
+		  
+		  var txt as TextOutputStream
+		  
+		  var dest as FolderItem = app.GetAppDataFolder()
+		  
+		  var d as Int64 = DateTime.Now.SecondsFrom1970
+		  
+		  var filename as string = "PROJECT" + format(d, "000000000") + cFileExtension
+		  
+		  txt = TextOutputStream.Create(dest.Child(filename))
+		  
+		  txt.Write(self.GetJSON.ToString)
+		  
+		  txt.close
+		  
+		  
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Shared Sub Untitled()
+		Sub SetDataSourceName(Name as string)
+		  self.DataSourceName = name
 		  
 		End Sub
 	#tag EndMethod
@@ -130,6 +194,9 @@ Protected Class clDataQueryProject
 	#tag EndConstant
 
 	#tag Constant, Name = cDataSource, Type = String, Dynamic = False, Default = \"datasource", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cFileExtension, Type = String, Dynamic = False, Default = \".dqproj", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = cProjectName, Type = String, Dynamic = False, Default = \"projectname", Scope = Public

@@ -323,6 +323,17 @@ End
 	#tag Method, Flags = &h0
 		Sub UpdateListOfProjects()
 		  
+		  var d as Dictionary = clDataQueryProject.GetListOfProjects
+		  
+		  lb_AvailableProjects.RemoveAllRows
+		  
+		  for each k as string in d.Keys
+		    lb_AvailableProjects.AddRow(d.value(k).StringValue)
+		    lb_AvailableProjects.RowTagAt(lb_AvailableProjects.LastAddedRowIndex) = k
+		    
+		  next
+		  
+		  lb_AvailableProjects.SelectedRowIndex = 0
 		  
 		  pb_select.Enabled = lb_AvailableProjects.RowCount > 0
 		  pb_manage.Enabled = lb_AvailableProjects.RowCount > 0
@@ -342,6 +353,51 @@ End
 		    LaunchTool(p)
 		    
 		  end if
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events pb_select
+	#tag Event
+		Sub Pressed()
+		  
+		  
+		  if lb_AvailableProjects.SelectedRowIndex <  0 then Return
+		  
+		  var projectName as string = lb_AvailableProjects.CellTextAt(lb_AvailableProjects.SelectedRowIndex, 0)
+		  var projectfFile as string = lb_AvailableProjects.RowTagAt(lb_AvailableProjects.SelectedRowIndex)
+		  var project as   clDataQueryProject
+		  
+		  var jFile as TextInputStream
+		  var jMain as JSONItem
+		  
+		  try
+		    jFIle = TextInputStream.Open(app.GetAppDataFolder.Child(projectfFile))
+		    
+		  catch
+		    
+		  end try
+		  
+		  if jFile <> nil then
+		    
+		    try
+		      var jTxt as string = jfile.ReadAll
+		      jMain = new JSONItem(jTxt)
+		      
+		    Catch
+		      
+		    end try
+		    
+		  end if
+		  
+		  if jMain <> nil then
+		    project = new clDataQueryProject(jMain)
+		    
+		  end if
+		  
+		  
+		  MessageBox(projectfFile + ":" + projectName)
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

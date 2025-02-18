@@ -20,9 +20,11 @@ Inherits DesktopApplication
 		    if not f.IsFolder then
 		      f.Remove
 		      
+		      f.CreateFolder
+		      
 		    end if
 		    
-		    f.CreateFolder
+		    
 		    
 		  else
 		    

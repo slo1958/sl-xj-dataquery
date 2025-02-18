@@ -579,7 +579,7 @@ End
 		Sub SelectionChanged()
 		  
 		  if dbConnection = nil then Return
-		   
+		  
 		  self.DataSourceName = lb_datasource.SelectedRowText
 		  
 		  // Attempt to connect
@@ -609,6 +609,8 @@ End
 		  p.SetDataSourceName(self.DataSourceName)
 		  
 		  self.Project = p
+		  
+		  P.Save()
 		  
 		  self.close
 		  
@@ -890,6 +892,14 @@ End
 		Group="Deprecated"
 		InitialValue="False"
 		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="DataSourceName"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
