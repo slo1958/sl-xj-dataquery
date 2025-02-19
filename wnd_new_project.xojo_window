@@ -610,7 +610,7 @@ End
 		  
 		  self.Project = p
 		  
-		  P.Save()
+		  p.Save()
 		  
 		  self.close
 		  

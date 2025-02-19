@@ -137,6 +137,13 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetTypeAsEnum() As StepTypes
+		  
+		  return self.ItemEnumType
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetTypeAsString() As string
 		  
 		  return self.ItemType

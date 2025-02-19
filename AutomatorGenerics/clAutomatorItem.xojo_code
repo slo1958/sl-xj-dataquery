@@ -37,7 +37,7 @@ Protected Class clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetType() As string
+		Function GetTypeAsString() As string
 		  return ItemType
 		End Function
 	#tag EndMethod

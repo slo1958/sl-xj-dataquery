@@ -141,6 +141,28 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetFlowName() As string
+		  
+		  
+		  for each item as clAutomatorItem in self.Items
+		    var DQItem as clDataQueryItem = clDataQueryItem(item)
+		    
+		    if DQItem.GetTypeAsEnum = StepTypes.Start then
+		      return DQItem.getTitle
+		      
+		    end if
+		    
+		  next
+		  
+		  return super.GetFlowName
+		  
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetJSON() As JSONItem
 		  
 		  var JMaster as new JSONItem

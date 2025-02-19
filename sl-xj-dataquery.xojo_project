@@ -53,6 +53,7 @@ Class=clDataQueryFieldInfo;AutomatorDataQuery/clDataQueryFieldInfo.xojo_code;&h0
 Class=clDataQueryProject;clDataQueryProject.xojo_code;&h000000000A97C7FF;&h0000000000000000;false
 DesktopWindow=wnd_main;wnd_main.xojo_window;&h000000001708C7FF;&h0000000000000000;false
 DesktopWindow=wnd_showLongString;AutomatorDataQuery/wnd_showLongString.xojo_window;&h000000001DE64FFF;&h00000000798437FF;false
+DesktopWindow=wnd_manage_projects;wnd_manage_projects.xojo_window;&h00000000738497FF;&h0000000000000000;false
 DefaultWindow=wnd_project_picker
 AppMenuBar=MainMenuBar
 MajorVersion=1

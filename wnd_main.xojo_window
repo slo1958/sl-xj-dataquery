@@ -277,6 +277,37 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Visible         =   True
       Width           =   80
    End
+   Begin DesktopButton Button2
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Save"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   415
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   360
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
 End
 #tag EndDesktopWindow
 
@@ -600,6 +631,29 @@ End
 		  wnd_showLongString.ShowMe("JSON", s)
 		  
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button2
+	#tag Event
+		Sub Pressed()
+		  var s as string
+		  
+		  s = self.AutomatorFlow.GetJSON.ToString
+		  
+		  var projectFile as FolderItem = CurrentProject.ProjectFIle
+		  
+		  if projectFile = nil then 
+		    MessageBox("Cannot save flow to undefined project")
+		    return
+		    
+		  end if
+		  
+		  
+		  // var destinationFolder as string = CurrentProject.
+		  
+		  
+		  return 
 		End Sub
 	#tag EndEvent
 #tag EndEvents

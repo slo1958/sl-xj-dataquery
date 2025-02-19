@@ -139,21 +139,31 @@ Protected Class clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetFlowName() As string
+		  return "noname"
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetJSON() As JSONItem
+		  
+		  return nil
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function GetTitle(theItem as integer) As string
+		  
 		  return items(theItem).getTitle
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetType(theItem as integer) As string
-		  return items(theItem).getType
+		Function GetTypeAsString(theItem as integer) As string
+		  return items(theItem).GetTypeAsString
 		  
 		End Function
 	#tag EndMethod
@@ -222,7 +232,7 @@ Protected Class clAutomatorFlow
 		    
 		    if item <> nil then
 		      var itemTitle as string = item.getTitle
-		      var itemType as string = item.GetType
+		      var itemType as string = item.GetTypeAsString
 		      var itemConfig as JSONItem = item.GetConfigJSON
 		      
 		      var ChildJSON as JSONItem

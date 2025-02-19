@@ -91,10 +91,8 @@ End
 		  
 		  c.Collapse(false)
 		  
-		  
-		  // c.Collapse
 		  c.SetID(item.ID)
-		  c.SetType(item.GetType)
+		  c.SetType(item.GetTypeAsString)
 		  c.SetTitle(item.getTitle)
 		  
 		  

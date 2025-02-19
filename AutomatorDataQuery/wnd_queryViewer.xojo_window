@@ -117,7 +117,7 @@ Begin DesktopWindow wnd_queryViewer
          Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
-         Left            =   480
+         Left            =   388
          LockBottom      =   True
          LockedInPosition=   False
          LockLeft        =   False
@@ -166,39 +166,7 @@ Begin DesktopWindow wnd_queryViewer
          Transparent     =   False
          Underline       =   False
          Visible         =   True
-         Width           =   336
-      End
-      Begin DesktopButton btn_export_csv
-         AllowAutoDeactivate=   True
-         Bold            =   False
-         Cancel          =   False
-         Caption         =   "Save"
-         Default         =   False
-         Enabled         =   True
-         FontName        =   "System"
-         FontSize        =   0.0
-         FontUnit        =   0
-         Height          =   20
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   388
-         LockBottom      =   True
-         LockedInPosition=   False
-         LockLeft        =   False
-         LockRight       =   True
-         LockTop         =   False
-         MacButtonStyle  =   0
-         Scope           =   0
-         TabIndex        =   3
-         TabPanelIndex   =   1
-         TabStop         =   True
-         Tooltip         =   ""
-         Top             =   462
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   True
-         Width           =   80
+         Width           =   244
       End
       Begin DesktopTextArea ta_sql
          AllowAutoDeactivate=   True
@@ -262,7 +230,7 @@ Begin DesktopWindow wnd_queryViewer
          Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          Italic          =   False
-         Left            =   480
+         Left            =   388
          LockBottom      =   True
          LockedInPosition=   False
          LockLeft        =   False
@@ -275,6 +243,102 @@ Begin DesktopWindow wnd_queryViewer
          TabStop         =   True
          Tooltip         =   ""
          Top             =   476
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   80
+      End
+      Begin DesktopButton Button1
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Close"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   480
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   3
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   462
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   80
+      End
+      Begin DesktopButton Button2
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Close"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   480
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   2
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   474
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   80
+      End
+      Begin DesktopButton btn_export_csv
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Save"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   296
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   4
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   462
          Transparent     =   False
          Underline       =   False
          Visible         =   True
@@ -421,6 +485,45 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events btn_export_sql
+	#tag Event
+		Sub Pressed()
+		  var res as RowSet= self.DBConnection.db.SelectSQL(self.SqlCode)
+		  
+		  var fd as FolderItem = FolderItem.ShowSaveFileDialog("","ExportSql.txt")
+		  
+		  if fd = nil then return
+		  
+		  if fd.IsFolder then return 
+		  
+		  if fd.Exists then fd.Remove
+		  
+		  var tt as TextOutputStream = TextOutputStream.Create(fd)
+		  
+		  tt.Write(ta_sql.Text)
+		  
+		  tt.Close
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button1
+	#tag Event
+		Sub Pressed()
+		  self.Close
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button2
+	#tag Event
+		Sub Pressed()
+		  self.Close
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events btn_export_csv
 	#tag Event
 		Sub Pressed()
@@ -468,29 +571,6 @@ End
 		    
 		  wend
 		  
-		  
-		  tt.Close
-		  
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btn_export_sql
-	#tag Event
-		Sub Pressed()
-		  var res as RowSet= self.DBConnection.db.SelectSQL(self.SqlCode)
-		  
-		  var fd as FolderItem = FolderItem.ShowSaveFileDialog("","ExportSql.txt")
-		  
-		  if fd = nil then return
-		  
-		  if fd.IsFolder then return 
-		  
-		  if fd.Exists then fd.Remove
-		  
-		  var tt as TextOutputStream = TextOutputStream.Create(fd)
-		  
-		  tt.Write(ta_sql.Text)
 		  
 		  tt.Close
 		  

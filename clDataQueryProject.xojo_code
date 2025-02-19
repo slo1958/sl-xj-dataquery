@@ -8,28 +8,40 @@ Protected Class clDataQueryProject
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(SourceJSON as JSONItem)
+		Sub Constructor(SourceJSON as JSONItem, SourceFile as string)
 		  
 		  if SourceJSON = nil then Return
 		  
 		  self.ProjectName = SourceJSON.value(cProjectName)
 		  
-		  var f as FolderItem 
+		  var fdb as FolderItem 
+		  var ffw as FolderItem
 		  
-		  f = new FolderItem(SourceJSON.value(cDatabasePath).StringValue)
+		  fdb = new FolderItem(SourceJSON.value(cDatabasePath).StringValue)
 		  
-		  if f = nil then
-		    
-		  elseif not f.Exists then
-		    
-		  else
-		    Self.PathToDatabase = f
-		    
-		    self.DBConnection = new clBasicSQLiteDB(f)
+		  var pfw as string = SourceJSON.Lookup(cFlowFolder, "").StringValue
+		  
+		  if pfw = "" then
+		    pfw = SourceFile.Replace(cFileExtension, "")
 		    
 		  end if
 		  
+		  if pfw <> "" then ffw = new FolderItem(pfw)
+		  
+		  if fdb = nil then
+		    
+		  elseif not fdb.Exists then
+		    
+		  else
+		    Self.PathToDatabase = fdb
+		    
+		    self.DBConnection = new clBasicSQLiteDB(fdb)
+		    
+		  end if
+		  
+		  self.ProjectFIle = new FolderItem(SourceFile)
 		  Self.DataSourceName = SourceJSON.Value(cDataSource) 
+		  self.ProjectFolder = ffw
 		  
 		  Return
 		  
@@ -76,6 +88,7 @@ Protected Class clDataQueryProject
 		  jMaster.value(cProjectName) = self.ProjectName
 		  jMaster.value(cDatabasePath) = Self.PathToDatabase.NativePath
 		  jMaster.Value(cDataSource) = Self.DataSourceName
+		  jMaster.Value(cFlowFolder) = self.ProjectFolder.NativePath
 		  
 		  return jMaster
 		  
@@ -149,9 +162,12 @@ Protected Class clDataQueryProject
 		  
 		  var d as Int64 = DateTime.Now.SecondsFrom1970
 		  
-		  var filename as string = "PROJECT" + format(d, "000000000") + cFileExtension
+		  var filename as string = "PROJECT" + format(d, "000000000") 
 		  
-		  txt = TextOutputStream.Create(dest.Child(filename))
+		  self.ProjectFIle = dest.Child(filename+ cFileExtension)
+		  self.ProjectFolder = dest.Child(filename)
+		  
+		  txt = TextOutputStream.Create(self.ProjectFIle)
 		  
 		  txt.Write(self.GetJSON.ToString)
 		  
@@ -185,6 +201,14 @@ Protected Class clDataQueryProject
 		Private PathToDatabase As FolderItem
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		ProjectFIle As FolderItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ProjectFolder As FolderItem
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
 		Private ProjectName As string
 	#tag EndProperty
@@ -197,6 +221,9 @@ Protected Class clDataQueryProject
 	#tag EndConstant
 
 	#tag Constant, Name = cFileExtension, Type = String, Dynamic = False, Default = \".dqproj", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cFlowFolder, Type = String, Dynamic = False, Default = \"flowStorage", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = cProjectName, Type = String, Dynamic = False, Default = \"projectname", Scope = Public

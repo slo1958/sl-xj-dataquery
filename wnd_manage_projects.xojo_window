@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopWindow wnd_project_picker
+Begin DesktopWindow wnd_manage_projects
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
@@ -10,7 +10,7 @@ Begin DesktopWindow wnd_project_picker
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   300
+   Height          =   417
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -20,10 +20,10 @@ Begin DesktopWindow wnd_project_picker
    MinimumHeight   =   64
    MinimumWidth    =   64
    Resizeable      =   True
-   Title           =   "Untitled"
+   Title           =   "Manage projects"
    Type            =   0
    Visible         =   True
-   Width           =   600
+   Width           =   340
    Begin DesktopListBox lb_AvailableProjects
       AllowAutoDeactivate=   True
       AllowAutoHideScrollbars=   True
@@ -47,7 +47,7 @@ Begin DesktopWindow wnd_project_picker
       HasHorizontalScrollbar=   False
       HasVerticalScrollbar=   True
       HeadingIndex    =   -1
-      Height          =   200
+      Height          =   281
       Index           =   -2147483648
       InitialValue    =   ""
       Italic          =   False
@@ -64,17 +64,60 @@ Begin DesktopWindow wnd_project_picker
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   41
+      Top             =   20
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   560
-      _ScrollOffset   =   0
+      Width           =   300
       _ScrollWidth    =   -1
    End
-   Begin DesktopLabel Label1
+   Begin DesktopTextField tf_newname
+      AllowAutoDeactivate=   True
+      AllowFocusRing  =   True
+      AllowSpellChecking=   False
+      AllowTabs       =   False
+      BackgroundColor =   &cFFFFFF
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Format          =   ""
+      HasBorder       =   True
+      Height          =   22
+      Hint            =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      MaximumCharactersAllowed=   0
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   2
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   343
+      Transparent     =   False
+      Underline       =   False
+      ValidationMask  =   ""
+      Visible         =   True
+      Width           =   188
+   End
+   Begin DesktopButton btn_rename
       AllowAutoDeactivate=   True
       Bold            =   False
+      Cancel          =   False
+      Caption         =   "Rename"
+      Default         =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
@@ -82,29 +125,87 @@ Begin DesktopWindow wnd_project_picker
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   28
-      LockBottom      =   False
+      Left            =   240
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      Multiline       =   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MacButtonStyle  =   0
       Scope           =   0
-      Selectable      =   False
-      TabIndex        =   1
+      TabIndex        =   3
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "Please select a project"
-      TextAlignment   =   0
-      TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   9
+      Top             =   343
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   300
+      Width           =   80
    End
-   Begin DesktopLabel Label2
+   Begin DesktopButton btn_Delete
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Delete"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   240
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   4
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   313
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
+   Begin DesktopButton btn_close
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Close"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   240
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   5
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   377
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
+   Begin DesktopLabel lb_filename
       AllowAutoDeactivate=   True
       Bold            =   False
       Enabled         =   True
@@ -123,142 +224,18 @@ Begin DesktopWindow wnd_project_picker
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
-      TabIndex        =   2
+      TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "Or create a new project"
+      Text            =   "Untitled"
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   260
+      Top             =   377
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   163
-   End
-   Begin DesktopButton pb_new
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "New"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   195
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   3
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   260
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
-   Begin DesktopButton pb_select
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Select"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   500
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   True
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   4
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   260
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
-   Begin DesktopButton pb_demo
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Demo"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   297
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   True
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   5
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   260
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
-   Begin DesktopButton pb_manage
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Manage"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   399
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   6
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   260
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
+      Width           =   188
    End
 End
 #tag EndDesktopWindow
@@ -266,57 +243,11 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  
-		  pb_demo.Visible = DebugBuild
-		  
-		  UpdateListOfProjects()
+		  UpdateListOfProjects
 		  
 		End Sub
 	#tag EndEvent
 
-
-	#tag Method, Flags = &h0
-		Function FindTestDataFolder() As FolderItem
-		  
-		  //
-		  // move up until we find the folder of the current project
-		  //
-		  var f as FolderItem = nil
-		  
-		  var limit as integer = 20
-		  var fld as FolderItem = app.ExecutableFile.Parent
-		  
-		  while limit > 0
-		    if fld = nil then return nil
-		    
-		    if fld.Child("TestData").Exists then 
-		      f = fld.Child("TestData")
-		      Return f
-		      
-		    end if
-		    
-		    fld = fld.Parent
-		    
-		    limit = limit -1
-		    
-		  wend
-		  
-		  return nil
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub LaunchTool(project as clDataQueryProject)
-		  
-		  self.Minimize
-		  
-		  var wnd as new wnd_main
-		  wnd.SetProject(project)
-		  wnd.Initialize
-		  wnd.Show
-		  
-		End Sub
-	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub UpdateListOfProjects()
@@ -332,122 +263,63 @@ End
 		  next
 		  
 		  lb_AvailableProjects.SelectedRowIndex = 0
-		  
-		  pb_select.Enabled = lb_AvailableProjects.RowCount > 0
-		  pb_manage.Enabled = lb_AvailableProjects.RowCount > 0
-		  
 		  lb_AvailableProjects.HeaderAt(0) =  "Available projects:"
+		  
+		  btn_Delete.Enabled = lb_AvailableProjects.RowCount > 0
+		  btn_rename.Enabled = False
+		  
 		  
 		  return
 		End Sub
 	#tag EndMethod
 
 
+	#tag Property, Flags = &h0
+		OriginalProjectName As String
+	#tag EndProperty
+
+
 #tag EndWindowCode
 
-#tag Events pb_new
+#tag Events lb_AvailableProjects
 	#tag Event
-		Sub Pressed()
+		Sub SelectionChanged()
+		  var projectName as string = lb_AvailableProjects.CellTextAt(lb_AvailableProjects.SelectedRowIndex, 0)
+		  var projectfFile as string = lb_AvailableProjects.RowTagAt(lb_AvailableProjects.SelectedRowIndex)
 		  
-		  var p as clDataQueryProject = wnd_new_project.ShowMe
-		  
-		  if p <> nil then 
-		    LaunchTool(p)
-		    
-		  end if
+		  OriginalProjectName = projectName
+		  tf_newname.Text = projectName
+		  lb_filename.Text = projectfFile
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_select
+#tag Events tf_newname
+	#tag Event
+		Sub TextChanged()
+		  
+		  var projNameUpdated as Boolean = OriginalProjectName <> tf_newname.Text.trim
+		  var projNameOk as Boolean  = tf_newname.Text.trim.Length > 0
+		  
+		  btn_rename.Enabled = (projNameUpdated and projNameok)
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_Delete
 	#tag Event
 		Sub Pressed()
 		  
-		  
-		  if lb_AvailableProjects.SelectedRowIndex <  0 then Return
-		  
-		  var projectName as string = lb_AvailableProjects.CellTextAt(lb_AvailableProjects.SelectedRowIndex, 0)
-		  var projectFileName as string = lb_AvailableProjects.RowTagAt(lb_AvailableProjects.SelectedRowIndex)
-		  var projectFile as FolderItem  = app.GetAppDataFolder.Child(projectFileName)
-		  
-		  var project as   clDataQueryProject
-		  
-		  var jFile as TextInputStream
-		  var jMain as JSONItem
-		  
-		  try
-		    jFIle = TextInputStream.Open(projectFile)
-		    
-		  catch
-		    
-		  end try
-		  
-		  if jFile <> nil then
-		    
-		    try
-		      var jTxt as string = jfile.ReadAll
-		      jMain = new JSONItem(jTxt)
-		      
-		    Catch
-		      
-		    end try
-		    
-		  end if
-		  
-		  if jMain <> nil then
-		    project = new clDataQueryProject(jMain, projectFileName)
-		    
-		  end if
-		  
-		  
-		  if project <> nil then 
-		    LaunchTool(project)
-		    
-		  end if
 		  
 		  return
 		  
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_demo
+#tag Events btn_close
 	#tag Event
 		Sub Pressed()
-		  
-		  var f as FolderItem = FindTestDataFolder
-		  
-		  if f = nil or not f.exists then 
-		    MessageBox("Cannot find  folder with demo data")
-		    Return
-		    
-		  end if
-		  
-		  f = f.child("DummySalesData.db")
-		  
-		  if f = nil or not f.exists then 
-		    MessageBox("Cannot find demo database " + f.name)
-		    Return
-		    
-		  end if
-		  
-		  var p as new clDataQueryProject("Demo Project")
-		  
-		  p.OpenDatabase(f)
-		  p.SetDataSourceName("CurrentSales")
-		  p.ProjectFIle = nil
-		  LaunchTool(p)
-		  
-		  Return
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events pb_manage
-	#tag Event
-		Sub Pressed()
-		  
-		  wnd_manage_projects.ShowModal
-		  
-		  UpdateListOfProjects
+		  self.Close
 		  
 		End Sub
 	#tag EndEvent
