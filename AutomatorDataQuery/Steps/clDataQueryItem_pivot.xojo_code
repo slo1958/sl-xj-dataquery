@@ -101,7 +101,7 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetSql() As string
+		Function getSql(IsLastStep as boolean) As string
 		  
 		  dim sSource as string
 		  dim sPostFix as string
@@ -116,7 +116,7 @@ Inherits clDataQueryItem
 		  dim s as string
 		  
 		  if prevDataQueryItem<>nil then 
-		    sSource=prevDataQueryItem.getSql
+		    sSource=prevDataQueryItem.getSql(false)
 		    sPostFix=prevDataQueryItem.fieldPostFix
 		  else
 		    ssource=""
@@ -266,7 +266,7 @@ Inherits clDataQueryItem
 		  
 		  
 		  if prevDataQueryItem<>nil then 
-		    sSource=prevDataQueryItem.getSql
+		    sSource=prevDataQueryItem.getSql(false)
 		    sPostFix=prevDataQueryItem.fieldPostFix
 		  else
 		    ssource=""

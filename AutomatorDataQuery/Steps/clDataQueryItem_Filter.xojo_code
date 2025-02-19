@@ -18,6 +18,35 @@ Inherits clDataQueryItem
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetConfigJSON() As JSONItem
+		  // Calling the overridden superclass method.
+		  
+		  var jMaster as  JSONItem = super.GetConfigJSON()
+		  
+		  var jItems as new  JSONItem
+		  
+		  for i as integer = 0 to maxItems
+		    if bInUse(i) then 
+		      var jItem as new JSONItem
+		      jitem.value(cJSONTagIndex) = i
+		      jitem.value(cJSONTagConstant) = sconst(i)
+		      jitem.value(cJSONTagField1) = sfield1(i)
+		      jitem.value(cJSONTagField2) = sfield2(i)
+		      jitem.value(cJSONTagOperator) = soper(i)
+		      
+		      jItems.Add(jItem)
+		    end if
+		  next
+		  
+		  jMaster.Value(cJSONTagItems) = jitems
+		  
+		  return jMaster
+		  
+		   
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function getOneItem(theItem as integer) As string
 		  dim s as string
@@ -46,17 +75,17 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetSql() As string
+		Function getSql(IsLastStep as boolean) As string
 		  dim sSource as string
 		  dim sPostFix as string
 		  var i  as integer
 		  dim n as integer
 		  dim s as string
 		  dim sSep as string
-		   
+		  
 		  
 		  if prevDataQueryItem<>nil then 
-		    sSource=prevDataQueryItem.getSql
+		    sSource=prevDataQueryItem.getSql(false)
 		    sPostFix=prevDataQueryItem.fieldPostFix
 		  else
 		    ssource=""
@@ -71,35 +100,42 @@ Inherits clDataQueryItem
 		    sSep=""
 		    
 		    for i=1 to keyFields.LastIndex
-		      s=s+sSep + keyFields(i)+"_"+sPostFix +"  as "+keyFields(i)+"_"+fieldPostFix
+		      s=s+sSep + keyFields(i)+"_"+sPostFix +"  as "+keyFields(i) + PostFixStr(IsLastStep)
 		      sSep=","
 		    next
 		    
 		    for i=1 to ubound(valueFields)
-		      s=s+"," + valueFields(i)+"_"+sPostFix +" as "+valueFields(i)+"_"+fieldPostFix
+		      s=s+"," + valueFields(i)+"_"+sPostFix +" as "+valueFields(i) + PostFixStr(IsLastStep)
 		    next
 		    
 		    s = s +"  FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
-		     
-		     
+		    
+		    
 		    
 		    var tempWheres() as string
 		    
 		    for i=0 to ubound(sConst)
 		      var tempWhere as string
 		      
-		      if bInUse(i) then
+		      if bInUse(i) and sfield1(i) <> "" then
 		        tempWhere = sfield1(i)+"_"+sPostFix
 		        
-		        if sField2(i)=cUseConstant then
+		        if sField2(i)=cUseConstant and sConst(i) <> "" then
 		          tempWhere = tempWhere + TradOp(soper(i))
 		          tempWhere = tempWhere + sConst(i)
 		          
+		        elseif sField2(i) = cUseConstant then
+		          tempWhere = ""
+		          
 		        elseif sField2(i) = cIsEmpty then
-		          tempWhere = tempWhere +  " is null "
-		        else
+		          tempWhere = tempWhere +  " is null " 
+		          
+		        elseif sField2(i) <>"" then
 		          tempWhere = tempWhere + TradOp(soper(i))
 		          tempWhere = tempWhere + sField2(i)+"_"+sPostFix
+		          
+		        else
+		          tempWhere = ""
 		          
 		        end if
 		        
@@ -196,24 +232,6 @@ Inherits clDataQueryItem
 		    binuse(nextitem)=true
 		  case else
 		  end select
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub saveMyData(theOutput as textoutputStream)
-		  var i  as integer
-		  
-		  for i=0 to maxItems
-		    if bInUse(i) then
-		      theOutput.writeline "50;10;xx"
-		      theOutput.writeline "50;11;"+sconst(i)
-		      theOutput.writeline "50;12;"+sfield1(i)
-		      theOutput.writeline "50;13;"+sfield2(i)
-		      theOutput.writeline "50;14;"+soper(i)
-		    end if
-		  next
-		  
 		  
 		End Sub
 	#tag EndMethod
@@ -330,6 +348,21 @@ Inherits clDataQueryItem
 		sOper(maxItems) As string
 	#tag EndProperty
 
+
+	#tag Constant, Name = cJSONTagConstant, Type = String, Dynamic = False, Default = \"constant", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagField1, Type = String, Dynamic = False, Default = \"field1", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagField2, Type = String, Dynamic = False, Default = \"field2", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagIndex, Type = String, Dynamic = False, Default = \"index", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagOperator, Type = String, Dynamic = False, Default = \"op", Scope = Public
+	#tag EndConstant
 
 	#tag Constant, Name = maxItems, Type = Integer, Dynamic = False, Default = \"6", Scope = Public
 	#tag EndConstant

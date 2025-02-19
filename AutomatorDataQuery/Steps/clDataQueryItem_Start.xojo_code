@@ -68,21 +68,40 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getSql() As string
-		  var i  as integer
-		  dim n as integer
-		  dim s as string
+		Function GetConfigJSON() As JSONItem
+		  // Calling the overridden superclass method.
 		  
+		  var jMaster as  JSONItem = super.GetConfigJSON()
+		  
+		  var jItems as new  JSONItem
+		  
+		  jItems.Value(cJSONTagDataSource) = self.dataSource
+		  jItems.Value(cJSONTagDatabaseName) = self.dbname
+		  
+		  jMaster.Value(cJSONTagItems) = jitems
+		  
+		  return jMaster
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getSql(IsLastStep as boolean) As string
+		  var i  as integer
+		   
+		  dim s as string
 		  
 		  var tempFields() as string
 		  
+		  
 		  for i=1 to keyFields.LastIndex
-		    tempFields.Add( keyFields(i)+" as "+keyFields(i)+"_"+fieldPostFix)
+		    
+		    tempFields.Add( keyFields(i)+" as "+keyFields(i) + PostFixStr(IsLastStep))
 		    
 		  next
 		  
 		  for i=1 to ubound(valueFields)
-		    tempFields.Add( valueFields(i)+" as "+valueFields(i)+"_"+fieldPostFix)
+		    tempFields.Add( valueFields(i)+" as "+valueFields(i) + PostFixStr(IsLastStep))
 		    
 		  next
 		  
@@ -134,6 +153,13 @@ Inherits clDataQueryItem
 	#tag Property, Flags = &h0
 		dbname As String
 	#tag EndProperty
+
+
+	#tag Constant, Name = cJSONTagDatabaseName, Type = String, Dynamic = False, Default = \"database", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagDataSource, Type = String, Dynamic = False, Default = \"datasource", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior

@@ -16,28 +16,30 @@ Inherits clDataQueryItem
 		Function GetConfigJSON() As JSONItem
 		  
 		  
-		  var j1 as new JSONItem
+		  var jMaster as  JSONItem = super.GetConfigJSON()
 		  
-		  var jFormula as new JSONItem
-		  var jOutput as new JSONItem
-		  
+		  var jItems as new  JSONItem
 		  
 		  for i as integer = 1 to ubound(formula)
-		    jFormula.Add(formula(i))
-		    jOutput.Add(OutputFields(i))
+		    var jItem as new JSONItem
+		    jitem.value(cJSONTagIndex) = i
+		    jitem.value(cJSONTagFormula) = formula(i)
+		    jitem.value(cJSONTagOutput) = OutputFields(i)
+		    jitem.Value(cJSONTagIsDimension) = IsDimension(i)
+		    
+		    jItems.Add(jItem)
 		    
 		  next
 		  
-		  j1.Value("formula") = jFormula
-		  j1.Value("output") = jOutput
+		  jMaster.Value(cJSONTagItems) = jitems
 		  
-		  return j1
+		  return jMaster
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getSql() As string
+		Function getSql(IsLastStep as boolean) As string
 		  var i  as integer
 		  dim n as integer
 		  dim s as string
@@ -54,19 +56,19 @@ Inherits clDataQueryItem
 		    
 		  else
 		    
-		    ssource=prevDataQueryItem.getSql
+		    ssource=prevDataQueryItem.getSql(false)
 		    sPostfix=prevDataQueryItem.fieldPostFix
 		    
 		    
 		    s="select "
 		    sdel=""
 		    for i=1 to ubound(prevDataQueryItem.keyFields)
-		      s=s+sdel+ prevDataQueryItem.keyFields(i)+"_"+spostfix+" as "+prevDataQueryItem.keyFields(i)+"_"+fieldPostFix
+		      s=s+sdel+ prevDataQueryItem.keyFields(i)+"_"+spostfix+" as "+prevDataQueryItem.keyFields(i)  + PostFixStr(IsLastStep)
 		      sdel=","
 		    next
 		    
 		    for i=1 to ubound(prevDataQueryItem.valueFields)
-		      s=s+sdel + prevDataQueryItem.valueFields(i)+"_"+spostfix+" as "+prevDataQueryItem.valueFields(i)+"_"+fieldPostFix
+		      s=s+sdel + prevDataQueryItem.valueFields(i)+"_"+spostfix+" as "+prevDataQueryItem.valueFields(i) + PostFixStr(IsLastStep)
 		      sdel=","
 		    next
 		    
@@ -74,7 +76,7 @@ Inherits clDataQueryItem
 		      if (formula(i)<>"") and (OutputFields(i)<>"") then
 		        stmp=formula(i)
 		        stmp=replaceAll(stmp,"$","_"+sPostfix)
-		        s=s+sdel+"("+stmp+") as "+OutputFields(i)+"_"+fieldPostFix
+		        s=s+sdel+"("+stmp+") as "+OutputFields(i)  + PostFixStr(IsLastStep)
 		        sdel=","
 		      end if
 		    next
@@ -89,20 +91,25 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Function getTextItem(theItem as integer) As string
-		  
-		  if (theItem<4) or (ubound(OutputFields)<=4) then
+		  if theItem >= 0 and theItem <= OutputFields.LastIndex then
+		    
 		    if theitem > ubound(OutputFields) then
 		      return ""
+		      
+		    elseif IsDimension(theItem) then
+		      return OutputFields(theItem)+" given by "+Formula(theitem) + " as dimension"
+		      
 		    else
 		      return OutputFields(theItem)+" given by "+Formula(theitem)
+		      
 		    end if
+		     
 		  else
-		    if theItem=4 and uBound(OutputFields)>4 then
-		      return "..."
-		    else
-		      return ""
-		    end if
+		    return ""
+		    
 		  end if
+		  
+		  
 		  
 		End Function
 	#tag EndMethod
@@ -153,9 +160,43 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
-		  var i  as integer
-		  dim n as integer
-		  dim m as integer
+		   
+		  // 
+		  // if prevDataQueryItem=nil then
+		  // 
+		  // else
+		  // '
+		  // ' move all key fields
+		  // '
+		  // n=ubound(prevDataQueryItem.keyFields)
+		  // 
+		  // redim keyFields(n)
+		  // redim keyFieldType(n)
+		  // 
+		  // for i=1 to n
+		  // keyFields(i)=prevDataQueryItem.keyFields(i)
+		  // keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
+		  // next
+		  // '
+		  // ' move all value fields
+		  // '
+		  // n=ubound(prevDataQueryItem.valueFields)
+		  // m=ubound(OutputFields)
+		  // 
+		  // redim valueFields(n+m)
+		  // 
+		  // for i=1 to n
+		  // valueFields(i)=prevDataQueryItem.valueFields(i)
+		  // next
+		  // 
+		  // for i=1 to m
+		  // 
+		  // valueFields(n+i)=OutputFields(i)
+		  // next
+		  // 
+		  // end if
+		  
+		  
 		  
 		  if prevDataQueryItem=nil then
 		    
@@ -163,29 +204,36 @@ Inherits clDataQueryItem
 		    '
 		    ' move all key fields
 		    '
-		    n=ubound(prevDataQueryItem.keyFields)
+		     
 		    
-		    redim keyFields(n)
-		    redim keyFieldType(n)
+		    redim keyFields(0)
+		    redim keyFieldType(0)
 		    
-		    for i=1 to n
-		      keyFields(i)=prevDataQueryItem.keyFields(i)
-		      keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
+		    
+		    for i as integer = 1 to prevDataQueryItem.keyFields.LastIndex
+		      keyFields.Add( prevDataQueryItem.keyFields(i))
+		      keyFieldType.Add(prevDataQueryItem.keyFieldType(i))
+		      
 		    next
 		    '
 		    ' move all value fields
-		    '
-		    n=ubound(prevDataQueryItem.valueFields)
-		    m=ubound(OutputFields)
+		    ' 
+		    redim valueFields(0)
 		    
-		    redim valueFields(n+m)
-		    
-		    for i=1 to n
-		      valueFields(i)=prevDataQueryItem.valueFields(i)
+		    for i as integer =1 to prevDataQueryItem.valueFields.LastIndex
+		      valueFields.add(prevDataQueryItem.valueFields(i))
+		      
 		    next
 		    
-		    for i=1 to m
-		      valueFields(n+i)=OutputFields(i)
+		    for i as integer = 1 to OutputFields.LastIndex
+		      if IsDimension(i) then
+		        keyFields.add(OutputFields(i))
+		        keyFieldType.add( InternalFieldTypes.Double) 
+		        
+		      else
+		        valueFields.Add(OutputFields(i))
+		        
+		      end if
 		    next
 		    
 		  end if
@@ -199,12 +247,29 @@ Inherits clDataQueryItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		IsDimension(0) As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		nextItem As integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		OutputFields(0) As string
 	#tag EndProperty
+
+
+	#tag Constant, Name = cJSONTagFormula, Type = String, Dynamic = False, Default = \"formula", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagIndex, Type = String, Dynamic = False, Default = \"index", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagIsDimension, Type = String, Dynamic = False, Default = \"dimension", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagOutput, Type = String, Dynamic = False, Default = \"output", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior

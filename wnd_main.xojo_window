@@ -246,6 +246,37 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Visible         =   True
       Width           =   59
    End
+   Begin DesktopButton Button1
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Button"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   315
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   9
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   360
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
 End
 #tag EndDesktopWindow
 
@@ -556,6 +587,19 @@ End
 		  tmpSource = clDataQueryFlow(self.AutomatorFlow).FlowDataSource
 		  
 		  wnd_queryViewer.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button1
+	#tag Event
+		Sub Pressed()
+		  var s as string
+		  
+		  s = self.AutomatorFlow.GetJSON.ToString
+		  
+		  wnd_showLongString.ShowMe("JSON", s)
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

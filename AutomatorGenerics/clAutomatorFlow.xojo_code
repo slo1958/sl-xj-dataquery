@@ -139,6 +139,12 @@ Protected Class clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetJSON() As JSONItem
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetTitle(theItem as integer) As string
 		  return items(theItem).getTitle
 		  
@@ -175,6 +181,7 @@ Protected Class clAutomatorFlow
 		  txtin=GetFolderItem(theTextFileName).OpenAsTextFile
 		  
 		  var MainJSON as new JSONItem(txtin.ReadAll)
+		  
 		  txtin.Close
 		  
 		  MessageBox( "Invalid file signature")

@@ -73,6 +73,10 @@ Protected Class clAutomatorItem
 		Sub SetTitle(NewTitle as string)
 		  self.Title = NewTitle
 		  
+		  if VisualSupport <> nil then
+		    VisualSupport.SetTitle(NewTitle)
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 

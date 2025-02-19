@@ -437,7 +437,7 @@ End
 		    
 		    lb_datasource.RemoveAllRows
 		    
-		    lb_datasource.AddRow(tmp)
+		    lb_datasource.AddRows(tmp)
 		    
 		    lb_datasource.SelectedRowIndex = 0
 		    
@@ -900,6 +900,6 @@ End
 		Group="Behavior"
 		InitialValue=""
 		Type="String"
-		EditorType=""
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 #tag EndViewBehavior

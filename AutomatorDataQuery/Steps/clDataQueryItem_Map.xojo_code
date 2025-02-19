@@ -15,7 +15,36 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getSql() As string
+		Function GetConfigJSON() As JSONItem
+		  // Calling the overridden superclass method.
+		  
+		  
+		  var jMaster as  JSONItem = super.GetConfigJSON()
+		  
+		  var jItems as new  JSONItem
+		  
+		  for i as integer = 1 to ubound(InputList)
+		     
+		    var jItem as new JSONItem
+		    jitem.value(cJSONTagIndex) = i
+		    jitem.Value(cJSONTagInput) = InputList(i)
+		    jItem.Value(cJSONTagOutput) = OutputList(i)
+		    
+		    jitems.Add(jitem)
+		     
+		    
+		  next
+		  jMaster.Value(cJSONTagItems) = jitems
+		  
+		  return jMaster
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getSql(IsLastStep as boolean) As string
 		  dim sSource as string
 		  dim sPostFix as string
 		  var i  as integer
@@ -27,7 +56,7 @@ Inherits clDataQueryItem
 		    sSource=""
 		    sPostFix=""
 		  else
-		    sSource=prevDataQueryItem.getSql
+		    sSource=prevDataQueryItem.getSql(false)
 		    sPostFix=prevDataQueryItem.fieldPostFix
 		  end if
 		  
@@ -35,13 +64,13 @@ Inherits clDataQueryItem
 		  ssep=""
 		  
 		  for i=1 to keyFields.LastIndex
-		    s=s+ssep+keyFields(i)+"_"+sPostFix+" as "+keyFields(i)+"_" + fieldPostFix
+		    s=s+ssep+keyFields(i)+"_"+sPostFix+" as "+keyFields(i)  + PostFixStr(IsLastStep)
 		    ssep=","
 		  next
 		  
 		  for i=1 to UBound(InputList)
 		    if OutputList(i)<>"" then
-		      s=s+ssep+InputList(i)+"_"+sPostFix+" as "+ OutputList(i)+"_"+fieldPostFix
+		      s=s+ssep+InputList(i)+"_"+sPostFix+" as "+ OutputList(i) + PostFixStr(IsLastStep)
 		    end if
 		  next
 		  
@@ -110,19 +139,6 @@ Inherits clDataQueryItem
 		    
 		  case else
 		  end select
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub saveMyData(theOutput as textoutputStream)
-		  var i  as integer
-		  
-		  for i=1 to ubound(InputList)
-		    theOutput.writeline "50;10;xx"
-		    theOutput.writeline "50;11;"+InputList(i)
-		    theOutput.writeline "50;12;"+OutputList(i)
-		  next
 		  
 		End Sub
 	#tag EndMethod
@@ -235,6 +251,16 @@ Inherits clDataQueryItem
 	#tag Property, Flags = &h0
 		OutputList(0) As string
 	#tag EndProperty
+
+
+	#tag Constant, Name = cJSONTagIndex, Type = String, Dynamic = False, Default = \"index", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagInput, Type = String, Dynamic = False, Default = \"input", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagOutput, Type = String, Dynamic = False, Default = \"Output", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior

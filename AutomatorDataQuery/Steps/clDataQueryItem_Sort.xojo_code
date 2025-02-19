@@ -17,6 +17,34 @@ Inherits clDataQueryItem
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetConfigJSON() As JSONItem
+		  // Calling the overridden superclass method.
+		  
+		  var jMaster as  JSONItem = super.GetConfigJSON()
+		  
+		  var jItems as new  JSONItem
+		  
+		  for i as integer = 0 to maxItems
+		    if bInUse(i) then 
+		      var jItem as new JSONItem
+		      
+		      jitem.value(cJSONTagIndex) = i
+		      jitem.Value(cJSONTagField) = sField1(i)
+		      jItem.Value(cJSONTagSortOrder) = sFieldS(i)
+		      
+		      jitems.Add(jitem)
+		    end if
+		    
+		  next
+		  jMaster.Value(cJSONTagItems) = jitems
+		  jMaster.Value(cJSONTagRecordLimit) = str(reclimit)
+		  return jMaster
+		  
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function getOneItem(theItem as integer) As string
 		  dim s as string
@@ -33,7 +61,7 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function getSql() As string
+		Protected Function getSql(IsLastStep as boolean) As string
 		  dim s as string
 		  dim sSource as string
 		  dim sPostFix as string
@@ -42,7 +70,7 @@ Inherits clDataQueryItem
 		  
 		  if prevDataQueryItem<>nil then
 		    
-		    sSource=prevDataQueryItem.getSql
+		    sSource=prevDataQueryItem.getSql(false)
 		    sPostFix=prevDataQueryItem.fieldPostFix
 		    
 		  end if
@@ -54,13 +82,13 @@ Inherits clDataQueryItem
 		    
 		    for i=1 to ubound(prevDataQueryItem.keyFields)
 		      s=s+ssep
-		      s=s+prevDataQueryItem.keyFields(i)+"_"+sPostFix+" as "+prevDataQueryItem.keyFields(i)+"_"+fieldPostFix
+		      s=s+prevDataQueryItem.keyFields(i)+"_"+sPostFix+" as "+prevDataQueryItem.keyFields(i) + PostFixStr(IsLastStep)
 		      ssep=","
 		    next
 		    
 		    for i=1 to ubound(prevDataQueryItem.valueFields)
 		      s=s+ssep
-		      s=s+prevDataQueryItem.valueFields(i)+"_"+sPostFix+" as "+prevDataQueryItem.valueFields(i)+"_"+fieldPostFix
+		      s=s+prevDataQueryItem.valueFields(i)+"_"+sPostFix+" as "+prevDataQueryItem.valueFields(i)  + PostFixStr(IsLastStep)
 		      ssep=","
 		    next
 		    
@@ -269,6 +297,18 @@ Inherits clDataQueryItem
 		sFieldS(maxItems) As string
 	#tag EndProperty
 
+
+	#tag Constant, Name = cJSONTagField, Type = String, Dynamic = False, Default = \"field", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagIndex, Type = String, Dynamic = False, Default = \"index", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagRecordLimit, Type = String, Dynamic = False, Default = \"recordlimit", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagSortOrder, Type = String, Dynamic = False, Default = \"order", Scope = Public
+	#tag EndConstant
 
 	#tag Constant, Name = maxItems, Type = Integer, Dynamic = False, Default = \"6", Scope = Public
 	#tag EndConstant

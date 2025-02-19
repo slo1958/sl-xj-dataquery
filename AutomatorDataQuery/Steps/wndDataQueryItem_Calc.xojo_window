@@ -10,7 +10,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   249
+   Height          =   251
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -23,7 +23,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
    Title           =   "Definition of a Calc"
    Type            =   0
    Visible         =   True
-   Width           =   842
+   Width           =   876
    Begin Label st_Name
       AllowAutoDeactivate=   True
       Bold            =   False
@@ -198,7 +198,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       TabIndex        =   4
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "Formula\r\nNote : the name of each field in a formula must be ended with a '$' (temporary)"
+      Text            =   "Formula\nThe name of each field in a formula must be ended with a '$'"
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
@@ -207,41 +207,6 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       Visible         =   True
       Width           =   350
-   End
-   Begin Label StaticText5
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   12.0
-      FontUnit        =   0
-      Height          =   51
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   565
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Multiline       =   True
-      Scope           =   0
-      Selectable      =   False
-      TabIndex        =   5
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Text            =   "You can drag/drop field names from this list to the formula area"
-      TextAlignment   =   0
-      TextColor       =   &c00000000
-      Tooltip         =   ""
-      Top             =   14
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   99
    End
    Begin Label StaticText2
       AllowAutoDeactivate=   True
@@ -400,7 +365,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       UnicodeMode     =   0
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   434
+      Width           =   386
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -475,7 +440,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
-      Visible         =   True
+      Visible         =   False
       Width           =   80
    End
    Begin TextArea efFieldA
@@ -525,8 +490,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       UnicodeMode     =   0
       ValidationMask  =   ""
-      Visible         =   True
-      Width           =   434
+      Visible         =   False
+      Width           =   386
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -601,7 +566,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
-      Visible         =   True
+      Visible         =   False
       Width           =   80
    End
    Begin DesktopButton pb_Remove
@@ -683,8 +648,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       UnicodeMode     =   0
       ValidationMask  =   ""
-      Visible         =   True
-      Width           =   434
+      Visible         =   False
+      Width           =   386
    End
    Begin TextField efFieldName
       AllowAutoDeactivate=   True
@@ -727,7 +692,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
-      Visible         =   True
+      Visible         =   False
       Width           =   80
    End
    Begin TextArea efFieldA
@@ -777,8 +742,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       UnicodeMode     =   0
       ValidationMask  =   ""
-      Visible         =   True
-      Width           =   434
+      Visible         =   False
+      Width           =   386
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -853,7 +818,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
-      Visible         =   True
+      Visible         =   False
       Width           =   80
    End
    Begin TextArea efFieldA
@@ -903,8 +868,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       UnicodeMode     =   0
       ValidationMask  =   ""
-      Visible         =   True
-      Width           =   434
+      Visible         =   False
+      Width           =   386
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -979,7 +944,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
-      Visible         =   True
+      Visible         =   False
       Width           =   80
    End
    Begin TextArea efFieldA
@@ -1029,8 +994,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       UnicodeMode     =   0
       ValidationMask  =   ""
-      Visible         =   True
-      Width           =   434
+      Visible         =   False
+      Width           =   386
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -1105,7 +1070,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
-      Visible         =   True
+      Visible         =   False
       Width           =   80
    End
    Begin TextArea efFieldA
@@ -1155,8 +1120,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       UnicodeMode     =   0
       ValidationMask  =   ""
-      Visible         =   True
-      Width           =   434
+      Visible         =   False
+      Width           =   386
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -1196,7 +1161,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       AllowExpandableRows=   False
       AllowFocusRing  =   True
       AllowResizableColumns=   False
-      AllowRowDragging=   False
+      AllowRowDragging=   True
       AllowRowReordering=   False
       Bold            =   False
       ColumnCount     =   1
@@ -1213,16 +1178,16 @@ Begin DesktopWindow wndDataQueryItem_Calc
       HasHorizontalScrollbar=   False
       HasVerticalScrollbar=   True
       HeadingIndex    =   -1
-      Height          =   176
+      Height          =   202
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
       Italic          =   False
-      Left            =   676
+      Left            =   705
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       RequiresSelection=   False
       RowSelectionType=   0
@@ -1235,7 +1200,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   148
+      Width           =   153
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
@@ -1249,15 +1214,15 @@ Begin DesktopWindow wndDataQueryItem_Calc
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
-      Height          =   22
+      Height          =   20
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   676
-      LockBottom      =   False
+      Left            =   673
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
@@ -1265,7 +1230,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   219
+      Top             =   221
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -1285,11 +1250,11 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   755
-      LockBottom      =   False
+      Left            =   789
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
@@ -1297,11 +1262,249 @@ Begin DesktopWindow wndDataQueryItem_Calc
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   219
+      Top             =   221
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   69
+   End
+   Begin DesktopCheckBox ck_isdim
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   ""
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   0
+      Italic          =   False
+      Left            =   604
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   32
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   71
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      VisualState     =   0
+      Width           =   33
+   End
+   Begin Label Label1
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   12.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   569
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   33
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "As dimension"
+      TextAlignment   =   2
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   45
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   88
+   End
+   Begin DesktopCheckBox ck_isdim
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   ""
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   1
+      Italic          =   False
+      Left            =   604
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   34
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   94
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      VisualState     =   0
+      Width           =   33
+   End
+   Begin DesktopCheckBox ck_isdim
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   ""
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   2
+      Italic          =   False
+      Left            =   604
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   35
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   118
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      VisualState     =   0
+      Width           =   33
+   End
+   Begin DesktopCheckBox ck_isdim
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   ""
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   3
+      Italic          =   False
+      Left            =   604
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   36
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   143
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      VisualState     =   0
+      Width           =   33
+   End
+   Begin DesktopCheckBox ck_isdim
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   ""
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   4
+      Italic          =   False
+      Left            =   604
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   37
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   168
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      VisualState     =   0
+      Width           =   33
+   End
+   Begin DesktopCheckBox ck_isdim
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   ""
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   5
+      Italic          =   False
+      Left            =   604
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   38
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   193
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      VisualState     =   0
+      Width           =   33
+   End
+   Begin DesktopCheckBox ck_isdim
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   ""
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   6
+      Italic          =   False
+      Left            =   604
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   39
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   219
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      VisualState     =   0
+      Width           =   33
    End
 End
 #tag EndDesktopWindow
@@ -1324,7 +1527,7 @@ End
 		  
 		  pb_Remove(0).Enabled=false
 		  
-		  pb_close.top=pb_add.top+25
+		  // pb_close.top=pb_add.top+25
 		  
 		  wndDataQueryItem_Calc.Height=pb_close.top+25
 		  
@@ -1336,9 +1539,9 @@ End
 		Function addOne() As integer
 		  if lastItem<6  then lastItem=lastItem+1
 		  
-		  efFieldName(lastItem).visible=true
-		  efFieldA(lastitem).Visible=true
-		  
+		  efFieldName(lastItem).visible = true
+		  efFieldA(lastitem).Visible = true
+		  ck_isdim(lastItem).Visible = true
 		  pb_remove(lastItem).visible=true 
 		  
 		  prepLine lastItem
@@ -1346,9 +1549,9 @@ End
 		  pb_add.top=pb_remove(lastItem).top
 		  
 		  
-		  pb_close.top=pb_add.top+25
+		  // pb_close.top=pb_add.top
 		  
-		  wndDataQueryItem_Calc.Height=efFieldA(0).top+25*(lastItem+1+1)
+		  // wndDataQueryItem_Calc.Height=efFieldA(0).top+25*(lastItem+1+1)
 		  
 		  return lastItem
 		  
@@ -1373,6 +1576,7 @@ End
 		  
 		  redim curStep.OutputFields(n)
 		  redim curStep.Formula(n)
+		  redim curStep.IsDimension(n)
 		  
 		  curStep.name=efName.text
 		  
@@ -1382,6 +1586,8 @@ End
 		      n=n+1
 		      curStep.OutputFields(n)=efFieldName(i).text
 		      curStep.Formula(n)=efFieldA(i).text
+		      curStep.IsDimension(n) = ck_isdim(i).Value
+		      
 		    end if
 		  next
 		  
@@ -1410,6 +1616,7 @@ End
 		    j=addone
 		    efFieldName(j).text=curStep.OutputFields(i)
 		    efFieldA(j).text=curStep.Formula(i)
+		    ck_isdim(j).Value = curStep.IsDimension(i)
 		    
 		  next
 		  
@@ -1485,16 +1692,16 @@ End
 		  
 		  i=lastItem
 		  
-		  efFieldA(i).visible=false
-		  efFieldName(i).visible=false
-		  
-		  pb_Remove(i).Visible=false
+		  efFieldA(i).visible = false
+		  efFieldName(i).visible = false
+		  ck_isdim(i).Visible = false
+		  pb_Remove(i).Visible = false
 		  
 		  lastItem=lastItem-1
 		  
 		  pb_add.top=pb_remove(lastItem).top
 		  
-		  pb_close.top=pb_add.top+25
+		  // pb_close.top=pb_add.top+25
 		  
 		  wndDataQueryItem_Calc.Height=efFieldA(0).top+25*(lastItem+1+1)
 		  
@@ -1523,6 +1730,11 @@ End
 		  
 		  
 		End Function
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  me.HeaderAt(0) = "Drag/drop"
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events pb_Add

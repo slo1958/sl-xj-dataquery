@@ -49,9 +49,43 @@ Inherits clAutomatorItem
 	#tag Method, Flags = &h0
 		Function GetConfigJSON() As JSONItem
 		  
-		  var j1 as new JSONItem
+		  var jMaster as new JSONItem
 		  
-		  return j1
+		  jMaster.Value(cJSONTagName) = self.Name
+		  jMaster.Value(cJSONTagInternalStepType) = self.GetTypeAsString
+		  
+		  
+		  // save internals for debug purposes
+		  
+		  var jitems as new JSONItem
+		  
+		  
+		  
+		  
+		  for i as integer = 1 to keyFields.LastIndex
+		    var jitem as new JSONItem
+		    jitem.value(cJSONTagDebugFieldType) = cJSONTagDebugFieldTypeKey
+		    jitem.value(cJSONTagDebugFieldIndex) = str(i)
+		    jitem.value(cJSONTagDebugFieldName) = keyFields(i)
+		    
+		    jitems.add(jitem)
+		    
+		  next
+		  
+		  for i as integer = 1  to ubound(valueFields)
+		    var jitem as new JSONItem
+		    jitem.value(cJSONTagDebugFieldType) = cJSONTagDebugFieldTypeValue
+		    jitem.value(cJSONTagDebugFieldIndex) = str(i)
+		    jitem.value(cJSONTagDebugFieldName) = valueFields(i)
+		    
+		    jitems.add(jitem)
+		    
+		  next
+		  
+		  jMaster.value(cJSONTagDebugListFields) = jitems
+		  
+		  return jMaster
+		  
 		  
 		End Function
 	#tag EndMethod
@@ -89,7 +123,7 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getSql() As string
+		Function getSql(IsLastStep as boolean) As string
 		  return ""
 		  
 		End Function
@@ -175,14 +209,19 @@ Inherits clAutomatorItem
 
 	#tag Method, Flags = &h0
 		Function Name() As string
-		  return title
+		  
+		  return super.getTitle
+		  
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Name(assigns s as string)
-		  Title=s
+		  
+		  super.SetTitle(s)
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -211,6 +250,19 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function PostFixStr(IsLastStep as Boolean) As string
+		  if  IsLastStep then 
+		    return ""
+		    
+		  else
+		    return "_"+fieldPostFix
+		    
+		  end if
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub processLoadedJSON(theLine as string)
 		  
 		End Sub
@@ -223,12 +275,6 @@ Inherits clAutomatorItem
 		  
 		  keyFields(0)=""
 		  valueFields(0)=""
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub saveMyData(theOutput as textoutputStream)
 		  
 		End Sub
 	#tag EndMethod
@@ -254,7 +300,7 @@ Inherits clAutomatorItem
 		  'theTextFile.writeline "10;"+str(IntxCenter)
 		  'theTextFile.writeline "11;"+str(ypos)
 		  
-		  saveMyData theTextFile
+		  // saveMyData theTextFile
 		  
 		End Sub
 	#tag EndMethod
@@ -294,6 +340,31 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 
+	#tag Note, Name = GetConfigJSON template
+		
+		var jMaster as  JSONItem = super.GetConfigJSON()
+		
+		var jItems as new  JSONItem
+		
+		for i as integer = 0 to maxItems
+		  if bInUse(i) then 
+		    var jItem as new JSONItem
+		    jitem.value(cJSONTagIndex) = i
+		    jitem.Value(cJSONTagField) = sField1(i)
+		    
+		    jitems.Add(jitem)
+		  end if
+		  
+		next
+		jMaster.Value(cJSONTagItems) = jitems
+		
+		return jMaster
+		
+		
+		
+	#tag EndNote
+
+
 	#tag Property, Flags = &h0
 		dataFlowError As boolean
 	#tag EndProperty
@@ -329,6 +400,34 @@ Inherits clAutomatorItem
 	#tag Property, Flags = &h0
 		valueFields(0) As string
 	#tag EndProperty
+
+
+	#tag Constant, Name = cJSONTagDebugFieldIndex, Type = String, Dynamic = False, Default = \"index", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagDebugFieldName, Type = String, Dynamic = True, Default = \"name", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagDebugFieldType, Type = String, Dynamic = False, Default = \"fieldtype", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagDebugFieldTypeKey, Type = String, Dynamic = False, Default = \"key", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagDebugFieldTypeValue, Type = String, Dynamic = False, Default = \"value", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagDebugListFields, Type = String, Dynamic = False, Default = \"internals", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagInternalStepType, Type = String, Dynamic = False, Default = \"type", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagItems, Type = String, Dynamic = False, Default = \"fields", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagName, Type = String, Dynamic = False, Default = \"name", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior

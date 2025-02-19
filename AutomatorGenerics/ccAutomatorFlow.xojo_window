@@ -89,6 +89,9 @@ End
 		  
 		  c.EmbedWithin(Canvas1, 0, 0, canvas1.Width, c.cCollapsedHeigth)
 		  
+		  c.Collapse(false)
+		  
+		  
 		  // c.Collapse
 		  c.SetID(item.ID)
 		  c.SetType(item.GetType)
@@ -129,9 +132,16 @@ End
 		    end if
 		    
 		    var tmptext() as string
+		    
 		    if c.IsCollapsed then
-		      tmptext.Add(item.getTextItem(1))
-		      if item.getTextItem(2) <> "" then tmptext.Add("...")
+		      if item.getTextItem(2) = "" then 
+		        tmptext.Add(item.getTextItem(1))
+		        
+		      else
+		        tmptext.Add(item.getTextItem(1) + " ...")
+		        
+		      end if
+		      
 		      
 		    else
 		      for i as integer = 1 to 4

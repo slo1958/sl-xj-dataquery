@@ -141,6 +141,36 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetJSON() As JSONItem
+		  
+		  var JMaster as new JSONItem
+		  
+		  var jItems as new JSONItem
+		  
+		  JMaster.Compact = False
+		  
+		  for each item as clAutomatorItem in self.Items
+		    var DQItem as clDataQueryItem = clDataQueryItem(item)
+		    var JItem as new JSONItem
+		    
+		    JItem.Value(cJSONTagExternalStepType) = DQItem.GetTypeAsString
+		    JItem.Value(cJSONTagIndex) = DQItem.ID.ToString
+		    JItem.value(cJSONTagConfig) = DQItem.GetConfigJSON()
+		    
+		    jItems.add(jItem)
+		    
+		  next
+		  
+		  JMaster.Value(cJSONTagItems) = jItems
+		  
+		  return jMaster
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Shared Function GetListOfSteps() As string()
 		  if StepTypeLabels = nil then CreateStepTypeLabels
 		  
@@ -181,7 +211,7 @@ Inherits clAutomatorFlow
 		  
 		  UpdateDataFlow
 		  
-		  s=DataQueryItem(items.LastIndex).getSql
+		  s=DataQueryItem(items.LastIndex).getSql(True)
 		  
 		  if AddDummyGroupby then 
 		    doRemove items.LastIndex
@@ -210,6 +240,7 @@ Inherits clAutomatorFlow
 	#tag Method, Flags = &h0
 		Sub LoadFromTextFile(theTextFilename as string)
 		  clAutomatorFlow.LoadFromTextFile theTextFilename
+		  
 		  UpdateDataFlow
 		  
 		  Exception err as RuntimeException
@@ -417,6 +448,18 @@ Inherits clAutomatorFlow
 	#tag EndProperty
 
 
+	#tag Constant, Name = cJSONTagConfig, Type = String, Dynamic = False, Default = \"configuration", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagExternalStepType, Type = String, Dynamic = False, Default = \"type", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagIndex, Type = String, Dynamic = False, Default = \"itemIndex", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagItems, Type = String, Dynamic = False, Default = \"items", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = cStepCalc, Type = String, Dynamic = False, Default = \"Calc", Scope = Public
 	#tag EndConstant
 
@@ -490,14 +533,6 @@ Inherits clAutomatorFlow
 			InitialValue="0"
 			Type="Integer"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="SourceProject"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

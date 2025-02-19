@@ -12,3 +12,5 @@ Debug*/Debug*\ Libs
 Dummy Sales Data.xlsx
 DummySalesData.db
 DummySalesaData2.db
+TestData/Export.csv
+TestData/ExportSql.txt

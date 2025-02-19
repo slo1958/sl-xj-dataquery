@@ -79,7 +79,7 @@ Begin DesktopContainer ccAutomatorItem
             FontName        =   "System"
             FontSize        =   0.0
             FontUnit        =   0
-            Height          =   118
+            Height          =   135
             Index           =   -2147483648
             InitialParent   =   "Rectangle2"
             Italic          =   False
@@ -88,7 +88,7 @@ Begin DesktopContainer ccAutomatorItem
             LockedInPosition=   False
             LockLeft        =   True
             LockRight       =   True
-            LockTop         =   False
+            LockTop         =   True
             Multiline       =   True
             Scope           =   0
             Selectable      =   False
@@ -332,10 +332,12 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Collapse()
+		Sub Collapse(DoUpdateUI as Boolean = True)
+		  
 		  self.Height = cCollapsedHeigth
 		  self.StateCollapsed = True
-		  UpdateUI
+		   
+		  if DoUpdateUI then  UpdateUI
 		End Sub
 	#tag EndMethod
 
@@ -352,6 +354,8 @@ End
 	#tag Method, Flags = &h0
 		Function IsCollapsed() As Boolean
 		  
+		  
+		  return  self.StateCollapsed
 		End Function
 	#tag EndMethod
 

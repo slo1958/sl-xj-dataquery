@@ -17,6 +17,32 @@ Inherits clDataQueryItem
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetConfigJSON() As JSONItem
+		  // Calling the overridden superclass method.
+		  
+		  var jMaster as  JSONItem = super.GetConfigJSON()
+		  
+		  var jItems as new  JSONItem
+		  
+		  for i as integer = 0 to maxItems
+		    if bInUse(i) then 
+		      var jItem as new JSONItem
+		      jitem.value(cJSONTagIndex) = i
+		      jitem.Value(cJSONTagField) = sField1(i)
+		      
+		      jitems.Add(jitem)
+		    end if
+		    
+		  next
+		  jMaster.Value(cJSONTagItems) = jitems
+		  
+		  return jMaster
+		  
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function getOneItem(theItem as integer) As string
 		  dim s as string
@@ -33,7 +59,7 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getSql() As String
+		Function getSql(IsLastStep as boolean) As String
 		  dim sSource as string
 		  dim sPostFix as string
 		  var i  as integer
@@ -43,7 +69,7 @@ Inherits clDataQueryItem
 		  dim sGroupBy as string
 		  
 		  if prevDataQueryItem<>nil then 
-		    sSource=prevDataQueryItem.getSql
+		    sSource=prevDataQueryItem.getSql(false)
 		    sPostFix=prevDataQueryItem.fieldPostFix
 		  else
 		    ssource=""
@@ -59,13 +85,13 @@ Inherits clDataQueryItem
 		    
 		    for i=0 to ubound(sField1)
 		      if bInUse(i) and sField1(i).trim.Length > 0 then
-		        s=s+sSep + sField1(i)+"_"+sPostFix +"  as "+sField1(i)+"_"+fieldPostFix
+		        s=s+sSep + sField1(i)+"_"+sPostFix +"  as "+sField1(i) + PostFixStr(IsLastStep)
 		        sSep=","
 		      end if
 		    next
 		    
 		    for i=1 to ubound(valueFields)
-		      s=s+ssep+"sum(" + valueFields(i)+"_"+sPostFix +") as "+valueFields(i)+"_"+fieldPostFix
+		      s=s+ssep+"sum(" + valueFields(i)+"_"+sPostFix +") as "+valueFields(i) + PostFixStr(IsLastStep)
 		      sSep=","
 		    next
 		    
@@ -165,21 +191,6 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub saveMyData(theOutput as textoutputStream)
-		  var i  as integer
-		  
-		  for i=0 to maxItems
-		    if bInUse(i) then
-		      theOutput.writeline "50;10;xx"
-		      theOutput.writeline "50;12;"+sfield1(i)
-		    end if
-		  next
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
 		  
 		  wndDataQueryItem_GroupSplit.showme me
@@ -255,6 +266,12 @@ Inherits clDataQueryItem
 		sField1Type(maxItems) As InternalFieldTypes
 	#tag EndProperty
 
+
+	#tag Constant, Name = cJSONTagField, Type = String, Dynamic = False, Default = \"groupbyfield", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagIndex, Type = String, Dynamic = False, Default = \"index", Scope = Public
+	#tag EndConstant
 
 	#tag Constant, Name = maxItems, Type = Integer, Dynamic = False, Default = \"6", Scope = Public
 	#tag EndConstant

@@ -43,7 +43,7 @@ Begin DesktopWindow wnd_queryViewer
       Panels          =   ""
       Scope           =   0
       SmallTabs       =   False
-      TabDefinition   =   "Tab 0\rTab 1"
+      TabDefinition   =   "Results\rGenerated SQL"
       TabIndex        =   6
       TabPanelIndex   =   0
       TabStop         =   True
@@ -168,40 +168,7 @@ Begin DesktopWindow wnd_queryViewer
          Visible         =   True
          Width           =   336
       End
-      Begin DesktopLabel lbl_sql
-         AllowAutoDeactivate=   True
-         Bold            =   False
-         Enabled         =   True
-         FontName        =   "System"
-         FontSize        =   0.0
-         FontUnit        =   0
-         Height          =   427
-         Index           =   -2147483648
-         InitialParent   =   "TabPanel1"
-         Italic          =   False
-         Left            =   40
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   True
-         Scope           =   0
-         Selectable      =   False
-         TabIndex        =   0
-         TabPanelIndex   =   2
-         TabStop         =   True
-         Text            =   "Untitled"
-         TextAlignment   =   0
-         TextColor       =   &c000000
-         Tooltip         =   ""
-         Top             =   38
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   True
-         Width           =   507
-      End
-      Begin DesktopButton btn_export
+      Begin DesktopButton btn_export_csv
          AllowAutoDeactivate=   True
          Bold            =   False
          Cancel          =   False
@@ -228,6 +195,86 @@ Begin DesktopWindow wnd_queryViewer
          TabStop         =   True
          Tooltip         =   ""
          Top             =   462
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   80
+      End
+      Begin DesktopTextArea ta_sql
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   True
+         AllowStyledText =   True
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         HasHorizontalScrollbar=   False
+         HasVerticalScrollbar=   True
+         Height          =   426
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   40
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Multiline       =   True
+         ReadOnly        =   True
+         Scope           =   0
+         TabIndex        =   0
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   ""
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   38
+         Transparent     =   False
+         Underline       =   False
+         UnicodeMode     =   1
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   520
+      End
+      Begin DesktopButton btn_export_sql
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Save"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   480
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   1
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   476
          Transparent     =   False
          Underline       =   False
          Visible         =   True
@@ -299,7 +346,7 @@ End
 		  
 		  self.Title = sourceTable + " from " + self.DBConnection.Name
 		  
-		  lbl_sql.Text = sqlQuery
+		  ta_sql.Text = sqlQuery
 		  
 		  var rs as RowSet
 		  var rCount as integer
@@ -318,7 +365,7 @@ End
 		  end try
 		  
 		  if rs = nil then
-		    btn_export.Enabled = False
+		    btn_export_csv.Enabled = False
 		    btn_moreRows.Enabled = False
 		    
 		  else
@@ -374,12 +421,19 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btn_export
+#tag Events btn_export_csv
 	#tag Event
 		Sub Pressed()
 		  var res as RowSet= self.DBConnection.db.SelectSQL(self.SqlCode)
 		  
-		  var fd as FolderItem = SpecialFolder.Desktop.child("Export.csv")
+		  var fd as FolderItem = FolderItem.ShowSaveFileDialog("","Export.csv")
+		  
+		  if fd = nil then return
+		  
+		  if fd.IsFolder then return 
+		  
+		  if fd.Exists then fd.Remove
+		  
 		  var tt as TextOutputStream = TextOutputStream.Create(fd)
 		  
 		  var fields() as string
@@ -414,6 +468,29 @@ End
 		    
 		  wend
 		  
+		  
+		  tt.Close
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_export_sql
+	#tag Event
+		Sub Pressed()
+		  var res as RowSet= self.DBConnection.db.SelectSQL(self.SqlCode)
+		  
+		  var fd as FolderItem = FolderItem.ShowSaveFileDialog("","ExportSql.txt")
+		  
+		  if fd = nil then return
+		  
+		  if fd.IsFolder then return 
+		  
+		  if fd.Exists then fd.Remove
+		  
+		  var tt as TextOutputStream = TextOutputStream.Create(fd)
+		  
+		  tt.Write(ta_sql.Text)
 		  
 		  tt.Close
 		  

@@ -395,8 +395,12 @@ End
 		  end if
 		  
 		  
-		  MessageBox(projectfFile + ":" + projectName)
+		  if project <> nil then 
+		    LaunchTool(project)
+		    
+		  end if
 		  
+		   
 		  
 		End Sub
 	#tag EndEvent
