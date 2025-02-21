@@ -1918,36 +1918,6 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   69
    End
-   Begin DesktopPopupMenu pp_JoinType
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      InitialParent   =   ""
-      InitialValue    =   "Intersection\r\nUse first block as master\r\n"
-      Italic          =   False
-      Left            =   468
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      SelectedRowIndex=   0
-      TabIndex        =   48
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   8
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-   End
    Begin Label st_help
       AllowAutoDeactivate=   True
       Bold            =   False
@@ -2110,7 +2080,7 @@ End
 		    
 		  next
 		  
-		  curStep.iJoinType=pp_JoinType.SelectedRowIndex
+		  // curStep.iJoinType=pp_JoinType.SelectedRowIndex
 		  
 		  
 		End Sub
@@ -2175,7 +2145,7 @@ End
 		    
 		  next
 		  
-		  pp_JoinType.SelectedRowIndex=curStep.iJoinType
+		  // pp_JoinType.SelectedRowIndex=curStep.iJoinType
 		  
 		  showmodal
 		  

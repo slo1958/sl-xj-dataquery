@@ -72,12 +72,53 @@ Inherits clDataQueryItem
 		  next
 		  
 		  nextItem=-1
-		  
-		  sJoinType(0)=" INNER JOIN "
-		  sJoinType(1)=" LEFT JOIN "
-		  iJoinType=0
-		  
+		   
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function GenSQL_GetRemainingKeyFields(NamePrefix as string, NameSuffix as string) As string()
+		  
+		  var tmpFields() as string
+		  
+		  var sPostFix as string = prevDataQueryItem.fieldPostFix
+		  
+		  for i as integer = 1 to keyFields.LastIndex
+		    if NameSuffix = "" then
+		      tmpFields.Add(NamePrefix + keyFields(i)+"_"+sPostFix)
+		      
+		    else
+		      tmpFields.Add(NamePrefix + keyFields(i)+"_"+sPostFix + " " + keyFields(i) +  NameSuffix)
+		      
+		    end if
+		    
+		  next
+		  
+		  return tmpFields
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function GenSQL_GetValueFields(NamePrefix as string, NameSuffix as string) As string()
+		  
+		  var tmpFields() as string
+		  
+		  var sPostFix as string = prevDataQueryItem.fieldPostFix
+		  
+		  for i as integer = 1 to ubound(prevDataQueryItem.valueFields)
+		    if NameSuffix = "" then
+		      tmpfields.Add(nameprefix + prevDataQueryItem.valueFields(i)+"_"+sPostFix)
+		      
+		    else
+		      tmpfields.Add(nameprefix + prevDataQueryItem.valueFields(i)+"_"+sPostFix + " " + prevDataQueryItem.valueFields(i)+NameSuffix)
+		      
+		    end if
+		    
+		  next
+		  
+		  return tmpFields
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
@@ -103,18 +144,13 @@ Inherits clDataQueryItem
 	#tag Method, Flags = &h0
 		Function getSql(IsLastStep as boolean) As string
 		  
+		  const cDriverCTE as string = "driversrc"
+		  const cDataCTE as string = "datasrc"
+		  
 		  dim sSource as string
 		  dim sPostFix as string
-		  dim blockSql(maxItems) as string
-		  var i  as integer
-		  var jBlock as integer
-		  var jField as integer
-		  dim sWhere as string
-		  dim sSep as string
-		  dim sOutput as string
 		  
-		  dim s as string
-		  
+		  // Info from previous steps
 		  if prevDataQueryItem<>nil then 
 		    sSource=prevDataQueryItem.getSql(false)
 		    sPostFix=prevDataQueryItem.fieldPostFix
@@ -123,122 +159,306 @@ Inherits clDataQueryItem
 		    sPostFix=""
 		  end if
 		  
-		  for i=0 to maxItems
-		    blocksql(i)=""
+		  var output as string
+		  var tmpfields() as string
+		  
+		  if sPostFix = "" then return ""
+		  
+		  var CTE0 as string
+		  var CTE1 as string
+		  
+		  
+		  
+		  '
+		  ' identify remaining key fields
+		  '
+		  Build_Remaining_KeyFields
+		  
+		  // First CTE is the driver, only includes distinct remaining key fields
+		  
+		  tmpfields.RemoveAll
+		  
+		  // add remaining key fields
+		  for each s as string in self.GenSQL_GetRemainingKeyFields("","")
+		    tmpfields.add(s)
+		    
 		  next
 		  
 		  
-		  soutput=""
+		  CTE0 =  cDriverCTE + " as (SELECT DISTINCT " + string.FromArray(tmpfields, ",") + " FROM (" + ssource +"))"
 		  
-		  if sPostFix<>"" then
-		    '
-		    ' identify remaining key fields
-		    '
-		    Build_Remaining_KeyFields
+		  // Second CTE includes all filter key fields, remaining key fields and measures
+		  
+		  
+		  tmpfields.RemoveAll
+		  
+		  // add remaining key fields
+		  
+		  for each s as string in self.GenSQL_GetRemainingKeyFields("", "")
+		    tmpfields.add(s)
 		    
-		    
-		    
-		    '
-		    ' build each subquery, using original postfix
-		    '
-		    for jBlock =0 to maxitems  
-		      if sBlockName(jBlock)<>"" then
-		        s="(select * FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
-		        
-		        
-		        swhere=" where "
-		        ssep=""
-		        
-		        for jfield=1 to 3
-		          if (sconst(jfield,jblock)<>"") and (sField(jField)<>cNotUsed)  then
-		            s=s+ swhere + ssep+"("
-		            s=s+sField(jfield)+"_"+sPostFix+"="
-		            s=s+sconst(jfield,jblock)
-		            s=s+")"
-		            swhere=""
-		            ssep=" and "
-		          end if
-		        next
-		        
-		        'if len(sgroup)>0 then s=s+" group by "+sgroup
-		        
-		        blockSql(jBlock)=s+") as   BLK_"+sBlockName(jblock)
+		  next
+		  
+		  // add filter fields
+		  
+		  for jBlock as integer  = 0 to maxitems  
+		    for jfield as integer = 1 to 3
+		      if (sconst(jfield,jblock)<>"") and (sField(jField)<>cNotUsed)  then
+		        if tmpfields.IndexOf( sField(jfield)+"_"+sPostFix) < 0 then tmpfields.add(sField(jfield)+"_"+sPostFix )
 		        
 		      end if
 		    next
+		  next
+		  
+		  // add value fields
+		  
+		  for each s as string in self.GenSQL_GetValueFields("", "")
+		    tmpfields.add(s)
 		    
+		  next
+		  
+		  // Second CTE 
+		  CTE1 =  cDataCTE + " as (SELECT  " + string.FromArray(tmpfields, ",") + " FROM (" + ssource +"))"
+		   
+		  
+		  // Create main query
+		  
+		  var joinedSrc() as string
+		  
+		  // Add fields from master CTE
+		  
+		  tmpfields.RemoveAll
+		  
+		  // for each s as string in self.GenSQL_GetRemainingKeyFields(cDriverCTE+".",PostFixStr(IsLastStep))
+		  // 
+		  // tmpfields.add(s)
+		  // 
+		  // next
+		  
+		  for i as integer = 1 to keyFields.LastIndex
+		    var s as string =  keyFields(i)
 		    
-		    '
-		    ' build output list
-		    '
-		    ' note that all fields must be prefixed by the name of the source
-		    '
-		    ' the first source is the 'master'
-		    '
-		    
-		    sOutput="select  "
-		    '
-		    ' extract non-involved key fields
-		    '
-		    ssep=""
-		    for i=1 to keyFields.LastIndex
-		      sOutput=sOutput+ssep+"BLK_"+sBlockName(0)+"."+keyFields(i)+"_"+sPostFix+" as "+keyFields(i)+"_"+fieldPostFix
-		      ssep=","
-		    next
-		    
-		    '
-		    ' extract data fields from each block
-		    '
-		    
-		    for jBlock=0 to maxItems
-		      if sBlockName(jBlock)<>"" then
-		        for i=1 to ubound(prevDataQueryItem.valueFields)
-		          soutput=soutput+ssep+"BLK_"+sBlockName(jblock)+"."+prevDataQueryItem.valueFields(i)+"_"+sPostFix+" as " +_
-		          prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
-		          ssep=","
-		        next
-		      end if
-		    next
-		    
-		    '
-		    ' join them now 
-		    '
-		    soutput=soutput+" from "
-		    s=blockSql(0)
-		    
-		    for jBlock=1 to maxitems 'not started from block 0 since block 0 is the "master" block
+		    if IsLastStep then
 		      
-		      if keyFields.LastIndex=0 then
-		        
-		        if blockSql(jBlock)<>"" then
-		          s=s+","+blockSql(jBlock)
-		        end if
-		        
-		      else
-		        if blockSql(jBlock)<>"" then
-		          s="("+s
-		          s=s+sJoinType(iJoinType) +"  "+blockSql(jBlock)' +"  on  "
-		          ssep=" on "
-		          
-		          for i=1 to keyFields.LastIndex
-		            s=s+ssep+" (BLK_"+sBlockName(0)+"."+keyFields(i)+"_"+sPostFix+"= BLK_"+sBlockName(jBlock)+"."+keyFields(i)+"_"+sPostFix+")"
-		            ssep=" and "
-		          next
-		          
-		          
-		          s=s+")"
-		          
-		        end if
-		        
-		      end if
-		    next
-		    '
-		    ' include the record source
-		    '
-		    soutput=soutput+" "+s
-		  end if
+		      // rename back to original name if last query
+		      tmpfields.add( cDriverCTE+"." + s + "_" + sPostFix + " " + s)
+		      
+		    else
+		      tmpfields.add( cDriverCTE+"." + s + "_" + sPostFix + " " + s + "_"+fieldPostFix)
+		      
+		    end if
+		    
+		    
+		  next
 		  
-		  return soutput
+		  
+		  // Add measure fields from joined queries
+		  for jBlock as integer = 0 to maxitems 
+		    if sBlockName(jBlock)<>"" and bInUse(jBlock) then
+		      var blockID as string = "B" + str(jblock)
+		      
+		      for each s as string in self.GenSQL_GetValueFields(BlockID+".", "_"+sBlockName(jblock) + PostFixStr(IsLastStep))
+		        tmpfields.add(s)
+		        
+		      next
+		      
+		    end if
+		    
+		  next
+		  
+		   
+		  joinedSrc.Add("SELECT " + string.FromArray(tmpfields,",") + " FROM " + cDriverCTE)
+		  
+		  // add queryies based on data CTE
+		  
+		  
+		  for jBlock as integer = 0 to maxitems 
+		    if sBlockName(jBlock)<>"" and bInUse(jBlock) then
+		      var whereClause() as string
+		      var joinFields() as string
+		      
+		      var blockID as string = "B" + str(jblock)
+		      
+		      tmpfields.RemoveAll
+		      joinFields.RemoveAll
+		      
+		      // add remaining key fields
+		      for each s as string in self.GenSQL_GetRemainingKeyFields("", "")
+		        tmpfields.Add(s)
+		        
+		        joinFields.add(cDriverCTE + "." + s + " = " + blockID + "." + s)
+		        
+		      next
+		      
+		      
+		      // add value fields
+		      for i as integer = 1 to ubound(prevDataQueryItem.valueFields)
+		        tmpfields.Add(prevDataQueryItem.valueFields(i)+"_"+sPostFix)
+		        
+		      next
+		      
+		      for jfield as integer = 1 to 3
+		        if (sconst(jfield,jblock)<>"") and (sField(jField)<>cNotUsed)  then
+		          var tempW as string
+		          tempW = sField(jfield)+"_"+sPostFix + " = " + sconst(jfield,jblock)
+		          whereClause.Add("(" + tempW + ")")
+		          
+		        end if
+		      next
+		      
+		      joinedSrc.Add("( SELECT " + string.FromArray(tmpfields,",") + " FROM " + cDataCTE + " WHERE " + String.FromArray(whereClause) + ") " + blockID + " ON (" + string.FromArray(joinFields," AND ") + ")" )
+		      
+		    end if
+		    
+		  next 
+		  
+		  output = " WITH " + CTE0 + "," + CTE1 + " " + string.FromArray(joinedSrc, " LEFT JOIN ")
+		  
+		  
+		  return output
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getSqlOld(IsLastStep as boolean) As string
+		  // 
+		  // dim sSource as string
+		  // dim sPostFix as string
+		  // dim blockSql(maxItems) as string
+		  // var i  as integer
+		  // var jBlock as integer
+		  // var jField as integer
+		  // dim sWhere as string
+		  // dim sSep as string
+		  // dim sOutput as string
+		  // 
+		  // dim s as string
+		  // 
+		  // if prevDataQueryItem<>nil then 
+		  // sSource=prevDataQueryItem.getSql(false)
+		  // sPostFix=prevDataQueryItem.fieldPostFix
+		  // else
+		  // ssource=""
+		  // sPostFix=""
+		  // end if
+		  // 
+		  // for i=0 to maxItems
+		  // blocksql(i)=""
+		  // next
+		  // 
+		  // 
+		  // soutput=""
+		  // 
+		  // if sPostFix<>"" then
+		  // '
+		  // ' identify remaining key fields
+		  // '
+		  // Build_Remaining_KeyFields
+		  // 
+		  // 
+		  // 
+		  // '
+		  // ' build each subquery, using original postfix
+		  // '
+		  // for jBlock =0 to maxitems  
+		  // if sBlockName(jBlock)<>"" then
+		  // s="(select * FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
+		  // 
+		  // 
+		  // swhere=" where "
+		  // ssep=""
+		  // 
+		  // for jfield=1 to 3
+		  // if (sconst(jfield,jblock)<>"") and (sField(jField)<>cNotUsed)  then
+		  // s=s+ swhere + ssep+"("
+		  // s=s+sField(jfield)+"_"+sPostFix+"="
+		  // s=s+sconst(jfield,jblock)
+		  // s=s+")"
+		  // swhere=""
+		  // ssep=" and "
+		  // end if
+		  // next
+		  // 
+		  // 'if len(sgroup)>0 then s=s+" group by "+sgroup
+		  // 
+		  // blockSql(jBlock)=s+") as   BLK_"+sBlockName(jblock)
+		  // 
+		  // end if
+		  // next
+		  // 
+		  // 
+		  // '
+		  // ' build output list
+		  // '
+		  // ' note that all fields must be prefixed by the name of the source
+		  // '
+		  // ' the first source is the 'master'
+		  // '
+		  // 
+		  // sOutput="select  "
+		  // '
+		  // ' extract non-involved key fields
+		  // '
+		  // ssep=""
+		  // for i=1 to keyFields.LastIndex
+		  // sOutput=sOutput+ssep+"BLK_"+sBlockName(0)+"."+keyFields(i)+"_"+sPostFix+" as "+keyFields(i)+"_"+fieldPostFix
+		  // ssep=","
+		  // next
+		  // 
+		  // '
+		  // ' extract data fields from each block
+		  // '
+		  // 
+		  // for jBlock=0 to maxItems
+		  // if sBlockName(jBlock)<>"" then
+		  // for i=1 to ubound(prevDataQueryItem.valueFields)
+		  // soutput=soutput+ssep+"BLK_"+sBlockName(jblock)+"."+prevDataQueryItem.valueFields(i)+"_"+sPostFix+" as " +_
+		  // prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
+		  // ssep=","
+		  // next
+		  // end if
+		  // next
+		  // 
+		  // '
+		  // ' join them now 
+		  // '
+		  // soutput=soutput+" from "
+		  // s=blockSql(0)
+		  // 
+		  // for jBlock=1 to maxitems 'not started from block 0 since block 0 is the "master" block
+		  // 
+		  // if keyFields.LastIndex=0 then
+		  // 
+		  // if blockSql(jBlock)<>"" then
+		  // s=s+","+blockSql(jBlock)
+		  // end if
+		  // 
+		  // else
+		  // if blockSql(jBlock)<>"" then
+		  // s="("+s
+		  // s=s+sJoinType(iJoinType) +"  "+blockSql(jBlock)' +"  on  "
+		  // ssep=" on "
+		  // 
+		  // for i=1 to keyFields.LastIndex
+		  // s=s+ssep+" (BLK_"+sBlockName(0)+"."+keyFields(i)+"_"+sPostFix+"= BLK_"+sBlockName(jBlock)+"."+keyFields(i)+"_"+sPostFix+")"
+		  // ssep=" and "
+		  // next
+		  // 
+		  // 
+		  // s=s+")"
+		  // 
+		  // end if
+		  // 
+		  // end if
+		  // next
+		  // '
+		  // ' include the record source
+		  // '
+		  // soutput=soutput+" "+s
+		  // end if
+		  // 
+		  // return soutput
 		  
 		End Function
 	#tag EndMethod
@@ -402,7 +622,7 @@ Inherits clDataQueryItem
 		Protected Function getTextItem(theItem as integer) As string
 		  dim s as string
 		  
-		  if iJoinType=1  and theItem=1 then s="(master key)"
+		  //if iJoinType=1  and theItem=1 then s="(master key)"
 		  
 		  if theItem <4 then
 		    if bInuse(theItem-1) then
@@ -467,7 +687,7 @@ Inherits clDataQueryItem
 		  case 13
 		    sfield(3)=s
 		  case 14
-		    iJoinType=val(s)
+		    //iJoinType=val(s)
 		    
 		  case 15
 		    sBlockName(nextItem)=s
@@ -504,7 +724,7 @@ Inherits clDataQueryItem
 		  theOutput.writeline "50;11;"+sfield(1)
 		  theOutput.writeline "50;12;"+sfield(2)
 		  theOutput.writeline "50;13;"+sfield(3)
-		  theOutput.writeline "50;14;"+str(iJoinType)
+		  //theOutput.writeline "50;14;"+str(iJoinType)
 		  
 		End Sub
 	#tag EndMethod
@@ -522,9 +742,7 @@ Inherits clDataQueryItem
 		  '
 		  ' a pivot removes some records, but passes all fields
 		  '
-		  var i  ,jBlock as integer
-		  dim n as integer
-		  dim s as string
+		   
 		  
 		  if prevDataQueryItem<>nil then
 		    
@@ -532,15 +750,32 @@ Inherits clDataQueryItem
 		    
 		    redim valueFields(0)
 		    
-		    for jBlock=0 to maxItems
-		      if sBlockName(jblock)<>"" then
-		        for i=1 to ubound(prevDataQueryItem.valueFields)
-		          n=ubound(valueFields)+1
-		          redim valueFields(n)
-		          valueFields(n)=prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)
+		    // for jBlock=0 to maxItems
+		    // if sBlockName(jblock)<>"" then
+		    // 
+		    // for i=1 to ubound(prevDataQueryItem.valueFields)
+		    // n=ubound(valueFields)+1
+		    // redim valueFields(n)
+		    // valueFields(n)=prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)
+		    // next
+		    // end if
+		    // next
+		    
+		    
+		    for jBlock as integer = 0 to maxitems 
+		      if sBlockName(jBlock)<>"" and bInUse(jBlock) then
+		        
+		        for i as integer = 1 to ubound(prevDataQueryItem.valueFields)
+		          valueFields.add(prevDataQueryItem.valueFields(i) + "_" + sBlockName(jblock))
+		          
 		        next
+		        
 		      end if
+		      
 		    next
+		    
+		    
+		    
 		    
 		  else
 		    redim keyFields(0)
@@ -583,12 +818,22 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h0
-		bInUse(maxItems) As boolean
-	#tag EndProperty
+	#tag Note, Name = Example query with CTE
+		with block0 as (select distinct customercode  from currentsales) ,
+		block1 as (select customercode, yearorder, total, quantity from currentsales)
+		select block0.customercode customercode_1, b1.total total2021, b1.quantity quantity2021, b2.total total2022, b2. quantity quantity2022 from block0
+		left join (select customercode,  total , quantity  from block1 where yearorder=2021) b1 on block0.customercode = b1.customercode
+		left join (select customercode,  total , quantity  from block1 where yearorder=2022) b2 on block0.customercode = b2.customercode
+		
+		
+		block1 create to avoid repeating its datasource
+		
+		
+	#tag EndNote
+
 
 	#tag Property, Flags = &h0
-		iJoinType As integer
+		bInUse(maxItems) As boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -609,10 +854,6 @@ Inherits clDataQueryItem
 
 	#tag Property, Flags = &h0
 		sFieldType(maxItems) As InternalFieldTypes
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		sJoinType(1) As string
 	#tag EndProperty
 
 
@@ -714,14 +955,6 @@ Inherits clDataQueryItem
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="nextItem"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="iJoinType"
 			Visible=false
 			Group="Behavior"
 			InitialValue="0"
