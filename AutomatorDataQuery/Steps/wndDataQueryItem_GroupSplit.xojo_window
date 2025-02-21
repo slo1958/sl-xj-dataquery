@@ -572,36 +572,6 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       Visible         =   True
       Width           =   20
    End
-   Begin DesktopRadioButton rb_sumNumber
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Caption         =   "Sum value fields"
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   19
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   8
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      TabIndex        =   18
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   189
-      Transparent     =   False
-      Underline       =   False
-      Value           =   True
-      Visible         =   True
-      Width           =   94
-   End
    Begin DesktopButton pb_Add
       AllowAutoDeactivate=   True
       Bold            =   True
@@ -684,7 +654,7 @@ End
 		  
 		  pb_Remove(0).Enabled=false
 		  
-		  rb_sumNumber.top=pb_add.top+25
+		  //rb_sumNumber.top=pb_add.top+25
 		  pb_close.top=pb_add.top+25
 		  
 		  wndDataQueryItem_GroupSplit.Height=pb_close.top+25
@@ -704,7 +674,7 @@ End
 		  
 		  pb_add.top=pb_remove(lastItem).top
 		  
-		  rb_sumNumber.top=pb_add.top+25
+		  //rb_sumNumber.top=pb_add.top+25
 		  pb_close.top=pb_add.top+25
 		  
 		  wndDataQueryItem_GroupSplit.Height=ppFieldA(0).top+25*(lastItem+1+1)
@@ -828,19 +798,12 @@ End
 		  
 		  pb_add.top=pb_remove(lastItem).top
 		  
-		  rb_sumNumber.top=pb_add.top+25
+		  //rb_sumNumber.top=pb_add.top+25
 		  pb_close.top=pb_add.top+25
 		  
 		  wndDataQueryItem_GroupSplit.Height=ppFieldA(0).top+25*(lastItem+1+1)
 		  
 		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events rb_sumNumber
-	#tag Event
-		Sub ValueChanged()
-		  rb_sumNumber.value=true
 		End Sub
 	#tag EndEvent
 #tag EndEvents

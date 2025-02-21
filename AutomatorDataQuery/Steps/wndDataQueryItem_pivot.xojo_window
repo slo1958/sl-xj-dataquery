@@ -10,7 +10,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   265
+   Height          =   289
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -133,41 +133,6 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   329
    End
-   Begin Label StaticText1
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   2
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Multiline       =   False
-      Scope           =   0
-      Selectable      =   False
-      TabIndex        =   3
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Text            =   "pivot fields"
-      TextAlignment   =   0
-      TextColor       =   &c00000000
-      Tooltip         =   ""
-      Top             =   56
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   100
-   End
    Begin Label StaticText2
       AllowAutoDeactivate=   True
       Bold            =   False
@@ -197,11 +162,11 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   88
+      Top             =   75
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   60
+      Width           =   90
    End
    Begin Label StaticText3
       AllowAutoDeactivate=   True
@@ -229,14 +194,14 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "="
-      TextAlignment   =   0
+      TextAlignment   =   2
       TextColor       =   &c00000000
       Tooltip         =   ""
       Top             =   88
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   24
+      Width           =   138
    End
    Begin Label StaticText4
       AllowAutoDeactivate=   True
@@ -251,7 +216,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   284
+      Left            =   282
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -264,14 +229,14 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "="
-      TextAlignment   =   0
+      TextAlignment   =   2
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   88
+      Top             =   87
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   19
+      Width           =   143
    End
    Begin Label StaticText5
       AllowAutoDeactivate=   True
@@ -286,7 +251,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   436
+      Left            =   437
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -299,14 +264,14 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "="
-      TextAlignment   =   0
+      TextAlignment   =   2
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   88
+      Top             =   87
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   20
+      Width           =   135
    End
    Begin DesktopPopupMenu ppField1
       AllowAutoDeactivate=   True
@@ -418,7 +383,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
-      Left            =   69
+      Left            =   8
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -435,12 +400,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   88
+      Top             =   107
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   50
+      Width           =   100
    End
    Begin TextField efConstant1
       AllowAutoDeactivate=   True
@@ -462,7 +427,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   132
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -479,12 +444,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   88
+      Top             =   107
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant2
       AllowAutoDeactivate=   True
@@ -506,7 +471,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
-      Left            =   309
+      Left            =   284
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -523,12 +488,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   88
+      Top             =   107
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant3
       AllowAutoDeactivate=   True
@@ -550,7 +515,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
-      Left            =   461
+      Left            =   436
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -567,12 +532,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   88
+      Top             =   107
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -600,7 +565,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   88
+      Top             =   107
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -626,7 +591,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
-      Left            =   69
+      Left            =   8
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -643,12 +608,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   113
+      Top             =   132
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   50
+      Width           =   100
    End
    Begin TextField efConstant1
       AllowAutoDeactivate=   True
@@ -670,7 +635,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   132
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -687,12 +652,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   113
+      Top             =   132
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant2
       AllowAutoDeactivate=   True
@@ -714,7 +679,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
-      Left            =   309
+      Left            =   284
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -731,12 +696,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   113
+      Top             =   132
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant3
       AllowAutoDeactivate=   True
@@ -758,7 +723,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
-      Left            =   461
+      Left            =   436
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -775,12 +740,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   113
+      Top             =   132
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -808,7 +773,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   113
+      Top             =   132
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -834,7 +799,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
-      Left            =   69
+      Left            =   8
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -851,12 +816,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   138
+      Top             =   157
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   50
+      Width           =   100
    End
    Begin TextField efConstant1
       AllowAutoDeactivate=   True
@@ -878,7 +843,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   132
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -895,12 +860,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   138
+      Top             =   157
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant2
       AllowAutoDeactivate=   True
@@ -922,7 +887,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
-      Left            =   309
+      Left            =   284
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -939,12 +904,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   138
+      Top             =   157
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant3
       AllowAutoDeactivate=   True
@@ -966,7 +931,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
-      Left            =   461
+      Left            =   436
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -983,12 +948,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   138
+      Top             =   157
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -1016,7 +981,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   138
+      Top             =   157
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -1042,7 +1007,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
-      Left            =   69
+      Left            =   8
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1059,12 +1024,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   163
+      Top             =   182
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   50
+      Width           =   100
    End
    Begin TextField efConstant1
       AllowAutoDeactivate=   True
@@ -1086,7 +1051,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   132
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1103,12 +1068,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   163
+      Top             =   182
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant2
       AllowAutoDeactivate=   True
@@ -1130,7 +1095,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
-      Left            =   309
+      Left            =   284
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1147,12 +1112,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   163
+      Top             =   182
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant3
       AllowAutoDeactivate=   True
@@ -1174,7 +1139,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
-      Left            =   461
+      Left            =   436
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1191,12 +1156,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   163
+      Top             =   182
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -1224,7 +1189,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   163
+      Top             =   182
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -1250,7 +1215,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
-      Left            =   69
+      Left            =   8
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1267,12 +1232,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   188
+      Top             =   207
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   50
+      Width           =   100
    End
    Begin TextField efConstant1
       AllowAutoDeactivate=   True
@@ -1294,7 +1259,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   132
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1311,12 +1276,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   188
+      Top             =   207
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant2
       AllowAutoDeactivate=   True
@@ -1338,7 +1303,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
-      Left            =   309
+      Left            =   284
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1355,12 +1320,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   188
+      Top             =   207
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant3
       AllowAutoDeactivate=   True
@@ -1382,7 +1347,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
-      Left            =   461
+      Left            =   436
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1399,12 +1364,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   188
+      Top             =   207
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -1432,7 +1397,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   188
+      Top             =   207
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -1458,7 +1423,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
-      Left            =   69
+      Left            =   8
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1475,12 +1440,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   213
+      Top             =   232
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   50
+      Width           =   100
    End
    Begin TextField efConstant1
       AllowAutoDeactivate=   True
@@ -1502,7 +1467,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   132
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1519,12 +1484,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   213
+      Top             =   232
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant2
       AllowAutoDeactivate=   True
@@ -1546,7 +1511,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
-      Left            =   309
+      Left            =   284
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1563,12 +1528,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   213
+      Top             =   232
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant3
       AllowAutoDeactivate=   True
@@ -1590,7 +1555,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
-      Left            =   461
+      Left            =   436
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1607,12 +1572,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   213
+      Top             =   232
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -1640,7 +1605,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   213
+      Top             =   232
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -1666,7 +1631,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
-      Left            =   69
+      Left            =   8
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1683,12 +1648,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   238
+      Top             =   257
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   50
+      Width           =   100
    End
    Begin TextField efConstant1
       AllowAutoDeactivate=   True
@@ -1710,7 +1675,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   132
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1727,12 +1692,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   238
+      Top             =   257
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant2
       AllowAutoDeactivate=   True
@@ -1754,7 +1719,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
-      Left            =   309
+      Left            =   284
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1771,12 +1736,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   238
+      Top             =   257
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin TextField efConstant3
       AllowAutoDeactivate=   True
@@ -1798,7 +1763,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
-      Left            =   461
+      Left            =   436
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1815,12 +1780,12 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   238
+      Top             =   257
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -1848,7 +1813,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   238
+      Top             =   257
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -1960,7 +1925,7 @@ End
 	#tag Event
 		Sub Opening()
 		  var i  as integer
-		  st_help.Caption=""
+		  st_help.Caption="Define condition for each pivoted block"
 		  
 		  lastItem=0
 		  for i=1 to 6

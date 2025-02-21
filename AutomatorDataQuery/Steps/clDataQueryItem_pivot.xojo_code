@@ -121,6 +121,64 @@ Inherits clDataQueryItem
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetConfigJSON() As JSONItem
+		  // Calling the overridden superclass method.
+		  
+		  Var returnValue as JSONItem = Super.GetConfigJSON()
+		  
+		  var jItemBlocks as new  JSONItem
+		  var jitemFields as new JSONItem
+		  var jitemConditions as new JSONItem
+		  
+		  for i as integer = 0 to sBlockName.LastIndex
+		    var jitem as new JSONItem
+		    if bInUse(i) then
+		      jitem.value("blockindex") = str(i)
+		      jitem.Value("value") = sBlockName(i)
+		      
+		      jItemBlocks.add(jitem)
+		    end if
+		    
+		  next
+		  
+		  for i as integer = 0 to sField.LastIndex
+		    var jitem as new JSONItem
+		    if sField(i).trim <> "" then
+		      jitem.value("fieldindex") = str(i)
+		      jitem.Value("value") = sField(i)
+		      
+		      jitemFields.add(jitem)
+		      
+		    end if
+		    
+		  next
+		  
+		  for i as integer = 0 to sBlockName.LastIndex
+		    
+		    for j as integer = 0 to sfield.LastIndex
+		      var jitem as new JSONItem
+		      if sConst(j,i) <> "" then
+		        jitem.value("blockindex") = str(i)
+		        jitem.value("fieldindex") = str(j)
+		        jitem.Value("value") = sConst(j,i)
+		        
+		        jitemConditions.add(jitem)
+		      end if
+		      
+		    next
+		    
+		  next
+		  
+		  returnValue.value("blocks") = jItemBlocks
+		  returnValue.value("fields")= jitemFields
+		  returnValue.value("filters") = jitemConditions
+		  
+		  return returnValue
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function getOneItem(theItem as integer) As string
 		  dim s as string
@@ -316,304 +374,6 @@ Inherits clDataQueryItem
 		  
 		  
 		  return output
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function getSqlOld(IsLastStep as boolean) As string
-		  // 
-		  // dim sSource as string
-		  // dim sPostFix as string
-		  // dim blockSql(maxItems) as string
-		  // var i  as integer
-		  // var jBlock as integer
-		  // var jField as integer
-		  // dim sWhere as string
-		  // dim sSep as string
-		  // dim sOutput as string
-		  // 
-		  // dim s as string
-		  // 
-		  // if prevDataQueryItem<>nil then 
-		  // sSource=prevDataQueryItem.getSql(false)
-		  // sPostFix=prevDataQueryItem.fieldPostFix
-		  // else
-		  // ssource=""
-		  // sPostFix=""
-		  // end if
-		  // 
-		  // for i=0 to maxItems
-		  // blocksql(i)=""
-		  // next
-		  // 
-		  // 
-		  // soutput=""
-		  // 
-		  // if sPostFix<>"" then
-		  // '
-		  // ' identify remaining key fields
-		  // '
-		  // Build_Remaining_KeyFields
-		  // 
-		  // 
-		  // 
-		  // '
-		  // ' build each subquery, using original postfix
-		  // '
-		  // for jBlock =0 to maxitems  
-		  // if sBlockName(jBlock)<>"" then
-		  // s="(select * FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
-		  // 
-		  // 
-		  // swhere=" where "
-		  // ssep=""
-		  // 
-		  // for jfield=1 to 3
-		  // if (sconst(jfield,jblock)<>"") and (sField(jField)<>cNotUsed)  then
-		  // s=s+ swhere + ssep+"("
-		  // s=s+sField(jfield)+"_"+sPostFix+"="
-		  // s=s+sconst(jfield,jblock)
-		  // s=s+")"
-		  // swhere=""
-		  // ssep=" and "
-		  // end if
-		  // next
-		  // 
-		  // 'if len(sgroup)>0 then s=s+" group by "+sgroup
-		  // 
-		  // blockSql(jBlock)=s+") as   BLK_"+sBlockName(jblock)
-		  // 
-		  // end if
-		  // next
-		  // 
-		  // 
-		  // '
-		  // ' build output list
-		  // '
-		  // ' note that all fields must be prefixed by the name of the source
-		  // '
-		  // ' the first source is the 'master'
-		  // '
-		  // 
-		  // sOutput="select  "
-		  // '
-		  // ' extract non-involved key fields
-		  // '
-		  // ssep=""
-		  // for i=1 to keyFields.LastIndex
-		  // sOutput=sOutput+ssep+"BLK_"+sBlockName(0)+"."+keyFields(i)+"_"+sPostFix+" as "+keyFields(i)+"_"+fieldPostFix
-		  // ssep=","
-		  // next
-		  // 
-		  // '
-		  // ' extract data fields from each block
-		  // '
-		  // 
-		  // for jBlock=0 to maxItems
-		  // if sBlockName(jBlock)<>"" then
-		  // for i=1 to ubound(prevDataQueryItem.valueFields)
-		  // soutput=soutput+ssep+"BLK_"+sBlockName(jblock)+"."+prevDataQueryItem.valueFields(i)+"_"+sPostFix+" as " +_
-		  // prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
-		  // ssep=","
-		  // next
-		  // end if
-		  // next
-		  // 
-		  // '
-		  // ' join them now 
-		  // '
-		  // soutput=soutput+" from "
-		  // s=blockSql(0)
-		  // 
-		  // for jBlock=1 to maxitems 'not started from block 0 since block 0 is the "master" block
-		  // 
-		  // if keyFields.LastIndex=0 then
-		  // 
-		  // if blockSql(jBlock)<>"" then
-		  // s=s+","+blockSql(jBlock)
-		  // end if
-		  // 
-		  // else
-		  // if blockSql(jBlock)<>"" then
-		  // s="("+s
-		  // s=s+sJoinType(iJoinType) +"  "+blockSql(jBlock)' +"  on  "
-		  // ssep=" on "
-		  // 
-		  // for i=1 to keyFields.LastIndex
-		  // s=s+ssep+" (BLK_"+sBlockName(0)+"."+keyFields(i)+"_"+sPostFix+"= BLK_"+sBlockName(jBlock)+"."+keyFields(i)+"_"+sPostFix+")"
-		  // ssep=" and "
-		  // next
-		  // 
-		  // 
-		  // s=s+")"
-		  // 
-		  // end if
-		  // 
-		  // end if
-		  // next
-		  // '
-		  // ' include the record source
-		  // '
-		  // soutput=soutput+" "+s
-		  // end if
-		  // 
-		  // return soutput
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function GetSql_InnerJoin() As string
-		  dim sSource as string
-		  dim sPostFix as string
-		  var i ,jBlock,jField as integer
-		  dim n as integer
-		  dim s as string
-		  dim sSep as string
-		  dim sOSep as string
-		  dim sWhere as string
-		  dim sWhere2 as string
-		  dim sGroup as string
-		  
-		  dim sPrFx as string
-		  
-		  dim sOutputFields as string
-		  
-		  dim blockSql(maxItems) as string
-		  
-		  MessageBox( "ubound keyfields (INNER) : " + str(keyFields.LastIndex))
-		  
-		  
-		  if prevDataQueryItem<>nil then 
-		    sSource=prevDataQueryItem.getSql(false)
-		    sPostFix=prevDataQueryItem.fieldPostFix
-		  else
-		    ssource=""
-		    sPostFix=""
-		  end if
-		  
-		  for i=0 to maxItems
-		    blocksql(i)=""
-		  next
-		  
-		  s=""
-		  sOutputFields=""
-		  
-		  'ssource="XXX"   ' for debugging purposes only !!
-		  
-		  if sPostFix<>"" then
-		    Build_Remaining_KeyFields 'update array keyfields (using list of keyfields from previous tep - keyfields used in pivoting)
-		    
-		    sPrFx=""
-		    for i=0 to maxItems
-		      if sBlockName(i)<>"" then
-		        if sPrFx="" then sPrFx="blk_"+sBlockName(i)+"."
-		      end if
-		    next
-		    
-		    '
-		    ' build list of 'final' output field
-		    '
-		    sosep=""
-		    for i=1 to keyFields.LastIndex
-		      sOutputFields=sOutputFields+soSep +sPrFx+keyFields(i)+"_"+fieldPostFix
-		      soSep=","
-		    next
-		    
-		    '
-		    '
-		    ' build sql statement for each block
-		    '
-		    for jBlock=0 to maxItems
-		      if sBlockName(jblock)<>"" then
-		        s="select  "   
-		        sSep=""
-		        sGroup=""
-		        
-		        for i=1 to keyFields.LastIndex
-		          s=s+sSep + keyFields(i)+"_"+sPostFix +"  as "+keyFields(i)+"_"+fieldPostFix
-		          sGroup=sgroup+sSep + keyFields(i)+"_"+sPostFix
-		          sSep=","
-		        next
-		        
-		        for i=1 to ubound(prevDataQueryItem.valueFields)
-		          s=s+sSep+ prevDataQueryItem.valueFields(i)+"_"+sPostFix +" as "+prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
-		          ssep=","
-		          sOutputFields=sOutputFields+sosep+prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)+"_"+fieldPostFix
-		          sosep=","
-		        next
-		        
-		        s=s+"  FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
-		        
-		        swhere=" where "
-		        ssep=""
-		        
-		        for jfield=1 to 3
-		          if (sconst(jfield,jblock)<>"") and (sField(jField)<>cNotUsed)  then
-		            s=s+ swhere + ssep+"("
-		            s=s+sField(jfield)+"_"+sPostFix+"="
-		            s=s+sconst(jfield,jblock)
-		            s=s+")"
-		            swhere=""
-		            ssep=" and "
-		          end if
-		        next
-		        
-		        'if len(sgroup)>0 then s=s+" group by "+sgroup
-		        
-		        blockSql(jBlock)=s
-		      end if
-		    next
-		    
-		    
-		    '
-		    ' build output query
-		    '
-		    s="select "+sOutputFields +" from "
-		    ssep=""
-		    for jblock=0 to maxitems
-		      if blockSql(jblock)<>"" then s=s+" "+ssep+"  ("+blockSql(jblock)+") as blk_"+sBlockName(jblock)
-		      ssep=","
-		    next
-		    
-		    
-		    '
-		    ' skip block #0
-		    '
-		    sWhere2=""
-		    ssep=""
-		    for jblock=1 to maxitems
-		      if sBlockName(jblock)<>"" then
-		        
-		        for i=1 to keyFields.LastIndex
-		          sWhere2=sWhere2+ssep+ " ("
-		          ssep=" and "
-		          
-		          sWhere2=sWhere2+"blk_"+sBlockName(jblock-1)
-		          sWhere2=sWhere2+"."
-		          sWhere2=sWhere2+keyFields(i)+"_"+fieldPostFix
-		          sWhere2=sWhere2+" = "
-		          sWhere2=sWhere2+"blk_"+sBlockName(jblock)
-		          sWhere2=sWhere2+"."
-		          sWhere2=sWhere2+keyFields(i)+"_"+fieldPostFix
-		          
-		          sWhere2=sWhere2+")"
-		        next
-		        
-		        
-		      end if
-		    next
-		    
-		    if len(sWhere2)>0 then
-		      s=s+" where "+swhere2
-		    end if
-		    
-		    return s
-		    
-		  end if
-		  
-		  return s
 		  
 		End Function
 	#tag EndMethod
