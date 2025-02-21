@@ -13,6 +13,46 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor(SourceJSON as JSONItem)
+		  // Calling the overridden superclass constructor.
+		  
+		  Super.constructor(StepTypes.Calculate, SourceJSON)
+		  
+		  
+		  Nextitem=0
+		  
+		  var jItems as  JSONItem = SourceJSON.Value(cJSONTagItems)
+		  
+		  if jitems.IsArray then
+		    for i as integer = 0 to jItems.LastRowIndex
+		      var jitem as JSONItem = jitems.childat(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex)
+		      
+		      if index >Formula.LastIndex then 
+		        redim Formula(index)
+		        redim OutputFields(index)
+		        redim IsDimension(Index)
+		        
+		      end if
+		       
+		      if index > nextItem then nextItem = index
+		      
+		      formula(Index) = jitem.value(cJSONTagFormula)
+		      OutputFields(Index) = jitem.value(cJSONTagOutput)
+		      IsDimension(Index) = jitem.Value(cJSONTagIsDimension) 
+		      
+		    next
+		    
+		    
+		  end if
+		  
+		  return
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetConfigJSON() As JSONItem
 		  
 		  
@@ -103,7 +143,7 @@ Inherits clDataQueryItem
 		      return OutputFields(theItem)+" given by "+Formula(theitem)
 		      
 		    end if
-		     
+		    
 		  else
 		    return ""
 		    
@@ -160,7 +200,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
-		   
+		  
 		  // 
 		  // if prevDataQueryItem=nil then
 		  // 
@@ -204,7 +244,7 @@ Inherits clDataQueryItem
 		    '
 		    ' move all key fields
 		    '
-		     
+		    
 		    
 		    redim keyFields(0)
 		    redim keyFieldType(0)

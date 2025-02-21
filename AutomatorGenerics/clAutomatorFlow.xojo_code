@@ -8,6 +8,42 @@ Protected Class clAutomatorFlow
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub Constructor(SourceJSON as JSONItem)
+		  doClear
+		  
+		  self.GroupName = SourceJSON.Value("groupname")
+		  var jitems as JSONItem = SourceJSON.Value(cJSONTagItems) 
+		  
+		  if true then
+		    
+		    // if not jitems.IsArray then
+		    // var k as integer = 1
+		    // 
+		    // else
+		    
+		    for i as integer = 0 to jitems.LastRowIndex
+		      var jitem as JSONItem = jitems.ChildAt(i)
+		      
+		      var itemType as string  = jitem.Value("type")
+		      
+		      if itemType <> "start" then
+		        var item as clAutomatorItem =  self.doAdd(itemType, jitem.value("configuration"))
+		        
+		        
+		      end if
+		      
+		      System.DebugLog(jitem.ToString)
+		      
+		    next
+		    
+		    
+		  end if
+		  
+		  Return
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function CreateVisualSupport() As DesktopContainer
 		  var cc as new ccAutomatorItem
@@ -18,16 +54,22 @@ Protected Class clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function doAdd(itemType as String) As clAutomatorItem
+		Function doAdd(itemType as String, SourceJSON as JSONItem) As clAutomatorItem
 		  
 		  var p as clAutomatorItem
 		  
-		  
-		  p=ObjectFactory(itemType)
+		  if SourceJSON = nil then
+		    
+		    p=ObjectFactory(itemType)
+		    
+		  else
+		    p = ObjectFactory(itemType, SourceJSON)
+		    
+		  end if
 		  
 		  if p<>nil  then
 		    items.Add(p)
-		    p.SetTitle("Step"+Format(lastStepId,"000000"))
+		    if p.getTitle.Trim = "" then p.SetTitle("Step"+Format(lastStepId,"000000"))
 		    
 		    self.doSelect(items.LastIndex)
 		    
@@ -211,24 +253,6 @@ Protected Class clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub LoadFromTextFile(theTextFilename as string)
-		  
-		  
-		  var txtin as TextInputStream
-		  
-		  txtin=GetFolderItem(theTextFileName).OpenAsTextFile
-		  
-		  var MainJSON as new JSONItem(txtin.ReadAll)
-		  
-		  txtin.Close
-		  
-		  MessageBox( "Invalid file signature")
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Function ObjectFactory(ObjectType as String) As clAutomatorItem
 		  //
 		  // Allocate an automator item
@@ -241,42 +265,19 @@ Protected Class clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ProcessLoadLine(clc as clAutomatorItem,theOpcode as integer, theParam as string)
+		Function ObjectFactory(ObjectType as String, SourceJSON as JSONItem) As clAutomatorItem
+		  //
+		  // Allocate an automator item
+		  // 
+		  return new clAutomatorItem("invalid")
 		  
-		End Sub
+		  
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SaveToFile(theTextFilename as string)
-		  var txtout as TextOutputStream
-		  
-		  var MainJSON as new JSONItem
-		  
-		  MainJSON.Value("signature") = clAutomatorFlow.cSignature
-		  MainJSON.Value("groupname") = GroupName
-		  MainJSON.Value("count") = items.Count
-		  
-		  for each item as clAutomatorItem in self.items
-		    
-		    if item <> nil then
-		      var itemTitle as string = item.getTitle
-		      var itemType as string = item.GetTypeAsString
-		      var itemConfig as JSONItem = item.GetConfigJSON
-		      
-		      var ChildJSON as JSONItem
-		      ChildJSON.value("type") = itemType
-		      ChildJSON.value("title") = itemTitle
-		      ChildJSON.value("configuration") = itemConfig
-		      
-		    end if
-		    
-		  next
-		  
-		  txtout=GetFolderItem(theTextFileName).CreateTextFile
-		  
-		  txtout.Write(MainJSON.ToString) 
-		  
-		  txtout.close
+		Sub ProcessLoadLine(clc as clAutomatorItem,theOpcode as integer, theParam as string)
 		  
 		End Sub
 	#tag EndMethod

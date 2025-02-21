@@ -70,6 +70,7 @@ Protected Class clAutomatorItem
 		Sub SetID(NewId as integer)
 		  
 		  self.ID = NewId
+		  
 		  if self.VisualSupport <> nil then self.VisualSupport.SetID(Newid)
 		  
 		End Sub

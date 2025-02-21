@@ -18,6 +18,50 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor(SourceJSON as JSONItem)
+		  
+		  // Calling the overridden superclass constructor.
+		  
+		  super.Constructor(StepTypes.GroupSplit, SourceJSON)
+		  
+		  //var ItemTitle as string = SourceJSON.Value(cJSONTagName)
+		  //Self.SetTitle(ItemTitle)
+		  
+		  var jItems as    JSONItem = SourceJSON.Value(cJSONTagItems)
+		  
+		  if jitems.IsArray then
+		    for i as integer = 0 to jItems.LastRowIndex
+		      
+		      var jitem as JSONItem = jitems.ChildAt(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex)
+		      
+		      sField1(Index) = jitem.Value(cJSONTagField)
+		      
+		      bInUse(index) = True
+		      
+		      if index > nextItem then nextItem = index
+		      
+		    next
+		    
+		    
+		  else
+		    for i as integer=0 to maxItems
+		      binuse(i)=false
+		    next
+		    
+		    nextItem=-1
+		    
+		  end if
+		  
+		  
+		  return 
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetConfigJSON() As JSONItem
 		  // Calling the overridden superclass method.
 		  
@@ -164,30 +208,6 @@ Inherits clDataQueryItem
 		  return GrouSplit_38_38
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoadedJSON(theLine as string)
-		  dim m as integer
-		  dim s as string
-		  var i  as integer
-		  
-		  m=val(NthField(theline,";",1))
-		  i=instr(theLine,";")
-		  s=trim(mid(theLine,i+1,9999))
-		  
-		  select case m
-		  case 10
-		    nextItem=nextItem+1
-		    
-		    
-		  case 12
-		    sfield1(nextItem)=s
-		    binuse(nextitem)=true
-		    
-		  case else
-		  end select
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

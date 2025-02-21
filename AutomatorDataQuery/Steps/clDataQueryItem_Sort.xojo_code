@@ -18,6 +18,46 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor(SourceJSON as JSONItem)
+		  // Calling the overridden superclass constructor.
+		  
+		  Super.Constructor(StepTypes.Sort, SourceJSON)
+		  
+		  
+		  for i as integer =0 to maxItems
+		    binuse(i)=false
+		  next
+		  
+		  nextItem=-1
+		  recLimit=0
+		  
+		  
+		  var jItems as    JSONItem = SourceJSON.Value(cJSONTagItems)
+		  
+		  if jitems.IsArray then
+		    for i as integer = 0 to jItems.LastRowIndex
+		      var jItem as JSONItem = jitems.ChildAt(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex) 
+		      
+		      bInUse(index) = True
+		      if index > nextItem then nextItem = index
+		      
+		      sField1(index) = jitem.Value(cJSONTagField)
+		      sFieldS(index) = jItem.Value(cJSONTagSortOrder) 
+		      
+		    next
+		    
+		  end if
+		  
+		  reclimit = SourceJSON.value(cJSONTagRecordLimit)
+		  
+		  Return
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetConfigJSON() As JSONItem
 		  // Calling the overridden superclass method.
 		  
@@ -164,54 +204,6 @@ Inherits clDataQueryItem
 		  return sort_38_38
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoadedJSON(theLine as string)
-		  dim m as integer
-		  dim s as string
-		  var i  as integer
-		  
-		  m=val(NthField(theline,";",1))
-		  i=instr(theLine,";")
-		  s=trim(mid(theLine,i+1,9999))
-		  
-		  select case m
-		  case 10
-		    nextItem=nextItem+1
-		    
-		    
-		  case 12
-		    sfield1(nextItem)=s
-		    binuse(nextitem)=true
-		    
-		  case 14
-		    sfieldS(nextItem)=s
-		    binuse(nextitem)=true
-		    
-		  case 16
-		    recLimit=val(s)
-		    
-		  case else
-		  end select
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub saveMyData(theOutput as textoutputStream)
-		  var i  as integer
-		  
-		  for i=0 to maxItems
-		    if bInUse(i) then
-		      theOutput.writeline "50;10;xx"
-		      theOutput.writeline "50;12;"+sfield1(i)
-		      theOutput.writeline "50;14;"+sfieldS(i)
-		      theOutput.writeline "50;16;"+str(reclimit)
-		    end if
-		  next
-		  
-		  
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

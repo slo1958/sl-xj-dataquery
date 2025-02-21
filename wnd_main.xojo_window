@@ -526,7 +526,25 @@ End
 		  // self.AutomatorFlow = new clDataQueryFlow(
 		  // tf_GroupTtitle.Text = self.AutomatorFlow.GroupName
 		  
-		  Refresh
+		  var loadedJSON as JSONItem = CurrentProject.LoadFlow(FileToOpen)
+		   
+		  var loadedFlow as new clDataQueryFlow(CurrentProject, loadedJSON)
+		  
+		  self.AutomatorFlow = loadedFlow
+		  self.ccAutomatorFlow1.SetFlow loadedFlow
+		  
+		  self.RefreshStepIDs
+		  
+		  clDataQueryFlow(self.AutomatorFlow).UpdateDataFlow
+		  
+		  title  = loadedFlow.GroupName
+		  tf_GroupTtitle.text = loadedFlow.GroupName
+		  
+		  UpdateUI
+		  
+		  return 
+		  
+		  
 		  
 		End Sub
 	#tag EndEvent

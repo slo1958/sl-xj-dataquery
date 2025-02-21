@@ -160,6 +160,24 @@ Protected Class clDataQueryProject
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function LoadFlow(SourceFileName as string) As JSONItem
+		  
+		  var sourceFolder as FolderItem = self.ProjectFolder
+		  var sourceFile as FolderItem = sourceFolder.Child(SourceFileName)
+		  
+		  var txtin as TextInputStream = TextInputStream.Open(sourceFile)
+		  var loadedStr as string = txtin.ReadAll
+		  txtin.close
+		  
+		  
+		  var loadedJSON as JSONItem = new JSONItem(loadedStr)
+		  
+		  return  loadedJSON 
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub OpenDatabase(f as FolderItem)
 		  
 		  self.PathToDatabase = f

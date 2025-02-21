@@ -15,6 +15,38 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor(SourceJSON as JSONItem)
+		  // Calling the overridden superclass constructor.
+		  
+		  Super.Constructor(StepTypes.Map, SourceJSON)
+		  
+		  
+		  var jItems as    JSONItem = SourceJSON.Value(cJSONTagItems)
+		  
+		  if jitems.IsArray then
+		    for i as integer = 0 to jItems.LastRowIndex
+		      var jItem as JSONItem = jitems.ChildAt(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex) 
+		      
+		      if index > InputList.LastIndex then
+		        Redim InputList(index)
+		        redim OutputList(index)
+		        
+		      end if
+		      
+		      InputList(index) = jitem.Value(cJSONTagInput)
+		      OutputList(index) = jItem.Value(cJSONTagOutput) 
+		      
+		    next
+		    
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetConfigJSON() As JSONItem
 		  // Calling the overridden superclass method.
 		  
@@ -24,14 +56,14 @@ Inherits clDataQueryItem
 		  var jItems as new  JSONItem
 		  
 		  for i as integer = 1 to ubound(InputList)
-		     
+		    
 		    var jItem as new JSONItem
 		    jitem.value(cJSONTagIndex) = i
 		    jitem.Value(cJSONTagInput) = InputList(i)
 		    jItem.Value(cJSONTagOutput) = OutputList(i)
 		    
 		    jitems.Add(jitem)
-		     
+		    
 		    
 		  next
 		  jMaster.Value(cJSONTagItems) = jitems
@@ -112,35 +144,6 @@ Inherits clDataQueryItem
 		  return map_38_38
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoadedJSON(theLine as string)
-		  dim m as integer
-		  dim s as string
-		  var i  as integer
-		  
-		  m=val(NthField(theline,";",1))
-		  i=instr(theLine,";")
-		  s=trim(mid(theLine,i+1,9999))
-		  
-		  select case m
-		  case 10
-		    nextItem=nextItem+1
-		    redim inputList(nextItem)
-		    redim OutputList(nextItem)
-		    
-		  case 11
-		    inputList(nextItem)=s
-		    
-		  case 12
-		    outputlist(nextItem)=s
-		    
-		    
-		  case else
-		  end select
-		  
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

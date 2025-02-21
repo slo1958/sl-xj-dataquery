@@ -16,6 +16,21 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor(Project as clDataQueryProject, SourceJSON as JSONItem)
+		  // Calling the overridden superclass constructor.
+		  
+		  
+		  self.SourceProject = Project
+		  
+		  if StepTypeLabels = nil then CreateStepTypeLabels
+		  
+		  Super.Constructor(SourceJSON)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Shared Sub CreateStepTypeLabels()
 		  
 		  
@@ -49,14 +64,14 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function doAdd(itemType as String) As clAutomatorItem
+		Function doAdd(itemType as String, SourceJSON as JSONItem) As clAutomatorItem
 		  // Calling the overridden superclass method.
 		  
 		  var lastItem as clDataQueryItem  = nil
 		  
 		  if self.Items.Count > 0 then lastItem = clDataQueryItem(self.Items(self.items.LastIndex))
 		  
-		  Var returnValue as clDataQueryItem = clDataQueryItem(Super.doAdd(itemType))
+		  Var returnValue as clDataQueryItem = clDataQueryItem(Super.doAdd(itemType, SourceJSON))
 		  
 		  returnValue.prevDataQueryItem = lastItem
 		  
@@ -72,7 +87,7 @@ Inherits clAutomatorFlow
 		  
 		  // Add the required steps
 		  for each t as string in RequiredStepTypes
-		    call self.doAdd (t)
+		    call self.doAdd (t, nil)
 		    
 		  next
 		  
@@ -199,7 +214,7 @@ Inherits clAutomatorFlow
 		    
 		  next
 		  
-		  if AddDummyGroupby then call doAdd(cStepGroupSplit)
+		  if AddDummyGroupby then call doAdd(cStepGroupSplit, nil)
 		  
 		  UpdateDataFlow
 		  
@@ -230,21 +245,10 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub LoadFromTextFile(theTextFilename as string)
-		  clAutomatorFlow.LoadFromTextFile theTextFilename
-		  
-		  UpdateDataFlow
-		  
-		  Exception err as RuntimeException
-		    // // err.cascade "clDataQueryFlow.LoadFromText"
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function ObjectFactory(StepLabel as String) As clautomatorItem
+		Function ObjectFactory(ObjectType as String) As clautomatorItem
 		  dim clc as clDataQueryItem
 		  
-		  select case LabelToStepType(StepLabel)
+		  select case LabelToStepType(ObjectType)
 		    
 		  case StepTypes.Generic
 		    clc=new clDataQueryItem
@@ -277,6 +281,51 @@ Inherits clAutomatorFlow
 		  end select
 		  
 		  return clc
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ObjectFactory(ObjectType as String, SourceJSON as JSONItem) As clAutomatorItem
+		  
+		  dim clc as clDataQueryItem
+		  
+		  select case LabelToStepType(ObjectType)
+		    
+		  case StepTypes.Generic
+		    clc=new clDataQueryItem(SourceJSON)
+		    
+		  case StepTypes.Filter
+		    clc=new clDataQueryItem_Filter(SourceJSON)
+		    
+		  case StepTypes.GroupSplit
+		    clc=new clDataQueryItem_GroupSplit(SourceJSON)
+		    
+		  case StepTypes.Start 
+		    var cls as new clDataQueryItem_Start(SourceProject) // this one does not require the source JSON
+		    clc = cls
+		    
+		  case StepTypes.Sort
+		    clc=new clDataQueryItem_Sort(SourceJSON)
+		    
+		  case StepTypes.Calculate
+		    clc=new clDataQueryItem_Calc(SourceJSON)
+		    
+		  case StepTypes.Pivot
+		    clc=new clDataQueryItem_pivot(SourceJSON)
+		    
+		  case StepTypes.Map
+		    clc=new clDataQueryItem_Map(SourceJSON)
+		    
+		  case else
+		    clc=nil
+		    
+		  end select
+		  
+		  return clc
+		  
 		  
 		  
 		  
@@ -524,7 +573,7 @@ Inherits clAutomatorFlow
 			Group="Behavior"
 			InitialValue=""
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

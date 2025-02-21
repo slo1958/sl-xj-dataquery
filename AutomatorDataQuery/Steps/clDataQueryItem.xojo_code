@@ -47,6 +47,20 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor(st as StepTypes, SourceJSON as JSONItem)
+		  super.Constructor(clDataQueryFlow.StepTypeToLabel(st))
+		  
+		  self.ItemEnumType = st
+		  
+		  prevDataQueryItem=nil
+		  
+		  var ItemTitle as string = SourceJSON.Value(cJSONTagName)
+		  
+		  Self.SetTitle(ItemTitle)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetConfigJSON() As JSONItem
 		  
 		  var jMaster as new JSONItem

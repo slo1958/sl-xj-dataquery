@@ -104,6 +104,19 @@ End
 	#tag Method, Flags = &h0
 		Sub SetFlow(NewFlow as clAutomatorFlow)
 		  
+		  if self.AutomatorFlow <> nil then
+		    
+		    for each item as clAutomatorItem in self.AutomatorFlow.Items
+		      if item.VisualSupport <> nil then
+		        item.VisualSupport.Close
+		        item.VisualSupport = nil
+		        
+		      end if
+		      
+		    next
+		    
+		  end if
+		  
 		  self.AutomatorFlow = NewFlow
 		  
 		  
