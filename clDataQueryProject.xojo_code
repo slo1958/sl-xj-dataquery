@@ -102,8 +102,10 @@ Protected Class clDataQueryProject
 		  
 		  var dest as FolderItem = FolderToScan
 		  
+		  if not dest.Exists then return d
+		  
 		  for each file as FolderItem in dest.Children
-		    if file.Name.right(cProjectFileExtension.Length) = ExtensionFilter then
+		    if file.Name.right(ExtensionFilter.Length) = ExtensionFilter then
 		      
 		      var jFile as TextInputStream
 		      
@@ -145,7 +147,7 @@ Protected Class clDataQueryProject
 
 	#tag Method, Flags = &h0
 		Function GetListOfFlows() As Dictionary
-		  
+		  return GetListOfElements(self.ProjectFolder, cFlowFileExtension, "groupname")
 		End Function
 	#tag EndMethod
 

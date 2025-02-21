@@ -24,7 +24,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
    Type            =   0
    Visible         =   False
    Width           =   934
-   Begin DesktopListBox ListBox3
+   Begin DesktopListBox lb_Analaysis
       AllowAutoDeactivate=   True
       AllowAutoHideScrollbars=   True
       AllowExpandableRows=   False
@@ -33,8 +33,8 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       AllowRowDragging=   False
       AllowRowReordering=   False
       Bold            =   False
-      ColumnCount     =   2
-      ColumnWidths    =   "0,100%"
+      ColumnCount     =   1
+      ColumnWidths    =   ""
       DefaultRowHeight=   -1
       DropIndicatorVisible=   False
       Enabled         =   True
@@ -306,56 +306,19 @@ End
 
 	#tag Method, Flags = &h0
 		Sub BuildListOfAnalysis()
-		  dim fld as FolderItem
-		  var i  as integer
-		  dim s as string
-		  dim s2 as string
-		  dim s3 as string
-		  dim r as integer
 		  
-		  dim txt as TextInputStream
+		  var d as Dictionary = CurrentProject.GetListOfFlows
 		  
-		  ListBox3.RemoveAllRows
+		  lb_Analaysis.RemoveAllRows
 		  
-		  fld=GetFolderItem("")
-		  
-		  for i=1 to fld.Count
-		    if fld.item(i).Directory then
-		    else
-		      s=trim(fld.Item(i).name)
-		      
-		      if uppercase(right(s,4))=".TXT" then
-		        txt=GetFolderItem(s).OpenAsTextFile
-		        s2=txt.readline
-		        
-		        if s2=clAutomatorFlow.cSignature  then
-		          s3=""
-		          while not txt.eof and s3=""
-		            s3=trim(txt.readline)
-		            
-		            if left(s3,3)<>"60;" then 
-		              s3="" 
-		            else
-		              s3=NthField(s3,";",2)
-		            end if
-		            
-		          wend
-		          
-		        end if
-		        
-		        txt.close
-		        if s2=clAutomatorFlow.cSignature then
-		          ListBox3.addrow  s
-		          r=ListBox3.LastRowIndex
-		          ListBox3.CellTextAt(r,1)=s3
-		        end if
-		      end if
-		      
-		    end if
+		  for each k as string in d.keys
+		    lb_Analaysis.AddRow(d.value(k).StringValue)
+		    
+		    lb_Analaysis.RowTagAt(lb_Analaysis.LastAddedRowIndex) = k
+		    
 		  next
 		  
-		  'Queries_Group.Visible=(ListBox3.ListCount>0) and viewPresent_Ranking
-		  'Queries_Group.Visible=viewPresent_Ranking and paramBoolean("SHOW_QUERIES",true)
+		  return
 		  
 		End Sub
 	#tag EndMethod
@@ -544,16 +507,16 @@ End
 
 #tag EndWindowCode
 
-#tag Events ListBox3
+#tag Events lb_Analaysis
 	#tag Event
 		Sub DoublePressed()
 		  dim sFileToOpen as string
 		  var i  as integer
 		  
-		  i = Listbox3.SelectedRowIndex
+		  i = lb_Analaysis.SelectedRowIndex
 		  
 		  if i>=0 Then
-		    sFileToOpen=ListBox3.CellTextAt(i,0)
+		    sFileToOpen=lb_Analaysis.CellTextAt(i,0)
 		    
 		    self.AutomatorFlow.LoadFromTextFile(sFileToOpen)
 		    
