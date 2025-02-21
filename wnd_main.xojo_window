@@ -510,23 +510,23 @@ End
 #tag Events lb_Analaysis
 	#tag Event
 		Sub DoublePressed()
-		  dim sFileToOpen as string
-		  var i  as integer
+		  
+		  var FileToOpen as string 
+		  
+		  var i as integer 
 		  
 		  i = lb_Analaysis.SelectedRowIndex
 		  
-		  if i>=0 Then
-		    sFileToOpen=lb_Analaysis.CellTextAt(i,0)
-		    
-		    self.AutomatorFlow.LoadFromTextFile(sFileToOpen)
-		    
-		    tmpCurrentFile=sFileToOpen
-		    
-		    tf_GroupTtitle.Text = self.AutomatorFlow.GroupName
-		    
-		    Refresh
-		    
-		  end if
+		  if i<0 Then Return
+		  
+		  FileToOpen=lb_Analaysis.RowTagAt(i)
+		  // 
+		  // self.AutomatorFlow.LoadFromTextFile(sFileToOpen)
+		  // 
+		  // self.AutomatorFlow = new clDataQueryFlow(
+		  // tf_GroupTtitle.Text = self.AutomatorFlow.GroupName
+		  
+		  Refresh
 		  
 		End Sub
 	#tag EndEvent

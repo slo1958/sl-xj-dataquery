@@ -154,8 +154,30 @@ Protected Class clAutomatorFlow
 		  MainJSON.Value("groupname") = GroupName
 		  MainJSON.Value("count") = items.Count
 		  
-		  return MainJSON
 		  
+		  MainJSON.Compact = False
+		  
+		  var jItems as new JSONItem
+		  
+		  for each item as clAutomatorItem in self.items
+		    
+		    if item <> nil then
+		      var JItem as new JSONItem
+		      
+		      JItem.Value(cJSONTagExternalStepType) = Item.GetTypeAsString
+		      JItem.Value(cJSONTagIndex) = Item.ID.ToString
+		      JItem.value(cJSONTagConfig) = Item.GetConfigJSON()
+		      
+		      jItems.add(jitem)
+		      
+		    end if
+		    
+		  next
+		  
+		  
+		  MainJSON.Value(cJSONTagItems) = jItems
+		  
+		  return MainJSON
 		End Function
 	#tag EndMethod
 
@@ -287,6 +309,18 @@ Protected Class clAutomatorFlow
 		Items(0) As clAutomatorItem
 	#tag EndProperty
 
+
+	#tag Constant, Name = cJSONTagConfig, Type = String, Dynamic = False, Default = \"configuration", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagExternalStepType, Type = String, Dynamic = False, Default = \"type", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagIndex, Type = String, Dynamic = False, Default = \"itemIndex", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cJSONTagItems, Type = String, Dynamic = False, Default = \"items", Scope = Public
+	#tag EndConstant
 
 	#tag Constant, Name = cSignature, Type = String, Dynamic = False, Default = \"AUTOSQL", Scope = Public
 	#tag EndConstant

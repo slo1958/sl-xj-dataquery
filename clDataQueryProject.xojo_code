@@ -228,8 +228,15 @@ Protected Class clDataQueryProject
 		  
 		  destinationFile = destinationFolder.Child(filename)
 		  
-		  if destinationFile.exists and destinationFolder.IsFolder then
-		    destinationFile.RemoveFolderAndContents
+		  if destinationFile.exists and destinationFile.IsFolder then
+		    try
+		      destinationFile.RemoveFolderAndContents
+		      
+		    catch 
+		      MessageBox("Failed to remove foldert " + destinationFile.NativePath)
+		      return ""
+		      
+		    end Try
 		    
 		  end if
 		  

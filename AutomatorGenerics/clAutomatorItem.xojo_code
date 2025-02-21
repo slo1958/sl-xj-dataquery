@@ -7,6 +7,12 @@ Protected Class clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor(SourceJSON as JSONItem)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Constructor(NewItemType as string)
 		  
 		  self.ItemType = NewItemType
