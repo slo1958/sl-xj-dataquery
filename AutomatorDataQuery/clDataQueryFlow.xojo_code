@@ -165,7 +165,7 @@ Inherits clAutomatorFlow
 	#tag Method, Flags = &h0
 		Function GetJSON() As JSONItem
 		  
-		  var JMaster as new JSONItem
+		  var JMaster as  JSONItem = super.GetJSON
 		  
 		  var jItems as new JSONItem
 		  
@@ -460,6 +460,10 @@ Inherits clAutomatorFlow
 		    
 	#tag EndNote
 
+
+	#tag Property, Flags = &h0
+		Filename As String
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		SourceProject As clDataQueryProject

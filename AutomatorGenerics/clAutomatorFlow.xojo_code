@@ -148,7 +148,13 @@ Protected Class clAutomatorFlow
 	#tag Method, Flags = &h0
 		Function GetJSON() As JSONItem
 		  
-		  return nil
+		  var MainJSON as new JSONItem
+		  
+		  MainJSON.Value("signature") = clAutomatorFlow.cSignature
+		  MainJSON.Value("groupname") = GroupName
+		  MainJSON.Value("count") = items.Count
+		  
+		  return MainJSON
 		  
 		End Function
 	#tag EndMethod

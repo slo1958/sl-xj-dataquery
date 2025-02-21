@@ -15,18 +15,18 @@ Protected Class clDataQueryProject
 		  self.ProjectName = SourceJSON.value(cProjectName)
 		  
 		  var fdb as FolderItem 
-		  var ffw as FolderItem
+		  var TempFolderForFlows as FolderItem
 		  
 		  fdb = new FolderItem(SourceJSON.value(cDatabasePath).StringValue)
 		  
 		  var pfw as string = SourceJSON.Lookup(cFlowFolder, "").StringValue
 		  
 		  if pfw = "" then
-		    pfw = SourceFile.Replace(cFileExtension, "")
+		    pfw = SourceFile.Replace(cProjectFileExtension, "")
 		    
 		  end if
 		  
-		  if pfw <> "" then ffw = new FolderItem(pfw)
+		  if pfw <> "" then TempFolderForFlows = new FolderItem(pfw)
 		  
 		  if fdb = nil then
 		    
@@ -41,7 +41,7 @@ Protected Class clDataQueryProject
 		  
 		  self.ProjectFIle = new FolderItem(SourceFile)
 		  Self.DataSourceName = SourceJSON.Value(cDataSource) 
-		  self.ProjectFolder = ffw
+		  self.ProjectFolder = TempFolderForFlows
 		  
 		  Return
 		  
@@ -96,14 +96,14 @@ Protected Class clDataQueryProject
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Shared Function GetListOfProjects() As Dictionary
+		Shared Function GetListOfElements(FolderToScan as FolderItem, ExtensionFilter as string, JSONTagForName as string) As Dictionary
 		  
 		  var d as new Dictionary
 		  
-		  var dest as FolderItem = app.GetAppDataFolder()
+		  var dest as FolderItem = FolderToScan
 		  
 		  for each file as FolderItem in dest.Children
-		    if file.Name.right(cFileExtension.Length) = cFileExtension then
+		    if file.Name.right(cProjectFileExtension.Length) = ExtensionFilter then
 		      
 		      var jFile as TextInputStream
 		      
@@ -120,7 +120,7 @@ Protected Class clDataQueryProject
 		          var jTxt as string = jfile.ReadAll
 		          var jMain as JSONItem = new JSONItem(jTxt)
 		          
-		          var jName as string = jMain.Value(cProjectName).StringValue
+		          var jName as string = jMain.Value(JSONTagForName).StringValue
 		          
 		          d.value(file.name) = jName
 		          
@@ -139,6 +139,20 @@ Protected Class clDataQueryProject
 		  next
 		  
 		  return d
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetListOfFlows() As Dictionary
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Shared Function GetListOfProjects() As Dictionary
+		  
+		  return GetListOfElements(app.GetAppDataFolder(), cProjectFileExtension, cProjectName)
 		  
 		End Function
 	#tag EndMethod
@@ -164,7 +178,7 @@ Protected Class clDataQueryProject
 		  
 		  var filename as string = "PROJECT" + format(d, "000000000") 
 		  
-		  self.ProjectFIle = dest.Child(filename+ cFileExtension)
+		  self.ProjectFIle = dest.Child(filename+ cProjectFileExtension)
 		  self.ProjectFolder = dest.Child(filename)
 		  
 		  txt = TextOutputStream.Create(self.ProjectFIle)
@@ -176,6 +190,63 @@ Protected Class clDataQueryProject
 		  
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SaveFlow(flow as JSONItem, DestinationFileName as string) As string
+		  
+		  
+		  if flow = nil then return DestinationFileName
+		  
+		  var d as Int64 = DateTime.Now.SecondsFrom1970
+		  
+		  var filename as string
+		  
+		  
+		  if DestinationFileName = "" then 
+		    filename = "DQFLOW" + format(d, "000000000") + cFlowFileExtension
+		    
+		  else
+		    filename = DestinationFileName
+		    
+		  end if
+		  
+		  var destinationFolder as FolderItem = self.ProjectFolder
+		  var destinationFile as FolderItem 
+		  var txt as TextOutputStream 
+		  
+		  
+		  
+		  // Create the folder to store analysis
+		  
+		  if not destinationFolder.Exists then
+		    destinationFolder.CreateFolder
+		    
+		  end if
+		  
+		  destinationFile = destinationFolder.Child(filename)
+		  
+		  if destinationFile.exists and destinationFolder.IsFolder then
+		    destinationFile.RemoveFolderAndContents
+		    
+		  end if
+		  
+		  txt = TextOutputStream.Create(destinationFile)
+		  
+		  txt.Write(flow.ToString)
+		  
+		  txt.close
+		  
+		  if DebugBuild then
+		    destinationFolder.Parent.Open
+		    
+		  end if
+		  
+		  return filename
+		  
+		  
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -220,10 +291,13 @@ Protected Class clDataQueryProject
 	#tag Constant, Name = cDataSource, Type = String, Dynamic = False, Default = \"datasource", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = cFileExtension, Type = String, Dynamic = False, Default = \".dqproj", Scope = Public
+	#tag Constant, Name = cFlowFileExtension, Type = String, Dynamic = False, Default = \".dqflow", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = cFlowFolder, Type = String, Dynamic = False, Default = \"flowStorage", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cProjectFileExtension, Type = String, Dynamic = False, Default = \".dqproj", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = cProjectName, Type = String, Dynamic = False, Default = \"projectname", Scope = Public

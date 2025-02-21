@@ -246,37 +246,6 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Visible         =   True
       Width           =   59
    End
-   Begin DesktopButton Button1
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Button"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   315
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   9
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   360
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
    Begin DesktopButton Button2
       AllowAutoDeactivate=   True
       Bold            =   False
@@ -290,7 +259,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   415
+      Left            =   315
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
@@ -621,27 +590,13 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button1
-	#tag Event
-		Sub Pressed()
-		  var s as string
-		  
-		  s = self.AutomatorFlow.GetJSON.ToString
-		  
-		  wnd_showLongString.ShowMe("JSON", s)
-		  
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events Button2
 	#tag Event
 		Sub Pressed()
-		  var s as string
-		  
-		  s = self.AutomatorFlow.GetJSON.ToString
 		  
 		  var projectFile as FolderItem = CurrentProject.ProjectFIle
+		  
+		  var projectFlow as clDataQueryFlow = clDataQueryFlow(self.AutomatorFlow)
 		  
 		  if projectFile = nil then 
 		    MessageBox("Cannot save flow to undefined project")
@@ -649,9 +604,7 @@ End
 		    
 		  end if
 		  
-		  
-		  // var destinationFolder as string = CurrentProject.
-		  
+		  projectFlow.Filename = CurrentProject.SaveFlow(self.AutomatorFlow.GetJSON, projectFlow.Filename)
 		  
 		  return 
 		End Sub

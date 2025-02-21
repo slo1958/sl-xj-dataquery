@@ -69,6 +69,7 @@ Begin DesktopWindow wnd_manage_projects
       Underline       =   False
       Visible         =   True
       Width           =   300
+      _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
    Begin DesktopTextField tf_newname
@@ -558,6 +559,14 @@ End
 		Group="Deprecated"
 		InitialValue="False"
 		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="OriginalProjectName"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
