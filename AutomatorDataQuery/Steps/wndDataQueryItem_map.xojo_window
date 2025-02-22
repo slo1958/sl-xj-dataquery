@@ -327,15 +327,13 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  var i  as integer
-		  
-		  
+		   
 		  curStep.name=efName.text
 		  
 		  '
 		  ' this proc will not add or remove a row
 		  '
-		  for i=1 to ubound(curStep.InputList)
+		  for i as integer = 1 to ubound(curStep.InputList)
 		    curStep.InputList(i)=ListBox1.CellTextAt(i-1,0)
 		    curStep.OutputList(i)=ListBox1.CellTextAt(i-1,1)
 		  next
@@ -363,12 +361,12 @@ End
 
 	#tag Method, Flags = &h0
 		Sub updateList()
-		  var i  as integer
-		  dim r as integer
+		   
+		  var r as integer
 		  
 		  ListBox1.RemoveAllRows
 		  
-		  for i=1 to ubound(curStep.InputList)
+		  for i as integer = 1 to ubound(curStep.InputList)
 		    ListBox1.addrow ""
 		    r=ListBox1.LastRowIndex
 		    
@@ -389,13 +387,13 @@ End
 		  dim sa,sb  as string
 		  dim bAnyDefined as boolean
 		  
-		  var i  as integer
+		   
 		  dim bErr as boolean
 		  
 		  bErr=false
 		  bAnyDefined=false
 		  
-		  for i=1 to ubound(curStep.InputList)
+		  for i as integer = 1 to ubound(curStep.InputList)
 		    sa=ListBox1.CellTextAt(i-1,0)
 		    sb=ListBox1.CellTextAt(i-1,1)
 		    
@@ -456,9 +454,9 @@ End
 #tag Events pb_None
 	#tag Event
 		Sub Pressed()
-		  var i  as integer
+		   
 		  
-		  for i=0 to ListBox1.RowCount-1
+		  for i as integer = 0 to ListBox1.RowCount-1
 		    listbox1.CellTextAt(i,1)=""
 		  next
 		  
@@ -468,9 +466,9 @@ End
 #tag Events PushButton1
 	#tag Event
 		Sub Pressed()
-		  var i  as integer
+		   
 		  
-		  for i=0 to ListBox1.RowCount-1
+		  for i as integer = 0 to ListBox1.RowCount-1
 		    listbox1.CellTextAt(i,1)=listbox1.CellTextAt(i,0)
 		  next
 		  

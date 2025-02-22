@@ -1047,10 +1047,10 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  var i  as integer
+		   
 		  
 		  lastItem=0
-		  for i=1 to 6
+		  for i as integer = 1 to 6
 		    ppFieldA(i).visible=false
 		    ppFieldB(i).visible=false
 		    pb_Remove(i).Visible=false
@@ -1098,13 +1098,11 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  var i  as integer
-		  
-		  
+		   
 		  curStep.name=efName.text
 		  
 		  
-		  for i=0 to  curStep.maxItems
+		  for i as integer = 0 to  curStep.maxItems
 		    if ppFieldA(i).Visible then
 		      curStep.sField1(i)=ppFieldA(i).SelectedRowText
 		      curStep.sFields(i)=ppfieldB(i).SelectedRowText
@@ -1131,16 +1129,16 @@ End
 
 	#tag Method, Flags = &h0
 		Sub prepLine(theLine as integer)
-		  var i  as integer
+		   
 		  if curStep.prevDataQueryItem<>nil then
 		    ppFieldA(theLine).RemoveAllRows
 		    
 		    
-		    for i=1 to ubound(curStep.prevDataQueryItem.keyFields)
+		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.keyFields)
 		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.keyFields(i)
 		    next
 		    
-		    for i=1 to ubound(curStep.prevDataQueryItem.valueFields)
+		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.valueFields)
 		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.valueFields(i)
 		    next
 		    
@@ -1152,7 +1150,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub ShowMe(theStep as clDataQueryItem_Sort)
-		  var i  as integer
+		   
 		  var j  as integer
 		  
 		  curStep=theStep
@@ -1164,7 +1162,7 @@ End
 		  ppFieldA(0).findItem(curStep.sField1(0))
 		  ppFieldB(0).findItem(curStep.sFieldS(0))
 		  
-		  for i=1 to curStep.maxItems
+		  for i as integer = 1 to curStep.maxItems
 		    if curStep.bInUse(i) then
 		      j=addone
 		      ppFieldA(j).findItem(curStep.sField1(i))

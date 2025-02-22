@@ -1293,6 +1293,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Top             =   71
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   33
@@ -1357,6 +1358,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Top             =   94
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   33
@@ -1386,6 +1388,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Top             =   118
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   33
@@ -1415,6 +1418,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Top             =   143
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   33
@@ -1444,6 +1448,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Top             =   168
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   33
@@ -1473,6 +1478,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Top             =   193
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   33
@@ -1502,6 +1508,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Top             =   219
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   33
@@ -1512,12 +1519,12 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  var i  as integer
+		   
 		  
 		  lastItem=-1
 		  lastText=-1
 		  
-		  for i=0 to 6
+		  for i as integer = 0 to 6
 		    efFieldA(i).visible=false
 		    effieldname(i).Visible=false
 		    pb_Remove(i).visible=false
@@ -1565,11 +1572,11 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  var i  as integer
+		   
 		  dim n as integer
 		  
 		  n=0
-		  for i=0 to 6
+		  for i as integer = 0 to 6
 		    if (efFieldA(i).Visible) and (efFieldName(i).text<>"") and (efFieldA(i).text<>"") then n=n+1
 		  next
 		  
@@ -1581,7 +1588,7 @@ End
 		  curStep.name=efName.text
 		  
 		  n=0
-		  for i=0 to  6 'ugly => to be improved in next version
+		  for i as integer = 0 to  6 'ugly => to be improved in next version
 		    if (efFieldA(i).Visible) and (efFieldName(i).text<>"") and (efFieldA(i).text<>"") then
 		      n=n+1
 		      curStep.OutputFields(n)=efFieldName(i).text
@@ -1603,7 +1610,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub ShowMe(theStep as clDataQueryItem_Calc)
-		  var i  as integer
+		   
 		  var j  as integer
 		  
 		  curStep=theStep
@@ -1612,7 +1619,7 @@ End
 		  
 		  efName.text=curStep.name
 		  
-		  for i=1 to ubound(curStep.OutputFields)
+		  for i as integer = 1 to ubound(curStep.OutputFields)
 		    j=addone
 		    efFieldName(j).text=curStep.OutputFields(i)
 		    efFieldA(j).text=curStep.Formula(i)
@@ -1626,7 +1633,7 @@ End
 		  
 		  ListBox1.RemoveAllRows
 		  if curStep.prevDataQueryItem<>nil then
-		    for i=1 to ubound(curStep.prevDataQueryItem.valueFields)
+		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.valueFields)
 		      ListBox1.addrow curStep.prevDataQueryItem.valueFields(i)+"$"
 		    next
 		  end if

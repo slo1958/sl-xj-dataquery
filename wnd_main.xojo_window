@@ -375,6 +375,8 @@ End
 		  
 		  clDataQueryFlow(self.AutomatorFlow).UpdateDataFlow
 		  
+		  self.RefreshStepIDs
+		  
 		  UpdateUI
 		  
 		End Sub
@@ -459,7 +461,7 @@ End
 		  
 		  if s = nil then return 
 		  
-		  if s.ID = Identifier then s.SetTitle(newName)
+		  if s.GetID = Identifier then s.SetTitle(newName)
 		  
 		  UpdateUI
 		End Sub
@@ -527,7 +529,7 @@ End
 		  // tf_GroupTtitle.Text = self.AutomatorFlow.GroupName
 		  
 		  var loadedJSON as JSONItem = CurrentProject.LoadFlow(FileToOpen)
-		   
+		  
 		  var loadedFlow as new clDataQueryFlow(CurrentProject, loadedJSON)
 		  
 		  self.AutomatorFlow = loadedFlow

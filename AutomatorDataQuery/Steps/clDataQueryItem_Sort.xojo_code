@@ -2,26 +2,10 @@
 Protected Class clDataQueryItem_Sort
 Inherits clDataQueryItem
 	#tag Method, Flags = &h0
-		Sub Constructor()
-		  var i  as integer
-		  
-		  Super.constructor(StepTypes.Sort)
-		  
-		  for i=0 to maxItems
-		    binuse(i)=false
-		  next
-		  
-		  nextItem=-1
-		  recLimit=0
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub Constructor(SourceJSON as JSONItem)
 		  // Calling the overridden superclass constructor.
 		  
-		  Super.Constructor(StepTypes.Sort, SourceJSON)
+		  Super.Constructor(SourceJSON)
 		  
 		  
 		  for i as integer =0 to maxItems
@@ -30,6 +14,8 @@ Inherits clDataQueryItem
 		  
 		  nextItem=-1
 		  recLimit=0
+		  
+		  if SourceJSON = nil then Return
 		  
 		  
 		  var jItems as    JSONItem = SourceJSON.Value(cJSONTagItems)
@@ -105,7 +91,7 @@ Inherits clDataQueryItem
 		  dim s as string
 		  dim sSource as string
 		  dim sPostFix as string
-		  var i  as integer
+		   
 		  dim ssep as string
 		  
 		  if prevDataQueryItem<>nil then
@@ -120,13 +106,13 @@ Inherits clDataQueryItem
 		    
 		    ssep=""
 		    
-		    for i=1 to ubound(prevDataQueryItem.keyFields)
+		    for i as integer = 1 to ubound(prevDataQueryItem.keyFields)
 		      s=s+ssep
 		      s=s+prevDataQueryItem.keyFields(i)+"_"+sPostFix+" as "+prevDataQueryItem.keyFields(i) + PostFixStr(IsLastStep)
 		      ssep=","
 		    next
 		    
-		    for i=1 to ubound(prevDataQueryItem.valueFields)
+		    for i as integer = 1 to ubound(prevDataQueryItem.valueFields)
 		      s=s+ssep
 		      s=s+prevDataQueryItem.valueFields(i)+"_"+sPostFix+" as "+prevDataQueryItem.valueFields(i)  + PostFixStr(IsLastStep)
 		      ssep=","
@@ -137,7 +123,7 @@ Inherits clDataQueryItem
 		    
 		    ssep=" order by "
 		    
-		    for i=0 to maxitems
+		    for i as integer = 0 to maxitems
 		      if sfield1(i)<>"" then
 		        s=s+ssep+sfield1(i)+"_"+sPostFix+"  "+sfields(i)
 		        ssep=","
@@ -183,14 +169,21 @@ Inherits clDataQueryItem
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetTypeAsEnum() As StepTypes
+		  
+		  return StepTypes.Sort
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		  var i  as integer
+		   
 		  var j  as integer
 		  
 		  j=0
 		  
-		  for i=0 to ubound(sfield1)
+		  for i as integer = 0 to ubound(sfield1)
 		    if bInUse(i) then j=j+1
 		  next
 		  
@@ -220,7 +213,7 @@ Inherits clDataQueryItem
 		  '
 		  ' passes all fields (key, values)
 		  '
-		  var i  as integer
+		   
 		  var j  as integer
 		  dim n as integer
 		  dim s as string
@@ -230,7 +223,7 @@ Inherits clDataQueryItem
 		    '
 		    ' obtain field type of selected fields
 		    '
-		    for i=0 to ubound(sField1)
+		    for i as integer = 0 to ubound(sField1)
 		      s=sField1(i)
 		      
 		      for j=1 to ubound(prevDataQueryItem.keyFields)
@@ -244,7 +237,7 @@ Inherits clDataQueryItem
 		    redim keyFields(n)
 		    redim keyFieldType(n)
 		    j=0
-		    for i=0 to ubound(sfield1)
+		    for i as integer = 0 to ubound(sfield1)
 		      if binuse(i) then  
 		        j=j+1
 		        keyFields(j)=sField1(i)
@@ -255,7 +248,7 @@ Inherits clDataQueryItem
 		    n=ubound(prevDataQueryItem.valueFields)
 		    redim valueFields(n)
 		    
-		    for i=1 to n
+		    for i as integer = 1 to n
 		      valueFields(i)=prevDataQueryItem.valueFields(i)
 		    next
 		    

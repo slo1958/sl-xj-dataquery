@@ -7,7 +7,6 @@ Inherits clDataQueryItem
 		  dim sField_Remaining(0) as string
 		  dim sField_R_Type(0) as InternalFieldTypes
 		  
-		  var i  as integer
 		  var jField  as integer
 		  
 		  '
@@ -20,14 +19,14 @@ Inherits clDataQueryItem
 		    redim sField_Remaining(ubound(prevDataQueryItem.keyFields))
 		    redim sField_R_Type(ubound(prevDataQueryItem.keyFields))
 		    
-		    for i=1 to ubound(prevDataQueryItem.keyFields)
+		    for i as integer = 1 to ubound(prevDataQueryItem.keyFields)
 		      sField_Remaining(i)=prevDataQueryItem.keyFields(i)
 		      sField_R_Type(i)=prevDataQueryItem.keyFieldType(i)
 		    next
 		    
 		    for jField=1 to 3
 		      
-		      for i=1 to ubound(sField_Remaining)
+		      for i as integer = 1 to ubound(sField_Remaining)
 		        if sField_Remaining(i)=sField(jField) then
 		          sField_Remaining(i)="$$$$"
 		        end if
@@ -43,7 +42,7 @@ Inherits clDataQueryItem
 		  redim keyFields(0)
 		  redim keyFieldType(0)
 		  
-		  for i=1 to ubound(sField_Remaining)
+		  for i as integer = 1 to ubound(sField_Remaining)
 		    if sField_Remaining(i)<>"$$$$" then
 		      jField=keyFields.LastIndex+1
 		      redim keyFields(jField)
@@ -60,19 +59,21 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor()
+		Sub Constructor(SourceJSON as JSONItem)
 		  
 		  
-		  super.Constructor(StepTypes.Pivot)
+		  super.Constructor(SourceJSON)
+		   
 		  
-		  var i  as integer
-		  
-		  for i=0 to maxItems
+		  for i as integer = 0 to maxItems
 		    binuse(i)=false
 		  next
 		  
 		  nextItem=-1
-		   
+		  
+		  
+		  if SourceJSON = nil then return 
+		  
 		End Sub
 	#tag EndMethod
 
@@ -182,11 +183,11 @@ Inherits clDataQueryItem
 	#tag Method, Flags = &h1
 		Protected Function getOneItem(theItem as integer) As string
 		  dim s as string
-		  var i  as integer
+		   
 		  if bInUse(theItem) then
 		    s=sBlockName(theItem)
 		    s=s+" for "
-		    for i=1 to 3
+		    for i as integer = 1 to 3
 		      if (sfield(i)<> cNotUsed) and (sfield(i)<>"")  then s=s+sField(i)+" = "+sConst(i,theItem)
 		    next
 		    
@@ -277,7 +278,7 @@ Inherits clDataQueryItem
 		  
 		  // Second CTE 
 		  CTE1 =  cDataCTE + " as (SELECT  " + string.FromArray(tmpfields, ",") + " FROM (" + ssource +"))"
-		   
+		  
 		  
 		  // Create main query
 		  
@@ -324,7 +325,7 @@ Inherits clDataQueryItem
 		    
 		  next
 		  
-		   
+		  
 		  joinedSrc.Add("SELECT " + string.FromArray(tmpfields,",") + " FROM " + cDriverCTE)
 		  
 		  // add queryies based on data CTE
@@ -403,14 +404,21 @@ Inherits clDataQueryItem
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetTypeAsEnum() As StepTypes
+		  
+		  return StepTypes.Pivot
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		  var i  as integer
+		   
 		  var j  as integer
 		  
 		  j=0
 		  
-		  for i=0 to maxItems
+		  for i as integer = 0 to maxItems
 		    if bInUse(i) then j=j+1
 		  next
 		  
@@ -468,28 +476,6 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub saveMyData(theOutput as textoutputStream)
-		  var i  as integer
-		  
-		  for i=0 to maxItems
-		    if bInUse(i) then
-		      theOutput.writeline "50;10;xx"
-		      theOutput.writeline "50;15;"+sBlockName(i)
-		      theOutput.writeline "50;16;"+sConst(1,i)
-		      theOutput.writeline "50;17;"+sConst(2,i)
-		      theOutput.writeline "50;18;"+sConst(3,i)
-		    end if
-		  next
-		  
-		  theOutput.writeline "50;11;"+sfield(1)
-		  theOutput.writeline "50;12;"+sfield(2)
-		  theOutput.writeline "50;13;"+sfield(3)
-		  //theOutput.writeline "50;14;"+str(iJoinType)
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
 		  
 		  wndDataQueryItem_pivot.showme me
@@ -502,7 +488,7 @@ Inherits clDataQueryItem
 		  '
 		  ' a pivot removes some records, but passes all fields
 		  '
-		   
+		  
 		  
 		  if prevDataQueryItem<>nil then
 		    
@@ -513,7 +499,7 @@ Inherits clDataQueryItem
 		    // for jBlock=0 to maxItems
 		    // if sBlockName(jblock)<>"" then
 		    // 
-		    // for i=1 to ubound(prevDataQueryItem.valueFields)
+		    // for i as integer = 1 to ubound(prevDataQueryItem.valueFields)
 		    // n=ubound(valueFields)+1
 		    // redim valueFields(n)
 		    // valueFields(n)=prevDataQueryItem.valueFields(i)+"_"+sBlockName(jblock)

@@ -245,49 +245,6 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function ObjectFactory(ObjectType as String) As clautomatorItem
-		  dim clc as clDataQueryItem
-		  
-		  select case LabelToStepType(ObjectType)
-		    
-		  case StepTypes.Generic
-		    clc=new clDataQueryItem
-		    
-		  case StepTypes.Filter
-		    clc=new clDataQueryItem_Filter
-		    
-		  case StepTypes.GroupSplit
-		    clc=new clDataQueryItem_GroupSplit
-		    
-		  case StepTypes.Start
-		    var cls as new clDataQueryItem_Start(SourceProject)
-		    clc = cls
-		    
-		  case StepTypes.Sort
-		    clc=new clDataQueryItem_Sort
-		    
-		  case StepTypes.Calculate
-		    clc=new clDataQueryItem_Calc
-		    
-		  case StepTypes.Pivot
-		    clc=new clDataQueryItem_pivot
-		    
-		  case StepTypes.Map
-		    clc=new clDataQueryItem_Map
-		    
-		  case else
-		    clc=nil
-		    
-		  end select
-		  
-		  return clc
-		  
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Function ObjectFactory(ObjectType as String, SourceJSON as JSONItem) As clAutomatorItem
 		  
 		  dim clc as clDataQueryItem
@@ -330,60 +287,6 @@ Inherits clAutomatorFlow
 		  
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoadLine(clc as clDataQueryItem, theOpcode as integer, theParam as string)
-		  dim m as integer
-		  dim s as string
-		  
-		  s=theParam
-		  
-		  select case theOpcode
-		    
-		  case 4 'nb key fields
-		    m=val(s)
-		    if clc<>nil then redim clc.keyFields(0)
-		    
-		  case 5 ' a key field
-		    m=ubound(clc.keyFields)+1
-		    redim clc.keyFields(m)
-		    if clc<>nil then clc.keyFields(m)=s
-		    
-		    
-		  case 6 'nb val fields
-		    m=val(s)
-		    if clc<>nil then redim clc.valueFields(0)
-		    
-		  case 7 'a value field
-		    m=ubound(clc.valueFields)+1
-		    redim clc.valueFields(m)
-		    if clc<>nil then clc.valueFields(m)=s
-		    
-		    
-		  case 9 ' link to next by name
-		    if clc<>nil then clc.tmp=s
-		    'if mtyp=400 then intSteps(1).tmp=s 'this is 'start'
-		    
-		  case 10 ' x pos
-		    m=val(s)
-		    'if clc<>nil then clc.xCenter=m
-		    
-		  case 11 ' y pos
-		    m=val(s)
-		    'if clc<>nil then clc.yPos=m
-		    
-		    
-		  case else
-		    
-		  end select
-		  
-		  Exception err as RuntimeException
-		    // // err.cascade "clDataQueryFlow.processLoadedJSONLine"
-		    
-		    
-		    
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

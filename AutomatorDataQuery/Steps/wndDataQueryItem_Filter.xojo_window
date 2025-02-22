@@ -1435,10 +1435,10 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  var i  as integer
+		   
 		  
 		  lastItem=0
-		  for i=1 to 6
+		  for i as integer = 1 to 6
 		    ppFieldA(i).visible=false
 		    ppFieldb(i).Visible=false
 		    ppop(i).Visible=false
@@ -1486,13 +1486,11 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  var i  as integer
-		  
-		  
+		   
 		  curStep.name=efName.text
 		  
 		  
-		  for i=0 to  curStep.maxItems
+		  for i as integer = 0 to  curStep.maxItems
 		    if ppFieldA(i).Visible and ppFieldA(i).SelectedRowText.Length > 0 then
 		      curStep.sField1(i)=ppFieldA(i).SelectedRowText
 		      curStep.sField2(i)=ppFieldB(i).SelectedRowText
@@ -1514,7 +1512,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub prepLine(theLine as integer)
-		  var i  as integer
+		   
 		  if curStep.prevDataQueryItem<>nil then
 		    ppFieldA(theLine).RemoveAllRows
 		    ppFieldB(theLine).RemoveAllRows
@@ -1522,12 +1520,12 @@ End
 		    ppFieldb(theLine).AddRow cUseConstant
 		    ppFieldb(theLine).AddRow cIsEmpty
 		    
-		    for i=1 to ubound(curStep.prevDataQueryItem.keyFields)
+		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.keyFields)
 		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.keyFields(i)
 		      ppFieldb(theLine).AddRow curStep.prevDataQueryItem.keyFields(i)
 		    next
 		    
-		    for i=1 to ubound(curStep.prevDataQueryItem.valueFields)
+		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.valueFields)
 		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.valueFields(i)
 		      ppFieldb(theLine).AddRow curStep.prevDataQueryItem.valueFields(i)
 		    next
@@ -1541,7 +1539,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub ShowMe(theStep as clDataQueryItem_filter)
-		  var i  as integer
+		   
 		  var j  as integer
 		  
 		  curStep=theStep
@@ -1554,7 +1552,7 @@ End
 		  ppOp(0).findItem(curStep.sOper(0))
 		  efConstant(0).Text=curStep.sConst(0)
 		  
-		  for i=1 to curStep.maxItems
+		  for i as integer = 1 to curStep.maxItems
 		    if curStep.bInUse(i) then
 		      j=addone
 		      ppFieldA(j).findItem(curStep.sField1(i))
@@ -1574,14 +1572,13 @@ End
 
 	#tag Method, Flags = &h0
 		Function validInput() As boolean
-		  var i  as integer
-		  dim k as integer
+		   
 		  dim bErr as boolean
 		  
 		  dim kt as InternalFieldTypes
 		  
 		  bErr=false
-		  for i=0 to 6
+		  for i as integer = 0 to 6
 		    efConstant(i).BackColor=rgb(255,255,255)
 		    
 		    if ppFieldA(i).Visible then

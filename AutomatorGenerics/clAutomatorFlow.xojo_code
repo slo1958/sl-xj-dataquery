@@ -12,6 +12,9 @@ Protected Class clAutomatorFlow
 		Sub Constructor(SourceJSON as JSONItem)
 		  doClear
 		  
+		  
+		  if SourceJSON = nil then return 
+		  
 		  self.GroupName = SourceJSON.Value("groupname")
 		  var jitems as JSONItem = SourceJSON.Value(cJSONTagItems) 
 		  
@@ -58,14 +61,8 @@ Protected Class clAutomatorFlow
 		  
 		  var p as clAutomatorItem
 		  
-		  if SourceJSON = nil then
-		    
-		    p=ObjectFactory(itemType)
-		    
-		  else
-		    p = ObjectFactory(itemType, SourceJSON)
-		    
-		  end if
+		  
+		  p = ObjectFactory(itemType, SourceJSON)
 		  
 		  if p<>nil  then
 		    items.Add(p)
@@ -160,8 +157,8 @@ Protected Class clAutomatorFlow
 
 	#tag Method, Flags = &h0
 		Sub doSelect(theItem as integer)
-		  var i  as integer
-		  for i=1 to ubound(items)
+		   
+		  for i as integer = 1 to ubound(items)
 		    items(i).selected=(i=theItem)
 		  next
 		  
@@ -172,7 +169,7 @@ Protected Class clAutomatorFlow
 		Function FindItemWithId(Identifier as integer) As clAutomatorItem
 		  
 		  for each s as clAutomatorItem in self.Items
-		    if s.ID = Identifier then return s
+		    if s.GetID = Identifier then return s
 		    
 		  next
 		  
@@ -207,7 +204,7 @@ Protected Class clAutomatorFlow
 		      var JItem as new JSONItem
 		      
 		      JItem.Value(cJSONTagExternalStepType) = Item.GetTypeAsString
-		      JItem.Value(cJSONTagIndex) = Item.ID.ToString
+		      JItem.Value(cJSONTagIndex) = Item.GetID.ToString
 		      JItem.value(cJSONTagConfig) = Item.GetConfigJSON()
 		      
 		      jItems.add(jitem)
@@ -253,33 +250,15 @@ Protected Class clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function ObjectFactory(ObjectType as String) As clAutomatorItem
+		Function ObjectFactory(ObjectType as String, SourceJSON as JSONItem = nil) As clAutomatorItem
 		  //
 		  // Allocate an automator item
 		  // 
-		  return new clAutomatorItem("invalid")
+		  return new clAutomatorItem(nil)
 		  
 		  
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function ObjectFactory(ObjectType as String, SourceJSON as JSONItem) As clAutomatorItem
-		  //
-		  // Allocate an automator item
-		  // 
-		  return new clAutomatorItem("invalid")
-		  
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub ProcessLoadLine(clc as clAutomatorItem,theOpcode as integer, theParam as string)
-		  
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

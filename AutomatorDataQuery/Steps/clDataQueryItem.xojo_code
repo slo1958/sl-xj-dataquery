@@ -8,10 +8,10 @@ Inherits clAutomatorItem
 		  //
 		  
 		  if prevDataQueryItem=nil then
-		    return (ItemEnumType=theExpectedType)
+		    return (self.GetTypeAsEnum=theExpectedType)
 		    
 		  else
-		    return (ItemEnumType=theExpectedType) or prevDataQueryItem.anyInChain(theExpectedType)
+		    return (self.GetTypeAsEnum=theExpectedType) or prevDataQueryItem.anyInChain(theExpectedType)
 		    
 		  end if
 		  
@@ -19,40 +19,14 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor()
-		  
-		  super.Constructor(clDataQueryFlow.StepTypeToLabel(StepTypes.Generic))
-		  
-		  self.ItemEnumType = StepTypes.Generic
-		  
+		Sub Constructor(SourceJSON as JSONItem)
+		  super.Constructor(SourceJSON)
+		   
 		  prevDataQueryItem=nil
 		  
-		  numSeq=-1
+		  if SourceJSON = nil then return
 		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Constructor(st as StepTypes)
 		  
-		  super.Constructor(clDataQueryFlow.StepTypeToLabel(st))
-		  
-		  self.ItemEnumType = st
-		  
-		  prevDataQueryItem=nil
-		  
-		  numSeq=-1
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Constructor(st as StepTypes, SourceJSON as JSONItem)
-		  super.Constructor(clDataQueryFlow.StepTypeToLabel(st))
-		  
-		  self.ItemEnumType = st
-		  
-		  prevDataQueryItem=nil
 		  
 		  var ItemTitle as string = SourceJSON.Value(cJSONTagName)
 		  
@@ -153,48 +127,14 @@ Inherits clAutomatorItem
 	#tag Method, Flags = &h0
 		Function GetTypeAsEnum() As StepTypes
 		  
-		  return self.ItemEnumType
+		  return StepTypes.Generic
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function GetTypeAsString() As string
 		  
-		  return self.ItemType
-		  
-		  // dim s as string
-		  // 
-		  // select case ItemType
-		  // 
-		  // case 100
-		  // s="Generic"
-		  // 
-		  // case 200
-		  // s="Filter"
-		  // 
-		  // case 300
-		  // s="Group/Split"
-		  // 
-		  // case 400
-		  // s="Start"
-		  // 
-		  // case 500
-		  // s="Sort"
-		  // 
-		  // case 600
-		  // s="Calc"
-		  // 
-		  // case 700
-		  // s="Pivot"
-		  // 
-		  // case 800
-		  // s="Map"
-		  // case else
-		  // s="?"
-		  // end Select
-		  // 
-		  // return s
-		  // 
+		  return clDataQueryFlow.StepTypeToLabel(self.GetTypeAsEnum)
 		  
 		End Function
 	#tag EndMethod
@@ -301,32 +241,6 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub saveToTextFile(theTextFile as textoutputStream)
-		  var i  as integer
-		  
-		  theTextFile.writeline "4;"+str(keyFields.LastIndex)
-		  for i=1 to keyFields.LastIndex
-		    theTextFile.writeline "5;"+keyFields(i)
-		  next
-		  
-		  theTextFile.writeline "6;"+str(ubound(valueFields))
-		  for i=1 to ubound(valueFields)
-		    theTextFile.writeline "7;"+valueFields(i)
-		  next
-		  
-		  'if nextDataQueryItem<>nil then
-		  'theTextFile.writeline "9;"+nextDataQueryItem.name
-		  'end if
-		  
-		  'theTextFile.writeline "10;"+str(IntxCenter)
-		  'theTextFile.writeline "11;"+str(ypos)
-		  
-		  // saveMyData theTextFile
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
 		  MessageBox( "Open operation not allowed on generic object")
 		  
@@ -398,10 +312,6 @@ Inherits clAutomatorItem
 		Protected intNumSeq As integer
 	#tag EndProperty
 
-	#tag Property, Flags = &h1
-		Protected ItemEnumType As StepTypes
-	#tag EndProperty
-
 	#tag Property, Flags = &h0
 		keyFields(0) As string
 	#tag EndProperty
@@ -412,10 +322,6 @@ Inherits clAutomatorItem
 
 	#tag Property, Flags = &h0
 		prevDataQueryItem As clDataQueryItem
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		tmp As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -515,14 +421,6 @@ Inherits clAutomatorItem
 			InitialValue="0"
 			Type="integer"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="tmp"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="fieldPostFix"

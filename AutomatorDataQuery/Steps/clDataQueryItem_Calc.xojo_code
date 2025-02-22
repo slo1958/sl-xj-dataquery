@@ -2,24 +2,14 @@
 Protected Class clDataQueryItem_Calc
 Inherits clDataQueryItem
 	#tag Method, Flags = &h0
-		Sub Constructor()
-		  
-		  Super.constructor(StepTypes.Calculate)
-		  
-		  
-		  Nextitem=0
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub Constructor(SourceJSON as JSONItem)
 		  // Calling the overridden superclass constructor.
 		  
-		  Super.constructor(StepTypes.Calculate, SourceJSON)
-		  
+		  Super.constructor(SourceJSON)
 		  
 		  Nextitem=0
+		  
+		  if SourceJSON = nil then return
 		  
 		  var jItems as  JSONItem = SourceJSON.Value(cJSONTagItems)
 		  
@@ -35,7 +25,7 @@ Inherits clDataQueryItem
 		        redim IsDimension(Index)
 		        
 		      end if
-		       
+		      
 		      if index > nextItem then nextItem = index
 		      
 		      formula(Index) = jitem.value(cJSONTagFormula)
@@ -80,8 +70,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Function getSql(IsLastStep as boolean) As string
-		  var i  as integer
-		  dim n as integer
+		   
 		  dim s as string
 		  
 		  dim sTmp as string
@@ -102,17 +91,17 @@ Inherits clDataQueryItem
 		    
 		    s="select "
 		    sdel=""
-		    for i=1 to ubound(prevDataQueryItem.keyFields)
+		    for i as integer = 1 to ubound(prevDataQueryItem.keyFields)
 		      s=s+sdel+ prevDataQueryItem.keyFields(i)+"_"+spostfix+" as "+prevDataQueryItem.keyFields(i)  + PostFixStr(IsLastStep)
 		      sdel=","
 		    next
 		    
-		    for i=1 to ubound(prevDataQueryItem.valueFields)
+		    for i as integer = 1 to ubound(prevDataQueryItem.valueFields)
 		      s=s+sdel + prevDataQueryItem.valueFields(i)+"_"+spostfix+" as "+prevDataQueryItem.valueFields(i) + PostFixStr(IsLastStep)
 		      sdel=","
 		    next
 		    
-		    for i=1 to ubound(Formula)
+		    for i as integer = 1 to ubound(Formula)
 		      if (formula(i)<>"") and (OutputFields(i)<>"") then
 		        stmp=formula(i)
 		        stmp=replaceAll(stmp,"$","_"+sPostfix)
@@ -151,6 +140,13 @@ Inherits clDataQueryItem
 		  
 		  
 		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetTypeAsEnum() As StepTypes
+		  
+		  return StepTypes.Calculate
 		End Function
 	#tag EndMethod
 
@@ -213,7 +209,7 @@ Inherits clDataQueryItem
 		  // redim keyFields(n)
 		  // redim keyFieldType(n)
 		  // 
-		  // for i=1 to n
+		  // for i as integer = 1 to n
 		  // keyFields(i)=prevDataQueryItem.keyFields(i)
 		  // keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
 		  // next
@@ -225,11 +221,11 @@ Inherits clDataQueryItem
 		  // 
 		  // redim valueFields(n+m)
 		  // 
-		  // for i=1 to n
+		  // for i as integer = 1 to n
 		  // valueFields(i)=prevDataQueryItem.valueFields(i)
 		  // next
 		  // 
-		  // for i=1 to m
+		  // for i as integer = 1 to m
 		  // 
 		  // valueFields(n+i)=OutputFields(i)
 		  // next

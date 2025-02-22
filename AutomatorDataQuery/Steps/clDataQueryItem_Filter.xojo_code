@@ -2,31 +2,20 @@
 Protected Class clDataQueryItem_Filter
 Inherits clDataQueryItem
 	#tag Method, Flags = &h0
-		Sub Constructor()
+		Sub Constructor(SourceJSON as JSONItem)
+		  // Calling the overridden superclass constructor.
 		  
-		  super.Constructor(StepTypes.Filter)
+		  super.Constructor(SourceJSON)
 		  
-		  var i  as integer
-		  
-		  for i=0 to maxItems
+		  for i as integer = 0 to maxItems
 		    binuse(i)=false
 		  next
 		  
 		  nextItem=-1
 		  
 		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Constructor(SourceJSON as JSONItem)
-		  // Calling the overridden superclass constructor.
+		  if SourceJSON = nil then return
 		  
-		  super.Constructor(StepTypes.Filter, SourceJSON)
-		  
-		  for i as integer = 0 to maxItems
-		    binuse(i)=false
-		  next
 		  
 		  var jItems as  JSONItem = SourceJSON.Value(cJSONTagItems)
 		  
@@ -121,7 +110,7 @@ Inherits clDataQueryItem
 		Function getSql(IsLastStep as boolean) As string
 		  dim sSource as string
 		  dim sPostFix as string
-		  var i  as integer
+		   
 		  dim n as integer
 		  dim s as string
 		  dim sSep as string
@@ -142,12 +131,12 @@ Inherits clDataQueryItem
 		    s="select  "   
 		    sSep=""
 		    
-		    for i=1 to keyFields.LastIndex
+		    for i as integer = 1 to keyFields.LastIndex
 		      s=s+sSep + keyFields(i)+"_"+sPostFix +"  as "+keyFields(i) + PostFixStr(IsLastStep)
 		      sSep=","
 		    next
 		    
-		    for i=1 to ubound(valueFields)
+		    for i as integer = 1 to ubound(valueFields)
 		      s=s+"," + valueFields(i)+"_"+sPostFix +" as "+valueFields(i) + PostFixStr(IsLastStep)
 		    next
 		    
@@ -157,7 +146,7 @@ Inherits clDataQueryItem
 		    
 		    var tempWheres() as string
 		    
-		    for i=0 to ubound(sConst)
+		    for i as integer = 0 to ubound(sConst)
 		      var tempWhere as string
 		      
 		      if bInUse(i) and sfield1(i) <> "" then
@@ -223,18 +212,24 @@ Inherits clDataQueryItem
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetTypeAsEnum() As StepTypes
+		  
+		  return StepTypes.Filter
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		  var i  as integer
-		  var j  as integer
+		   
+		  var itemCount  as integer = 0
 		  
-		  j=0
-		  
-		  for i=0 to maxItems
-		    if bInUse(i) then j=j+1
+		  for i as integer = 0 to maxItems
+		    if bInUse(i) then itemCount = itemCount + 1
+		    
 		  next
 		  
-		  Return j
+		  Return itemCount
 		  
 		End Function
 	#tag EndMethod
@@ -269,7 +264,7 @@ Inherits clDataQueryItem
 		  '
 		  ' a filter removes some records, but passes all fields
 		  '
-		  var i ,j as integer
+		   
 		  dim n as integer
 		  dim s as string
 		  if prevDataQueryItem<>nil then
@@ -278,10 +273,10 @@ Inherits clDataQueryItem
 		    '
 		    ' obtain field type of selected fields
 		    '
-		    for i=0 to ubound(sField1)
+		    for i as integer = 0 to ubound(sField1)
 		      s=sField1(i)
 		      
-		      for j=1 to ubound(prevDataQueryItem.keyFields)
+		      for j as integer =1 to ubound(prevDataQueryItem.keyFields)
 		        if prevDataQueryItem.keyFields(j)=s then
 		          sField1Type(i)=prevDataQueryItem.keyFieldType(j)
 		        end if
@@ -293,10 +288,10 @@ Inherits clDataQueryItem
 		    '
 		    ' obtain field type of selected fields
 		    '
-		    for i=0 to ubound(sField2)
+		    for i as integer = 0 to ubound(sField2)
 		      s=sField2(i)
 		      
-		      for j=1 to ubound(prevDataQueryItem.keyFields)
+		      for j as integer = 1 to ubound(prevDataQueryItem.keyFields)
 		        if prevDataQueryItem.keyFields(j)=s then
 		          sField2Type(i)=prevDataQueryItem.keyFieldType(j)
 		        end if
@@ -306,7 +301,7 @@ Inherits clDataQueryItem
 		    n=ubound(prevDataQueryItem.keyFields)
 		    redim keyFields(n)
 		    redim keyFieldType(n)
-		    for i=1 to n
+		    for i as integer = 1 to n
 		      keyFields(i)=prevDataQueryItem.keyFields(i)
 		      keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
 		    next
@@ -315,7 +310,7 @@ Inherits clDataQueryItem
 		    n=ubound(prevDataQueryItem.valueFields)
 		    redim valueFields(n)
 		    
-		    for i=1 to n
+		    for i as integer = 1 to n
 		      valueFields(i)=prevDataQueryItem.valueFields(i)
 		    next
 		    

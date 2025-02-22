@@ -2,24 +2,18 @@
 Protected Class clDataQueryItem_Map
 Inherits clDataQueryItem
 	#tag Method, Flags = &h0
-		Sub Constructor()
+		Sub Constructor(SourceJSON as JSONItem)
+		  // Calling the overridden superclass constructor.
 		  
-		  Super.constructor(StepTypes.Map)
+		  Super.Constructor(SourceJSON)
+		  
 		  
 		  redim inputList(0)
 		  redim Outputlist(0)
 		  
 		  nextItem=0
 		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Constructor(SourceJSON as JSONItem)
-		  // Calling the overridden superclass constructor.
-		  
-		  Super.Constructor(StepTypes.Map, SourceJSON)
-		  
+		  if SourceJSON = nil then Return
 		  
 		  var jItems as    JSONItem = SourceJSON.Value(cJSONTagItems)
 		  
@@ -79,7 +73,7 @@ Inherits clDataQueryItem
 		Function getSql(IsLastStep as boolean) As string
 		  dim sSource as string
 		  dim sPostFix as string
-		  var i  as integer
+		   
 		  dim ssep as string
 		  
 		  dim s as string
@@ -95,12 +89,12 @@ Inherits clDataQueryItem
 		  s="select  "
 		  ssep=""
 		  
-		  for i=1 to keyFields.LastIndex
+		  for i as integer = 1 to keyFields.LastIndex
 		    s=s+ssep+keyFields(i)+"_"+sPostFix+" as "+keyFields(i)  + PostFixStr(IsLastStep)
 		    ssep=","
 		  next
 		  
-		  for i=1 to UBound(InputList)
+		  for i as integer = 1 to UBound(InputList)
 		    if OutputList(i)<>"" then
 		      s=s+ssep+InputList(i)+"_"+sPostFix+" as "+ OutputList(i) + PostFixStr(IsLastStep)
 		    end if
@@ -118,14 +112,13 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Function getTextItem(theItem as integer) As string
-		  var i  as integer
 		  dim n as integer
 		  dim s as string
 		  
 		  n=0
 		  s=""
 		  
-		  for i=1 to ubound(OutputList)
+		  for i as integer = 1 to ubound(OutputList)
 		    if OutputList(i)<>"" then
 		      n=n+1
 		      if n=theItem then s=OutputList(i)
@@ -136,6 +129,13 @@ Inherits clDataQueryItem
 		  
 		  return s
 		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetTypeAsEnum() As StepTypes
+		  
+		  return StepTypes.Map
 		End Function
 	#tag EndMethod
 
@@ -156,7 +156,8 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
-		  var i ,j as integer
+		   
+		  var j as integer
 		  dim n as integer
 		  dim m as integer
 		  dim b as boolean
@@ -173,7 +174,7 @@ Inherits clDataQueryItem
 		    redim keyFields(n)
 		    redim keyFieldType(n)
 		    
-		    for i=1 to n
+		    for i as integer = 1 to n
 		      keyfields(i)=prevDataQueryItem.keyFields(i)
 		      keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
 		    next
@@ -182,7 +183,7 @@ Inherits clDataQueryItem
 		    '  add new data fields
 		    '
 		    n=UBound(prevDataQueryItem.valueFields)
-		    for i=1 to n
+		    for i as integer = 1 to n
 		      m=ubound(InputList)
 		      b=false
 		      for j=1 to m
@@ -201,24 +202,24 @@ Inherits clDataQueryItem
 		    '
 		    ' remove value fields that no longer exist
 		    '
-		    i=1
+		    var index as integer = 1
 		    
 		    looplimit=100
 		    
-		    while i<=ubound(inputlist) and looplimit>0
+		    while index<=ubound(inputlist) and looplimit>0
 		      b=false 
 		      
 		      for j=1 to ubound(prevDataQueryItem.valueFields)
 		        
-		        if prevDataQueryItem.valueFields(j)=InputList(i) then b=true
+		        if prevDataQueryItem.valueFields(j)=InputList(index) then b=true
 		        
 		      next
 		      
 		      if b then
-		        i=i+1
+		        index = index + 1
 		      else
-		        InputList.Remove i
-		        OutputList.remove i
+		        InputList.Remove index
+		        OutputList.remove index
 		      end if
 		      looplimit=looplimit-1
 		    wend
@@ -229,7 +230,7 @@ Inherits clDataQueryItem
 		    m=ubound(InputList)
 		    redim valueFields(0)
 		    
-		    for i=1 to m
+		    for i as integer = 1 to m
 		      if OutputList(i)<>"" then
 		        n=ubound(valueFields)+1
 		        redim valueFields(n)

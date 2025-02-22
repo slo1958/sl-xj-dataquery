@@ -13,17 +13,17 @@ Protected Class clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(NewItemType as string)
-		  
-		  self.ItemType = NewItemType
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Function GetConfigJSON() As JSONItem
 		  
 		  return new JSONItem
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetID() As integer
+		  
+		  return self.ID
 		  
 		End Function
 	#tag EndMethod
@@ -61,12 +61,6 @@ Protected Class clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub saveToTextFile(txtout as TextOutputStream)
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub SetID(NewId as integer)
 		  
 		  self.ID = NewId
@@ -88,8 +82,8 @@ Protected Class clAutomatorItem
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h0
-		ID As Integer
+	#tag Property, Flags = &h21
+		Private ID As Integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h1

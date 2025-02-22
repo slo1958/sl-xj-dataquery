@@ -336,7 +336,7 @@ End
 		  
 		  self.Height = cCollapsedHeigth
 		  self.StateCollapsed = True
-		   
+		  
 		  if DoUpdateUI then  UpdateUI
 		End Sub
 	#tag EndMethod

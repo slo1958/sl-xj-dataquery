@@ -1924,11 +1924,11 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  var i  as integer
+		   
 		  st_help.Caption="Define condition for each pivoted block"
 		  
 		  lastItem=0
-		  for i=1 to 6
+		  for i as integer = 1 to 6
 		    BlockName(i).visible=false
 		    efConstant1(i).Visible=false
 		    efConstant2(i).Visible=false
@@ -1971,7 +1971,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub checkUsage()
-		  var i  as integer
+		   
 		  dim bAnyUsed as boolean
 		  
 		  
@@ -1980,7 +1980,7 @@ End
 		  '
 		  if true then
 		    bAnyUsed=false
-		    for i=0 to 6
+		    for i as integer = 0 to 6
 		      if len(trim(efConstant1(i).text))>0 then bAnyUsed=true
 		    next
 		    
@@ -1991,7 +1991,7 @@ End
 		  
 		  if ppField2.SelectedRowIndex>0 then
 		    bAnyUsed=false
-		    for i=0 to 6
+		    for i as integer = 0 to 6
 		      if len(trim(efConstant2(i).text))>0 then bAnyUsed=true
 		    next
 		    
@@ -2004,7 +2004,7 @@ End
 		  
 		  if ppField3.SelectedRowIndex>0 then
 		    bAnyUsed=false
-		    for i=0 to 6
+		    for i as integer = 0 to 6
 		      if len(trim(efConstant3(i).text))>0 then bAnyUsed=true
 		    next
 		    
@@ -2020,9 +2020,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		  var i  as integer
-		  
-		  
+		   
 		  curStep.name=efName.text
 		  
 		  curStep.sfield(1)=notUsedIsEmpty(ppField1.SelectedRowText)
@@ -2030,7 +2028,7 @@ End
 		  curStep.sfield(3)=notUsedIsEmpty(ppField3.SelectedRowText)
 		  
 		  
-		  for i=0 to  curStep.maxItems
+		  for i as integer = 0 to  curStep.maxItems
 		    if blockname(i).Visible then
 		      curStep.sBlockName(i)=BlockName(i).text
 		      
@@ -2064,7 +2062,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub ShowMe(theStep as clDataQueryItem_pivot)
-		  var i  as integer
+		   
 		  var j  as integer
 		  
 		  curStep=theStep
@@ -2079,7 +2077,7 @@ End
 		  ppField3.addrow cNotUsed
 		  
 		  if curstep.prevDataQueryItem<>nil then
-		    for i=1 to ubound(curStep.prevDataQueryItem.keyFields)
+		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.keyFields)
 		      ppField1.addrow curStep.prevDataQueryItem.keyFields(i)
 		      ppField2.addrow curStep.prevDataQueryItem.keyFields(i)
 		      ppField3.addrow curStep.prevDataQueryItem.keyFields(i)
@@ -2099,7 +2097,7 @@ End
 		  efConstant2(0).text=curStep.sConst(2,0)
 		  efConstant3(0).text=curStep.sConst(3,0)
 		  
-		  for i=1 to curStep.maxItems
+		  for i as integer = 1 to curStep.maxItems
 		    if curStep.bInUse(i) then
 		      j=addone
 		      BlockName(j).text=curStep.sBlockName(i)
@@ -2120,12 +2118,12 @@ End
 	#tag Method, Flags = &h0
 		Function validBlockName() As boolean
 		  dim bErr as Boolean
-		  var i  as integer
+		   
 		  dim sb as string
 		  
 		  berr=false
 		  
-		  for i=0 to 6
+		  for i as integer = 0 to 6
 		    if BlockName(i).visible then
 		      sb=BlockName(i).text
 		      
@@ -2154,14 +2152,14 @@ End
 	#tag Method, Flags = &h0
 		Function validKeyValue() As boolean
 		  dim bErr as Boolean
-		  var i  as integer
+		   
 		  dim sa as string
 		  var kt as InternalFieldTypes
 		  dim eff as TextField
 		  
 		  berr=false
 		  
-		  for i=0 to 6
+		  for i as integer = 0 to 6
 		    efConstant1(i).BackColor=rgb(255,255,255)
 		    efConstant2(i).BackColor=rgb(255,255,255)
 		    efConstant3(i).BackColor=rgb(255,255,255)
@@ -2243,9 +2241,9 @@ End
 #tag Events ppField2
 	#tag Event
 		Sub SelectionChanged(item As DesktopMenuItem)
-		  var i  as integer
+		   
 		  
-		  for i=0 to 6
+		  for i as integer = 0 to 6
 		    efConstant2(i).Enabled=ppField2.SelectedRowText<>cNotUsed
 		  next
 		  
@@ -2255,9 +2253,9 @@ End
 #tag Events ppField3
 	#tag Event
 		Sub SelectionChanged(item As DesktopMenuItem)
-		  var i  as integer
+		   
 		  
-		  for i=0 to 6
+		  for i as integer = 0 to 6
 		    efConstant3(i).Enabled=ppField3.SelectedRowText<>cNotUsed
 		  next
 		  

@@ -2,27 +2,21 @@
 Protected Class clDataQueryItem_GroupSplit
 Inherits clDataQueryItem
 	#tag Method, Flags = &h0
-		Sub Constructor()
+		Sub Constructor(SourceJSON as JSONItem)
 		  
-		  super.Constructor(StepTypes.GroupSplit)
+		  // Calling the overridden superclass constructor.
 		  
-		  var i  as integer
+		  super.Constructor(SourceJSON)
 		  
-		  for i=0 to maxItems
+		  
+		  for i as integer = 0 to maxItems
 		    binuse(i)=false
 		  next
 		  
 		  nextItem=-1
 		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Constructor(SourceJSON as JSONItem)
+		  if SourceJSON = nil then return
 		  
-		  // Calling the overridden superclass constructor.
-		  
-		  super.Constructor(StepTypes.GroupSplit, SourceJSON)
 		  
 		  //var ItemTitle as string = SourceJSON.Value(cJSONTagName)
 		  //Self.SetTitle(ItemTitle)
@@ -106,7 +100,7 @@ Inherits clDataQueryItem
 		Function getSql(IsLastStep as boolean) As String
 		  dim sSource as string
 		  dim sPostFix as string
-		  var i  as integer
+		   
 		  dim n as integer
 		  dim s as string
 		  dim sSep as string
@@ -127,14 +121,14 @@ Inherits clDataQueryItem
 		    s="select  "   
 		    sSep=""
 		    
-		    for i=0 to ubound(sField1)
+		    for i as integer = 0 to ubound(sField1)
 		      if bInUse(i) and sField1(i).trim.Length > 0 then
 		        s=s+sSep + sField1(i)+"_"+sPostFix +"  as "+sField1(i) + PostFixStr(IsLastStep)
 		        sSep=","
 		      end if
 		    next
 		    
-		    for i=1 to ubound(valueFields)
+		    for i as integer = 1 to ubound(valueFields)
 		      s=s+ssep+"sum(" + valueFields(i)+"_"+sPostFix +") as "+valueFields(i) + PostFixStr(IsLastStep)
 		      sSep=","
 		    next
@@ -144,7 +138,7 @@ Inherits clDataQueryItem
 		    sGroupBy=" GROUP BY "
 		    ssep=""
 		    
-		    for i=0 to ubound(sField1)
+		    for i as integer = 0 to ubound(sField1)
 		      if bInUse(i) and sField1(i).trim.Length > 0 then
 		        s=s+sGroupBy
 		        sGroupBy=""
@@ -187,14 +181,21 @@ Inherits clDataQueryItem
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetTypeAsEnum() As StepTypes
+		  
+		  return StepTypes.GroupSplit
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		  var i  as integer
+		   
 		  var j  as integer
 		  
 		  j=0
 		  
-		  for i=0 to ubound(sfield1)
+		  for i as integer = 0 to ubound(sfield1)
 		    if bInUse(i) then j=j+1
 		  next
 		  
@@ -223,7 +224,7 @@ Inherits clDataQueryItem
 		  '
 		  ' a group/split   but passes all value fields and only selected key fields
 		  '
-		  var i  as integer
+		   
 		  var j  as integer
 		  dim n as integer
 		  dim s as string
@@ -233,7 +234,7 @@ Inherits clDataQueryItem
 		    '
 		    ' obtain field type of selected fields
 		    '
-		    for i=0 to ubound(sField1)
+		    for i as integer = 0 to ubound(sField1)
 		      s=sField1(i)
 		      
 		      for j=1 to ubound(prevDataQueryItem.keyFields)
@@ -249,7 +250,7 @@ Inherits clDataQueryItem
 		    redim keyFieldType(n)
 		    
 		    j=0
-		    for i=0 to ubound(sfield1)
+		    for i as integer = 0 to ubound(sfield1)
 		      if binuse(i) then  
 		        j=j+1
 		        keyFields(j)=sField1(i)
@@ -260,7 +261,7 @@ Inherits clDataQueryItem
 		    n=ubound(prevDataQueryItem.valueFields)
 		    redim valueFields(n)
 		    
-		    for i=1 to n
+		    for i as integer = 1 to n
 		      valueFields(i)=prevDataQueryItem.valueFields(i)
 		    next
 		    

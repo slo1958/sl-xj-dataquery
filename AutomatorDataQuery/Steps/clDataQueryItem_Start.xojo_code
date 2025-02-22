@@ -11,7 +11,7 @@ Inherits clDataQueryItem
 		Sub Constructor(project as clDataQueryProject)
 		  // Calling the overridden superclass constructor.
 		  
-		  Super.Constructor(StepTypes.Start)
+		  Super.Constructor(nil)
 		  
 		  dim ssql as string
 		  
@@ -87,20 +87,19 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Function getSql(IsLastStep as boolean) As string
-		  var i  as integer
 		   
 		  dim s as string
 		  
 		  var tempFields() as string
 		  
 		  
-		  for i=1 to keyFields.LastIndex
+		  for i as integer = 1 to keyFields.LastIndex
 		    
 		    tempFields.Add( keyFields(i)+" as "+keyFields(i) + PostFixStr(IsLastStep))
 		    
 		  next
 		  
-		  for i=1 to ubound(valueFields)
+		  for i as integer = 1 to ubound(valueFields)
 		    tempFields.Add( valueFields(i)+" as "+valueFields(i) + PostFixStr(IsLastStep))
 		    
 		  next
@@ -127,6 +126,13 @@ Inherits clDataQueryItem
 		    
 		  end select
 		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetTypeAsEnum() As StepTypes
+		  
+		  return StepTypes.Start
 		End Function
 	#tag EndMethod
 
