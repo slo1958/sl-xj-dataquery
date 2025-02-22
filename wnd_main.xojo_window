@@ -353,10 +353,11 @@ End
 		    var tmpSql as string
 		    var tmpSource as string
 		    
-		    tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement
+		    tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement(Identifier)
 		    tmpSource = clDataQueryFlow(self.CurrentFlow).FlowDataSource
 		    
-		    wnd_queryViewer.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
+		    var wqv as new wnd_queryViewer
+		    wqv.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
 		    
 		    
 		  case else
@@ -514,7 +515,7 @@ End
 	#tag Constant, Name = cEdit, Type = String, Dynamic = False, Default = \"Edit", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = cRunTillHere, Type = String, Dynamic = False, Default = \"Run all", Scope = Public
+	#tag Constant, Name = cRunTillHere, Type = String, Dynamic = False, Default = \"Run until here", Scope = Public
 	#tag EndConstant
 
 
@@ -589,10 +590,12 @@ End
 		  var tmpSql as string
 		  var tmpSource as string
 		  
-		  tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement
+		  tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement(-1)
 		  tmpSource = clDataQueryFlow(self.CurrentFlow).FlowDataSource
 		  
-		  wnd_queryViewer.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
+		  var wqv as new wnd_queryViewer
+		  
+		  wqv.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

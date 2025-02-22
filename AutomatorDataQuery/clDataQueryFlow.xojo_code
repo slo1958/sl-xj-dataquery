@@ -200,7 +200,60 @@ Inherits clAutomatorFlow
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getSqlStatement() As string
+		Function getSqlStatement(lastItemId as integer) As string
+		  
+		  
+		  var tempItems() as clAutomatorItem
+		  
+		  
+		  var hasGroupBy as Boolean = False
+		  
+		  var haltCopy as Boolean = False
+		  var lastItem as clDataQueryItem  = nil
+		  
+		  for each item as clAutomatorItem in self.Items
+		    
+		    if not haltCopy then
+		      tempItems.Add(item)
+		      
+		      haltCopy = (item.GetID = lastItemId)
+		      
+		      lastItem = clDataQueryItem(item)
+		      
+		      if lastItem isa clDataQueryItem_GroupSplit then hasGroupBy = True
+		      
+		    end if
+		    
+		  next
+		  
+		  if tempItems.Count <= 0 then return ""
+		  
+		  UpdateDataFlow(tempItems)
+		  
+		  
+		  if not hasGroupBy then 
+		    var temp as clDataQueryItem = clDataQueryItem(self.ObjectFactory(cStepGroupSplit, nil))
+		    
+		    temp.numSeq = lastItem.numSeq + 1
+		    temp.prevDataQueryItem = lastItem
+		    temp.updateFieldsFromPred
+		    
+		    lastItem = temp
+		    
+		  else
+		    
+		  end if
+		  
+		  return  lastItem.getSql(True)
+		   
+		  
+		  
+		   
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getSqlStatement1() As string
 		  var s as string
 		  
 		  
@@ -226,6 +279,7 @@ Inherits clAutomatorFlow
 		  end if
 		  
 		  return s
+		  
 		  
 		End Function
 	#tag EndMethod
@@ -310,22 +364,25 @@ Inherits clAutomatorFlow
 
 	#tag Method, Flags = &h0
 		Sub UpdateDataFlow()
+		  
+		  self.UpdateDataFlow(self.items)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub UpdateDataFlow(flowItems() as clAutomatorItem)
 		  var i  as integer
 		  
 		  var prevItem as clDataQueryItem
 		  
-		  for each gItem as clAutomatorItem in  Items
+		  for each gItem as clAutomatorItem in  flowItems
 		    var item as clDataQueryItem = clDataQueryItem(gItem)
 		    
 		    i = i + 1
-		    if item isa clDataQueryItem_Start then
-		      item.numSeq = i
-		      
-		    else
-		      item.numSeq = i
-		      item.updateFieldsFromPred
-		      
-		    end 
+		    
+		    item.numSeq = i
+		    item.updateFieldsFromPred
 		    
 		    prevItem = item
 		    
@@ -340,7 +397,7 @@ Inherits clAutomatorFlow
 		  
 		  n=ubound(items) ' just in case we added an item
 		  
-		  UpdateDataFlow
+		  UpdateDataFlow(self.Items)
 		  
 		  return DataQueryItem(n).validateChain
 		  

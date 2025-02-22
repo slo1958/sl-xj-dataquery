@@ -61,18 +61,50 @@ Inherits clDataQueryItem
 	#tag Method, Flags = &h0
 		Sub Constructor(SourceJSON as JSONItem)
 		  
-		  
 		  super.Constructor(SourceJSON)
 		   
 		  
 		  for i as integer = 0 to maxItems
 		    binuse(i)=false
+		    
 		  next
-		  
-		  nextItem=-1
-		  
+		   
 		  
 		  if SourceJSON = nil then return 
+		  
+		  
+		  var jItemBlocks as  JSONItem = SourceJSON.value("blocks")
+		  var jitemFields as  JSONItem = SourceJSON.Value("fields")
+		  var jitemConditions as  JSONItem =SourceJSON.value("filters")
+		  
+		  
+		  for i as integer = 0 to jitemConditions.LastRowIndex
+		    var jitem as JSONItem = jitemConditions.ChildAt(i)
+		    
+		    var iBlockIndex as integer = jitem.value("blockindex")  
+		    var jFieldIndex as integer = jitem.value("fieldindex")  
+		    self.sConst(jFieldIndex, iBlockIndex) = jitem.Value("value") 
+		    
+		  next
+		  
+		  for i as integer = 0 to jitemFields.LastRowIndex
+		    var jitem as JSONItem = jitemFields.ChildAt(i)
+		    
+		    var jFieldIndex as integer = jitem.value("fieldindex")  
+		    sField(jFieldIndex) = jitem.Value("value")
+		    
+		  next
+		  
+		  for i as integer = 0 to jItemBlocks.LastRowIndex
+		    var jitem as JSONItem = jItemBlocks.ChildAt(i)
+		    
+		    var iBlockIndex as integer = jitem.value("blockindex")  
+		    sBlockName(iBlockIndex) = jitem.value("value")
+		    bInUse(iBlockIndex) = True
+		    
+		  next
+		  
+		  return
 		  
 		End Sub
 	#tag EndMethod
@@ -221,6 +253,8 @@ Inherits clDataQueryItem
 		  var output as string
 		  var tmpfields() as string
 		  
+		  var commonGroupByFields() as string
+		  
 		  if sPostFix = "" then return ""
 		  
 		  var CTE0 as string
@@ -235,16 +269,16 @@ Inherits clDataQueryItem
 		  
 		  // First CTE is the driver, only includes distinct remaining key fields
 		  
-		  tmpfields.RemoveAll
+		  commonGroupByFields.RemoveAll
 		  
 		  // add remaining key fields
 		  for each s as string in self.GenSQL_GetRemainingKeyFields("","")
-		    tmpfields.add(s)
+		    commonGroupByFields.add(s)
 		    
 		  next
 		  
 		  
-		  CTE0 =  cDriverCTE + " as (SELECT DISTINCT " + string.FromArray(tmpfields, ",") + " FROM (" + ssource +"))"
+		  CTE0 =  cDriverCTE + " as (SELECT DISTINCT " + string.FromArray(commonGroupByFields, ",") + " FROM (" + ssource +"))"
 		  
 		  // Second CTE includes all filter key fields, remaining key fields and measures
 		  
@@ -288,11 +322,8 @@ Inherits clDataQueryItem
 		  
 		  tmpfields.RemoveAll
 		  
-		  // for each s as string in self.GenSQL_GetRemainingKeyFields(cDriverCTE+".",PostFixStr(IsLastStep))
-		  // 
-		  // tmpfields.add(s)
-		  // 
-		  // next
+		  
+		  // add key fields in top query
 		  
 		  for i as integer = 1 to keyFields.LastIndex
 		    var s as string =  keyFields(i)
@@ -330,7 +361,6 @@ Inherits clDataQueryItem
 		  
 		  // add queryies based on data CTE
 		  
-		  
 		  for jBlock as integer = 0 to maxitems 
 		    if sBlockName(jBlock)<>"" and bInUse(jBlock) then
 		      var whereClause() as string
@@ -352,7 +382,10 @@ Inherits clDataQueryItem
 		      
 		      // add value fields
 		      for i as integer = 1 to ubound(prevDataQueryItem.valueFields)
-		        tmpfields.Add(prevDataQueryItem.valueFields(i)+"_"+sPostFix)
+		        
+		        tmpfields.Add("SUM(" + prevDataQueryItem.valueFields(i)+"_"+sPostFix + ") " + prevDataQueryItem.valueFields(i)+"_"+sPostFix)
+		        
+		        //tmpfields.Add(prevDataQueryItem.valueFields(i)+"_"+sPostFix)
 		        
 		      next
 		      
@@ -365,7 +398,14 @@ Inherits clDataQueryItem
 		        end if
 		      next
 		      
-		      joinedSrc.Add("( SELECT " + string.FromArray(tmpfields,",") + " FROM " + cDataCTE + " WHERE " + String.FromArray(whereClause) + ") " + blockID + " ON (" + string.FromArray(joinFields," AND ") + ")" )
+		      var tempSql as string
+		      
+		      tempsql = "SELECT " + string.FromArray(tmpfields,",") + " FROM " + cDataCTE + " WHERE " + String.FromArray(whereClause) 
+		      if commonGroupByFields.Count > 0 then tempSql = tempSql + " GROUP BY " + String.FromArray(commonGroupByFields, ",")
+		      
+		      tempSql = "( " + tempSQl + ") " + blockID + " ON (" + string.FromArray(joinFields," AND ") + ")" 
+		      
+		      joinedSrc.Add(tempSql)
 		      
 		    end if
 		    
@@ -432,47 +472,6 @@ Inherits clDataQueryItem
 		  return pivot_38_38
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoadedJSON(theLine as string)
-		  dim m as integer
-		  dim s as string
-		  var i  as integer
-		  
-		  m=val(NthField(theline,";",1))
-		  i=instr(theLine,";")
-		  s=trim(mid(theLine,i+1,9999))
-		  
-		  select case m
-		  case 10
-		    nextItem=nextItem+1
-		    
-		  case 11
-		    sfield(1)=s
-		  case 12
-		    sfield(2)=s
-		  case 13
-		    sfield(3)=s
-		  case 14
-		    //iJoinType=val(s)
-		    
-		  case 15
-		    sBlockName(nextItem)=s
-		    binuse(nextitem)=true
-		  case 16
-		    sConst(1,nextItem)=s
-		    binuse(nextitem)=true
-		  case 17
-		    sConst(2,nextItem)=s
-		    binuse(nextitem)=true
-		  case 18
-		    sConst(3,nextItem)=s
-		    binuse(nextitem)=true
-		  case else
-		  end select
-		  
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -583,10 +582,6 @@ Inherits clDataQueryItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		nextItem As integer
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		sBlockName(maxItems) As string
 	#tag EndProperty
 
@@ -611,14 +606,6 @@ Inherits clDataQueryItem
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="ID"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
@@ -676,14 +663,6 @@ Inherits clDataQueryItem
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="tmp"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="fieldPostFix"
 			Visible=false
 			Group="Behavior"
@@ -697,14 +676,6 @@ Inherits clDataQueryItem
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="nextItem"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

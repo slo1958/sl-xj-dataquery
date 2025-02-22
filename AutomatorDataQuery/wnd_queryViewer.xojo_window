@@ -11,7 +11,7 @@ Begin DesktopWindow wnd_queryViewer
    HasMaximizeButton=   True
    HasMinimizeButton=   True
    Height          =   534
-   ImplicitInstance=   True
+   ImplicitInstance=   False
    MacProcID       =   0
    MaximumHeight   =   32000
    MaximumWidth    =   32000
