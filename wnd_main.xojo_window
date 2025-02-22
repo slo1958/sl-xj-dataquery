@@ -165,11 +165,11 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       InitialParent   =   ""
       Italic          =   False
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   True
-      LockTop         =   True
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
@@ -215,7 +215,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Visible         =   True
       Width           =   600
    End
-   Begin DesktopButton pb_run
+   Begin DesktopButton btn_run
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -246,7 +246,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Visible         =   True
       Width           =   59
    End
-   Begin DesktopButton Button2
+   Begin DesktopButton btn_save
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -271,7 +271,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   360
+      Top             =   355
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -281,6 +281,12 @@ End
 #tag EndDesktopWindow
 
 #tag WindowCode
+	#tag Event
+		Sub Activated()
+		  BuildListOfAnalysis
+		End Sub
+	#tag EndEvent
+
 	#tag Event
 		Sub Opening()
 		  
@@ -292,12 +298,11 @@ End
 		Sub AddStepAfter(Identifier as integer, NewStepType as string)
 		  // Part of the AutomatorVisualInterface interface.
 		  
-		  
-		  var s as  clAutomatorItem = AutomatorFlow.doInsertAfter(NewStepType, Identifier)
+		  var s as  clAutomatorItem = self.CurrentFlow.doInsertAfter(NewStepType, Identifier)
 		  
 		  RefreshStepIDs
 		  
-		  clDataQueryFlow(self.AutomatorFlow).UpdateDataFlow
+		  clDataQueryFlow(self.CurrentFlow).UpdateDataFlow
 		  
 		  UpdateUI
 		  
@@ -318,6 +323,9 @@ End
 		    
 		  next
 		  
+		  lb_Analaysis.AddRow("(new analysis)")
+		  lb_Analaysis.RowTagAt(lb_Analaysis.LastAddedRowIndex) = "$$"
+		  
 		  return
 		  
 		End Sub
@@ -327,9 +335,9 @@ End
 		Sub ExecuteAction(Identifier as integer, ActionCode as string)
 		  // Part of the AutomatorVisualInterface interface.
 		  
-		  clDataQueryFlow(self.AutomatorFlow).UpdateDataFlow
+		  clDataQueryFlow(self.CurrentFlow).UpdateDataFlow
 		  
-		  var s as clAutomatorItem = self.AutomatorFlow.FindItemWithId(Identifier)
+		  var s as clAutomatorItem = self.CurrentFlow.FindItemWithId(Identifier)
 		  
 		  
 		  if s = nil then return 
@@ -345,8 +353,8 @@ End
 		    var tmpSql as string
 		    var tmpSource as string
 		    
-		    tmpSql = clDataQueryFlow(self.AutomatorFlow).getSqlStatement
-		    tmpSource = clDataQueryFlow(self.AutomatorFlow).FlowDataSource
+		    tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement
+		    tmpSource = clDataQueryFlow(self.CurrentFlow).FlowDataSource
 		    
 		    wnd_queryViewer.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
 		    
@@ -363,7 +371,7 @@ End
 		Sub ExecuteRemove(Identifier as integer, ActionCode as string)
 		  var ItemToRemove as integer = Identifier
 		  
-		  var s as clAutomatorItem = self.AutomatorFlow.FindItemWithId(Identifier)
+		  var s as clAutomatorItem = self.CurrentFlow.FindItemWithId(Identifier)
 		  
 		  if s.VisualSupport <> nil then
 		    s.VisualSupport.Close
@@ -371,9 +379,9 @@ End
 		    
 		  end if
 		  
-		  self.AutomatorFlow.doRemove(ItemToRemove)
+		  self.CurrentFlow.doRemove(ItemToRemove)
 		  
-		  clDataQueryFlow(self.AutomatorFlow).UpdateDataFlow
+		  clDataQueryFlow(self.CurrentFlow).UpdateDataFlow
 		  
 		  self.RefreshStepIDs
 		  
@@ -421,19 +429,25 @@ End
 		  
 		  BuildListOfAnalysis
 		  
-		  self.AutomatorFlow =new clDataQueryFlow(self.CurrentProject)
+		  if self.CurrentFlow = nil then
+		    var  d as new date
+		    self.CurrentFlow =new clDataQueryFlow(self.CurrentProject)
+		    tf_GroupTtitle.Text =  "Analysis "+d.ShortDate
+		    sttLocalFilename.caption = ""
+		    
+		  else
+		    tf_GroupTtitle.Text = self.CurrentFlow.GroupName
+		    sttLocalFilename.caption =clDataQueryFlow( self.CurrentFlow).Filename
+		  end if
 		  
-		  self.ccAutomatorFlow1.SetFlow self.AutomatorFlow
-		  
-		  var  d as new date
-		  
-		  tf_GroupTtitle.Text =  "Analysis "+d.ShortDate
-		  tmpCurrentFile=""
+		  self.ccAutomatorFlow1.SetFlow self.CurrentFlow
 		  
 		  UpdateUI
 		  
+		  RefreshStepIDs 
+		  
 		  dirtyFlag=false
-		  sttLocalFilename.caption=tmpCurrentFile
+		   
 		  
 		End Sub
 	#tag EndMethod
@@ -442,7 +456,7 @@ End
 		Sub RefreshStepIDs()
 		  var i as integer
 		  
-		  for each c as clAutomatorItem in self.AutomatorFlow.Items
+		  for each c as clAutomatorItem in self.CurrentFlow.Items
 		    c.SetID(i)
 		    
 		    i = i + 1
@@ -457,7 +471,7 @@ End
 		  // Part of the AutomatorVisualInterface interface.
 		  
 		  
-		  var s as clAutomatorItem = self.AutomatorFlow.FindItemWithId(Identifier)
+		  var s as clAutomatorItem = self.CurrentFlow.FindItemWithId(Identifier)
 		  
 		  if s = nil then return 
 		  
@@ -468,9 +482,10 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetProject(p as clDataQueryProject)
-		  self.CurrentProject = p
+		Sub SetProjectAndFlow(p as clDataQueryProject, f as clDataQueryFlow)
 		  
+		  self.CurrentProject = p
+		  self.CurrentFlow = f
 		End Sub
 	#tag EndMethod
 
@@ -484,7 +499,7 @@ End
 
 
 	#tag Property, Flags = &h1
-		Protected AutomatorFlow As clAutomatorFlow
+		Protected CurrentFlow As clAutomatorFlow
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -493,10 +508,6 @@ End
 
 	#tag Property, Flags = &h1
 		Protected dirtyFlag As boolean
-	#tag EndProperty
-
-	#tag Property, Flags = &h1
-		Protected tmpCurrentFile As string
 	#tag EndProperty
 
 
@@ -522,27 +533,39 @@ End
 		  if i<0 Then Return
 		  
 		  FileToOpen=lb_Analaysis.RowTagAt(i)
+		  
+		  var loadedFlow as  clDataQueryFlow
+		  
+		  if FileToOpen = "$$" then // new flow
+		    loadedFlow = nil
+		    
+		  else
+		    var loadedJSON as JSONItem = CurrentProject.LoadFlow(FileToOpen)
+		    
+		    loadedFlow = new clDataQueryFlow(CurrentProject, loadedJSON)
+		    loadedFlow.Filename = FileToOpen
+		    
+		  end if
+		  
+		  var wnd as new wnd_main
+		  wnd.Top = self.Top + 10
+		  wnd.Left = self.left + 10
+		  
+		  wnd.SetProjectAndFlow(self.CurrentProject, loadedFlow)
+		  wnd.Initialize
+		  wnd.show
+		  
+		  // self.CurrentFlow = loadedFlow
+		  // self.ccAutomatorFlow1.SetFlow loadedFlow
 		  // 
-		  // self.AutomatorFlow.LoadFromTextFile(sFileToOpen)
+		  // self.RefreshStepIDs
 		  // 
-		  // self.AutomatorFlow = new clDataQueryFlow(
-		  // tf_GroupTtitle.Text = self.AutomatorFlow.GroupName
-		  
-		  var loadedJSON as JSONItem = CurrentProject.LoadFlow(FileToOpen)
-		  
-		  var loadedFlow as new clDataQueryFlow(CurrentProject, loadedJSON)
-		  
-		  self.AutomatorFlow = loadedFlow
-		  self.ccAutomatorFlow1.SetFlow loadedFlow
-		  
-		  self.RefreshStepIDs
-		  
-		  clDataQueryFlow(self.AutomatorFlow).UpdateDataFlow
-		  
-		  title  = loadedFlow.GroupName
-		  tf_GroupTtitle.text = loadedFlow.GroupName
-		  
-		  UpdateUI
+		  // clDataQueryFlow(self.CurrentFlow).UpdateDataFlow
+		  // 
+		  // title  = loadedFlow.GroupName
+		  // tf_GroupTtitle.text = loadedFlow.GroupName
+		  // 
+		  // UpdateUI
 		  
 		  return 
 		  
@@ -555,31 +578,31 @@ End
 	#tag Event
 		Sub TextChange()
 		  title=tf_GroupTtitle.text
-		  self.AutomatorFlow.GroupName = tf_GroupTtitle.text
+		  self.CurrentFlow.GroupName = tf_GroupTtitle.text
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_run
+#tag Events btn_run
 	#tag Event
 		Sub Pressed()
 		  
 		  var tmpSql as string
 		  var tmpSource as string
 		  
-		  tmpSql = clDataQueryFlow(self.AutomatorFlow).getSqlStatement
-		  tmpSource = clDataQueryFlow(self.AutomatorFlow).FlowDataSource
+		  tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement
+		  tmpSource = clDataQueryFlow(self.CurrentFlow).FlowDataSource
 		  
 		  wnd_queryViewer.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button2
+#tag Events btn_save
 	#tag Event
 		Sub Pressed()
 		  
 		  var projectFile as FolderItem = CurrentProject.ProjectFIle
 		  
-		  var projectFlow as clDataQueryFlow = clDataQueryFlow(self.AutomatorFlow)
+		  var projectFlow as clDataQueryFlow = clDataQueryFlow(self.CurrentFlow)
 		  
 		  if projectFile = nil then 
 		    MessageBox("Cannot save flow to undefined project")
@@ -587,7 +610,7 @@ End
 		    
 		  end if
 		  
-		  projectFlow.Filename = CurrentProject.SaveFlow(self.AutomatorFlow.GetJSON, projectFlow.Filename)
+		  projectFlow.Filename = CurrentProject.SaveFlow(self.CurrentFlow.GetJSON, projectFlow.Filename)
 		  
 		  return 
 		End Sub

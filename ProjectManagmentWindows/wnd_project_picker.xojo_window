@@ -311,7 +311,7 @@ End
 		  self.Minimize
 		  
 		  var wnd as new wnd_main
-		  wnd.SetProject(project)
+		  wnd.SetProjectAndFlow(project, nil)
 		  wnd.Initialize
 		  wnd.Show
 		  

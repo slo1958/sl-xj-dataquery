@@ -236,7 +236,6 @@ Protected Class clDataQueryProject
 		  var txt as TextOutputStream 
 		  
 		  
-		  
 		  // Create the folder to store analysis
 		  
 		  if not destinationFolder.Exists then
