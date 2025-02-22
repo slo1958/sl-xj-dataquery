@@ -51,7 +51,7 @@ Begin DesktopWindow wnd_queryViewer
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      Value           =   0
+      Value           =   1
       Visible         =   True
       Width           =   560
       Begin DesktopListBox lb_Data
@@ -77,7 +77,7 @@ Begin DesktopWindow wnd_queryViewer
          HasHorizontalScrollbar=   False
          HasVerticalScrollbar=   True
          HeadingIndex    =   -1
-         Height          =   417
+         Height          =   409
          Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          InitialValue    =   ""
@@ -135,7 +135,7 @@ Begin DesktopWindow wnd_queryViewer
          Visible         =   True
          Width           =   80
       End
-      Begin DesktopLabel lbl_message
+      Begin DesktopLabel lbl_message0
          AllowAutoDeactivate=   True
          Bold            =   False
          Enabled         =   True
@@ -192,10 +192,10 @@ Begin DesktopWindow wnd_queryViewer
          Left            =   40
          LineHeight      =   0.0
          LineSpacing     =   1.0
-         LockBottom      =   False
+         LockBottom      =   True
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          MaximumCharactersAllowed=   0
          Multiline       =   True
@@ -344,6 +344,39 @@ Begin DesktopWindow wnd_queryViewer
          Visible         =   True
          Width           =   80
       End
+      Begin DesktopLabel lbl_message1
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   40
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   3
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "Untitled"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   476
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   336
+      End
    End
 End
 #tag EndDesktopWindow
@@ -369,6 +402,8 @@ End
 		      
 		    next
 		    
+		    redim self.RunningTotal(results.ColumnCount)
+		    
 		  end if
 		  
 		  
@@ -381,8 +416,18 @@ End
 		    for i as integer = 0 to Results.ColumnCount - 1
 		      var col as DatabaseColumn = results.ColumnAt(i)
 		      
-		      if col.Type = 6 or col.Type = 7 then
+		      self.RunningTotal(0) = self.RunningTotal(0) + 1
+		      
+		      if col.type = 0 then
+		        
+		        if col.DoubleValue <> 0 then // Xojo returns datatype 0 for some number columns
+		          lb_Data.CellTextAt(r, i+1) = format(col.DoubleValue, "-######0.00#####")
+		          self.RunningTotal(i+1) = self.RunningTotal(i+1) + col.DoubleValue
+		        end if
+		        
+		      elseif col.Type = 6 or col.Type = 7  then
 		        lb_Data.CellTextAt(r, i+1) = format(col.DoubleValue, "-######0.00#####")
+		        self.RunningTotal(i+1) = self.RunningTotal(i+1) + col.DoubleValue
 		        
 		      else
 		        lb_Data.CellTextAt(r, i+1) = col.StringValue
@@ -421,7 +466,8 @@ End
 		    
 		  catch err As DatabaseException
 		    rs = nil
-		    lbl_message.text = "SQL Error " + err.Message
+		    lbl_message0.text = "No results - SQL error"
+		    lbl_message1.text = "SQL Error: " + err.Message
 		    
 		    
 		  Catch
@@ -439,7 +485,8 @@ End
 		      
 		    next
 		    
-		    lbl_message.text = " Query returned " + str(rCount) + " rows."
+		    lbl_message0.text = " Query returned " + str(rCount) + " rows."
+		    lbl_message1.text = "Query length " + str(self.SqlCode.Length) + " chars."
 		    
 		    Results = self.DBConnection.db.SelectSQL(self.SqlCode)
 		    
@@ -448,10 +495,33 @@ End
 		    
 		    AddNextRows()
 		    
+		    ShowTotals
+		    
 		  end if
 		  
 		  me.ShowModal
 		  
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ShowTotals()
+		  
+		  if not Results.AfterLastRow then return
+		   
+		  lb_Data.AddRow("")
+		  
+		  lb_Data.AddRow("TOTAL")
+		  
+		  for  i as integer = 1 to lb_Data.LastColumnIndex
+		    if RunningTotal(i) <> 0 then
+		      lb_Data.CellTextAt(lb_Data.LastAddedRowIndex, i) =   format(RunningTotal(i), "-######0.00#####")
+		      
+		    end if
+		    
+		  next
 		  
 		  
 		End Sub
@@ -471,6 +541,10 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		RunningTotal() As Double
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		SqlCode As string
 	#tag EndProperty
 
@@ -481,6 +555,8 @@ End
 	#tag Event
 		Sub Pressed()
 		  AddNextRows
+		  
+		  ShowTotals
 		  
 		End Sub
 	#tag EndEvent

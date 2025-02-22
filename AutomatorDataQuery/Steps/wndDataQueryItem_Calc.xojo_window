@@ -79,7 +79,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   110
+      Left            =   81
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -101,7 +101,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   329
+      Width           =   508
    End
    Begin Label StaticText1
       AllowAutoDeactivate=   True
@@ -151,7 +151,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   111
+      Left            =   81
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -171,7 +171,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   80
+      Width           =   110
    End
    Begin Label StaticText4
       AllowAutoDeactivate=   True
@@ -293,7 +293,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
-      Left            =   111
+      Left            =   81
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -315,7 +315,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   80
+      Width           =   110
    End
    Begin TextArea efFieldA
       AllowAutoDeactivate=   True
@@ -345,9 +345,9 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Multiline       =   True
       ReadOnly        =   False
@@ -385,8 +385,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   10
@@ -419,7 +419,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
-      Left            =   111
+      Left            =   81
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -441,7 +441,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   False
-      Width           =   80
+      Width           =   110
    End
    Begin TextArea efFieldA
       AllowAutoDeactivate=   True
@@ -471,9 +471,9 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Multiline       =   True
       ReadOnly        =   False
@@ -511,8 +511,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   13
@@ -545,7 +545,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
-      Left            =   111
+      Left            =   81
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -567,7 +567,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   False
-      Width           =   80
+      Width           =   110
    End
    Begin DesktopButton pb_Remove
       AllowAutoDeactivate=   True
@@ -587,8 +587,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   15
@@ -629,9 +629,9 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Multiline       =   True
       ReadOnly        =   False
@@ -671,7 +671,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
-      Left            =   111
+      Left            =   81
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -693,7 +693,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   False
-      Width           =   80
+      Width           =   110
    End
    Begin TextArea efFieldA
       AllowAutoDeactivate=   True
@@ -723,9 +723,9 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Multiline       =   True
       ReadOnly        =   False
@@ -763,8 +763,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   19
@@ -797,7 +797,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
-      Left            =   111
+      Left            =   81
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -819,7 +819,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   False
-      Width           =   80
+      Width           =   110
    End
    Begin TextArea efFieldA
       AllowAutoDeactivate=   True
@@ -849,9 +849,9 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Multiline       =   True
       ReadOnly        =   False
@@ -889,8 +889,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   22
@@ -923,7 +923,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
-      Left            =   111
+      Left            =   81
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -945,7 +945,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   False
-      Width           =   80
+      Width           =   110
    End
    Begin TextArea efFieldA
       AllowAutoDeactivate=   True
@@ -975,9 +975,9 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Multiline       =   True
       ReadOnly        =   False
@@ -1015,8 +1015,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   25
@@ -1049,7 +1049,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
-      Left            =   111
+      Left            =   81
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -1071,7 +1071,7 @@ Begin DesktopWindow wndDataQueryItem_Calc
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   False
-      Width           =   80
+      Width           =   110
    End
    Begin TextArea efFieldA
       AllowAutoDeactivate=   True
@@ -1101,9 +1101,9 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LineSpacing     =   1.0
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Multiline       =   True
       ReadOnly        =   False
@@ -1141,8 +1141,8 @@ Begin DesktopWindow wndDataQueryItem_Calc
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   28
@@ -1219,11 +1219,11 @@ Begin DesktopWindow wndDataQueryItem_Calc
       InitialParent   =   ""
       Italic          =   False
       Left            =   673
-      LockBottom      =   True
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   True
-      LockTop         =   False
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   30
