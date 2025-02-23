@@ -23,7 +23,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
    Title           =   "Definition of a Sort"
    Type            =   0
    Visible         =   True
-   Width           =   476
+   Width           =   506
    Begin DesktopCanvas Canvas1
       AllowAutoDeactivate=   True
       AllowFocus      =   False
@@ -247,9 +247,9 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
@@ -266,7 +266,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   329
+      Width           =   363
    End
    Begin Label StaticText1
       AllowAutoDeactivate=   True
@@ -318,9 +318,9 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   4
@@ -331,7 +331,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   136
    End
    Begin DesktopPopupMenu PopupMenu1
       AllowAutoDeactivate=   True
@@ -377,12 +377,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Index           =   0
       InitialParent   =   ""
       Italic          =   False
-      Left            =   311
+      Left            =   341
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   6
@@ -410,9 +410,9 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   7
@@ -423,7 +423,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   136
    End
    Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
@@ -439,12 +439,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Index           =   1
       InitialParent   =   ""
       Italic          =   False
-      Left            =   311
+      Left            =   341
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   8
@@ -472,9 +472,9 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   9
@@ -485,7 +485,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   136
    End
    Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
@@ -501,12 +501,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Index           =   2
       InitialParent   =   ""
       Italic          =   False
-      Left            =   311
+      Left            =   341
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   10
@@ -534,9 +534,9 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   11
@@ -547,7 +547,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   136
    End
    Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
@@ -563,12 +563,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Index           =   3
       InitialParent   =   ""
       Italic          =   False
-      Left            =   311
+      Left            =   341
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   12
@@ -596,9 +596,9 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   13
@@ -609,7 +609,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   136
    End
    Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
@@ -625,12 +625,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Index           =   4
       InitialParent   =   ""
       Italic          =   False
-      Left            =   311
+      Left            =   341
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   14
@@ -658,9 +658,9 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   15
@@ -671,7 +671,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   136
    End
    Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
@@ -687,12 +687,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Index           =   5
       InitialParent   =   ""
       Italic          =   False
-      Left            =   311
+      Left            =   341
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   16
@@ -720,9 +720,9 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Left            =   110
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   17
@@ -733,7 +733,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   136
    End
    Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
@@ -749,12 +749,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Index           =   6
       InitialParent   =   ""
       Italic          =   False
-      Left            =   311
+      Left            =   341
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   18
@@ -781,12 +781,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   338
+      Left            =   368
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   19
@@ -813,12 +813,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   370
+      Left            =   400
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   20
@@ -843,12 +843,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       InitialParent   =   ""
       InitialValue    =   "Asc\r\nDesc\r\n"
       Italic          =   False
-      Left            =   255
+      Left            =   251
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   21
@@ -859,7 +859,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   52
+      Width           =   78
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
@@ -873,12 +873,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       InitialParent   =   ""
       InitialValue    =   "Asc\r\nDesc\r\n"
       Italic          =   False
-      Left            =   255
+      Left            =   251
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   22
@@ -889,7 +889,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   52
+      Width           =   78
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
@@ -903,12 +903,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       InitialParent   =   ""
       InitialValue    =   "Asc\r\nDesc\r\n"
       Italic          =   False
-      Left            =   255
+      Left            =   251
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   23
@@ -919,7 +919,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   52
+      Width           =   78
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
@@ -933,12 +933,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       InitialParent   =   ""
       InitialValue    =   "Asc\r\nDesc\r\n"
       Italic          =   False
-      Left            =   255
+      Left            =   251
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   24
@@ -949,7 +949,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   52
+      Width           =   78
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
@@ -963,12 +963,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       InitialParent   =   ""
       InitialValue    =   "Asc\r\nDesc\r\n"
       Italic          =   False
-      Left            =   255
+      Left            =   251
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   25
@@ -979,7 +979,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   52
+      Width           =   78
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
@@ -993,12 +993,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       InitialParent   =   ""
       InitialValue    =   "Asc\r\nDesc\r\n"
       Italic          =   False
-      Left            =   255
+      Left            =   251
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   26
@@ -1009,7 +1009,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   52
+      Width           =   78
    End
    Begin DesktopPopupMenu ppFieldB
       AllowAutoDeactivate=   True
@@ -1023,12 +1023,12 @@ Begin DesktopWindow wndDataQueryItem_Sort
       InitialParent   =   ""
       InitialValue    =   "Asc\r\nDesc\r\n"
       Italic          =   False
-      Left            =   255
+      Left            =   251
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   27
@@ -1039,7 +1039,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   52
+      Width           =   78
    End
 End
 #tag EndDesktopWindow
@@ -1222,7 +1222,7 @@ End
 #tag EndEvents
 #tag Events btn_Remove
 	#tag Event
-		Sub Pressed()
+		Sub Pressed(index as Integer)
 		  var i  as integer
 		  dim y as integer
 		  dim last as integer

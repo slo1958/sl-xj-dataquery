@@ -229,6 +229,38 @@ Inherits clDataQueryItem
 		  
 		  if prevDataQueryItem<>nil then
 		    
+		    redim keyFields(prevDataQueryItem.keyFields.LastIndex)
+		    redim keyFieldType(prevDataQueryItem.keyFields.LastIndex)
+		    
+		    for i as integer = 0 to prevDataQueryItem.keyFields.LastIndex
+		      keyFields(i) = prevDataQueryItem.keyFields(i)
+		      keyFieldType(i) = prevDataQueryItem.keyFieldType(i)
+		    next
+		    
+		     
+		    redim valueFields(prevDataQueryItem.valueFields.LastIndex)
+		    
+		    for i as integer = 0 to prevDataQueryItem.valueFields.LastIndex
+		      valueFields(i)=prevDataQueryItem.valueFields(i)
+		    next
+		    
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub updateFieldsFromPred1()
+		  '
+		  ' passes all fields (key, values)
+		  '
+		  
+		  var j  as integer
+		  dim n as integer
+		  dim s as string
+		  
+		  if prevDataQueryItem<>nil then
+		    
 		    '
 		    ' obtain field type of selected fields
 		    '
