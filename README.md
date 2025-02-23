@@ -7,3 +7,21 @@ When executed from the IDE, a demo mode uses a small database included in the so
 The tool lets the user create simple queries by creating a 'automator like' flow.
 
 Flows are grouped in projects, aproject is linked to a single database.
+
+
+
+
+The following staps are available
+
+- Start (the mandatory first step)
+- Calculate
+- Filter
+- Group split
+- Map
+- Pivot
+- Sort
+
+
+
+
+### Calculate
