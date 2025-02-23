@@ -79,8 +79,18 @@ Inherits clDataQueryItem
 		    
 		    return s
 		    
+		  elseif theItem = 0 and recLimit > 0 then 
+		    return "Limit " + str(recLimit) + " rows"
+		    
+		  elseif theItem = 0 then
+		    return ""
+		    
+		  elseif   bInUse(theItem-1) and recLimit>0 then
+		    return "Limit " + str(recLimit) + " rows"
+		    
 		  else
 		    return ""
+		    
 		  end if
 		  
 		End Function
@@ -91,7 +101,7 @@ Inherits clDataQueryItem
 		  dim s as string
 		  dim sSource as string
 		  dim sPostFix as string
-		   
+		  
 		  dim ssep as string
 		  
 		  if prevDataQueryItem<>nil then
@@ -151,18 +161,17 @@ Inherits clDataQueryItem
 		Protected Function getTextItem(theItem as integer) As string
 		  
 		  if theItem <4 then
-		    if bInuse(theItem-1) then
-		      return getOneItem(theItem-1)
-		    else
-		      return ""
-		    end if
+		    return getOneItem(theItem-1)
 		    
 		  elseif itemInUse>4 then
 		    return "..."
+		    
 		  elseif bInUse(3) then
 		    return getOneItem(3)
+		    
 		  else
 		    return ""
+		    
 		  end if
 		  
 		  
@@ -178,7 +187,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		   
+		  
 		  var j  as integer
 		  
 		  j=0
@@ -213,7 +222,7 @@ Inherits clDataQueryItem
 		  '
 		  ' passes all fields (key, values)
 		  '
-		   
+		  
 		  var j  as integer
 		  dim n as integer
 		  dim s as string
@@ -301,14 +310,6 @@ Inherits clDataQueryItem
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="ID"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
@@ -363,14 +364,6 @@ Inherits clDataQueryItem
 			InitialValue="0"
 			Type="integer"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="tmp"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="fieldPostFix"
