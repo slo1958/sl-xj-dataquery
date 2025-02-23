@@ -363,7 +363,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -425,7 +425,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -487,7 +487,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -549,7 +549,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -611,7 +611,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -673,7 +673,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -735,7 +735,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -767,7 +767,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Visible         =   True
       Width           =   20
    End
-   Begin DesktopButton pb_Add
+   Begin DesktopButton btn_Add
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -799,7 +799,7 @@ Begin DesktopWindow wndDataQueryItem_Sort
       Visible         =   True
       Width           =   20
    End
-   Begin DesktopButton pb_close
+   Begin DesktopButton btn_close
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -1047,22 +1047,22 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		   
+		  
 		  
 		  lastItem=0
 		  for i as integer = 1 to 6
 		    ppFieldA(i).visible=false
 		    ppFieldB(i).visible=false
-		    pb_Remove(i).Visible=false
+		    btn_Remove(i).Visible=false
 		  next
 		  
-		  pb_add.top=pb_remove(0).top
+		  btn_add.top=btn_remove(0).top
 		  
-		  pb_Remove(0).Enabled=false
+		  btn_Remove(0).Enabled=false
 		  
-		  pb_close.top=pb_add.top+25
+		  btn_close.top=btn_add.top+25
 		  
-		  wndDataQueryItem_Sort.Height=pb_close.top+25
+		  wndDataQueryItem_Sort.Height=btn_close.top+25
 		  
 		End Sub
 	#tag EndEvent
@@ -1075,14 +1075,14 @@ End
 		  ppFielda(lastItem).Visible=true
 		  ppFieldb(lastitem).Visible=true
 		  
-		  pb_remove(lastItem).visible=true 
+		  btn_remove(lastItem).visible=true 
 		  
 		  prepLine lastItem
 		  
-		  pb_add.top=pb_remove(lastItem).top
+		  btn_add.top=btn_remove(lastItem).top
 		  
 		  
-		  pb_close.top=pb_add.top+25
+		  btn_close.top=btn_add.top+25
 		  
 		  wndDataQueryItem_Sort.Height=ppFieldA(0).top+25*(lastItem+1+1)
 		  
@@ -1098,7 +1098,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		   
+		  
 		  curStep.name=efName.text
 		  
 		  
@@ -1129,7 +1129,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub prepLine(theLine as integer)
-		   
+		  
 		  if curStep.prevDataQueryItem<>nil then
 		    ppFieldA(theLine).RemoveAllRows
 		    
@@ -1150,7 +1150,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub ShowMe(theStep as clDataQueryItem_Sort)
-		   
+		  
 		  var j  as integer
 		  
 		  curStep=theStep
@@ -1220,9 +1220,9 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_Remove
+#tag Events btn_Remove
 	#tag Event
-		Sub Pressed(index as Integer)
+		Sub Pressed()
 		  var i  as integer
 		  dim y as integer
 		  dim last as integer
@@ -1238,13 +1238,13 @@ End
 		  
 		  ppFieldA(i).visible=false
 		  ppFieldB(i).visible=false
-		  pb_Remove(i).Visible=false
+		  btn_Remove(i).Visible=false
 		  
 		  lastItem=lastItem-1
 		  
-		  pb_add.top=pb_remove(lastItem).top
+		  btn_add.top=btn_remove(lastItem).top
 		  
-		  pb_close.top=pb_add.top+25
+		  btn_close.top=btn_add.top+25
 		  
 		  wndDataQueryItem_Sort.Height=ppFieldA(0).top+25*(lastItem+1+1)
 		  
@@ -1252,7 +1252,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_Add
+#tag Events btn_Add
 	#tag Event
 		Sub Pressed()
 		  
@@ -1264,7 +1264,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_close
+#tag Events btn_close
 	#tag Event
 		Sub Pressed()
 		  

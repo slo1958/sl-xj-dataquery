@@ -133,7 +133,7 @@ Begin DesktopWindow wndDataQueryItem_map
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton pb_close
+   Begin DesktopButton btn_close
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -249,7 +249,7 @@ Begin DesktopWindow wndDataQueryItem_map
       Visible         =   True
       Width           =   287
    End
-   Begin DesktopButton pb_None
+   Begin DesktopButton btn_None
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -327,7 +327,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		   
+		  
 		  curStep.name=efName.text
 		  
 		  '
@@ -361,7 +361,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub updateList()
-		   
+		  
 		  var r as integer
 		  
 		  ListBox1.RemoveAllRows
@@ -387,7 +387,7 @@ End
 		  dim sa,sb  as string
 		  dim bAnyDefined as boolean
 		  
-		   
+		  
 		  dim bErr as boolean
 		  
 		  bErr=false
@@ -438,7 +438,7 @@ End
 
 #tag EndWindowCode
 
-#tag Events pb_close
+#tag Events btn_close
 	#tag Event
 		Sub Pressed()
 		  
@@ -451,10 +451,10 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_None
+#tag Events btn_None
 	#tag Event
 		Sub Pressed()
-		   
+		  
 		  
 		  for i as integer = 0 to ListBox1.RowCount-1
 		    listbox1.CellTextAt(i,1)=""
@@ -466,7 +466,7 @@ End
 #tag Events PushButton1
 	#tag Event
 		Sub Pressed()
-		   
+		  
 		  
 		  for i as integer = 0 to ListBox1.RowCount-1
 		    listbox1.CellTextAt(i,1)=listbox1.CellTextAt(i,0)

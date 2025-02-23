@@ -26,7 +26,7 @@ Protected Class clDataQueryProject
 		    
 		  end if
 		  
-		  if pfw <> "" then TempFolderForFlows = new FolderItem(pfw)
+		  if pfw <> "" then TempFolderForFlows = app.GetAppDataFolder.Child(pfw)
 		  
 		  if fdb = nil then
 		    
@@ -88,7 +88,7 @@ Protected Class clDataQueryProject
 		  jMaster.value(cProjectName) = self.ProjectName
 		  jMaster.value(cDatabasePath) = Self.PathToDatabase.NativePath
 		  jMaster.Value(cDataSource) = Self.DataSourceName
-		  jMaster.Value(cFlowFolder) = self.ProjectFolder.NativePath
+		  jMaster.Value(cFlowFolder) = self.ProjectFolder.Name
 		  
 		  return jMaster
 		  
@@ -102,11 +102,13 @@ Protected Class clDataQueryProject
 		  
 		  var dest as FolderItem = FolderToScan
 		  
+		  if dest = nil then return d
+		  
 		  if not dest.Exists then return d
 		  
 		  for each file as FolderItem in dest.Children
 		    if file.Name.right(ExtensionFilter.Length) = ExtensionFilter then
-		      
+		       
 		      var jFile as TextInputStream
 		      
 		      try
@@ -131,9 +133,8 @@ Protected Class clDataQueryProject
 		        end try
 		        
 		        jfile.Close
+		        
 		      end if
-		      
-		      
 		      
 		    end if
 		    
@@ -188,6 +189,81 @@ Protected Class clDataQueryProject
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Shared Function OpenProject(ProjectName as string, ProjectFileName as string) As clDataQueryProject
+		  
+		  var projectFile as FolderItem  = app.GetAppDataFolder.Child(projectFileName)
+		  var project as   clDataQueryProject
+		  
+		  var jFile as TextInputStream
+		  var jMain as JSONItem
+		  
+		  try
+		    jFIle = TextInputStream.Open(projectFile)
+		    
+		  catch
+		    
+		  end try
+		  
+		  if jFile <> nil then
+		    
+		    try
+		      var jTxt as string = jfile.ReadAll
+		      jMain = new JSONItem(jTxt)
+		      
+		    Catch
+		      
+		    end try
+		    
+		  end if
+		  
+		  if jMain <> nil then
+		    project = new clDataQueryProject(jMain, projectFileName)
+		    
+		  end if
+		  
+		  
+		  return project
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Shared Sub RemoveProject(ProjectName as string, ProjectFileName as string)
+		  
+		  
+		  var project as   clDataQueryProject = OpenProject(ProjectName, ProjectFileName)
+		  
+		  
+		  var projectfile as FolderItem = app.GetAppDataFolder.Child(projectFileName)
+		  var projectAnalysisFolder as FolderItem = project.ProjectFolder
+		  
+		  
+		  try
+		    projectfile.Remove
+		    
+		  catch
+		    
+		    
+		  end try
+		  
+		  
+		  if projectAnalysisFolder.Exists and projectAnalysisFolder.IsFolder then
+		    try
+		      projectAnalysisFolder.RemoveFolderAndContents
+		      
+		    catch
+		      
+		      
+		    end try
+		    
+		  end if
+		  
+		  
+		  return 
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Save()
 		  
 		  var txt as TextOutputStream
@@ -196,7 +272,7 @@ Protected Class clDataQueryProject
 		  
 		  var d as Int64 = DateTime.Now.SecondsFrom1970
 		  
-		  var filename as string = "PROJECT" + format(d, "000000000") 
+		  var filename as string =  ProjectBaseName + format(d, "000000000") 
 		  
 		  self.ProjectFIle = dest.Child(filename+ cProjectFileExtension)
 		  self.ProjectFolder = dest.Child(filename)
@@ -224,7 +300,7 @@ Protected Class clDataQueryProject
 		  
 		  
 		  if DestinationFileName = "" then 
-		    filename = "DQFLOW" + format(d, "000000000") + cFlowFileExtension
+		    filename = FlowBaseName + format(d, "000000000") + cFlowFileExtension
 		    
 		  else
 		    filename = DestinationFileName
@@ -317,16 +393,22 @@ Protected Class clDataQueryProject
 	#tag Constant, Name = cDataSource, Type = String, Dynamic = False, Default = \"datasource", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = cFlowFileExtension, Type = String, Dynamic = False, Default = \".dqflow", Scope = Public
+	#tag Constant, Name = cFlowFileExtension, Type = String, Dynamic = False, Default = \".qqflow", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = cFlowFolder, Type = String, Dynamic = False, Default = \"flowStorage", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = cProjectFileExtension, Type = String, Dynamic = False, Default = \".dqproj", Scope = Public
+	#tag Constant, Name = cProjectFileExtension, Type = String, Dynamic = False, Default = \".qqproject", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = cProjectName, Type = String, Dynamic = False, Default = \"projectname", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = FlowBaseName, Type = String, Dynamic = False, Default = \"QQFLOW", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = ProjectBaseName, Type = String, Dynamic = False, Default = \"QQPROJECT", Scope = Public
 	#tag EndConstant
 
 

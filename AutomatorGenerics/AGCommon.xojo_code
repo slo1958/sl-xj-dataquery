@@ -1,20 +1,5 @@
 #tag Module
 Protected Module AGCommon
-	#tag Method, Flags = &h0
-		Function ConfirmDialog(Message as String) As Boolean
-		  
-		  var w as new wnd_Confirm
-		  w.setMessage(message)
-		  
-		  w.ShowModal
-		  
-		  return w.Confirmed
-		  
-		  
-		End Function
-	#tag EndMethod
-
-
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="Name"

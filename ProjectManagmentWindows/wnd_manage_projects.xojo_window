@@ -285,6 +285,9 @@ End
 #tag Events lb_AvailableProjects
 	#tag Event
 		Sub SelectionChanged()
+		  
+		  if lb_AvailableProjects.SelectedRowIndex < 0 then return 
+		  
 		  var projectName as string = lb_AvailableProjects.CellTextAt(lb_AvailableProjects.SelectedRowIndex, 0)
 		  var projectfFile as string = lb_AvailableProjects.RowTagAt(lb_AvailableProjects.SelectedRowIndex)
 		  
@@ -311,6 +314,23 @@ End
 	#tag Event
 		Sub Pressed()
 		  
+		  var index as integer = lb_AvailableProjects.SelectedRowIndex
+		  
+		  if index < 0 then return
+		  
+		  var projectName as string = lb_AvailableProjects.CellTextAt(index, 0)
+		  var projectfFile as string = lb_AvailableProjects.RowTagAt(index)
+		  
+		  lb_AvailableProjects.RemoveAllRows
+		  
+		  if ConfirmDialog("Confirm removing project", "This action wll remove project [%0] and all its analysis","", projectName) then
+		    
+		    clDataQueryProject.RemoveProject(projectName, projectfFile)
+		    
+		    
+		  end if
+		  
+		  UpdateListOfProjects
 		  
 		  return
 		  
@@ -567,6 +587,6 @@ End
 		Group="Behavior"
 		InitialValue=""
 		Type="String"
-		EditorType=""
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 #tag EndViewBehavior

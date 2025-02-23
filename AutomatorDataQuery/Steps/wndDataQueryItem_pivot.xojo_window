@@ -539,7 +539,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -747,7 +747,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -955,7 +955,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -1163,7 +1163,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -1371,7 +1371,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -1579,7 +1579,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -1787,7 +1787,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   140
    End
-   Begin DesktopButton pb_Remove
+   Begin DesktopButton btn_Remove
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -1819,7 +1819,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   20
    End
-   Begin DesktopButton pb_Add
+   Begin DesktopButton btn_Add
       AllowAutoDeactivate=   True
       Bold            =   True
       Cancel          =   False
@@ -1851,7 +1851,7 @@ Begin DesktopWindow wndDataQueryItem_pivot
       Visible         =   True
       Width           =   20
    End
-   Begin DesktopButton pb_close
+   Begin DesktopButton btn_close
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -1924,7 +1924,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		   
+		  
 		  st_help.Caption="Define condition for each pivoted block"
 		  
 		  lastItem=0
@@ -1933,15 +1933,15 @@ End
 		    efConstant1(i).Visible=false
 		    efConstant2(i).Visible=false
 		    efConstant3(i).Visible=false
-		    pb_Remove(i).Visible=false
+		    btn_Remove(i).Visible=false
 		  next
 		  
-		  pb_add.top=pb_remove(0).top
-		  pb_close.top=pb_Remove(0).top
+		  btn_add.top=btn_remove(0).top
+		  btn_close.top=btn_Remove(0).top
 		  
 		  wndDataQueryItem_pivot.Height=BlockName(0).top+25
 		  
-		  pb_Remove(0).Enabled=false
+		  btn_Remove(0).Enabled=false
 		  
 		End Sub
 	#tag EndEvent
@@ -1955,11 +1955,11 @@ End
 		  efConstant1(lastItem).Visible=true
 		  efConstant2(lastItem).visible=true
 		  efConstant3(lastItem).visible=true
-		  pb_Remove(lastitem).visible=true
+		  btn_Remove(lastitem).visible=true
 		  
 		  
-		  pb_add.top=pb_remove(lastItem).top
-		  pb_close.top=pb_Remove(lastItem).top
+		  btn_add.top=btn_remove(lastItem).top
+		  btn_close.top=btn_Remove(lastItem).top
 		  
 		  
 		  wndDataQueryItem_pivot.Height=BlockName(0).top+25*(lastItem+1)
@@ -1971,7 +1971,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub checkUsage()
-		   
+		  
 		  dim bAnyUsed as boolean
 		  
 		  
@@ -2020,7 +2020,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub doSave()
-		   
+		  
 		  curStep.name=efName.text
 		  
 		  curStep.sfield(1)=notUsedIsEmpty(ppField1.SelectedRowText)
@@ -2062,7 +2062,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub ShowMe(theStep as clDataQueryItem_pivot)
-		   
+		  
 		  var j  as integer
 		  
 		  curStep=theStep
@@ -2118,7 +2118,7 @@ End
 	#tag Method, Flags = &h0
 		Function validBlockName() As boolean
 		  dim bErr as Boolean
-		   
+		  
 		  dim sb as string
 		  
 		  berr=false
@@ -2152,7 +2152,7 @@ End
 	#tag Method, Flags = &h0
 		Function validKeyValue() As boolean
 		  dim bErr as Boolean
-		   
+		  
 		  dim sa as string
 		  var kt as InternalFieldTypes
 		  dim eff as TextField
@@ -2241,7 +2241,7 @@ End
 #tag Events ppField2
 	#tag Event
 		Sub SelectionChanged(item As DesktopMenuItem)
-		   
+		  
 		  
 		  for i as integer = 0 to 6
 		    efConstant2(i).Enabled=ppField2.SelectedRowText<>cNotUsed
@@ -2253,7 +2253,7 @@ End
 #tag Events ppField3
 	#tag Event
 		Sub SelectionChanged(item As DesktopMenuItem)
-		   
+		  
 		  
 		  for i as integer = 0 to 6
 		    efConstant3(i).Enabled=ppField3.SelectedRowText<>cNotUsed
@@ -2356,9 +2356,9 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_Remove
+#tag Events btn_Remove
 	#tag Event
-		Sub Pressed(index as Integer)
+		Sub Pressed()
 		  var i  as integer
 		  dim y as integer
 		  dim last as integer
@@ -2378,12 +2378,12 @@ End
 		  efConstant1(i).Visible=false
 		  efConstant2(i).Visible=false
 		  efConstant3(i).Visible=false
-		  pb_Remove(i).Visible=false
+		  btn_Remove(i).Visible=false
 		  
 		  lastItem=lastItem-1
 		  
-		  pb_add.top=pb_remove(lastItem).top
-		  pb_close.top=pb_Remove(lastItem).top
+		  btn_add.top=btn_remove(lastItem).top
+		  btn_close.top=btn_Remove(lastItem).top
 		  
 		  wndDataQueryItem_pivot.Height=blockName(0).top+25*(lastItem+1)
 		  
@@ -2391,7 +2391,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_Add
+#tag Events btn_Add
 	#tag Event
 		Sub Pressed()
 		  
@@ -2403,7 +2403,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_close
+#tag Events btn_close
 	#tag Event
 		Sub Pressed()
 		  

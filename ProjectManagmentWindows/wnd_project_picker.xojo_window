@@ -20,7 +20,7 @@ Begin DesktopWindow wnd_project_picker
    MinimumHeight   =   64
    MinimumWidth    =   64
    Resizeable      =   True
-   Title           =   "Untitled"
+   Title           =   "QuickQuery"
    Type            =   0
    Visible         =   True
    Width           =   600
@@ -136,7 +136,7 @@ Begin DesktopWindow wnd_project_picker
       Visible         =   True
       Width           =   163
    End
-   Begin DesktopButton pb_new
+   Begin DesktopButton btn_new
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -167,7 +167,7 @@ Begin DesktopWindow wnd_project_picker
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton pb_select
+   Begin DesktopButton btn_select
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -198,7 +198,7 @@ Begin DesktopWindow wnd_project_picker
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton pb_demo
+   Begin DesktopButton btn_demo
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -229,7 +229,7 @@ Begin DesktopWindow wnd_project_picker
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton pb_manage
+   Begin DesktopButton btn_manage
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -265,9 +265,15 @@ End
 
 #tag WindowCode
 	#tag Event
+		Sub Closing()
+		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Opening()
 		  
-		  pb_demo.Visible = DebugBuild
+		  btn_demo.Visible = DebugBuild
 		  
 		  UpdateListOfProjects()
 		  
@@ -333,8 +339,8 @@ End
 		  
 		  lb_AvailableProjects.SelectedRowIndex = 0
 		  
-		  pb_select.Enabled = lb_AvailableProjects.RowCount > 0
-		  pb_manage.Enabled = lb_AvailableProjects.RowCount > 0
+		  btn_select.Enabled = lb_AvailableProjects.RowCount > 0
+		  btn_manage.Enabled = lb_AvailableProjects.RowCount > 0
 		  
 		  lb_AvailableProjects.HeaderAt(0) =  "Available projects:"
 		  
@@ -345,7 +351,7 @@ End
 
 #tag EndWindowCode
 
-#tag Events pb_new
+#tag Events btn_new
 	#tag Event
 		Sub Pressed()
 		  
@@ -358,7 +364,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_select
+#tag Events btn_select
 	#tag Event
 		Sub Pressed()
 		  
@@ -367,42 +373,10 @@ End
 		  
 		  var projectName as string = lb_AvailableProjects.CellTextAt(lb_AvailableProjects.SelectedRowIndex, 0)
 		  var projectFileName as string = lb_AvailableProjects.RowTagAt(lb_AvailableProjects.SelectedRowIndex)
-		  var projectFile as FolderItem  = app.GetAppDataFolder.Child(projectFileName)
 		  
-		  var project as   clDataQueryProject
+		  var project as  clDataQueryProject = clDataQueryProject.OpenProject(projectName, projectFileName)
 		  
-		  var jFile as TextInputStream
-		  var jMain as JSONItem
-		  
-		  try
-		    jFIle = TextInputStream.Open(projectFile)
-		    
-		  catch
-		    
-		  end try
-		  
-		  if jFile <> nil then
-		    
-		    try
-		      var jTxt as string = jfile.ReadAll
-		      jMain = new JSONItem(jTxt)
-		      
-		    Catch
-		      
-		    end try
-		    
-		  end if
-		  
-		  if jMain <> nil then
-		    project = new clDataQueryProject(jMain, projectFileName)
-		    
-		  end if
-		  
-		  
-		  if project <> nil then 
-		    LaunchTool(project)
-		    
-		  end if
+		  if project <> nil then LaunchTool(project)
 		  
 		  return
 		  
@@ -410,7 +384,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_demo
+#tag Events btn_demo
 	#tag Event
 		Sub Pressed()
 		  
@@ -422,7 +396,7 @@ End
 		    
 		  end if
 		  
-		  f = f.child("DummySalesData.db")
+		  f = f.child("SmallTestDB.db")
 		  
 		  if f = nil or not f.exists then 
 		    MessageBox("Cannot find demo database " + f.name)
@@ -433,7 +407,7 @@ End
 		  var p as new clDataQueryProject("Demo Project")
 		  
 		  p.OpenDatabase(f)
-		  p.SetDataSourceName("CurrentSales")
+		  p.SetDataSourceName("SampleData")
 		  p.ProjectFIle = nil
 		  LaunchTool(p)
 		  
@@ -441,7 +415,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_manage
+#tag Events btn_manage
 	#tag Event
 		Sub Pressed()
 		  

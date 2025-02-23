@@ -20,7 +20,7 @@ Begin DesktopWindow wnd_new_project
    MinimumHeight   =   64
    MinimumWidth    =   64
    Resizeable      =   True
-   Title           =   "New project"
+   Title           =   "New QuickQuery project"
    Type            =   0
    Visible         =   False
    Width           =   600
@@ -273,7 +273,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   300
    End
-   Begin DesktopButton pb_ok
+   Begin DesktopButton btn_ok
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -304,7 +304,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton pb_cancel
+   Begin DesktopButton btn_cancel
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   True
@@ -335,7 +335,7 @@ Begin DesktopWindow wnd_new_project
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton pb_select
+   Begin DesktopButton btn_select
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   True
@@ -516,7 +516,7 @@ End
 		    
 		  end select
 		  
-		  pb_ok.Enabled = tmp_Status = cEverythingOk
+		  btn_ok.Enabled = tmp_Status = cEverythingOk
 		  
 		  return
 		End Sub
@@ -598,7 +598,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_ok
+#tag Events btn_ok
 	#tag Event
 		Sub Pressed()
 		  
@@ -618,7 +618,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_cancel
+#tag Events btn_cancel
 	#tag Event
 		Sub Pressed()
 		  
@@ -630,7 +630,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events pb_select
+#tag Events btn_select
 	#tag Event
 		Sub Pressed()
 		  

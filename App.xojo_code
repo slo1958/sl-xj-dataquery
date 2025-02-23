@@ -4,6 +4,9 @@ Inherits DesktopApplication
 	#tag Event
 		Sub Opening()
 		  
+		  
+		  app.AllowAutoQuit = True
+		  
 		End Sub
 	#tag EndEvent
 
