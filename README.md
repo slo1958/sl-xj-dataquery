@@ -46,7 +46,15 @@ The start step is the mandatory first step of a flow. The parameters are the nam
 
 This step is used to calculate new measures from existing measures. Note the mandatory “$” at the end of the field names (this is a quick/dirty fix for handling expression )
 
-The checkbox 'as Dimension' causes the new field to be treated as a dimension rather than a measure. This is typically used when the formula returns a boolean value, stored as '0' or '1' by SQLite.
+The checkbox 'as Dimension' causes the new field to be treated as a dimension rather than a measure. This is typically used when the formula returns a boolean value, stored as '0' or '1' by SQLite, for example:
+
+![Screenshot 2025-02-24 at 16 11 09](https://github.com/user-attachments/assets/0d1227c5-83e9-41bc-bb11-79b0fdb5f94d)
+
+In this case, the field MoQOK appears as a dimenion in a subsequent step, for example:
+
+![Screenshot 2025-02-24 at 16 12 17](https://github.com/user-attachments/assets/d61d7a7d-4b26-410a-903a-90e657cc5b0c)
+
+
 
 ### Filter
 ![Screenshot 2025-02-23 at 14 08 40](https://github.com/user-attachments/assets/49553bad-204c-440e-bc20-7d053a9fa215)
