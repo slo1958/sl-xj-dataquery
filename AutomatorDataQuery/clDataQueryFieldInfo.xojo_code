@@ -4,6 +4,7 @@ Protected Class clDataQueryFieldInfo
 		Sub Constructor(FieldName as string, FieldType as InternalFieldTypes)
 		  
 		  self.Name = FieldName
+		  self.Type = FieldType
 		  
 		End Sub
 	#tag EndMethod
@@ -73,7 +74,14 @@ Protected Class clDataQueryFieldInfo
 			Group="Behavior"
 			InitialValue=""
 			Type="InternalFieldTypes"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - String"
+				"1 - Double"
+				"2 - Date"
+				"3 - Integer"
+				"4 - Undefined"
+			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

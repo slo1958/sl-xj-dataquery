@@ -73,6 +73,7 @@ Inherits clDataQueryItem
 		    end if
 		    
 		  next
+		  
 		  jMaster.Value(cJSONTagItems) = jitems
 		  
 		  return jMaster
@@ -100,7 +101,7 @@ Inherits clDataQueryItem
 		Function getSql(IsLastStep as boolean) As String
 		  dim sSource as string
 		  dim sPostFix as string
-		   
+		  
 		  dim n as integer
 		  dim s as string
 		  dim sSep as string
@@ -190,7 +191,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		   
+		  
 		  var j  as integer
 		  
 		  j=0
@@ -224,7 +225,7 @@ Inherits clDataQueryItem
 		  '
 		  ' a group/split   but passes all value fields and only selected key fields
 		  '
-		   
+		  
 		  var j  as integer
 		  dim n as integer
 		  dim s as string
@@ -300,14 +301,6 @@ Inherits clDataQueryItem
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="ID"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
@@ -362,14 +355,6 @@ Inherits clDataQueryItem
 			InitialValue="0"
 			Type="integer"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="tmp"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="fieldPostFix"

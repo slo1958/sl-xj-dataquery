@@ -70,7 +70,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Function getSql(IsLastStep as boolean) As string
-		   
+		  
 		  dim s as string
 		  
 		  dim sTmp as string
@@ -155,35 +155,6 @@ Inherits clDataQueryItem
 		  return Calc_38_38
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub processLoadedJSON(theLine as string)
-		  dim m as integer
-		  dim s as string
-		  var i  as integer
-		  
-		  m=val(NthField(theline,";",1))
-		  i=instr(theLine,";")
-		  s=trim(mid(theLine,i+1,9999))
-		  
-		  select case m
-		  case 11
-		    nextItem=ubound(Formula)+1
-		    redim Formula(nextItem)
-		    redim OutputFields(nextItem)
-		    
-		  case 21
-		    formula(nextItem)=s
-		    
-		  case 25
-		    outputfields(nextItem)=s
-		    
-		    
-		  case else
-		  end select
-		  
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -310,14 +281,6 @@ Inherits clDataQueryItem
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="ID"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="selected"
 			Visible=false
 			Group="Behavior"
@@ -332,14 +295,6 @@ Inherits clDataQueryItem
 			InitialValue="0"
 			Type="integer"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="tmp"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="fieldPostFix"

@@ -21,7 +21,7 @@ Inherits clAutomatorItem
 	#tag Method, Flags = &h0
 		Sub Constructor(SourceJSON as JSONItem)
 		  super.Constructor(SourceJSON)
-		   
+		  
 		  prevDataQueryItem=nil
 		  
 		  if SourceJSON = nil then return
@@ -224,12 +224,6 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processLoadedJSON(theLine as string)
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub ResetData()
 		  redim keyFields(0)
 		  redim valueFields(0)
@@ -358,14 +352,6 @@ Inherits clAutomatorItem
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="ID"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
