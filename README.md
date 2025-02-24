@@ -88,6 +88,7 @@ This step is used to group data along one or more dimensions.
 When the user runs the flow from the start step (or a flow that contains only a start step) the generated query calculates the total of all available measures. This behaviour persists until a group/split step is added to the flow.
 
 #### Handling of measures
+(click on the 'Aggregate' button to display this pagge)
 
 ![Screenshot 2025-02-24 at 14 21 45](https://github.com/user-attachments/assets/a3ac9473-4b4a-41a2-8436-c5d88605b061)
 
