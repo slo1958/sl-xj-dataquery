@@ -101,7 +101,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   329
+      Width           =   417
    End
    Begin Label stt_CurrentPage
       AllowAutoDeactivate=   True
@@ -184,13 +184,14 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       PanelCount      =   2
       Panels          =   ""
       Scope           =   2
+      SelectedPanelIndex=   0
       TabIndex        =   21
       TabPanelIndex   =   0
       TabStop         =   False
       Tooltip         =   ""
       Top             =   38
       Transparent     =   False
-      Value           =   1
+      Value           =   0
       Visible         =   True
       Width           =   429
       Begin DesktopButton btn_AddDimension
@@ -431,6 +432,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   51
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   1
          Width           =   152
@@ -461,6 +463,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   75
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -491,6 +494,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   75
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -521,6 +525,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   75
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -899,6 +904,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   51
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   100
@@ -959,6 +965,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   99
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -989,6 +996,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   99
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1019,6 +1027,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   99
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1111,6 +1120,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   124
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1141,6 +1151,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   124
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1171,6 +1182,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   124
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1263,6 +1275,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   149
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1293,6 +1306,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   149
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1323,6 +1337,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   149
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1415,6 +1430,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   173
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1445,6 +1461,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   173
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1475,6 +1492,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   173
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1567,6 +1585,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   198
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1597,6 +1616,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   198
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1627,6 +1647,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
          Top             =   198
          Transparent     =   False
          Underline       =   False
+         Value           =   False
          Visible         =   True
          VisualState     =   0
          Width           =   60
@@ -1707,7 +1728,7 @@ End
 		  
 		  // Dimensions
 		  
-		   for i as integer = 1 to curStep.MaxDimensions
+		  for i as integer = 1 to curStep.MaxDimensions
 		    ppFieldDimension(i).visible=false
 		    btn_RemoveDimension(i).Visible=false
 		    
@@ -1730,7 +1751,7 @@ End
 		  btn_AddMeasure.top=btn_RemoveMeasure(0).top
 		  
 		  btn_RemoveMeasure(0).Enabled=false
-		   
+		  
 		  
 		End Sub
 	#tag EndEvent
@@ -1825,9 +1846,9 @@ End
 		  for i as integer = 0 to  curStep.MaxDimensions
 		    if ppFieldDimension(i).Visible and ppFieldDimension(i).SelectedRowText.Length > 0 then
 		      curStep.sFieldDImension.Add(ppFieldDimension(i).SelectedRowText)
-		       
+		      
 		    else
-		       
+		      
 		    end if
 		    
 		  next
@@ -1852,7 +1873,7 @@ End
 		  next
 		  
 		  curStep.IncludeCount = ckb_CountRows.value
-		   
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -2060,7 +2081,7 @@ End
 		  LastGroupByItem=LastGroupByItem-1
 		  
 		  btn_AddDimension.top=btn_RemoveDimension(LastGroupByItem).top
-		   
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2307,6 +2328,14 @@ End
 		Group="Appearance"
 		InitialValue=""
 		Type="DesktopMenuBar"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LastMeasure"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
