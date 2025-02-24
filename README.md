@@ -46,7 +46,7 @@ The start step is the mandatory first step of a flow. The parameters are the nam
 
 This step is used to calculate new measures from existing measures. Note the mandatory “$” at the end of the field names (this is a quick/dirty fix for handling expression )
 
-The checkbox 'as Dimension' causes the new field to be treated as a dimension rather than a measure. This typically used when the formula returns a boolean value, stored as '0' or '1' by SQLite.
+The checkbox 'as Dimension' causes the new field to be treated as a dimension rather than a measure. This is typically used when the formula returns a boolean value, stored as '0' or '1' by SQLite.
 
 ### Filter
 ![Screenshot 2025-02-23 at 14 08 40](https://github.com/user-attachments/assets/49553bad-204c-440e-bc20-7d053a9fa215)
