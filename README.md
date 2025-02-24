@@ -69,6 +69,8 @@ Where
 
 ### Group split
 
+This step takes its name from the fact that, by default, all measure fields are summed. This is also the case when a flow is executed using 'run until here'. Adding a group/split step allow to split those amounts along one or more dimension. 
+
 #### Definition of split dimensions
 
 ![Screenshot 2025-02-24 at 14 21 33](https://github.com/user-attachments/assets/4f292d15-5558-496a-bcc3-b84324ad0627)
@@ -83,7 +85,7 @@ When the user runs the flow from the start step (or a flow that contains only a 
 
 From the user perspective, this step tells the flow to split the results along dimension(s) chosen by the user.
 
-By default, all measure fields are summed. The user can also specify different aggregation (Min / Avg / Max) for distinct measure fields.
+By default, all measure fields are summed. The user can also specify different aggregation (Min / Avg / Max) for a selection of measure fields.
 
 
 
