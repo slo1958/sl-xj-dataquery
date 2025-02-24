@@ -2078,9 +2078,9 @@ End
 		  
 		  if curstep.prevDataQueryItem<>nil then
 		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.keyFields)
-		      ppField1.addrow curStep.prevDataQueryItem.keyFields(i)
-		      ppField2.addrow curStep.prevDataQueryItem.keyFields(i)
-		      ppField3.addrow curStep.prevDataQueryItem.keyFields(i)
+		      ppField1.addrow curStep.prevDataQueryItem.keyFields(i).Name 
+		      ppField2.addrow curStep.prevDataQueryItem.keyFields(i).Name 
+		      ppField3.addrow curStep.prevDataQueryItem.keyFields(i).Name 
 		    next
 		  end if
 		  
@@ -2358,7 +2358,7 @@ End
 #tag EndEvents
 #tag Events btn_Remove
 	#tag Event
-		Sub Pressed()
+		Sub Pressed(index as Integer)
 		  var i  as integer
 		  dim y as integer
 		  dim last as integer

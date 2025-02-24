@@ -110,7 +110,7 @@ Inherits clDataQueryItem
 		Function getSql(IsLastStep as boolean) As string
 		  dim sSource as string
 		  dim sPostFix as string
-		   
+		  
 		  dim n as integer
 		  dim s as string
 		  dim sSep as string
@@ -132,7 +132,7 @@ Inherits clDataQueryItem
 		    sSep=""
 		    
 		    for i as integer = 1 to keyFields.LastIndex
-		      s=s+sSep + keyFields(i)+"_"+sPostFix +"  as "+keyFields(i) + PostFixStr(IsLastStep)
+		      s=s+sSep + keyFields(i).Name +"_"+sPostFix +"  as "+keyFields(i).Name  + PostFixStr(IsLastStep)
 		      sSep=","
 		    next
 		    
@@ -221,7 +221,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		   
+		  
 		  var itemCount  as integer = 0
 		  
 		  for i as integer = 0 to maxItems
@@ -264,7 +264,7 @@ Inherits clDataQueryItem
 		  '
 		  ' a filter removes some records, but passes all fields
 		  '
-		   
+		  
 		  dim n as integer
 		  dim s as string
 		  if prevDataQueryItem<>nil then
@@ -274,13 +274,8 @@ Inherits clDataQueryItem
 		    ' obtain field type of selected fields
 		    '
 		    for i as integer = 0 to ubound(sField1)
-		      s=sField1(i)
-		      
-		      for j as integer =1 to ubound(prevDataQueryItem.keyFields)
-		        if prevDataQueryItem.keyFields(j)=s then
-		          sField1Type(i)=prevDataQueryItem.keyFieldType(j)
-		        end if
-		      next
+		      sField1Type(i) = prevDataQueryItem.getKeyType(sField1(i))
+		       
 		    next
 		    
 		    
@@ -289,22 +284,20 @@ Inherits clDataQueryItem
 		    ' obtain field type of selected fields
 		    '
 		    for i as integer = 0 to ubound(sField2)
-		      s=sField2(i)
+		      sField2Type(i) = prevDataQueryItem.getKeyType(sField2(i))
 		      
-		      for j as integer = 1 to ubound(prevDataQueryItem.keyFields)
-		        if prevDataQueryItem.keyFields(j)=s then
-		          sField2Type(i)=prevDataQueryItem.keyFieldType(j)
-		        end if
-		      next
 		    next
 		    
-		    n=ubound(prevDataQueryItem.keyFields)
-		    redim keyFields(n)
-		    redim keyFieldType(n)
-		    for i as integer = 1 to n
-		      keyFields(i)=prevDataQueryItem.keyFields(i)
-		      keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
+		    
+		    ' move all key fields
+		    '
+		    self.keyFields.RemoveAll
+		    
+		    for each field as clDataQueryFieldInfo in prevDataQueryItem.keyFields
+		      self.keyFields.Add(field.Clone)
+		      
 		    next
+		    
 		    
 		    
 		    n=ubound(prevDataQueryItem.valueFields)
@@ -375,14 +368,6 @@ Inherits clDataQueryItem
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="ID"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="selected"
 			Visible=false
 			Group="Behavior"
@@ -397,14 +382,6 @@ Inherits clDataQueryItem
 			InitialValue="0"
 			Type="integer"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="tmp"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="fieldPostFix"

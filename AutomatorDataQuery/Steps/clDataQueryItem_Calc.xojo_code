@@ -92,7 +92,7 @@ Inherits clDataQueryItem
 		    s="select "
 		    sdel=""
 		    for i as integer = 1 to ubound(prevDataQueryItem.keyFields)
-		      s=s+sdel+ prevDataQueryItem.keyFields(i)+"_"+spostfix+" as "+prevDataQueryItem.keyFields(i)  + PostFixStr(IsLastStep)
+		      s=s+sdel+ prevDataQueryItem.keyFields(i).Name +"_"+spostfix+" as "+prevDataQueryItem.keyFields(i).Name   + PostFixStr(IsLastStep)
 		      sdel=","
 		    next
 		    
@@ -167,61 +167,22 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
-		  
-		  // 
-		  // if prevDataQueryItem=nil then
-		  // 
-		  // else
-		  // '
-		  // ' move all key fields
-		  // '
-		  // n=ubound(prevDataQueryItem.keyFields)
-		  // 
-		  // redim keyFields(n)
-		  // redim keyFieldType(n)
-		  // 
-		  // for i as integer = 1 to n
-		  // keyFields(i)=prevDataQueryItem.keyFields(i)
-		  // keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
-		  // next
-		  // '
-		  // ' move all value fields
-		  // '
-		  // n=ubound(prevDataQueryItem.valueFields)
-		  // m=ubound(OutputFields)
-		  // 
-		  // redim valueFields(n+m)
-		  // 
-		  // for i as integer = 1 to n
-		  // valueFields(i)=prevDataQueryItem.valueFields(i)
-		  // next
-		  // 
-		  // for i as integer = 1 to m
-		  // 
-		  // valueFields(n+i)=OutputFields(i)
-		  // next
-		  // 
-		  // end if
-		  
-		  
+		   
 		  
 		  if prevDataQueryItem=nil then
 		    
 		  else
+		    
 		    '
 		    ' move all key fields
 		    '
+		    self.keyFields.RemoveAll
 		    
-		    
-		    redim keyFields(0)
-		    redim keyFieldType(0)
-		    
-		    
-		    for i as integer = 1 to prevDataQueryItem.keyFields.LastIndex
-		      keyFields.Add( prevDataQueryItem.keyFields(i))
-		      keyFieldType.Add(prevDataQueryItem.keyFieldType(i))
+		    for each field as clDataQueryFieldInfo in prevDataQueryItem.keyFields
+		      self.keyFields.Add(field.Clone)
 		      
 		    next
+		    
 		    '
 		    ' move all value fields
 		    ' 
@@ -234,8 +195,7 @@ Inherits clDataQueryItem
 		    
 		    for i as integer = 1 to OutputFields.LastIndex
 		      if IsDimension(i) then
-		        keyFields.add(OutputFields(i))
-		        keyFieldType.add( InternalFieldTypes.Double) 
+		        self.keyFields.add(new clDataQueryFieldInfo(OutputFields(i), InternalFieldTypes.Double))
 		        
 		      else
 		        valueFields.Add(OutputFields(i))

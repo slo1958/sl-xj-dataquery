@@ -54,7 +54,7 @@ Inherits clAutomatorItem
 		    var jitem as new JSONItem
 		    jitem.value(cJSONTagDebugFieldType) = cJSONTagDebugFieldTypeKey
 		    jitem.value(cJSONTagDebugFieldIndex) = str(i)
-		    jitem.value(cJSONTagDebugFieldName) = keyFields(i)
+		    jitem.value(cJSONTagDebugFieldName) = keyFields(i).Name
 		    
 		    jitems.add(jitem)
 		    
@@ -94,19 +94,13 @@ Inherits clAutomatorItem
 
 	#tag Method, Flags = &h0
 		Function getKeyType(theKey as string) As InternalFieldTypes
-		  var i  as integer
-		  var j  as InternalFieldTypes = InternalFieldTypes.Undefined
 		  
-		  i=1 
-		  j= InternalFieldTypes.Undefined
-		  while (i<=keyFields.LastIndex) and (j = InternalFieldTypes.Undefined)
-		    if uppercase(keyFields(i))=uppercase(thekey) then j=keyFieldType(i)
+		  for each field as clDataQueryFieldInfo in self.keyFields
+		    if field.Name.Uppercase = theKey.Uppercase then return field.Type
 		    
-		    i=i+1
-		  wend
+		  next
 		  
-		  return j
-		  
+		  Return  InternalFieldTypes.Undefined
 		End Function
 	#tag EndMethod
 
@@ -225,11 +219,12 @@ Inherits clAutomatorItem
 
 	#tag Method, Flags = &h0
 		Sub ResetData()
-		  redim keyFields(0)
+		  
 		  redim valueFields(0)
 		  
-		  keyFields(0)=""
-		  valueFields(0)=""
+		  self.keyFields.RemoveAll
+		  
+		   valueFields(0)=""
 		  
 		End Sub
 	#tag EndMethod
@@ -307,11 +302,7 @@ Inherits clAutomatorItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		keyFields(0) As string
-	#tag EndProperty
-
-	#tag Property, Flags = &h1
-		Protected keyFieldType(0) As InternalFieldTypes
+		keyFields() As clDataQueryFieldInfo
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

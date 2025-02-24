@@ -1,6 +1,15 @@
 #tag Class
 Protected Class clDataQueryFieldInfo
 	#tag Method, Flags = &h0
+		Function Clone() As clDataQueryFieldInfo
+		  
+		  
+		  return new clDataQueryFieldInfo(self.Name, self.Type)
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Constructor(FieldName as string, FieldType as InternalFieldTypes)
 		  
 		  self.Name = FieldName

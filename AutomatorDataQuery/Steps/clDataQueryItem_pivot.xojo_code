@@ -4,8 +4,7 @@ Inherits clDataQueryItem
 	#tag Method, Flags = &h21
 		Private Sub Build_Remaining_KeyFields()
 		  
-		  dim sField_Remaining(0) as string
-		  dim sField_R_Type(0) as InternalFieldTypes
+		  var sField_Remaining() as clDataQueryFieldInfo
 		  
 		  var jField  as integer
 		  
@@ -16,19 +15,19 @@ Inherits clDataQueryItem
 		    
 		  else
 		    
-		    redim sField_Remaining(ubound(prevDataQueryItem.keyFields))
-		    redim sField_R_Type(ubound(prevDataQueryItem.keyFields))
-		    
-		    for i as integer = 1 to ubound(prevDataQueryItem.keyFields)
-		      sField_Remaining(i)=prevDataQueryItem.keyFields(i)
-		      sField_R_Type(i)=prevDataQueryItem.keyFieldType(i)
+		    for i as integer = 0 to ubound(prevDataQueryItem.keyFields)
+		      sField_Remaining.add(prevDataQueryItem.keyFields(i).Clone)
+		      
 		    next
 		    
 		    for jField=1 to 3
 		      
-		      for i as integer = 1 to ubound(sField_Remaining)
-		        if sField_Remaining(i)=sField(jField) then
-		          sField_Remaining(i)="$$$$"
+		      for i as integer = 0 to ubound(sField_Remaining)
+		        if sField_Remaining(i) = nil then 
+		          
+		        elseif sField_Remaining(i).Name = sField(jField) then
+		          sField_Remaining(i) = nil
+		          
 		        end if
 		      next
 		      
@@ -39,21 +38,18 @@ Inherits clDataQueryItem
 		  '
 		  ' store in output key fields
 		  '
-		  redim keyFields(0)
-		  redim keyFieldType(0)
+		  keyFields.RemoveAll
 		  
-		  for i as integer = 1 to ubound(sField_Remaining)
-		    if sField_Remaining(i)<>"$$$$" then
-		      jField=keyFields.LastIndex+1
-		      redim keyFields(jField)
-		      redim keyFieldType(jField)
-		      
-		      keyFields(jField)=sField_Remaining(i)
-		      keyFieldType(jField)=sField_R_Type(i)
+		  for i as integer = 1 to sField_Remaining.LastIndex
+		    if sField_Remaining(i)<>nil then
+		      keyFields.add(sField_Remaining(i).Clone)
 		      
 		    end if
 		    
 		  next
+		  
+		  return
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -62,13 +58,13 @@ Inherits clDataQueryItem
 		Sub Constructor(SourceJSON as JSONItem)
 		  
 		  super.Constructor(SourceJSON)
-		   
+		  
 		  
 		  for i as integer = 0 to maxItems
 		    binuse(i)=false
 		    
 		  next
-		   
+		  
 		  
 		  if SourceJSON = nil then return 
 		  
@@ -118,10 +114,10 @@ Inherits clDataQueryItem
 		  
 		  for i as integer = 1 to keyFields.LastIndex
 		    if NameSuffix = "" then
-		      tmpFields.Add(NamePrefix + keyFields(i)+"_"+sPostFix)
+		      tmpFields.Add(NamePrefix + keyFields(i).Name+"_"+sPostFix)
 		      
 		    else
-		      tmpFields.Add(NamePrefix + keyFields(i)+"_"+sPostFix + " " + keyFields(i) +  NameSuffix)
+		      tmpFields.Add(NamePrefix + keyFields(i).Name+"_"+sPostFix + " " + keyFields(i).Name +  NameSuffix)
 		      
 		    end if
 		    
@@ -215,7 +211,7 @@ Inherits clDataQueryItem
 	#tag Method, Flags = &h1
 		Protected Function getOneItem(theItem as integer) As string
 		  dim s as string
-		   
+		  
 		  if bInUse(theItem) then
 		    s=sBlockName(theItem)
 		    s=s+" for "
@@ -326,7 +322,7 @@ Inherits clDataQueryItem
 		  // add key fields in top query
 		  
 		  for i as integer = 1 to keyFields.LastIndex
-		    var s as string =  keyFields(i)
+		    var s as string =  keyFields(i).Name
 		    
 		    if IsLastStep then
 		      
@@ -453,7 +449,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
-		   
+		  
 		  var j  as integer
 		  
 		  j=0

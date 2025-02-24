@@ -1135,7 +1135,7 @@ End
 		    
 		    
 		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.keyFields)
-		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.keyFields(i)
+		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.keyFields(i).Name 
 		    next
 		    
 		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.valueFields)

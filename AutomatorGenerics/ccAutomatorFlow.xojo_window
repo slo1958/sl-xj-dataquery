@@ -128,6 +128,7 @@ End
 		  
 		  var verticalOffset as integer = Scrollbar1.Value
 		  
+		  var yTotal as integer
 		  var y as integer =  - verticalOffset + canvas1.top + 10
 		  
 		  var ccList() as ccAutomatorItem
@@ -167,6 +168,7 @@ End
 		    c.Top = y
 		    c.Visible = True
 		    y = y + c.Height + 20
+		    yTotal = yTotal + c.Height + 20
 		    
 		    ccList.add(c)
 		    
@@ -178,14 +180,14 @@ End
 		  next
 		  
 		  
-		  if ScrollBar1.Value > y then
+		  if ScrollBar1.Value > yTotal then
 		    
-		    ScrollBar1.MaximumValue = y
-		    Scrollbar1.value = y
+		    ScrollBar1.MaximumValue = yTotal
+		    Scrollbar1.value = yTotal
 		    
 		  else
+		    ScrollBar1.MaximumValue = yTotal
 		    
-		    ScrollBar1.MaximumValue = y
 		  end if
 		  
 		  

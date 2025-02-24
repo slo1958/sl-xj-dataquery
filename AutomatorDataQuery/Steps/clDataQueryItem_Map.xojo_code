@@ -73,7 +73,7 @@ Inherits clDataQueryItem
 		Function getSql(IsLastStep as boolean) As string
 		  dim sSource as string
 		  dim sPostFix as string
-		   
+		  
 		  dim ssep as string
 		  
 		  dim s as string
@@ -90,7 +90,7 @@ Inherits clDataQueryItem
 		  ssep=""
 		  
 		  for i as integer = 1 to keyFields.LastIndex
-		    s=s+ssep+keyFields(i)+"_"+sPostFix+" as "+keyFields(i)  + PostFixStr(IsLastStep)
+		    s=s+ssep+keyFields(i).Name +"_"+sPostFix+" as "+keyFields(i).Name   + PostFixStr(IsLastStep)
 		    ssep=","
 		  next
 		  
@@ -156,7 +156,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
-		   
+		  
 		  var j as integer
 		  dim n as integer
 		  dim m as integer
@@ -167,16 +167,14 @@ Inherits clDataQueryItem
 		  if prevDataQueryItem=nil then
 		    
 		  else
-		    '
-		    ' key fields are moved 'as is'
-		    '
-		    n=ubound(prevDataQueryItem.keyFields)
-		    redim keyFields(n)
-		    redim keyFieldType(n)
 		    
-		    for i as integer = 1 to n
-		      keyfields(i)=prevDataQueryItem.keyFields(i)
-		      keyFieldType(i)=prevDataQueryItem.keyFieldType(i)
+		    ' move all key fields
+		    '
+		    self.keyFields.RemoveAll
+		    
+		    for each field as clDataQueryFieldInfo in prevDataQueryItem.keyFields
+		      self.keyFields.Add(field.Clone)
+		      
 		    next
 		    
 		    '
@@ -269,14 +267,6 @@ Inherits clDataQueryItem
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="ID"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
@@ -331,14 +321,6 @@ Inherits clDataQueryItem
 			InitialValue="0"
 			Type="integer"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="tmp"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="fieldPostFix"

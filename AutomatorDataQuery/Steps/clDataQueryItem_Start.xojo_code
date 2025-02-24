@@ -23,7 +23,8 @@ Inherits clDataQueryItem
 		  
 		  var temp as new clBasicSQLiteQuery(project.Connection, ssql)
 		  
-		  redim KeyFields(0)
+		  self.keyFields.RemoveAll
+		  
 		  redim valueFields(0)
 		  
 		  var dct as Dictionary = temp.GetColumnTypes
@@ -40,16 +41,13 @@ Inherits clDataQueryItem
 		      valueFields.Add(FieldName)
 		      
 		    case 3
-		      keyFields.add(FieldName)
-		      keyFieldType.add(InternalFieldTypes.Undefined)
+		      keyFields.add(new clDataQueryFieldInfo(FieldName, InternalFieldTypes.Undefined))
 		      
 		    case 5
-		      keyFields.add(FieldName)
-		      keyFieldType.add(InternalFieldTypes.String)
+		      keyFields.add(new clDataQueryFieldInfo(FieldName, InternalFieldTypes.String))
 		      
 		    case 19
-		      keyFields.add(FieldName)
-		      keyFieldType.add(InternalFieldTypes.Integer)
+		      keyFields.add(new clDataQueryFieldInfo(FieldName, InternalFieldTypes.Integer))
 		      
 		    case 8 // Date
 		      writelog ("Rejected field "+ FieldName +" fieldtype "+str(ct))
@@ -87,7 +85,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Function getSql(IsLastStep as boolean) As string
-		   
+		  
 		  dim s as string
 		  
 		  var tempFields() as string
@@ -95,12 +93,12 @@ Inherits clDataQueryItem
 		  
 		  for i as integer = 1 to keyFields.LastIndex
 		    
-		    tempFields.Add( keyFields(i)+" as "+keyFields(i) + PostFixStr(IsLastStep))
+		    tempFields.Add( keyFields(i).Name + " as "+keyFields(i).Name + PostFixStr(IsLastStep))
 		    
 		  next
 		  
 		  for i as integer = 1 to ubound(valueFields)
-		    tempFields.Add( valueFields(i)+" as "+valueFields(i) + PostFixStr(IsLastStep))
+		    tempFields.Add( valueFields(i) + " as "+valueFields(i) + PostFixStr(IsLastStep))
 		    
 		  next
 		  
@@ -170,14 +168,6 @@ Inherits clDataQueryItem
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="ID"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
@@ -232,14 +222,6 @@ Inherits clDataQueryItem
 			InitialValue="0"
 			Type="integer"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="tmp"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="fieldPostFix"

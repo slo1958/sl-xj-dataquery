@@ -226,9 +226,9 @@ Inherits clDataQueryItem
 		  ' a group/split   but passes all value fields and only selected key fields
 		  '
 		  
-		  var j  as integer
+		   
 		  dim n as integer
-		  dim s as string
+		   
 		  
 		  if prevDataQueryItem<>nil then
 		    
@@ -236,26 +236,17 @@ Inherits clDataQueryItem
 		    ' obtain field type of selected fields
 		    '
 		    for i as integer = 0 to ubound(sField1)
-		      s=sField1(i)
+		      sField1Type(i) = prevDataQueryItem.getKeyType(sField1(i))
 		      
-		      for j=1 to ubound(prevDataQueryItem.keyFields)
-		        if prevDataQueryItem.keyFields(j)=s then
-		          sField1Type(i)=prevDataQueryItem.keyFieldType(j)
-		        end if
-		      next
 		    next
 		    
+		     
+		    keyFields.RemoveAll
 		    
-		    n=itemInUse
-		    redim keyFields(n)
-		    redim keyFieldType(n)
-		    
-		    j=0
 		    for i as integer = 0 to ubound(sfield1)
 		      if binuse(i) then  
-		        j=j+1
-		        keyFields(j)=sField1(i)
-		        keyFieldType(j)=sField1Type(i)
+		        keyFields.add(new clDataQueryFieldInfo(sField1(i), sField1Type(i)))
+		        
 		      end if
 		    next
 		    

@@ -107,9 +107,10 @@ Protected Class clDataQueryProject
 		  if not dest.Exists then return d
 		  
 		  for each file as FolderItem in dest.Children
-		    if file.Name.right(ExtensionFilter.Length) = ExtensionFilter then
-		       
+		    if file.Name.right(ExtensionFilter.Length) = ExtensionFilter and file.Length > 0 then 
+		      
 		      var jFile as TextInputStream
+		      
 		      
 		      try
 		        jFIle = TextInputStream.Open(file)

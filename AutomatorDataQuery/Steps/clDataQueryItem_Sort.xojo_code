@@ -118,7 +118,7 @@ Inherits clDataQueryItem
 		    
 		    for i as integer = 1 to ubound(prevDataQueryItem.keyFields)
 		      s=s+ssep
-		      s=s+prevDataQueryItem.keyFields(i)+"_"+sPostFix+" as "+prevDataQueryItem.keyFields(i) + PostFixStr(IsLastStep)
+		      s=s+prevDataQueryItem.keyFields(i).Name +"_"+sPostFix+" as "+prevDataQueryItem.keyFields(i).Name  + PostFixStr(IsLastStep)
 		      ssep=","
 		    next
 		    
@@ -222,22 +222,21 @@ Inherits clDataQueryItem
 		  '
 		  ' passes all fields (key, values)
 		  '
-		  
-		  var j  as integer
-		  dim n as integer
-		  dim s as string
+		   
 		  
 		  if prevDataQueryItem<>nil then
 		    
-		    redim keyFields(prevDataQueryItem.keyFields.LastIndex)
-		    redim keyFieldType(prevDataQueryItem.keyFields.LastIndex)
 		    
-		    for i as integer = 0 to prevDataQueryItem.keyFields.LastIndex
-		      keyFields(i) = prevDataQueryItem.keyFields(i)
-		      keyFieldType(i) = prevDataQueryItem.keyFieldType(i)
+		    ' move all key fields
+		    '
+		    self.keyFields.RemoveAll
+		    
+		    for each field as clDataQueryFieldInfo in prevDataQueryItem.keyFields
+		      self.keyFields.Add(field.Clone)
+		      
 		    next
 		    
-		     
+		    
 		    redim valueFields(prevDataQueryItem.valueFields.LastIndex)
 		    
 		    for i as integer = 0 to prevDataQueryItem.valueFields.LastIndex
@@ -265,25 +264,16 @@ Inherits clDataQueryItem
 		    ' obtain field type of selected fields
 		    '
 		    for i as integer = 0 to ubound(sField1)
-		      s=sField1(i)
+		      sField1Type(i) = prevDataQueryItem.getKeyType(sfield1(i))
 		      
-		      for j=1 to ubound(prevDataQueryItem.keyFields)
-		        if prevDataQueryItem.keyFields(j)=s then
-		          sField1Type(i)=prevDataQueryItem.keyFieldType(j)
-		        end if
-		      next
-		    next
+		     next
 		    
-		    n=itemInUse
-		    redim keyFields(n)
-		    redim keyFieldType(n)
-		    j=0
+		    
+		    keyFields.RemoveAll
+		    
 		    for i as integer = 0 to ubound(sfield1)
-		      if binuse(i) then  
-		        j=j+1
-		        keyFields(j)=sField1(i)
-		        keyFieldType(j)=sField1Type(i)
-		      end if
+		      keyFields.add(new clDataQueryFieldInfo(sField1(i) , sField1Type(i)))
+		      
 		    next
 		    
 		    n=ubound(prevDataQueryItem.valueFields)

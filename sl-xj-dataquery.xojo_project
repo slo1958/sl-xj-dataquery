@@ -54,6 +54,7 @@ DesktopWindow=wnd_manage_projects;ProjectManagmentWindows/wnd_manage_projects.xo
 DesktopWindow=wnd_project_picker;ProjectManagmentWindows/wnd_project_picker.xojo_window;&h000000000C615FFF;&h000000003C1DE7FF;false
 DesktopWindow=wnd_new_project;ProjectManagmentWindows/wnd_new_project.xojo_window;&h00000000415FBFFF;&h000000003C1DE7FF;false
 Module=CommonDIalogs;CommonDIalogs.xojo_code;&h0000000057EABFFF;&h0000000000000000;false
+DesktopWindow=wnd_debug_flow;wnd_debug_flow.xojo_window;&h000000004E2AAFFF;&h0000000000000000;false
 DefaultWindow=wnd_project_picker
 AppMenuBar=MainMenuBar
 MajorVersion=1
