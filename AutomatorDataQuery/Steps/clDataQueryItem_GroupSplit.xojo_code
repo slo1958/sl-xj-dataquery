@@ -8,20 +8,17 @@ Inherits clDataQueryItem
 		  
 		  super.Constructor(SourceJSON)
 		  
-		  
-		  for i as integer = 0 to maxItems
-		    binuse(i)=false
-		  next
-		  
-		  nextItem=-1
-		  
 		  if SourceJSON = nil then return
 		  
 		  
 		  //var ItemTitle as string = SourceJSON.Value(cJSONTagName)
 		  //Self.SetTitle(ItemTitle)
 		  
-		  var jItems as    JSONItem = SourceJSON.Value(cJSONTagItems)
+		  var jItems as    JSONItem 
+		  
+		  sFieldDImension.RemoveAll
+		  
+		  jitems = SourceJSON.Value(cJSONTagItems)
 		  
 		  if jitems.IsArray then
 		    for i as integer = 0 to jItems.LastRowIndex
@@ -30,24 +27,42 @@ Inherits clDataQueryItem
 		      
 		      var index as integer = jitem.value(cJSONTagIndex)
 		      
-		      sField1(Index) = jitem.Value(cJSONTagField)
-		      
-		      bInUse(index) = True
-		      
-		      if index > nextItem then nextItem = index
+		      sFieldDImension.add(jitem.Value(cJSONTagField))
 		      
 		    next
-		    
-		    
-		  else
-		    for i as integer=0 to maxItems
-		      binuse(i)=false
-		    next
-		    
-		    nextItem=-1
 		    
 		  end if
 		  
+		  IncludeCount = false
+		  
+		  sFieldMeasure.RemoveAll
+		  tFieldMeasure.RemoveAll
+		  
+		  if SourceJSON.HasKey(cJSONTagMeasure) then
+		    jitems = SourceJSON.Value(cJSONTagMeasure)
+		    
+		    for i as integer = 0 to jItems.LastRowIndex
+		      var jitem as JSONItem = jitems.ChildAt(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex)
+		      
+		      if jitem.Value(cJSONAggreg) = 9999 then 
+		        IncludeCount = True
+		        
+		      else
+		        sFieldMeasure.add(jitem.Value(cJSONTagField))
+		        tFieldMeasure.add(jitem.Value(cJSONAggreg))
+		        
+		      end if
+		      
+		      
+		    next
+		    
+		  else
+		    sFieldMeasure.RemoveAll
+		    IncludeCount = false
+		    
+		  end if
 		  
 		  return 
 		  
@@ -63,18 +78,47 @@ Inherits clDataQueryItem
 		  
 		  var jItems as new  JSONItem
 		  
-		  for i as integer = 0 to maxItems
-		    if bInUse(i) then 
-		      var jItem as new JSONItem
-		      jitem.value(cJSONTagIndex) = i
-		      jitem.Value(cJSONTagField) = sField1(i)
-		      
-		      jitems.Add(jitem)
-		    end if
+		  var jmeasures as new JSONItem
+		  
+		  for i as integer = 0 to sFieldDImension.LastIndex
+		     
+		    var jItem as new JSONItem
+		    jitem.value(cJSONTagIndex) = i
+		    jitem.Value(cJSONTagField) = sFieldDImension(i)
+		    
+		    jitems.Add(jitem)
+		    
 		    
 		  next
 		  
+		  if self.IncludeCount then
+		    var jitem as new JSONItem
+		    jitem.Value(cJSONTagIndex) = 0
+		    jitem.Value(cJSONTagField) = ""
+		    jitem.value(cJSONAggreg) = 9999
+		    
+		    jmeasures.add(jitem)
+		    
+		  end if
+		  
+		  
+		  for i as integer = 0 to sFieldMeasure.LastIndex
+		    var jitem as new JSONItem
+		    jitem.value(cJSONTagIndex) = i
+		    jitem.value(cJSONTagField) = sFieldMeasure(i)
+		    jitem.value(cJSONAggreg) = tFieldMeasure(i)
+		    
+		    jmeasures.add(jitem)
+		    
+		  next
+		  
+		  
 		  jMaster.Value(cJSONTagItems) = jitems
+		  
+		  if jmeasures.Count >0 then
+		    jMaster.Value(cJSONTagMeasure) = jmeasures
+		    
+		  end if
 		  
 		  return jMaster
 		  
@@ -84,14 +128,14 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h1
 		Protected Function getOneItem(theItem as integer) As string
-		  dim s as string
-		  if bInUse(theItem) then
-		    s=sField1(theItem)
-		    
-		    return s
+		  
+		  
+		  if theItem <= sFieldDImension.LastIndex then
+		    return sFieldDImension(theItem)
 		    
 		  else
 		    return ""
+		    
 		  end if
 		  
 		End Function
@@ -101,11 +145,8 @@ Inherits clDataQueryItem
 		Function getSql(IsLastStep as boolean) As String
 		  dim sSource as string
 		  dim sPostFix as string
-		  
-		  dim n as integer
-		  dim s as string
-		  dim sSep as string
-		  dim sGroupBy as string
+		   
+		  dim s as string 
 		  
 		  if prevDataQueryItem<>nil then 
 		    sSource=prevDataQueryItem.getSql(false)
@@ -114,45 +155,63 @@ Inherits clDataQueryItem
 		    ssource=""
 		    sPostFix=""
 		  end if
+		   
 		  
-		  s=""
+		  var selectFields() as string
+		  var groupByFIelds() as string
 		  
 		  if sPostFix<>"" then
 		    
-		    s="select  "   
-		    sSep=""
-		    
-		    for i as integer = 0 to ubound(sField1)
-		      if bInUse(i) and sField1(i).trim.Length > 0 then
-		        s=s+sSep + sField1(i)+"_"+sPostFix +"  as "+sField1(i) + PostFixStr(IsLastStep)
-		        sSep=","
+		    for i as integer = 0 to sFieldDImension.LastIndex
+		      if sFieldDImension(i).trim.Length > 0 then
+		        selectFields.add( sFieldDImension(i)+"_"+sPostFix +"  as "+sFieldDImension(i) + PostFixStr(IsLastStep))
+		        groupByFIelds.add(sFieldDImension(i)+"_"+sPostFix)
+		        
 		      end if
 		    next
 		    
-		    for i as integer = 1 to ubound(valueFields)
-		      s=s+ssep+"sum(" + valueFields(i)+"_"+sPostFix +") as "+valueFields(i) + PostFixStr(IsLastStep)
-		      sSep=","
+		    if self.IncludeCount then
+		      selectFields.add("COUNT(*)  " + " as " +  "RowCount"  + PostFixStr(IsLastStep))
+		      
+		    end if
+		    
+		    
+		    for i as integer = 1 to  ubound(prevDataQueryItem.valueFields)
+		      selectFields.add("sum(" + prevDataQueryItem.valueFields(i)+"_"+sPostFix +") as "+ prevDataQueryItem.valueFields(i) + PostFixStr(IsLastStep))
+		      
 		    next
 		    
-		    s=s+"  FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
 		    
-		    sGroupBy=" GROUP BY "
-		    ssep=""
-		    
-		    for i as integer = 0 to ubound(sField1)
-		      if bInUse(i) and sField1(i).trim.Length > 0 then
-		        s=s+sGroupBy
-		        sGroupBy=""
-		        s=s+ssep
-		        ssep=" , "
+		    for i as integer = 0 to sFieldMeasure.LastIndex
+		      if sFieldMeasure(i).Trim.Length > 0 then
 		        
-		        s=s+sfield1(i)+"_"+sPostFix
+		        if bitand(tFieldMeasure(i), cstHasMin) = cstHasMin then
+		          selectFields.add("MIN(" +  sFieldMeasure(i) + "_" + sPostFix +") as Min"+ sFieldMeasure(i) + PostFixStr(IsLastStep))
+		           
+		        end if
+		        
+		        if bitand(tFieldMeasure(i), cstHasMax) = cstHasMax then
+		          selectFields.add("MAX(" +  sFieldMeasure(i) + "_" + sPostFix +") as Max"+ sFieldMeasure(i) + PostFixStr(IsLastStep))
+		          
+		        end if
+		        
+		        if bitand(tFieldMeasure(i), cstHasAvg) = cstHasAvg then
+		          selectFields.add("AVG(" +  sFieldMeasure(i) + "_" + sPostFix +") as Avg"+ sFieldMeasure(i) + PostFixStr(IsLastStep))
+		          
+		        end if
 		        
 		      end if
 		      
 		    next
 		    
 		    
+		    s = "SELECT " + string.FromArray(selectFields,",") +"  FROM (" + chr(13) + chr(13) + sSource + chr(13) +  ")" + chr(13) 
+		    
+		    
+		    if groupByFIelds.LastIndex >= 0 then 
+		      s = s + " GROUP BY " + string.FromArray(groupByFIelds,",")
+		      
+		    end if
 		  end if
 		  
 		  return s
@@ -163,19 +222,16 @@ Inherits clDataQueryItem
 	#tag Method, Flags = &h1
 		Protected Function getTextItem(theItem as integer) As string
 		  
-		  if theItem <4 then
-		    if bInuse(theItem-1) then
-		      return getOneItem(theItem-1)
-		    else
-		      return ""
-		    end if
+		  if theItem <4 then 
+		    return getOneItem(theItem-1)
 		    
-		  elseif itemInUse>4 then
+		    
+		  elseif itemInUse> 4 then
 		    return "..."
-		  elseif bInUse(3) then
-		    return getOneItem(3)
+		    
 		  else
 		    return ""
+		    
 		  end if
 		  
 		  
@@ -192,15 +248,8 @@ Inherits clDataQueryItem
 	#tag Method, Flags = &h1
 		Protected Function itemInUse() As integer
 		  
-		  var j  as integer
+		  return sFieldDImension.Count
 		  
-		  j=0
-		  
-		  for i as integer = 0 to ubound(sfield1)
-		    if bInUse(i) then j=j+1
-		  next
-		  
-		  Return j
 		  
 		End Function
 	#tag EndMethod
@@ -226,28 +275,18 @@ Inherits clDataQueryItem
 		  ' a group/split   but passes all value fields and only selected key fields
 		  '
 		  
-		   
+		  
 		  dim n as integer
-		   
+		  
 		  
 		  if prevDataQueryItem<>nil then
 		    
-		    '
-		    ' obtain field type of selected fields
-		    '
-		    for i as integer = 0 to ubound(sField1)
-		      sField1Type(i) = prevDataQueryItem.getKeyType(sField1(i))
-		      
-		    next
-		    
-		     
 		    keyFields.RemoveAll
 		    
-		    for i as integer = 0 to ubound(sfield1)
-		      if binuse(i) then  
-		        keyFields.add(new clDataQueryFieldInfo(sField1(i), sField1Type(i)))
-		        
-		      end if
+		    for i as integer = 0 to sFieldDImension.LastIndex
+		      var Field1Type as InternalFieldTypes = prevDataQueryItem.getKeyType(sFieldDImension(i))
+		      keyFields.add(new clDataQueryFieldInfo(sFieldDImension(i), Field1Type))
+		      
 		    next
 		    
 		    n=ubound(prevDataQueryItem.valueFields)
@@ -257,6 +296,36 @@ Inherits clDataQueryItem
 		      valueFields(i)=prevDataQueryItem.valueFields(i)
 		    next
 		    
+		    if IncludeCount then 
+		      redim valueFields(valueFields.LastIndex+1)
+		      valueFields(valueFields.LastIndex) = "RowCount"
+		      
+		    end if
+		    
+		    for i as integer = 0 to sFieldMeasure.LastIndex
+		      if sFieldMeasure(i).Trim.Length > 0 then
+		        
+		        if bitand(tFieldMeasure(i), cstHasMin) = cstHasMin then
+		          redim valueFields(valueFields.LastIndex+1)
+		          valueFields(valueFields.LastIndex) = "Min"+ sFieldMeasure(i) 
+		          
+		        end if
+		        
+		        if bitand(tFieldMeasure(i), cstHasMax) = cstHasMax then
+		          redim valueFields(valueFields.LastIndex+1)
+		          valueFields(valueFields.LastIndex) = "Max"+ sFieldMeasure(i) 
+		          
+		        end if
+		        if bitand(tFieldMeasure(i), cstHasAvg) = cstHasAvg then
+		          redim valueFields(valueFields.LastIndex+1)
+		          valueFields(valueFields.LastIndex) = "Avg"+ sFieldMeasure(i) 
+		          
+		        end if
+		      end if
+		      
+		    next
+		    
+		    
 		  end if
 		  
 		End Sub
@@ -264,21 +333,24 @@ Inherits clDataQueryItem
 
 
 	#tag Property, Flags = &h0
-		bInUse(maxItems) As boolean
+		IncludeCount As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		nextItem As integer
+		sFieldDImension() As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		sField1(maxItems) As string
+		sFieldMeasure() As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		sField1Type(maxItems) As InternalFieldTypes
+		tFieldMeasure() As Integer
 	#tag EndProperty
 
+
+	#tag Constant, Name = cJSONAggreg, Type = String, Dynamic = False, Default = \"aggregate", Scope = Public
+	#tag EndConstant
 
 	#tag Constant, Name = cJSONTagField, Type = String, Dynamic = False, Default = \"groupbyfield", Scope = Public
 	#tag EndConstant
@@ -286,7 +358,22 @@ Inherits clDataQueryItem
 	#tag Constant, Name = cJSONTagIndex, Type = String, Dynamic = False, Default = \"index", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = maxItems, Type = Integer, Dynamic = False, Default = \"6", Scope = Public
+	#tag Constant, Name = cJSONTagMeasure, Type = String, Dynamic = False, Default = \"measures", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cstHasAvg, Type = Double, Dynamic = False, Default = \"2", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cstHasMax, Type = Double, Dynamic = False, Default = \"4", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cstHasMin, Type = Double, Dynamic = False, Default = \"8", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = MaxDimensions, Type = Double, Dynamic = False, Default = \"6", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = MaxMeasure, Type = Double, Dynamic = False, Default = \"5", Scope = Public
 	#tag EndConstant
 
 
@@ -361,14 +448,6 @@ Inherits clDataQueryItem
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="nextItem"
-			Visible=false
-			Group="Behavior"
-			InitialValue="0"
-			Type="integer"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

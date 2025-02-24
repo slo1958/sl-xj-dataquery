@@ -10,7 +10,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   219
+   Height          =   251
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -23,7 +23,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
    Title           =   "Definition of a GroupSplit"
    Type            =   0
    Visible         =   True
-   Width           =   447
+   Width           =   666
    Begin Label st_Name
       AllowAutoDeactivate=   True
       Bold            =   False
@@ -37,7 +37,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   8
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -57,7 +57,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   88
    End
    Begin TextField efName
       AllowAutoDeactivate=   True
@@ -103,7 +103,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       Visible         =   True
       Width           =   329
    End
-   Begin Label StaticText1
+   Begin Label stt_CurrentPage
       AllowAutoDeactivate=   True
       Bold            =   False
       DataField       =   ""
@@ -116,7 +116,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   2
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -132,477 +132,11 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   40
+      Top             =   52
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   100
-   End
-   Begin DesktopPopupMenu ppFieldA
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   0
-      InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
-      Italic          =   False
-      Left            =   110
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      SelectedRowIndex=   0
-      TabIndex        =   3
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   40
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-   End
-   Begin DesktopButton btn_Remove
-      AllowAutoDeactivate=   True
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   0
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   257
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   4
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   39
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   20
-   End
-   Begin DesktopPopupMenu ppFieldA
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   1
-      InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
-      Italic          =   False
-      Left            =   110
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      SelectedRowIndex=   0
-      TabIndex        =   6
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   64
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-   End
-   Begin DesktopButton btn_Remove
-      AllowAutoDeactivate=   True
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   1
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   257
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   7
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   63
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   20
-   End
-   Begin DesktopPopupMenu ppFieldA
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   2
-      InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
-      Italic          =   False
-      Left            =   110
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      SelectedRowIndex=   0
-      TabIndex        =   8
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   88
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-   End
-   Begin DesktopButton btn_Remove
-      AllowAutoDeactivate=   True
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   2
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   257
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   9
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   87
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   20
-   End
-   Begin DesktopPopupMenu ppFieldA
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   3
-      InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
-      Italic          =   False
-      Left            =   110
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      SelectedRowIndex=   0
-      TabIndex        =   10
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   113
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-   End
-   Begin DesktopButton btn_Remove
-      AllowAutoDeactivate=   True
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   3
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   257
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   11
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   112
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   20
-   End
-   Begin DesktopPopupMenu ppFieldA
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   4
-      InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
-      Italic          =   False
-      Left            =   110
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      SelectedRowIndex=   0
-      TabIndex        =   12
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   138
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-   End
-   Begin DesktopButton btn_Remove
-      AllowAutoDeactivate=   True
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   4
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   257
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   13
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   137
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   20
-   End
-   Begin DesktopPopupMenu ppFieldA
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   5
-      InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
-      Italic          =   False
-      Left            =   110
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      SelectedRowIndex=   0
-      TabIndex        =   14
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   163
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-   End
-   Begin DesktopButton btn_Remove
-      AllowAutoDeactivate=   True
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   5
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   257
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   15
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   162
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   20
-   End
-   Begin DesktopPopupMenu ppFieldA
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   6
-      InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
-      Italic          =   False
-      Left            =   110
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      Scope           =   0
-      SelectedRowIndex=   0
-      TabIndex        =   16
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   189
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-   End
-   Begin DesktopButton btn_Remove
-      AllowAutoDeactivate=   True
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "-"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   6
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   257
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   17
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   188
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   20
-   End
-   Begin DesktopButton btn_Add
-      AllowAutoDeactivate=   True
-      Bold            =   True
-      Cancel          =   False
-      Caption         =   "+"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   22
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   338
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   19
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   162
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   20
+      Width           =   88
    End
    Begin DesktopButton btn_close
       AllowAutoDeactivate=   True
@@ -618,7 +152,7 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   370
+      Left            =   566
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
@@ -630,11 +164,1536 @@ Begin DesktopWindow wndDataQueryItem_GroupSplit
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   162
+      Top             =   199
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   69
+      Width           =   80
+   End
+   Begin DesktopPagePanel PagePanel1
+      AllowAutoDeactivate=   True
+      Enabled         =   True
+      Height          =   193
+      Index           =   -2147483648
+      Left            =   99
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      PanelCount      =   2
+      Panels          =   ""
+      Scope           =   2
+      TabIndex        =   21
+      TabPanelIndex   =   0
+      TabStop         =   False
+      Tooltip         =   ""
+      Top             =   38
+      Transparent     =   False
+      Value           =   1
+      Visible         =   True
+      Width           =   429
+      Begin DesktopButton btn_AddDimension
+         AllowAutoDeactivate=   True
+         Bold            =   True
+         Cancel          =   False
+         Caption         =   "+"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   22
+         Index           =   -2147483648
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   340
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   0
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   173
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   20
+      End
+      Begin DesktopPopupMenu ppFieldDimension
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   3
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
+         Italic          =   False
+         Left            =   112
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   4
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   123
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   180
+      End
+      Begin DesktopPopupMenu ppFieldDimension
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   4
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
+         Italic          =   False
+         Left            =   112
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   6
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   148
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   180
+      End
+      Begin DesktopPopupMenu ppFieldDimension
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   6
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
+         Italic          =   False
+         Left            =   112
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   10
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   199
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   180
+      End
+      Begin DesktopPopupMenu ppFieldDimension
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   1
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
+         Italic          =   False
+         Left            =   112
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   12
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   74
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   180
+      End
+      Begin DesktopPopupMenu ppFieldDimension
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   0
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
+         Italic          =   False
+         Left            =   112
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   14
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   50
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   180
+      End
+      Begin DesktopPopupMenu ppFieldMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   0
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   111
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         SelectedRowIndex=   0
+         TabIndex        =   0
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   75
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   143
+      End
+      Begin DesktopCheckBox ckb_SumAllMeasures
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Sum all measures"
+         Enabled         =   False
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   111
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   1
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   51
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   1
+         Width           =   152
+      End
+      Begin DesktopCheckBox ckb_HasMin
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Min"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   0
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   266
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   2
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   75
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasAvg
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Avg"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   0
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   334
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   3
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   75
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasMax
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Max"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   0
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   402
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   4
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   75
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopButton btn_RemoveMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   0
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   465
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   2
+         TabIndex        =   5
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   75
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   22
+      End
+      Begin DesktopButton btn_AddMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "+"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   499
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   2
+         TabIndex        =   6
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   75
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   22
+      End
+      Begin DesktopPopupMenu ppFieldDimension
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   2
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
+         Italic          =   False
+         Left            =   112
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   15
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   98
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   180
+      End
+      Begin DesktopPopupMenu ppFieldDimension
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   5
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n"
+         Italic          =   False
+         Left            =   112
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   16
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   173
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   180
+      End
+      Begin DesktopButton btn_RemoveDimension
+         AllowAutoDeactivate=   True
+         Bold            =   True
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   0
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   17
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   50
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   20
+      End
+      Begin DesktopButton btn_RemoveDimension
+         AllowAutoDeactivate=   True
+         Bold            =   True
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   6
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   18
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   199
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   20
+      End
+      Begin DesktopButton btn_RemoveDimension
+         AllowAutoDeactivate=   True
+         Bold            =   True
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   5
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   19
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   173
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   20
+      End
+      Begin DesktopButton btn_RemoveDimension
+         AllowAutoDeactivate=   True
+         Bold            =   True
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   4
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   20
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   148
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   20
+      End
+      Begin DesktopButton btn_RemoveDimension
+         AllowAutoDeactivate=   True
+         Bold            =   True
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   3
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   21
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   123
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   20
+      End
+      Begin DesktopButton btn_RemoveDimension
+         AllowAutoDeactivate=   True
+         Bold            =   True
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   2
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   22
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   98
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   20
+      End
+      Begin DesktopButton btn_RemoveDimension
+         AllowAutoDeactivate=   True
+         Bold            =   True
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   1
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   23
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   74
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   20
+      End
+      Begin DesktopCheckBox ckb_CountRows
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Count rows"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   266
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   7
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   51
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   100
+      End
+      Begin DesktopPopupMenu ppFieldMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   1
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   111
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         SelectedRowIndex=   0
+         TabIndex        =   8
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   99
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   143
+      End
+      Begin DesktopCheckBox ckb_HasMin
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Min"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   1
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   266
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   9
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   99
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasAvg
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Avg"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   1
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   334
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   10
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   99
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasMax
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Max"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   1
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   402
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   11
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   99
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopButton btn_RemoveMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   1
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   465
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   2
+         TabIndex        =   12
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   99
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   22
+      End
+      Begin DesktopPopupMenu ppFieldMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   2
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   111
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         SelectedRowIndex=   0
+         TabIndex        =   13
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   124
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   143
+      End
+      Begin DesktopCheckBox ckb_HasMin
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Min"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   2
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   266
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   14
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   124
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasAvg
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Avg"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   2
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   334
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   15
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   124
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasMax
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Max"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   2
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   402
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   16
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   124
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopButton btn_RemoveMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   2
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   465
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   2
+         TabIndex        =   17
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   124
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   22
+      End
+      Begin DesktopPopupMenu ppFieldMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   3
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   111
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         SelectedRowIndex=   0
+         TabIndex        =   18
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   149
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   143
+      End
+      Begin DesktopCheckBox ckb_HasMin
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Min"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   3
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   266
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   19
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   149
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasAvg
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Avg"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   3
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   334
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   20
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   149
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasMax
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Max"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   3
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   402
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   21
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   149
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopButton btn_RemoveMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   3
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   465
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   2
+         TabIndex        =   22
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   149
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   22
+      End
+      Begin DesktopPopupMenu ppFieldMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   4
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   111
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         SelectedRowIndex=   0
+         TabIndex        =   23
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   173
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   143
+      End
+      Begin DesktopCheckBox ckb_HasMin
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Min"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   4
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   266
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   24
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   173
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasAvg
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Avg"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   4
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   334
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   25
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   173
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasMax
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Max"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   4
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   402
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   26
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   173
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopButton btn_RemoveMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   4
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   465
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   2
+         TabIndex        =   27
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   173
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   22
+      End
+      Begin DesktopPopupMenu ppFieldMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   5
+         InitialParent   =   "PagePanel1"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   111
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         SelectedRowIndex=   0
+         TabIndex        =   28
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   198
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   143
+      End
+      Begin DesktopCheckBox ckb_HasMin
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Min"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   5
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   266
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   29
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   198
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasAvg
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Avg"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   5
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   334
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   30
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   198
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopCheckBox ckb_HasMax
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Max"
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   5
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   402
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   2
+         TabIndex        =   31
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   198
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   60
+      End
+      Begin DesktopButton btn_RemoveMeasure
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   5
+         InitialParent   =   "PagePanel1"
+         Italic          =   False
+         Left            =   465
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   2
+         TabIndex        =   32
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   198
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   22
+      End
+   End
+   Begin DesktopButton btn_ChangeTo
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Aggregate"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   22
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   201
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
    End
 End
 #tag EndDesktopWindow
@@ -643,43 +1702,58 @@ End
 	#tag Event
 		Sub Opening()
 		  
+		  self.LastGroupByItem = 0
+		  self.LastMeasure = 0
 		  
-		  lastItem=0
-		  for i as integer = 1 to 6
-		    ppFieldA(i).visible=false
-		    btn_Remove(i).Visible=false
+		  // Dimensions
+		  
+		   for i as integer = 1 to curStep.MaxDimensions
+		    ppFieldDimension(i).visible=false
+		    btn_RemoveDimension(i).Visible=false
+		    
 		  next
 		  
-		  btn_add.top=btn_remove(0).top
+		  btn_AddDimension.top=btn_RemoveDimension(0).top
 		  
-		  btn_Remove(0).Enabled=false
+		  btn_RemoveDimension(0).Enabled=false
 		  
-		  //rb_sumNumber.top=btn_add.top+25
-		  btn_close.top=btn_add.top+25
+		  // Measures
 		  
-		  wndDataQueryItem_GroupSplit.Height=btn_close.top+25
+		  for i as integer = 1 to curStep.MaxMeasure
+		    ppFieldMeasure(i).visible=false
+		    btn_RemoveMeasure(i).Visible=false
+		    ckb_HasMin(i).Visible = false
+		    ckb_HasAvg(i).Visible = False
+		    ckb_HasMax(i).Visible= False
+		  next
+		  
+		  btn_AddMeasure.top=btn_RemoveMeasure(0).top
+		  
+		  btn_RemoveMeasure(0).Enabled=false
+		   
 		  
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
-		Function addOne() As integer
-		  if lastItem<curStep.maxItems  then lastItem=lastItem+1
+		Function addOneDimension() As integer
 		  
-		  ppFielda(lastItem).Visible=true
-		  btn_remove(lastItem).visible=true 
+		  if LastGroupByItem<curStep.MaxDimensions  then LastGroupByItem=LastGroupByItem+1
 		  
-		  prepLine lastItem
+		  ppFieldDimension(LastGroupByItem).Visible=true
+		  btn_RemoveDimension(LastGroupByItem).visible=true 
 		  
-		  btn_add.top=btn_remove(lastItem).top
+		  prepLineDimension LastGroupByItem
+		  
+		  btn_AddDimension.top=btn_RemoveDimension(LastGroupByItem).top
 		  
 		  //rb_sumNumber.top=btn_add.top+25
-		  btn_close.top=btn_add.top+25
+		  // btn_close.top=btn_add.top+25
 		  
-		  wndDataQueryItem_GroupSplit.Height=ppFieldA(0).top+25*(lastItem+1+1)
+		  // wndDataQueryItem_GroupSplit.Height=ppFieldA(0).top+25*(lastItem+1+1)
 		  
-		  return lastItem
+		  return LastGroupByItem
 		  
 		  
 		  
@@ -690,49 +1764,137 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function addOneMeasure() As integer
+		  
+		  if LastMeasure<curStep.MaxMeasure  then LastMeasure=LastMeasure+1
+		  
+		  ppFieldMeasure(LastMeasure).Visible=true
+		  btn_RemoveMeasure(LastMeasure).visible=true 
+		  ckb_HasMin(LastMeasure).Visible = true
+		  ckb_HasAvg(LastMeasure).Visible = true
+		  ckb_HasMax(LastMeasure).Visible= true
+		  
+		  PrepLineMeasure LastMeasure
+		  
+		  btn_AddMeasure.top=btn_RemoveMeasure(LastMeasure).top
+		  
+		  //rb_sumNumber.top=btn_add.top+25
+		  // btn_close.top=btn_add.top+25
+		  
+		  // wndDataQueryItem_GroupSplit.Height=ppFieldA(0).top+25*(lastItem+1+1)
+		  
+		  return LastMeasure
+		  
+		  
+		  
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ChangePage(ChangeTo as string)
+		  
+		  
+		  select case ChangeTo
+		    
+		  case "Aggregate"
+		    PagePanel1.SelectedPanelIndex = 1
+		    stt_CurrentPage.Text = "Aggregate"
+		    btn_ChangeTo.Caption = "Split by"
+		    
+		  case "Split by"
+		    PagePanel1.SelectedPanelIndex = 0
+		    stt_CurrentPage.Text = "Split by"
+		    btn_ChangeTo.Caption = "Aggregate"
+		    
+		  case else
+		    
+		  end select
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub doSave()
 		  
 		  
 		  curStep.name=efName.text
 		  
-		  
-		  for i as integer = 0 to  curStep.maxItems
-		    if ppFieldA(i).Visible and ppFieldA(i).SelectedRowText.Length > 0 then
-		      curStep.sField1(i)=ppFieldA(i).SelectedRowText
-		      curStep.bInUse(i)=true
+		  curStep.sFieldDImension.RemoveAll
+		  for i as integer = 0 to  curStep.MaxDimensions
+		    if ppFieldDimension(i).Visible and ppFieldDimension(i).SelectedRowText.Length > 0 then
+		      curStep.sFieldDImension.Add(ppFieldDimension(i).SelectedRowText)
+		       
 		    else
-		      curStep.bInUse(i)=false
+		       
 		    end if
 		    
 		  next
 		  
 		  
+		  curStep.sFieldMeasure.RemoveAll
+		  curStep.tFieldMeasure.RemoveAll
+		  
+		  for i as integer = 0 to curStep.MaxMeasure
+		    var bValue as integer = 0
+		    if ppFieldMeasure(i).Visible and ppFieldMeasure(i).SelectedRowText.Length > 0 then
+		      curStep.sFieldMeasure.add(ppFieldMeasure(i).SelectedRowText)
+		      
+		      if ckb_HasMin(i).Value then bValue = bvalue +  curStep.cstHasMin
+		      if ckb_HasAvg(i).Value then bValue = bvalue +  curStep.cstHasAvg
+		      if ckb_HasMax(i).Value then bValue = bvalue +  curStep.cstHasMax
+		      
+		      curStep.tFieldMeasure.add(bValue)
+		      
+		    end if
+		    
+		  next
+		  
+		  curStep.IncludeCount = ckb_CountRows.value
+		   
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub prepLine(theLine as integer)
+		Sub prepLineDimension(theLine as integer)
 		  
 		  if curStep.prevDataQueryItem<>nil then
-		    ppFieldA(theLine).RemoveAllRows
+		    ppFieldDimension(theLine).RemoveAllRows
 		    
 		    
 		    for i as integer = 0 to ubound(curStep.prevDataQueryItem.keyFields)
 		      if curStep.prevDataQueryItem.keyFields(i) <> nil then
-		        ppFielda(theLine).AddRow curStep.prevDataQueryItem.keyFields(i).Name 
+		        ppFieldDimension(theLine).AddRow curStep.prevDataQueryItem.keyFields(i).Name 
 		        
 		      end if
 		    next
 		    
-		    'for i as integer = 1 to ubound(curStep.prevDataQueryItem.valueFields)
-		    'ppFielda(theLine).AddRow curStep.prevDataQueryItem.valueFields(i)
-		    'ppFieldb(theLine).AddRow curStep.prevDataQueryItem.valueFields(i)
-		    'next
-		    '
-		    
-		    'ppFieldb(theLine).AddRow cUseConstant
 		  end if
+		  
+		  return
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub PrepLineMeasure(theLine as integer)
+		  
+		  
+		  if curStep.prevDataQueryItem<>nil then
+		    ppFieldMeasure(theLine).RemoveAllRows
+		    
+		    for i as integer = 0 to ubound(curStep.prevDataQueryItem.valueFields)
+		      ppFieldMeasure(theLine).AddRow(curStep.prevDataQueryItem.valueFields(i))
+		      
+		    next
+		    
+		  end if
+		  
+		  return 
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -743,22 +1905,52 @@ End
 		  
 		  curStep=theStep
 		  
-		  prepLine 0
+		  prepLineDimension 0
+		  PrepLineMeasure 0
 		  
 		  efName.text=curStep.getTitle
 		  
-		  ppFieldA(0).findItem(curStep.sField1(0))
+		  if curStep.sFieldDImension.Count = 0 then
+		    ppFieldDimension(0).SelectedRowIndex = 0
+		    
+		  else
+		    ppFieldDimension(0).findItem(curStep.sFieldDImension(0))
+		    
+		  end if
 		  
-		  
-		  for i as integer = 1 to curStep.maxItems
-		    if curStep.bInUse(i) then
-		      j=addone
-		      ppFieldA(j).findItem(curStep.sField1(i))
-		    end if
+		  for i as integer = 1 to curStep.sFieldDImension.LastIndex
+		    j=addOneDimension
+		    ppFieldDimension(j).findItem(curStep.sFieldDImension(i))
 		    
 		  next
 		  
+		  //
+		  // Prepare measures
+		  //
+		  if curStep.sFieldMeasure.Count = 0 then
+		    ppFieldMeasure(0).SelectedRowIndex = 0
+		    
+		  else
+		    ppFieldMeasure(0).findItem(curStep.sFieldMeasure(0))
+		    ckb_HasMin(0).Value = bitand(curStep.tFieldMeasure(0), curStep.cstHasMin) = curStep.cstHasMin
+		    ckb_HasAvg(0).Value = bitand(curStep.tFieldMeasure(0), curStep.cstHasAvg) = curStep.cstHasAvg
+		    ckb_HasMax(0).Value = bitand(curStep.tFieldMeasure(0), curStep.cstHasMax) = curStep.cstHasMax
+		    
+		  end if
 		  
+		  
+		  for i as integer = 1 to curStep.sFieldMeasure.LastIndex
+		    j=addOneMeasure
+		    ppFieldMeasure(j).findItem(curStep.sFieldMeasure(i))
+		    
+		    ckb_HasMin(j).Value = bitand(curStep.tFieldMeasure(i), curStep.cstHasMin) = curStep.cstHasMin
+		    ckb_HasAvg(j).Value = bitand(curStep.tFieldMeasure(i), curStep.cstHasAvg) = curStep.cstHasAvg
+		    ckb_HasMax(j).Value = bitand(curStep.tFieldMeasure(i), curStep.cstHasMax) = curStep.cstHasMax
+		    
+		    
+		  next
+		  
+		  ckb_CountRows.value = curStep.IncludeCount
 		  
 		  showmodal
 		  
@@ -771,56 +1963,16 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
-		Protected lastItem As integer
+		Protected LastGroupByItem As integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		LastMeasure As Integer
 	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events btn_Remove
-	#tag Event
-		Sub Pressed(index as Integer)
-		  var i  as integer
-		  dim y as integer
-		  dim last as integer
-		  
-		  
-		  for i=index+1 to lastItem
-		    y=ppFieldA(i).top-25
-		    ppFieldA(i-1).SelectedRowIndex=ppFieldA(i).SelectedRowIndex
-		  next
-		  
-		  i=lastItem
-		  
-		  ppFieldA(i).visible=false
-		  
-		  btn_Remove(i).Visible=false
-		  
-		  lastItem=lastItem-1
-		  
-		  btn_add.top=btn_remove(lastItem).top
-		  
-		  //rb_sumNumber.top=btn_add.top+25
-		  btn_close.top=btn_add.top+25
-		  
-		  wndDataQueryItem_GroupSplit.Height=ppFieldA(0).top+25*(lastItem+1+1)
-		  
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btn_Add
-	#tag Event
-		Sub Pressed()
-		  
-		  var i  as integer
-		  i=addOne
-		  
-		  
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events btn_close
 	#tag Event
 		Sub Pressed()
@@ -828,6 +1980,95 @@ End
 		  doSave
 		  
 		  close
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_AddDimension
+	#tag Event
+		Sub Pressed()
+		  
+		  var i  as integer
+		  i=addOneDimension
+		  
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_RemoveMeasure
+	#tag Event
+		Sub Pressed(index as Integer)
+		  var i  as integer
+		  dim y as integer
+		  dim last as integer
+		  
+		  
+		  for i=index+1 to LastMeasure
+		    y=ppFieldMeasure(i).top-25
+		    ppFieldMeasure(i-1).SelectedRowIndex=ppFieldMeasure(i).SelectedRowIndex
+		  Next
+		  
+		  i=LastMeasure
+		  
+		  ppFieldMeasure(i).visible=false
+		  
+		  btn_RemoveMeasure(i).Visible=false
+		  
+		  ckb_HasMin(i).Visible = false
+		  ckb_HasAvg(i).Visible = false
+		  ckb_HasMax(i).Visible= false
+		  
+		  LastMeasure=LastMeasure-1
+		  
+		  btn_AddMeasure.top=btn_RemoveMeasure(LastMeasure).top
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_AddMeasure
+	#tag Event
+		Sub Pressed()
+		  
+		  var i  as integer
+		  i=addOneMeasure
+		  
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_RemoveDimension
+	#tag Event
+		Sub Pressed(index as Integer)
+		  var i  as integer
+		  dim y as integer
+		  dim last as integer
+		  
+		  
+		  for i=index+1 to LastGroupByItem
+		    y=ppFieldDimension(i).top-25
+		    ppFieldDimension(i-1).SelectedRowIndex=ppFieldDimension(i).SelectedRowIndex
+		  next
+		  
+		  i=LastGroupByItem
+		  
+		  ppFieldDimension(i).visible=false
+		  
+		  btn_RemoveDimension(i).Visible=false
+		  
+		  LastGroupByItem=LastGroupByItem-1
+		  
+		  btn_AddDimension.top=btn_RemoveDimension(LastGroupByItem).top
+		   
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_ChangeTo
+	#tag Event
+		Sub Pressed()
+		  
+		  ChangePage(me.Caption)
 		  
 		End Sub
 	#tag EndEvent

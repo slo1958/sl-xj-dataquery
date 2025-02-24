@@ -51,7 +51,7 @@ Begin DesktopWindow wnd_queryViewer
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      Value           =   1
+      Value           =   0
       Visible         =   True
       Width           =   560
       Begin DesktopListBox lb_Data
@@ -59,7 +59,7 @@ Begin DesktopWindow wnd_queryViewer
          AllowAutoHideScrollbars=   True
          AllowExpandableRows=   False
          AllowFocusRing  =   True
-         AllowResizableColumns=   False
+         AllowResizableColumns=   True
          AllowRowDragging=   False
          AllowRowReordering=   False
          Bold            =   False
@@ -74,7 +74,7 @@ Begin DesktopWindow wnd_queryViewer
          GridLineStyle   =   0
          HasBorder       =   True
          HasHeader       =   True
-         HasHorizontalScrollbar=   False
+         HasHorizontalScrollbar=   True
          HasVerticalScrollbar=   True
          HeadingIndex    =   -1
          Height          =   409
@@ -385,12 +385,16 @@ End
 	#tag Method, Flags = &h0
 		Sub AddNextRows()
 		  
+		  const cStartColWidth as string = "96"
+		  
 		  var nextCount as integer = 200
 		  
 		  if Results.AfterLastRow then return
 		  
+		  
 		  if lb_Data.ColumnCount = 1 then
 		    var nbcol as integer = results.ColumnCount
+		    var colwidth as string = cStartColWidth
 		    
 		    lb_Data.ColumnCount = results.ColumnCount + 1
 		    lb_Data.HasHeader = True
@@ -399,8 +403,10 @@ End
 		    
 		    for i as integer = 0 to Results.ColumnCount - 1
 		      lb_Data.HeaderAt( i+1 ) = results.ColumnAt(i).Name
-		      
+		      colwidth = colwidth + "," + cStartColWidth
 		    next
+		    
+		    lb_Data.ColumnWidths = colwidth
 		    
 		    redim self.RunningTotal(results.ColumnCount)
 		    
@@ -510,7 +516,7 @@ End
 		Sub ShowTotals()
 		  
 		  if not Results.AfterLastRow then return
-		   
+		  
 		  lb_Data.AddRow("")
 		  
 		  lb_Data.AddRow("TOTAL")
