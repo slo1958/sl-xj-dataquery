@@ -89,9 +89,12 @@ Inherits clDataQueryItem
 		  s="select  "
 		  ssep=""
 		  
-		  for i as integer = 1 to keyFields.LastIndex
-		    s=s+ssep+keyFields(i).Name +"_"+sPostFix+" as "+keyFields(i).Name   + PostFixStr(IsLastStep)
-		    ssep=","
+		  for i as integer = 0 to keyFields.LastIndex
+		    if keyFields(i) <> nil then
+		      s=s+ssep+keyFields(i).Name +"_"+sPostFix+" as "+keyFields(i).Name   + PostFixStr(IsLastStep)
+		      ssep=","
+		      
+		    end if
 		  next
 		  
 		  for i as integer = 1 to UBound(InputList)

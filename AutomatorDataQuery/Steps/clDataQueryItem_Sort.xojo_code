@@ -116,10 +116,13 @@ Inherits clDataQueryItem
 		    
 		    ssep=""
 		    
-		    for i as integer = 1 to ubound(prevDataQueryItem.keyFields)
-		      s=s+ssep
-		      s=s+prevDataQueryItem.keyFields(i).Name +"_"+sPostFix+" as "+prevDataQueryItem.keyFields(i).Name  + PostFixStr(IsLastStep)
-		      ssep=","
+		    for i as integer = 0 to ubound(prevDataQueryItem.keyFields)
+		      if prevDataQueryItem.keyFields(i) <> nil then
+		        s=s+ssep
+		        s=s+prevDataQueryItem.keyFields(i).Name +"_"+sPostFix+" as "+prevDataQueryItem.keyFields(i).Name  + PostFixStr(IsLastStep)
+		        ssep=","
+		        
+		      end if
 		    next
 		    
 		    for i as integer = 1 to ubound(prevDataQueryItem.valueFields)

@@ -1520,9 +1520,13 @@ End
 		    ppFieldb(theLine).AddRow cUseConstant
 		    ppFieldb(theLine).AddRow cIsEmpty
 		    
-		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.keyFields)
-		      ppFielda(theLine).AddRow curStep.prevDataQueryItem.keyFields(i).Name 
-		      ppFieldb(theLine).AddRow curStep.prevDataQueryItem.keyFields(i).Name 
+		    for i as integer = 0 to ubound(curStep.prevDataQueryItem.keyFields)
+		      if curStep.prevDataQueryItem.keyFields(i) <> nil then
+		        ppFielda(theLine).AddRow curStep.prevDataQueryItem.keyFields(i).Name 
+		        ppFieldb(theLine).AddRow curStep.prevDataQueryItem.keyFields(i).Name 
+		        
+		      end if
+		      
 		    next
 		    
 		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.valueFields)

@@ -91,10 +91,11 @@ Inherits clDataQueryItem
 		  var tempFields() as string
 		  
 		  
-		  for i as integer = 1 to keyFields.LastIndex
-		    
-		    tempFields.Add( keyFields(i).Name + " as "+keyFields(i).Name + PostFixStr(IsLastStep))
-		    
+		  for i as integer = 0 to keyFields.LastIndex
+		    if keyFields(i) <> nil then 
+		      tempFields.Add( keyFields(i).Name + " as "+keyFields(i).Name + PostFixStr(IsLastStep))
+		      
+		    end if
 		  next
 		  
 		  for i as integer = 1 to ubound(valueFields)

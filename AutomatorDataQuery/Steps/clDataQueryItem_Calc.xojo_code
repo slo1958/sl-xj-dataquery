@@ -91,9 +91,12 @@ Inherits clDataQueryItem
 		    
 		    s="select "
 		    sdel=""
-		    for i as integer = 1 to ubound(prevDataQueryItem.keyFields)
-		      s=s+sdel+ prevDataQueryItem.keyFields(i).Name +"_"+spostfix+" as "+prevDataQueryItem.keyFields(i).Name   + PostFixStr(IsLastStep)
-		      sdel=","
+		    for i as integer = 0 to ubound(prevDataQueryItem.keyFields)
+		      if prevDataQueryItem.keyFields(i) <> nil then 
+		        s=s+sdel+ prevDataQueryItem.keyFields(i).Name +"_"+spostfix+" as "+prevDataQueryItem.keyFields(i).Name   + PostFixStr(IsLastStep)
+		        sdel=","
+		        
+		      end if
 		    next
 		    
 		    for i as integer = 1 to ubound(prevDataQueryItem.valueFields)

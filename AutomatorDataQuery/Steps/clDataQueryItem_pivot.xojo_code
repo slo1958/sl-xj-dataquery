@@ -16,8 +16,10 @@ Inherits clDataQueryItem
 		  else
 		    
 		    for i as integer = 0 to ubound(prevDataQueryItem.keyFields)
-		      sField_Remaining.add(prevDataQueryItem.keyFields(i).Clone)
-		      
+		      if prevDataQueryItem.keyFields(i) <> nil then 
+		        sField_Remaining.add(prevDataQueryItem.keyFields(i).Clone)
+		        
+		      end if
 		    next
 		    
 		    for jField=1 to 3
@@ -40,7 +42,7 @@ Inherits clDataQueryItem
 		  '
 		  keyFields.RemoveAll
 		  
-		  for i as integer = 1 to sField_Remaining.LastIndex
+		  for i as integer = 0 to sField_Remaining.LastIndex
 		    if sField_Remaining(i)<>nil then
 		      keyFields.add(sField_Remaining(i).Clone)
 		      
@@ -112,8 +114,10 @@ Inherits clDataQueryItem
 		  
 		  var sPostFix as string = prevDataQueryItem.fieldPostFix
 		  
-		  for i as integer = 1 to keyFields.LastIndex
-		    if NameSuffix = "" then
+		  for i as integer = 0 to keyFields.LastIndex
+		    if keyFields(i) = nil then 
+		      
+		    elseif NameSuffix = "" then
 		      tmpFields.Add(NamePrefix + keyFields(i).Name+"_"+sPostFix)
 		      
 		    else
@@ -321,19 +325,21 @@ Inherits clDataQueryItem
 		  
 		  // add key fields in top query
 		  
-		  for i as integer = 1 to keyFields.LastIndex
-		    var s as string =  keyFields(i).Name
-		    
-		    if IsLastStep then
+		  for i as integer = 0 to keyFields.LastIndex
+		    if keyFields(i) <> nil then 
+		      var s as string =  keyFields(i).Name
 		      
-		      // rename back to original name if last query
-		      tmpfields.add( cDriverCTE+"." + s + "_" + sPostFix + " " + s)
-		      
-		    else
-		      tmpfields.add( cDriverCTE+"." + s + "_" + sPostFix + " " + s + "_"+fieldPostFix)
+		      if IsLastStep then
+		        
+		        // rename back to original name if last query
+		        tmpfields.add( cDriverCTE+"." + s + "_" + sPostFix + " " + s)
+		        
+		      else
+		        tmpfields.add( cDriverCTE+"." + s + "_" + sPostFix + " " + s + "_"+fieldPostFix)
+		        
+		      end if
 		      
 		    end if
-		    
 		    
 		  next
 		  
