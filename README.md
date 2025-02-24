@@ -83,9 +83,7 @@ When the user runs the flow from the start step (or a flow that contains only a 
 
 ![Screenshot 2025-02-24 at 14 21 45](https://github.com/user-attachments/assets/a3ac9473-4b4a-41a2-8436-c5d88605b061)
 
-From the user perspective, this step tells the flow to split the results along dimension(s) chosen by the user.
-
-By default, all measure fields are summed. The user can also specify different aggregation (Min / Avg / Max) for a selection of measure fields.
+All measure fields are summed. The user can also specify different aggregation (Min / Avg / Max) for a selection of measure fields.
 
 
 
