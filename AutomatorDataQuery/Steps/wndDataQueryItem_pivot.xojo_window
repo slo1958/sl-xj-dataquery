@@ -2077,10 +2077,13 @@ End
 		  ppField3.addrow cNotUsed
 		  
 		  if curstep.prevDataQueryItem<>nil then
-		    for i as integer = 1 to ubound(curStep.prevDataQueryItem.keyFields)
-		      ppField1.addrow curStep.prevDataQueryItem.keyFields(i).Name 
-		      ppField2.addrow curStep.prevDataQueryItem.keyFields(i).Name 
-		      ppField3.addrow curStep.prevDataQueryItem.keyFields(i).Name 
+		    for i as integer = 0 to ubound(curStep.prevDataQueryItem.keyFields)
+		      if curStep.prevDataQueryItem.keyFields(i).Name.length > 0 then
+		        ppField1.addrow curStep.prevDataQueryItem.keyFields(i).Name 
+		        ppField2.addrow curStep.prevDataQueryItem.keyFields(i).Name 
+		        ppField3.addrow curStep.prevDataQueryItem.keyFields(i).Name 
+		        
+		      end if
 		    next
 		  end if
 		  

@@ -260,6 +260,7 @@ Inherits clDataQueryItem
 		  var CTE0 as string
 		  var CTE1 as string
 		  
+		  var dummyDimension as string
 		  
 		  
 		  '
@@ -277,8 +278,17 @@ Inherits clDataQueryItem
 		    
 		  next
 		  
+		  if commonGroupByFields.Count = 0 then
+		    dummyDimension = "InternalDummyKey"
+		    CTE0 =  cDriverCTE + " as (SELECT DISTINCT 1 as InternalDummyKey  FROM (" + ssource +"))"
+		    
+		  else
+		    dummyDimension = ""
+		    CTE0 =  cDriverCTE + " as (SELECT DISTINCT " + string.FromArray(commonGroupByFields, ",") + " FROM (" + ssource +"))"
+		    
+		  end if
 		  
-		  CTE0 =  cDriverCTE + " as (SELECT DISTINCT " + string.FromArray(commonGroupByFields, ",") + " FROM (" + ssource +"))"
+		  
 		  
 		  // Second CTE includes all filter key fields, remaining key fields and measures
 		  
@@ -291,6 +301,11 @@ Inherits clDataQueryItem
 		    tmpfields.add(s)
 		    
 		  next
+		  
+		  if dummyDimension.Length > 0 then
+		    tmpfields.add("1 as " + dummyDimension)
+		    
+		  end if
 		  
 		  // add filter fields
 		  
@@ -380,6 +395,12 @@ Inherits clDataQueryItem
 		        joinFields.add(cDriverCTE + "." + s + " = " + blockID + "." + s)
 		        
 		      next
+		      
+		      if dummyDimension.Length > 0 then
+		        tmpfields.add(dummyDimension)
+		        joinFields.add(cDriverCTE + "." + dummyDimension + " = " + blockID + "." + dummyDimension)
+		        
+		      end if
 		      
 		      
 		      // add value fields

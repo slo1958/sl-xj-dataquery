@@ -81,7 +81,7 @@ Inherits clDataQueryItem
 		  var jmeasures as new JSONItem
 		  
 		  for i as integer = 0 to sFieldDImension.LastIndex
-		     
+		    
 		    var jItem as new JSONItem
 		    jitem.value(cJSONTagIndex) = i
 		    jitem.Value(cJSONTagField) = sFieldDImension(i)
@@ -145,7 +145,7 @@ Inherits clDataQueryItem
 		Function getSql(IsLastStep as boolean) As String
 		  dim sSource as string
 		  dim sPostFix as string
-		   
+		  
 		  dim s as string 
 		  
 		  if prevDataQueryItem<>nil then 
@@ -155,7 +155,7 @@ Inherits clDataQueryItem
 		    ssource=""
 		    sPostFix=""
 		  end if
-		   
+		  
 		  
 		  var selectFields() as string
 		  var groupByFIelds() as string
@@ -187,7 +187,7 @@ Inherits clDataQueryItem
 		        
 		        if bitand(tFieldMeasure(i), cstHasMin) = cstHasMin then
 		          selectFields.add("MIN(" +  sFieldMeasure(i) + "_" + sPostFix +") as Min"+ sFieldMeasure(i) + PostFixStr(IsLastStep))
-		           
+		          
 		        end if
 		        
 		        if bitand(tFieldMeasure(i), cstHasMax) = cstHasMax then
@@ -328,6 +328,7 @@ Inherits clDataQueryItem
 		    
 		  end if
 		  
+		  return
 		End Sub
 	#tag EndMethod
 
@@ -448,6 +449,14 @@ Inherits clDataQueryItem
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IncludeCount"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
