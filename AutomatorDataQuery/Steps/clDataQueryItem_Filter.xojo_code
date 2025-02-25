@@ -14,35 +14,7 @@ Inherits clDataQueryItem
 		  nextItem=-1
 		  
 		  
-		  if SourceJSON = nil then return
-		  
-		  
-		  var jItems as  JSONItem = SourceJSON.Value(cJSONTagItems)
-		  
-		  if jitems.IsArray then
-		    for i as integer = 0 to jItems.LastRowIndex
-		      var jitem as JSONItem = jitems.ChildAt(i)
-		      
-		      var index as integer = jitem.value(cJSONTagIndex)
-		      sconst(index) = jitem.value(cJSONTagConstant)
-		      sfield1(index) = jitem.value(cJSONTagField1)
-		      sfield2(index) = jitem.value(cJSONTagField2)
-		      soper(index) = jitem.value(cJSONTagOperator) 
-		      bInUse(index) = True
-		      if index > nextItem then nextItem = index
-		      
-		    next
-		    
-		    
-		  else
-		    for i as integer=0 to maxItems
-		      binuse(i)=false
-		    next
-		    
-		    nextItem=-1
-		    
-		  end if
-		  
+		  // processConfigJSON is called by the super constructor if SourceJSON is not nil
 		  
 		  return 
 		  
@@ -245,6 +217,43 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub ProcessConfigJSON(SourceJSON as JSONItem)
+		  // Calling the overridden superclass method.
+		  Super.ProcessConfigJSON(SourceJSON)
+		  
+		  
+		  
+		  var jItems as  JSONItem = SourceJSON.Value(cJSONTagItems)
+		  
+		  if jitems.IsArray then
+		    for i as integer = 0 to jItems.LastRowIndex
+		      var jitem as JSONItem = jitems.ChildAt(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex)
+		      sconst(index) = jitem.value(cJSONTagConstant)
+		      sfield1(index) = jitem.value(cJSONTagField1)
+		      sfield2(index) = jitem.value(cJSONTagField2)
+		      soper(index) = jitem.value(cJSONTagOperator) 
+		      bInUse(index) = True
+		      if index > nextItem then nextItem = index
+		      
+		    next
+		    
+		    
+		  else
+		    for i as integer=0 to maxItems
+		      binuse(i)=false
+		    next
+		    
+		    nextItem=-1
+		    
+		  end if
+		  
+		  return
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
 		  
 		  wndDataQueryItem_Filter.showme me
@@ -278,7 +287,7 @@ Inherits clDataQueryItem
 		    '
 		    for i as integer = 0 to ubound(sField1)
 		      sField1Type(i) = prevDataQueryItem.getKeyType(sField1(i))
-		       
+		      
 		    next
 		    
 		    

@@ -113,6 +113,7 @@ Inherits clAutomatorFlow
 		  if AfterItem <> nil then AfterItem.prevDataQueryItem = returnValue
 		  
 		  
+		  return returnValue
 		  
 		End Function
 	#tag EndMethod
@@ -245,10 +246,10 @@ Inherits clAutomatorFlow
 		  end if
 		  
 		  return  lastItem.getSql(True)
-		   
 		  
 		  
-		   
+		  
+		  
 		End Function
 	#tag EndMethod
 

@@ -9,33 +9,7 @@ Inherits clDataQueryItem
 		  
 		  Nextitem=0
 		  
-		  if SourceJSON = nil then return
-		  
-		  var jItems as  JSONItem = SourceJSON.Value(cJSONTagItems)
-		  
-		  if jitems.IsArray then
-		    for i as integer = 0 to jItems.LastRowIndex
-		      var jitem as JSONItem = jitems.childat(i)
-		      
-		      var index as integer = jitem.value(cJSONTagIndex)
-		      
-		      if index >Formula.LastIndex then 
-		        redim Formula(index)
-		        redim OutputFields(index)
-		        redim IsDimension(Index)
-		        
-		      end if
-		      
-		      if index > nextItem then nextItem = index
-		      
-		      formula(Index) = jitem.value(cJSONTagFormula)
-		      OutputFields(Index) = jitem.value(cJSONTagOutput)
-		      IsDimension(Index) = jitem.Value(cJSONTagIsDimension) 
-		      
-		    next
-		    
-		    
-		  end if
+		  // processConfigJSON is called by the super constructor if SourceJSON is not nil
 		  
 		  return
 		  
@@ -161,6 +135,41 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub ProcessConfigJSON(SourceJSON as JSONItem)
+		  // Calling the overridden superclass method.
+		  Super.ProcessConfigJSON(SourceJSON)
+		  
+		  var jItems as  JSONItem = SourceJSON.Value(cJSONTagItems)
+		  
+		  if jitems.IsArray then
+		    for i as integer = 0 to jItems.LastRowIndex
+		      var jitem as JSONItem = jitems.childat(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex)
+		      
+		      if index >Formula.LastIndex then 
+		        redim Formula(index)
+		        redim OutputFields(index)
+		        redim IsDimension(Index)
+		        
+		      end if
+		      
+		      if index > nextItem then nextItem = index
+		      
+		      formula(Index) = jitem.value(cJSONTagFormula)
+		      OutputFields(Index) = jitem.value(cJSONTagOutput)
+		      IsDimension(Index) = jitem.Value(cJSONTagIsDimension) 
+		      
+		    next
+		    
+		    
+		  end if
+		  
+		  return
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
 		  
 		  wndDataQueryItem_Calc.showme me
@@ -170,7 +179,7 @@ Inherits clDataQueryItem
 
 	#tag Method, Flags = &h0
 		Sub updateFieldsFromPred()
-		   
+		  
 		  
 		  if prevDataQueryItem=nil then
 		    

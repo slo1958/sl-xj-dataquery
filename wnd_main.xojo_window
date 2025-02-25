@@ -329,7 +329,51 @@ End
 		Sub AddStepAfter(Identifier as integer, NewStepType as string)
 		  // Part of the AutomatorVisualInterface interface.
 		  
-		  var s as  clAutomatorItem = self.CurrentFlow.doInsertAfter(NewStepType, Identifier)
+		  var tmpStepType as string = ""
+		  var js as JSONItem = nil
+		  
+		  if NewStepType = "Paste" then
+		    var clp as new Clipboard
+		    
+		    if clp.TextAvailable then
+		      
+		      #Pragma BreakOnExceptions Off
+		      
+		      try
+		        var txt as string = clp.Text
+		        
+		        js  = new JSONItem(txt)
+		        
+		        if  js.HasKey("signature") and js.value("signature") = clDataQueryFlow.cSignature then
+		          tmpStepType = js.Value(clDataQueryItem.cJSONTagInternalStepType)
+		          
+		        else
+		          js = nil
+		          
+		        end if
+		        
+		        
+		      catch
+		        
+		      end try
+		      
+		      #Pragma BreakOnExceptions Default
+		      
+		    end if
+		    
+		  else
+		    tmpStepType = NewStepType
+		    
+		  end if
+		  
+		  
+		  if tmpStepType.Length>0 then
+		    var s as  clAutomatorItem 
+		    s = self.CurrentFlow.doInsertAfter(tmpStepType, Identifier)
+		    
+		    if js <> nil then clDataQueryItem(s).ProcessConfigJSON(js)
+		    
+		  end if
 		  
 		  RefreshStepIDs
 		  
@@ -390,12 +434,20 @@ End
 		    var wqv as new wnd_queryViewer
 		    wqv.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
 		    
+		  case "Copy"
+		    var dq as clDataQueryItem = clDataQueryItem(s)
+		    var js as JSONItem = dq.GetConfigJSON
+		    js.value("signature") = clDataQueryFlow.cSignature
+		    
+		    var txt as string = js.ToString
+		    var clp as new Clipboard
+		    clp.Text = txt
 		    
 		  case else
 		    
 		  end select
 		  
-		  
+		  return
 		End Sub
 	#tag EndMethod
 
@@ -427,9 +479,14 @@ End
 		  var temp() as string
 		  
 		  
-		  if CurrentStepType <> "Start" then Temp.Add(cEdit)
-		  Temp.Add(cRunTillHere)
-		  
+		  if CurrentStepType <> "Start" then 
+		    temp.Add(cEdit)
+		    temp.Add("Copy")
+		    
+		  end if
+		   
+		  temp.Add("-")
+		  temp.Add(cRunTillHere)
 		  
 		  return temp
 		  
@@ -441,8 +498,36 @@ End
 
 	#tag Method, Flags = &h0
 		Function GetListOfOptionsForAdd(CurrentStepType as string) As string()
+		  var tmp() as string = clDataQueryFlow.GetListOfSteps
 		  
-		  return clDataQueryFlow.GetListOfSteps
+		  var txt as string
+		  var clp as new Clipboard
+		  
+		  if clp.TextAvailable then
+		    txt = clp.Text
+		    
+		    #Pragma BreakOnExceptions Off
+		    
+		    try
+		      var js as JSONItem = new JSONItem(txt)
+		      
+		      if not js.HasKey("signature") then 
+		        
+		      elseif js.value("signature") = clDataQueryFlow.cSignature then
+		        tmp.Add("-")
+		        tmp.Add("Paste")
+		      end if
+		      
+		      
+		    catch
+		      
+		    end try
+		    
+		    #Pragma BreakOnExceptions Default
+		    
+		  end if
+		  
+		  return tmp
 		  
 		  
 		  

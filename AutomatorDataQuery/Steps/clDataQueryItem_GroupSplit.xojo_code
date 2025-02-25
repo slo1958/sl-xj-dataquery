@@ -8,61 +8,8 @@ Inherits clDataQueryItem
 		  
 		  super.Constructor(SourceJSON)
 		  
-		  if SourceJSON = nil then return
+		  // processConfigJSON is called by the super constructor if SourceJSON is not nil
 		  
-		  
-		  //var ItemTitle as string = SourceJSON.Value(cJSONTagName)
-		  //Self.SetTitle(ItemTitle)
-		  
-		  var jItems as    JSONItem 
-		  
-		  sFieldDImension.RemoveAll
-		  
-		  jitems = SourceJSON.Value(cJSONTagItems)
-		  
-		  if jitems.IsArray then
-		    for i as integer = 0 to jItems.LastRowIndex
-		      
-		      var jitem as JSONItem = jitems.ChildAt(i)
-		      
-		      var index as integer = jitem.value(cJSONTagIndex)
-		      
-		      sFieldDImension.add(jitem.Value(cJSONTagField))
-		      
-		    next
-		    
-		  end if
-		  
-		  IncludeCount = false
-		  
-		  sFieldMeasure.RemoveAll
-		  tFieldMeasure.RemoveAll
-		  
-		  if SourceJSON.HasKey(cJSONTagMeasure) then
-		    jitems = SourceJSON.Value(cJSONTagMeasure)
-		    
-		    for i as integer = 0 to jItems.LastRowIndex
-		      var jitem as JSONItem = jitems.ChildAt(i)
-		      
-		      var index as integer = jitem.value(cJSONTagIndex)
-		      
-		      if jitem.Value(cJSONAggreg) = 9999 then 
-		        IncludeCount = True
-		        
-		      else
-		        sFieldMeasure.add(jitem.Value(cJSONTagField))
-		        tFieldMeasure.add(jitem.Value(cJSONAggreg))
-		        
-		      end if
-		      
-		      
-		    next
-		    
-		  else
-		    sFieldMeasure.RemoveAll
-		    IncludeCount = false
-		    
-		  end if
 		  
 		  return 
 		  
@@ -259,6 +206,67 @@ Inherits clDataQueryItem
 		  return GrouSplit_38_38
 		  
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ProcessConfigJSON(SourceJSON as JSONItem)
+		  // Calling the overridden superclass method.
+		  Super.ProcessConfigJSON(SourceJSON)
+		  
+		  
+		  var jItems as    JSONItem 
+		  
+		  sFieldDImension.RemoveAll
+		  
+		  jitems = SourceJSON.Value(cJSONTagItems)
+		  
+		  if jitems.IsArray then
+		    for i as integer = 0 to jItems.LastRowIndex
+		      
+		      var jitem as JSONItem = jitems.ChildAt(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex)
+		      
+		      sFieldDImension.add(jitem.Value(cJSONTagField))
+		      
+		    next
+		    
+		  end if
+		  
+		  IncludeCount = false
+		  
+		  sFieldMeasure.RemoveAll
+		  tFieldMeasure.RemoveAll
+		  
+		  if SourceJSON.HasKey(cJSONTagMeasure) then
+		    jitems = SourceJSON.Value(cJSONTagMeasure)
+		    
+		    for i as integer = 0 to jItems.LastRowIndex
+		      var jitem as JSONItem = jitems.ChildAt(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex)
+		      
+		      if jitem.Value(cJSONAggreg) = 9999 then 
+		        IncludeCount = True
+		        
+		      else
+		        sFieldMeasure.add(jitem.Value(cJSONTagField))
+		        tFieldMeasure.add(jitem.Value(cJSONAggreg))
+		        
+		      end if
+		      
+		      
+		    next
+		    
+		  else
+		    sFieldMeasure.RemoveAll
+		    IncludeCount = false
+		    
+		  end if
+		  
+		  return 
+		  
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

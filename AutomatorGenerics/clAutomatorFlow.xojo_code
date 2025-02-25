@@ -157,7 +157,7 @@ Protected Class clAutomatorFlow
 
 	#tag Method, Flags = &h0
 		Sub doSelect(theItem as integer)
-		   
+		  
 		  for i as integer = 1 to ubound(items)
 		    items(i).selected=(i=theItem)
 		  next

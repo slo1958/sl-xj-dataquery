@@ -24,13 +24,11 @@ Inherits clAutomatorItem
 		  
 		  prevDataQueryItem=nil
 		  
-		  if SourceJSON = nil then return
+		  if SourceJSON <> nil then self.ProcessConfigJSON(SourceJSON)
+		  
+		  return
 		  
 		  
-		  
-		  var ItemTitle as string = SourceJSON.Value(cJSONTagName)
-		  
-		  Self.SetTitle(ItemTitle)
 		End Sub
 	#tag EndMethod
 
@@ -218,13 +216,24 @@ Inherits clAutomatorItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub ProcessConfigJSON(SourceJSON as JSONItem)
+		  
+		  var ItemTitle as string = SourceJSON.Value(cJSONTagName)
+		  
+		  Self.SetTitle(ItemTitle)
+		  
+		  return
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub ResetData()
 		  
 		  redim valueFields(0)
 		  
 		  self.keyFields.RemoveAll
 		  
-		   valueFields(0)=""
+		  valueFields(0)=""
 		  
 		End Sub
 	#tag EndMethod

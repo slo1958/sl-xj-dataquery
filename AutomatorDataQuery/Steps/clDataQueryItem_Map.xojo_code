@@ -7,35 +7,16 @@ Inherits clDataQueryItem
 		  
 		  Super.Constructor(SourceJSON)
 		  
-		  
 		  redim inputList(0)
 		  redim Outputlist(0)
 		  
 		  nextItem=0
 		  
-		  if SourceJSON = nil then Return
 		  
-		  var jItems as    JSONItem = SourceJSON.Value(cJSONTagItems)
+		  // processConfigJSON is called by the super constructor if SourceJSON is not nil
 		  
-		  if jitems.IsArray then
-		    for i as integer = 0 to jItems.LastRowIndex
-		      var jItem as JSONItem = jitems.ChildAt(i)
-		      
-		      var index as integer = jitem.value(cJSONTagIndex) 
-		      
-		      if index > InputList.LastIndex then
-		        Redim InputList(index)
-		        redim OutputList(index)
-		        
-		      end if
-		      
-		      InputList(index) = jitem.Value(cJSONTagInput)
-		      OutputList(index) = jItem.Value(cJSONTagOutput) 
-		      
-		    next
-		    
-		  end if
 		  
+		  return 
 		  
 		End Sub
 	#tag EndMethod
@@ -147,6 +128,40 @@ Inherits clDataQueryItem
 		  return map_38_38
 		  
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ProcessConfigJSON(SourceJSON as JSONItem)
+		  // Calling the overridden superclass method.
+		  Super.ProcessConfigJSON(SourceJSON)
+		  
+		  
+		  redim inputList(0)
+		  redim Outputlist(0)
+		  
+		  var jItems as    JSONItem = SourceJSON.Value(cJSONTagItems)
+		  
+		  if jitems.IsArray then
+		    for i as integer = 0 to jItems.LastRowIndex
+		      var jItem as JSONItem = jitems.ChildAt(i)
+		      
+		      var index as integer = jitem.value(cJSONTagIndex) 
+		      
+		      if index > InputList.LastIndex then
+		        Redim InputList(index)
+		        redim OutputList(index)
+		        
+		      end if
+		      
+		      InputList(index) = jitem.Value(cJSONTagInput)
+		      OutputList(index) = jItem.Value(cJSONTagOutput) 
+		      
+		    next
+		    
+		  end if
+		  
+		  return
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
