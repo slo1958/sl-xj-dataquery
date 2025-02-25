@@ -51,7 +51,7 @@ Begin DesktopWindow wnd_queryViewer
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      Value           =   0
+      Value           =   1
       Visible         =   True
       Width           =   560
       Begin DesktopListBox lb_Data
@@ -77,7 +77,7 @@ Begin DesktopWindow wnd_queryViewer
          HasHorizontalScrollbar=   True
          HasVerticalScrollbar=   True
          HeadingIndex    =   -1
-         Height          =   409
+         Height          =   390
          Index           =   -2147483648
          InitialParent   =   "TabPanel1"
          InitialValue    =   ""
@@ -162,11 +162,11 @@ Begin DesktopWindow wnd_queryViewer
          TextAlignment   =   0
          TextColor       =   &c000000
          Tooltip         =   ""
-         Top             =   462
+         Top             =   435
          Transparent     =   False
          Underline       =   False
          Visible         =   True
-         Width           =   244
+         Width           =   520
       End
       Begin DesktopTextArea ta_sql
          AllowAutoDeactivate=   True
@@ -376,6 +376,38 @@ Begin DesktopWindow wnd_queryViewer
          Underline       =   False
          Visible         =   True
          Width           =   336
+      End
+      Begin DesktopButton btn_copy
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Copy"
+         Default         =   False
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanel1"
+         Italic          =   False
+         Left            =   192
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   5
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   462
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   80
       End
    End
 End
@@ -655,6 +687,55 @@ End
 		  
 		  
 		  tt.Close
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_copy
+	#tag Event
+		Sub Pressed()
+		  var clp as new Clipboard
+		  
+		  var res as RowSet= self.DBConnection.db.SelectSQL(self.SqlCode)
+		   
+		  var rows() as string
+		  
+		  var fields() as string
+		  
+		  
+		  for i as integer = 0 to res.ColumnCount - 1
+		    fields.add( res.ColumnAt(i).Name)
+		    
+		  next
+		  
+		  rows.add(string.FromArray(fields, chr(9)))
+		  
+		  while not res.AfterLastRow
+		    fields.RemoveAll
+		    
+		    for i as integer = 0 to res.ColumnCount -1
+		      var col as DatabaseColumn = res.ColumnAt(i)
+		      
+		      if col.Type = 6 or col.Type = 7 then
+		        fields.add( format(col.DoubleValue, "-######0.00#####"))
+		        
+		      else
+		        fields.add(  col.StringValue)
+		        
+		      end if
+		      
+		    next
+		    
+		    rows.add(string.FromArray(fields, chr(9)))
+		    
+		    res.MoveToNextRow
+		    
+		  wend
+		  
+		  clp.Text = string.FromArray(rows, EndOfLine)
+		  
+		  return
 		  
 		  
 		End Sub
