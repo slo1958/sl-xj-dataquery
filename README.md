@@ -46,6 +46,15 @@ The start step is the mandatory first step of a flow. The parameters are the nam
 
 This step is used to calculate new measures from existing measures. Note the mandatory “$” at the end of the field names (this is a quick/dirty fix for handling expression )
 
+The checkbox 'as Dimension' causes the new field to be treated as a dimension rather than a measure. This is typically used when the formula returns a boolean value, stored as '0' or '1' by SQLite, for example:
+
+![Screenshot 2025-02-24 at 16 11 09](https://github.com/user-attachments/assets/0d1227c5-83e9-41bc-bb11-79b0fdb5f94d)
+
+In this case, the field MoQOK appears as a dimenion in a subsequent step, for example:
+
+![Screenshot 2025-02-24 at 16 12 17](https://github.com/user-attachments/assets/d61d7a7d-4b26-410a-903a-90e657cc5b0c)
+
+
 
 ### Filter
 ![Screenshot 2025-02-23 at 14 08 40](https://github.com/user-attachments/assets/49553bad-204c-440e-bc20-7d053a9fa215)
@@ -68,6 +77,8 @@ Where
 
 ### Group split
 
+This step takes its name from the fact that, by default, all measure fields are summed. This is also the case when a flow is executed using 'run until here'. Adding a group/split step allow to split those amounts along one or more dimension. 
+
 #### Definition of split dimensions
 
 ![Screenshot 2025-02-24 at 14 21 33](https://github.com/user-attachments/assets/4f292d15-5558-496a-bcc3-b84324ad0627)
@@ -77,12 +88,11 @@ This step is used to group data along one or more dimensions.
 When the user runs the flow from the start step (or a flow that contains only a start step) the generated query calculates the total of all available measures. This behaviour persists until a group/split step is added to the flow.
 
 #### Handling of measures
+(click on the 'Aggregate' button to display this pagge)
 
 ![Screenshot 2025-02-24 at 14 21 45](https://github.com/user-attachments/assets/a3ac9473-4b4a-41a2-8436-c5d88605b061)
 
-From the user perspective, this step tells the flow to split the results along dimension(s) chosen by the user.
-
-By default, all measure fields are summed. The user can also specify different aggregation (Min / Avg / Max) for distinct measure fields.
+All measure fields are summed. The user can also specify different aggregation (Min / Avg / Max) for a selection of measure fields.
 
 
 
