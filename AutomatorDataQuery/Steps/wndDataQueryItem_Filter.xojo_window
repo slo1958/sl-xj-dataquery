@@ -208,7 +208,7 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Height          =   20
       Index           =   0
       InitialParent   =   ""
-      InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
+      InitialValue    =   "=\n<\n<=\n>\n>=\n!=\nin"
       Italic          =   False
       Left            =   285
       LockBottom      =   False
@@ -238,7 +238,7 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Height          =   20
       Index           =   0
       InitialParent   =   ""
-      InitialValue    =   "dummyfield1\r\ndummyfield2\r\ndummyfield3\r\ndummyfield4\r\n(constant)\r\n(empty)"
+      InitialValue    =   "dummyfield1\ndummyfield2\ndummyfield3\ndummyfield4\n(constant)\n(empty)"
       Italic          =   False
       Left            =   354
       LockBottom      =   False
@@ -281,9 +281,9 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Left            =   506
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
@@ -320,8 +320,8 @@ Begin DesktopWindow wndDataQueryItem_Filter
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   8
@@ -374,7 +374,7 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Height          =   20
       Index           =   1
       InitialParent   =   ""
-      InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
+      InitialValue    =   "=\n<\n<=\n>\n>=\n!=\nin"
       Italic          =   False
       Left            =   285
       LockBottom      =   False
@@ -447,9 +447,9 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Left            =   506
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
@@ -486,8 +486,8 @@ Begin DesktopWindow wndDataQueryItem_Filter
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   13
@@ -540,7 +540,7 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Height          =   20
       Index           =   2
       InitialParent   =   ""
-      InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
+      InitialValue    =   "=\n<\n<=\n>\n>=\n!=\nin"
       Italic          =   False
       Left            =   285
       LockBottom      =   False
@@ -613,9 +613,9 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Left            =   506
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
@@ -652,8 +652,8 @@ Begin DesktopWindow wndDataQueryItem_Filter
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   18
@@ -706,7 +706,7 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Height          =   20
       Index           =   3
       InitialParent   =   ""
-      InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
+      InitialValue    =   "=\n<\n<=\n>\n>=\n!=\nin"
       Italic          =   False
       Left            =   285
       LockBottom      =   False
@@ -779,9 +779,9 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Left            =   506
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
@@ -818,8 +818,8 @@ Begin DesktopWindow wndDataQueryItem_Filter
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   23
@@ -945,9 +945,9 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Left            =   506
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
@@ -984,8 +984,8 @@ Begin DesktopWindow wndDataQueryItem_Filter
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   28
@@ -1038,7 +1038,7 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Height          =   20
       Index           =   5
       InitialParent   =   ""
-      InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
+      InitialValue    =   "=\n<\n<=\n>\n>=\n!=\nin"
       Italic          =   False
       Left            =   285
       LockBottom      =   False
@@ -1111,9 +1111,9 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Left            =   506
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
@@ -1150,8 +1150,8 @@ Begin DesktopWindow wndDataQueryItem_Filter
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   33
@@ -1204,7 +1204,7 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Height          =   20
       Index           =   6
       InitialParent   =   ""
-      InitialValue    =   "=\r\n<\r\n<=\r\n>\r\n>=\r\n!=\r\n"
+      InitialValue    =   "=\n<\n<=\n>\n>=\n!=\nin"
       Italic          =   False
       Left            =   285
       LockBottom      =   False
@@ -1277,9 +1277,9 @@ Begin DesktopWindow wndDataQueryItem_Filter
       Left            =   506
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
       MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
@@ -1316,8 +1316,8 @@ Begin DesktopWindow wndDataQueryItem_Filter
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   38
@@ -1348,8 +1348,8 @@ Begin DesktopWindow wndDataQueryItem_Filter
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   39
@@ -1380,8 +1380,8 @@ Begin DesktopWindow wndDataQueryItem_Filter
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
+      LockRight       =   True
+      LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   40
@@ -1654,7 +1654,7 @@ End
 	#tag Event
 		Sub SelectionChanged(index as Integer, item As DesktopMenuItem)
 		  
-		  efConstant(index).Enabled=ppFieldB(index).SelectedRowText = cUseConstant
+		  efConstant(index).Enabled =ppFieldB(index).SelectedRowText = cUseConstant
 		  
 		End Sub
 	#tag EndEvent

@@ -366,9 +366,9 @@ End
 		    
 		  end if
 		  
+		  var s as  clAutomatorItem 
 		  
 		  if tmpStepType.Length>0 then
-		    var s as  clAutomatorItem 
 		    s = self.CurrentFlow.doInsertAfter(tmpStepType, Identifier)
 		    
 		    if js <> nil then clDataQueryItem(s).ProcessConfigJSON(js)
@@ -380,6 +380,9 @@ End
 		  clDataQueryFlow(self.CurrentFlow).UpdateDataFlow
 		  
 		  UpdateUI
+		  
+		  if js = nil then s.Open
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -484,7 +487,7 @@ End
 		    temp.Add("Copy")
 		    
 		  end if
-		   
+		  
 		  temp.Add("-")
 		  temp.Add(cRunTillHere)
 		  

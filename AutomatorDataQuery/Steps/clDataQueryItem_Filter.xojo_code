@@ -128,8 +128,14 @@ Inherits clDataQueryItem
 		        tempWhere = sfield1(i)+"_"+sPostFix
 		        
 		        if sField2(i)=cUseConstant and sConst(i) <> "" then
-		          tempWhere = tempWhere + TradOp(soper(i))
-		          tempWhere = tempWhere + sConst(i)
+		          if soper(i)  = cOperatorIN then
+		            tempWhere = tempWhere + " in (" + sConst(i) + ")"
+		            
+		          else
+		            tempWhere = tempWhere + TradOp(soper(i))
+		            tempWhere = tempWhere + sConst(i)
+		            
+		          end if
 		          
 		        elseif sField2(i) = cUseConstant then
 		          tempWhere = ""
@@ -265,8 +271,10 @@ Inherits clDataQueryItem
 		Function TradOp(theOp as string) As string
 		  if theOp="!=" then
 		    return "<>"
+		    
 		  else
 		    return theOp
+		    
 		  end if
 		End Function
 	#tag EndMethod
@@ -372,6 +380,9 @@ Inherits clDataQueryItem
 	#tag EndConstant
 
 	#tag Constant, Name = cJSONTagOperator, Type = String, Dynamic = False, Default = \"op", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = cOperatorIN, Type = String, Dynamic = False, Default = \"in", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = maxItems, Type = Integer, Dynamic = False, Default = \"6", Scope = Public
