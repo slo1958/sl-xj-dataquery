@@ -59,48 +59,15 @@ Inherits clDataQueryItem
 	#tag Method, Flags = &h0
 		Sub Constructor(SourceJSON as JSONItem)
 		  
-		  super.Constructor(SourceJSON)
-		  
-		  
 		  for i as integer = 0 to maxItems
 		    binuse(i)=false
 		    
 		  next
 		  
+		  // processConfigJSON is called by the super constructor if SourceJSON is not nil
 		  
-		  if SourceJSON = nil then return 
+		  super.Constructor(SourceJSON)
 		  
-		  
-		  var jItemBlocks as  JSONItem = SourceJSON.value("blocks")
-		  var jitemFields as  JSONItem = SourceJSON.Value("fields")
-		  var jitemConditions as  JSONItem =SourceJSON.value("filters")
-		  
-		  
-		  for i as integer = 0 to jitemConditions.LastRowIndex
-		    var jitem as JSONItem = jitemConditions.ChildAt(i)
-		    
-		    var iBlockIndex as integer = jitem.value("blockindex")  
-		    var jFieldIndex as integer = jitem.value("fieldindex")  
-		    self.sConst(jFieldIndex, iBlockIndex) = jitem.Value("value") 
-		    
-		  next
-		  
-		  for i as integer = 0 to jitemFields.LastRowIndex
-		    var jitem as JSONItem = jitemFields.ChildAt(i)
-		    
-		    var jFieldIndex as integer = jitem.value("fieldindex")  
-		    sField(jFieldIndex) = jitem.Value("value")
-		    
-		  next
-		  
-		  for i as integer = 0 to jItemBlocks.LastRowIndex
-		    var jitem as JSONItem = jItemBlocks.ChildAt(i)
-		    
-		    var iBlockIndex as integer = jitem.value("blockindex")  
-		    sBlockName(iBlockIndex) = jitem.value("value")
-		    bInUse(iBlockIndex) = True
-		    
-		  next
 		  
 		  return
 		  
@@ -498,6 +465,47 @@ Inherits clDataQueryItem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub ProcessConfigJSON(SourceJSON as JSONItem)
+		  // Calling the overridden superclass method.
+		  Super.ProcessConfigJSON(SourceJSON)
+		  
+		  
+		  
+		  var jItemBlocks as  JSONItem = SourceJSON.value("blocks")
+		  var jitemFields as  JSONItem = SourceJSON.Value("fields")
+		  var jitemConditions as  JSONItem =SourceJSON.value("filters")
+		  
+		  
+		  for i as integer = 0 to jitemConditions.LastRowIndex
+		    var jitem as JSONItem = jitemConditions.ChildAt(i)
+		    
+		    var iBlockIndex as integer = jitem.value("blockindex")  
+		    var jFieldIndex as integer = jitem.value("fieldindex")  
+		    self.sConst(jFieldIndex, iBlockIndex) = jitem.Value("value") 
+		    
+		  next
+		  
+		  for i as integer = 0 to jitemFields.LastRowIndex
+		    var jitem as JSONItem = jitemFields.ChildAt(i)
+		    
+		    var jFieldIndex as integer = jitem.value("fieldindex")  
+		    sField(jFieldIndex) = jitem.Value("value")
+		    
+		  next
+		  
+		  for i as integer = 0 to jItemBlocks.LastRowIndex
+		    var jitem as JSONItem = jItemBlocks.ChildAt(i)
+		    
+		    var iBlockIndex as integer = jitem.value("blockindex")  
+		    sBlockName(iBlockIndex) = jitem.value("value")
+		    bInUse(iBlockIndex) = True
+		    
+		  next
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub ShowConfigDialog()
 		  
 		  wndDataQueryItem_pivot.showme me
@@ -624,7 +632,7 @@ Inherits clDataQueryItem
 	#tag Constant, Name = maxFields, Type = Integer, Dynamic = False, Default = \"3", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = maxItems, Type = Integer, Dynamic = False, Default = \"6", Scope = Public
+	#tag Constant, Name = maxItems, Type = Double, Dynamic = False, Default = \"9", Scope = Public
 	#tag EndConstant
 
 

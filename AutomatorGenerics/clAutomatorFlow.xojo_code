@@ -36,8 +36,6 @@ Protected Class clAutomatorFlow
 		        
 		      end if
 		      
-		      System.DebugLog(jitem.ToString)
-		      
 		    next
 		    
 		    

@@ -5,14 +5,13 @@ Inherits clDataQueryItem
 		Sub Constructor(SourceJSON as JSONItem)
 		  // Calling the overridden superclass constructor.
 		  
-		  super.Constructor(SourceJSON)
-		  
 		  for i as integer = 0 to maxItems
 		    binuse(i)=false
 		  next
 		  
 		  nextItem=-1
 		  
+		  super.Constructor(SourceJSON)
 		  
 		  // processConfigJSON is called by the super constructor if SourceJSON is not nil
 		  

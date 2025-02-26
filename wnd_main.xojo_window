@@ -277,7 +277,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton btn_save1
+   Begin DesktopButton btn_debug
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -314,6 +314,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Activated()
+		  
 		  BuildListOfAnalysis
 		End Sub
 	#tag EndEvent
@@ -434,8 +435,10 @@ End
 		    tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement(Identifier)
 		    tmpSource = clDataQueryFlow(self.CurrentFlow).FlowDataSource
 		    
-		    var wqv as new wnd_queryViewer
-		    wqv.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
+		    RunQueryInResultsWIndow(tmpSql, tmpSource)
+		    // 
+		    // var wqv as new wnd_queryViewer
+		    // wqv.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
 		    
 		  case "Copy"
 		    var dq as clDataQueryItem = clDataQueryItem(s)
@@ -603,6 +606,20 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub RunQueryInResultsWIndow(SourceSql as string, FlowDataSource as String)
+		   
+		  
+		  var wqv as new wnd_queryViewer
+		  
+		  wqv.ShowResults(self.CurrentProject.Connection, SourceSql, FlowDataSource)
+		  
+		  
+		  return
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetProjectAndFlow(p as clDataQueryProject, f as clDataQueryFlow)
 		  
 		  self.CurrentProject = p
@@ -713,9 +730,10 @@ End
 		  tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement(-1)
 		  tmpSource = clDataQueryFlow(self.CurrentFlow).FlowDataSource
 		  
-		  var wqv as new wnd_queryViewer
+		   RunQueryInResultsWIndow(tmpSql, tmpSource)
 		  
-		  wqv.ShowResults(self.CurrentProject.Connection, tmpSql, tmpSource)
+		  return
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -739,7 +757,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btn_save1
+#tag Events btn_debug
 	#tag Event
 		Sub Pressed()
 		  
@@ -749,6 +767,7 @@ End
 		  
 		  tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement(-1)
 		  tmpSource = clDataQueryFlow(self.CurrentFlow).FlowDataSource
+		  
 		  
 		  var wdf as new wnd_debug_flow
 		  

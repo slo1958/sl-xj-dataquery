@@ -451,6 +451,28 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events ListBox1
+	#tag Event
+		Sub DoublePressed()
+		  
+		  var r as integer = Listbox1.SelectedRowIndex
+		  
+		  if r < 0 then return
+		  
+		  var curOutput as string = listbox1.CellTextAt(r,1).Trim
+		  
+		  if curOutput.Length = 0 then
+		     listbox1.CellTextAt(r,1) = listbox1.CellTextAt(r,0)
+		    
+		  else
+		    listbox1.CellTextAt(r,1) = ""
+		    
+		  end if
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events btn_None
 	#tag Event
 		Sub Pressed()

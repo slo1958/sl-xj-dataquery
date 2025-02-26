@@ -22,7 +22,7 @@ Begin DesktopWindow wnd_queryViewer
    Resizeable      =   True
    Title           =   "Untitled"
    Type            =   0
-   Visible         =   True
+   Visible         =   False
    Width           =   600
    Begin DesktopTabPanel TabPanel1
       AllowAutoDeactivate=   True
@@ -51,7 +51,7 @@ Begin DesktopWindow wnd_queryViewer
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      Value           =   1
+      Value           =   0
       Visible         =   True
       Width           =   560
       Begin DesktopListBox lb_Data
@@ -410,6 +410,24 @@ Begin DesktopWindow wnd_queryViewer
          Width           =   80
       End
    End
+   Begin Thread thr_GetResults
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Priority        =   5
+      Scope           =   0
+      StackSize       =   0
+      TabPanelIndex   =   0
+      Type            =   0
+   End
+   Begin Timer Timer1
+      Enabled         =   True
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Period          =   1000
+      RunMode         =   0
+      Scope           =   0
+      TabPanelIndex   =   0
+   End
 End
 #tag EndDesktopWindow
 
@@ -425,7 +443,7 @@ End
 		  
 		  
 		  if lb_Data.ColumnCount = 1 then
-		    var nbcol as integer = results.ColumnCount
+		    //var nbcol as integer = results.ColumnCount
 		    var colwidth as string = cStartColWidth
 		    
 		    lb_Data.ColumnCount = results.ColumnCount + 1
@@ -495,49 +513,25 @@ End
 		  
 		  ta_sql.Text = sqlQuery
 		  
-		  var rs as RowSet
-		  var rCount as integer
+		  btn_export_csv.Enabled = False
+		  btn_moreRows.Enabled = False
+		  btn_copy.Enabled = False
 		  
-		  try
-		    
-		    rs = self.DBConnection.db.SelectSQL("Select count(*) cnt from (" + self.SqlCode+")")
-		    
-		  catch err As DatabaseException
-		    rs = nil
-		    lbl_message0.text = "No results - SQL error"
-		    lbl_message1.text = "SQL Error: " + err.Message
-		    
-		    
-		  Catch
-		    
-		  end try
+		  lb_Data.Visible = false
 		  
-		  if rs = nil then
-		    btn_export_csv.Enabled = False
-		    btn_moreRows.Enabled = False
-		    
-		  else
-		    
-		    for each row as DatabaseRow in rs
-		      rCount = row.Column("cnt").IntegerValue
-		      
-		    next
-		    
-		    lbl_message0.text = " Query returned " + str(rCount) + " rows."
-		    lbl_message1.text = "Query length " + str(self.SqlCode.Length) + " chars."
-		    
-		    Results = self.DBConnection.db.SelectSQL(self.SqlCode)
-		    
-		    lb_Data.RemoveAllRows
-		    RowCounter = 0
-		    
-		    AddNextRows()
-		    
-		    ShowTotals
-		    
-		  end if
+		  lbl_message0.text = "Executing query..."
+		  lbl_message1.text = "Executing query..."
 		  
-		  me.ShowModal
+		  textForMessage0 = ""
+		  textForMessage1 = ""
+		  
+		  ResultsAvailable = 0
+		  
+		  Timer1.Period = 200
+		  Timer1.RunMode = timer.RunModes.Multiple
+		  
+		  
+		  Self.Show
 		  
 		  
 		  
@@ -571,7 +565,15 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		QueryStartTime As Double
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Results As rowset
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ResultsAvailable As integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -584,6 +586,14 @@ End
 
 	#tag Property, Flags = &h0
 		SqlCode As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		textForMessage0 As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		textForMessage1 As string
 	#tag EndProperty
 
 
@@ -698,7 +708,7 @@ End
 		  var clp as new Clipboard
 		  
 		  var res as RowSet= self.DBConnection.db.SelectSQL(self.SqlCode)
-		   
+		  
 		  var rows() as string
 		  
 		  var fields() as string
@@ -738,6 +748,116 @@ End
 		  return
 		  
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events thr_GetResults
+	#tag Event
+		Sub Run()
+		  
+		  var rs as RowSet
+		  var rCount as integer
+		  
+		  #Pragma BreakOnExceptions False
+		  
+		  try
+		    rs = self.DBConnection.db.SelectSQL("Select count(*) cnt from (" + self.SqlCode+")")
+		    
+		    
+		  catch err As DatabaseException
+		    rs = nil
+		    textForMessage0 = "No results - SQL error"
+		    textForMessage1 = "SQL Error: " + err.Message
+		    
+		    
+		  Catch
+		    
+		  end try
+		  
+		  #Pragma BreakOnExceptions Default
+		   
+		  
+		  if rs <> nil then
+		    for each row as DatabaseRow in rs
+		      rCount = row.Column("cnt").IntegerValue
+		      
+		    next
+		    
+		    var exectime as Double = DateTime.now.SecondsFrom1970 - self.QueryStartTime
+		    
+		    textForMessage0 = " Query returned " + str(rCount) + " rows after " + Format(exectime, "###0.0") + " seconds."
+		    textForMessage1 = "Query length " + str(self.SqlCode.Length) + " chars."
+		    
+		    try
+		      Results = self.DBConnection.db.SelectSQL(self.SqlCode)
+		      
+		    catch
+		      Results = Nil
+		      
+		    end try
+		    
+		  else
+		    Results = Nil
+		    
+		  end if
+		  
+		  ResultsAvailable = 2
+		  
+		  Return
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Timer1
+	#tag Event
+		Sub Action()
+		  
+		  
+		  //if thr_GetResults.ThreadState = Thread.ThreadStates.Running then Return
+		  
+		  select case  ResultsAvailable 
+		    
+		  case  0 // Need to launch the thread
+		    QueryStartTime = DateTime.Now.SecondsFrom1970
+		    
+		    Timer1.RunMode = timer.RunModes.Off
+		    Timer1.Period = 1000
+		    Timer1.RunMode = timer.RunModes.Multiple
+		    
+		    ResultsAvailable = 1
+		    thr_GetResults.Start
+		    
+		    
+		  case 1 // Thread is running
+		    
+		  case 2 // Thread is done
+		    
+		    lbl_message0.text = textForMessage0
+		    lbl_message1.text = textForMessage1
+		    
+		    if Results = nil then
+		      lb_Data.Visible = False
+		      btn_export_csv.Enabled = False
+		      btn_moreRows.Enabled = False
+		      btn_copy.Enabled = False
+		      
+		    else
+		      lb_Data.RemoveAllRows
+		      // Visible = False
+		      lb_Data.Visible = True
+		      
+		      AddNextRows()
+		      
+		      ShowTotals
+		      
+		      btn_export_csv.Enabled = True
+		      btn_copy.Enabled = True
+		      
+		    end if
+		    
+		    Timer1.RunMode = timer.RunModes.Off
+		     
+		    
+		  end Select
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -5,9 +5,9 @@ Inherits clDataQueryItem
 		Sub Constructor(SourceJSON as JSONItem)
 		  // Calling the overridden superclass constructor.
 		  
-		  Super.constructor(SourceJSON)
-		  
 		  Nextitem=0
+		  
+		  Super.constructor(SourceJSON)
 		  
 		  // processConfigJSON is called by the super constructor if SourceJSON is not nil
 		  
