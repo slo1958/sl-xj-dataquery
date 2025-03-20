@@ -265,6 +265,17 @@ Protected Class clDataQueryProject
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Rename(NewName as string)
+		  
+		  if NewName.trim.Length > 0 then
+		    self.ProjectName = NewName.trim
+		    
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub Save()
 		  
 		  var txt as TextOutputStream

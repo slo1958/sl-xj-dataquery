@@ -3,7 +3,7 @@ Begin DesktopWindow wnd_debug_flow
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
-   DefaultLocation =   2
+   DefaultLocation =   0
    FullScreen      =   False
    HasBackgroundColor=   False
    HasCloseButton  =   True
@@ -69,6 +69,7 @@ Begin DesktopWindow wnd_debug_flow
       Underline       =   False
       Visible         =   True
       Width           =   560
+      _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
    Begin DesktopButton Button1
@@ -484,14 +485,6 @@ End
 		Group="Deprecated"
 		InitialValue="False"
 		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="CurrentFlow"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

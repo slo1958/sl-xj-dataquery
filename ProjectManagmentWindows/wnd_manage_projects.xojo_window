@@ -3,7 +3,7 @@ Begin DesktopWindow wnd_manage_projects
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
-   DefaultLocation =   2
+   DefaultLocation =   0
    FullScreen      =   False
    HasBackgroundColor=   False
    HasCloseButton  =   True
@@ -93,7 +93,7 @@ Begin DesktopWindow wnd_manage_projects
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   False
       MaximumCharactersAllowed=   0
       Password        =   False
@@ -220,7 +220,7 @@ Begin DesktopWindow wnd_manage_projects
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   False
       Multiline       =   False
       Scope           =   0
@@ -341,6 +341,24 @@ End
 	#tag Event
 		Sub Pressed()
 		  self.Close
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events lb_filename
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  return true
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Sub MouseUp(x As Integer, y As Integer)
+		  
+		  var fld as  folderitem = app.GetAppDataFolder
+		  
+		  fld.Open
+		  
 		  
 		End Sub
 	#tag EndEvent

@@ -3,7 +3,7 @@ Begin DesktopWindow wnd_showLongString
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
-   DefaultLocation =   2
+   DefaultLocation =   0
    FullScreen      =   False
    HasBackgroundColor=   False
    HasCloseButton  =   True

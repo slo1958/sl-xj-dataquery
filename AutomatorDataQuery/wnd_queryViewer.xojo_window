@@ -3,7 +3,7 @@ Begin DesktopWindow wnd_queryViewer
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
-   DefaultLocation =   2
+   DefaultLocation =   0
    FullScreen      =   False
    HasBackgroundColor=   False
    HasCloseButton  =   True
@@ -411,12 +411,15 @@ Begin DesktopWindow wnd_queryViewer
       End
    End
    Begin Thread thr_GetResults
+      DebugIdentifier =   ""
       Index           =   -2147483648
       LockedInPosition=   False
       Priority        =   5
       Scope           =   0
       StackSize       =   0
       TabPanelIndex   =   0
+      ThreadID        =   0
+      ThreadState     =   0
       Type            =   0
    End
    Begin Timer Timer1
@@ -775,7 +778,7 @@ End
 		  end try
 		  
 		  #Pragma BreakOnExceptions Default
-		   
+		  
 		  
 		  if rs <> nil then
 		    for each row as DatabaseRow in rs
@@ -855,7 +858,7 @@ End
 		    end if
 		    
 		    Timer1.RunMode = timer.RunModes.Off
-		     
+		    
 		    
 		  end Select
 		End Sub
@@ -1111,6 +1114,38 @@ End
 		Group="Behavior"
 		InitialValue=""
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="QueryStartTime"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ResultsAvailable"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="textForMessage0"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="string"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="textForMessage1"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="string"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

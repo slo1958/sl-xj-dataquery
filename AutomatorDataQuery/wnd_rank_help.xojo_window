@@ -22,7 +22,7 @@ Begin DesktopWindow wnd_rank_help
    Resizeable      =   True
    Title           =   "Information"
    Type            =   0
-   Visible         =   True
+   Visible         =   False
    Width           =   761
    Begin DesktopBevelButton BevelButton1
       Active          =   False

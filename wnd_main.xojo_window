@@ -3,7 +3,7 @@ Begin DesktopWindow wnd_main Implements AutomatorVisualInterface
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
-   DefaultLocation =   2
+   DefaultLocation =   0
    FullScreen      =   False
    HasBackgroundColor=   False
    HasCloseButton  =   True
@@ -607,7 +607,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub RunQueryInResultsWIndow(SourceSql as string, FlowDataSource as String)
-		   
+		  
 		  
 		  var wqv as new wnd_queryViewer
 		  
@@ -730,7 +730,7 @@ End
 		  tmpSql = clDataQueryFlow(self.CurrentFlow).getSqlStatement(-1)
 		  tmpSource = clDataQueryFlow(self.CurrentFlow).FlowDataSource
 		  
-		   RunQueryInResultsWIndow(tmpSql, tmpSource)
+		  RunQueryInResultsWIndow(tmpSql, tmpSource)
 		  
 		  return
 		  
